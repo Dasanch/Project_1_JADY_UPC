@@ -2,7 +2,7 @@
 
 int main ()
 {
-	printf("Hello World\n");
+	printf("Hello World and any other beings that are not in this world\n");
 	sytem("pause");
 	return(0);
 }
