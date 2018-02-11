@@ -1,4 +1,4 @@
-# Project Name
+# Project 1
 TODO: Write a project description
 
 ## Installation
@@ -19,7 +19,9 @@ feature'`
 TODO: Write history
 
 ## Credits
-TODO: Write credits
+Yessica Servin Dominguez
+Alejandro Gamarra Niño
+Dani Sanchez Flores
 
 ## License
-TODO: Write license
+No Lincense
