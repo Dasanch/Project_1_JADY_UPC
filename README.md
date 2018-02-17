@@ -1,6 +1,7 @@
 # Project 1
 TODO: Write a project description
 
+
 ## Installation
 TODO: Describe the installation process
 
@@ -20,8 +21,9 @@ TODO: Write history
 
 ## Credits
 Yessica Servin Dominguez
-Alejandro Gamarra Niño
+Alejandro Gamarra NiÃ±o
 Dani Sanchez Flores
+Jaume Montagut i Guix
 
 ## License
 No Lincense
