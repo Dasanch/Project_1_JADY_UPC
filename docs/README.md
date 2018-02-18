@@ -9,6 +9,8 @@ Art/Design: Aurelio Gamarra Niño
 Code: Yessica Servin Dominguez
 QA: Daniel Sanchez Flores
 
+![Image](https://drive.google.com/file/d/1v2r3jHN6oh1c0s24CrWLVrUJcfzSlH9l/view)
+
 ## Gameplay
 <iframe width="420" height="345" src="https://www.youtube.com/watch?v=aybhwlEV0EM">
 </iframe>
