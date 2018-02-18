@@ -12,7 +12,7 @@ Code: Yessica Servin Dominguez
 
 QA: Daniel Sanchez Flores
 
-![Image](https://drive.google.com/file/d/1DmNPZRTzYk4KDOgrh1kr0IEFsehPMwMj/view?usp=sharing)
+![Image](https://github.com/Dasanch/Project_1_JADY_UPC/blob/master/docs/IMG-20180212-WA0002%20(1).jpg)
 <img src="https://drive.google.com/file/d/1DmNPZRTzYk4KDOgrh1kr0IEFsehPMwMj/view?usp=sharing" />
 
 ## Gameplay
