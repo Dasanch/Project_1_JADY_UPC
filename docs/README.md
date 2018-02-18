@@ -16,5 +16,4 @@ QA: Daniel Sanchez Flores
 
 
 ## Gameplay
-<iframe width="420" height="345" src="https://www.youtube.com/watch?v=aybhwlEV0EM">
-</iframe>
+[![Gameplay](https://img.youtube.com/vi/VID/0.jpg)](https://www.youtube.com/watch?v=aybhwlEV0EM)
