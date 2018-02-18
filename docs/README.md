@@ -5,8 +5,11 @@ The object of the game is to fight through five stages and destroy the end stage
 
 ## Team
 Management: Jaume Montagut Guix
+
 Art/Design: Aurelio Gamarra Niño
+
 Code: Yessica Servin Dominguez
+
 QA: Daniel Sanchez Flores
 
 ![Image](https://drive.google.com/file/d/1DmNPZRTzYk4KDOgrh1kr0IEFsehPMwMj/view?usp=sharing)
