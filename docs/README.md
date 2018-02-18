@@ -12,9 +12,7 @@ The object of the game is to fight through five stages and destroy the end stage
 | Code | Yessica Servin Dominguez      |
 | QA | Daniel Sanchez Flores      |
 
-
-![Image](https://github.com/Dasanch/Project_1_JADY_UPC/blob/master/docs/IMG-20180212-WA0002%20(1).jpg)
-
+![Team JADY](https://github.com/Dasanch/Project_1_JADY_UPC/blob/master/docs/Team_JADY.png)
 
 ## Gameplay
 <iframe width="854" height="480" src="https://www.youtube.com/embed/aybhwlEV0EM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
