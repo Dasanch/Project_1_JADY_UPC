@@ -13,6 +13,7 @@ Code: Yessica Servin Dominguez
 QA: Daniel Sanchez Flores
 
 ![Image](https://drive.google.com/file/d/1DmNPZRTzYk4KDOgrh1kr0IEFsehPMwMj/view?usp=sharing)
+<img src="https://drive.google.com/file/d/1DmNPZRTzYk4KDOgrh1kr0IEFsehPMwMj/view?usp=sharing" />
 
 ## Gameplay
 <iframe width="420" height="345" src="https://www.youtube.com/watch?v=aybhwlEV0EM">
