@@ -1,6 +1,6 @@
-# Project 1
-TODO: Write a project description
-
+# Project JADY
+## Introduction
+In this project we will recreate the game Last Resort, we will use the sprites of the original game and we will program it from scratch.
 
 ## Installation
 TODO: Describe the installation process
