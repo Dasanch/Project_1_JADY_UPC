@@ -16,6 +16,9 @@ feature'`
 ## Credits
 > Yessica Servin Dominguez
 
+Find her on:
+            Instragram: @randomgerbit
+
 > Alejandro Gamarra Niño
 
 > Dani Sanchez Flores
