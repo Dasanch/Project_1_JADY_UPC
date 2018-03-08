@@ -16,8 +16,7 @@ feature'`
 ## Credits
 > Yessica Servin Dominguez
 
-Find her on:
-            Instragram: @randomgerbit
+_Find her on Instragram as @randomgerbit_
 
 > Alejandro Gamarra Niño
 
