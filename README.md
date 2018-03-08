@@ -14,9 +14,8 @@ feature'`
 5. Submit a pull request :D
 
 ## Credits
-> Yessica Servin Dominguez
-
-_Find her on Instragram as @randomgerbit_
+> Yessica Servin Dominguez          
+> _Find her on Instragram as @randomgerbit_
 
 > Alejandro Gamarra Niño
 
