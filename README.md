@@ -14,8 +14,8 @@ feature'`
 5. Submit a pull request :D
 
 ## Credits
-Yessica Servin Dominguez
-Alejandro Gamarra Niño
-Dani Sanchez Flores
-Jaume Montagut i Guix
+> Yessica Servin Dominguez
+> Alejandro Gamarra Niño
+> Dani Sanchez Flores
+> Jaume Montagut i Guix
 
