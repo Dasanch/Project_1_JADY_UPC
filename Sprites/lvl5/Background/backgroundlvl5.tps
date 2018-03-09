@@ -193,6 +193,32 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">Backgroundflore_0000_background1.png.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>24,56,48,112</rect>
+                <key>scale9Paddings</key>
+                <rect>24,56,48,112</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Backgroundflore_0001_background0.png.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,56,95,112</rect>
+                <key>scale9Paddings</key>
+                <rect>48,56,95,112</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">image/Backgroundlvl5_0000_Background0.png.png</key>
             <key type="filename">image/Backgroundlvl5_0001_Background1.png.png</key>
             <key type="filename">image/Backgroundlvl5_0002_Background2.png.png</key>
@@ -300,6 +326,8 @@
             <filename>image/Backgroundlvl5_0037_Background37.png.png</filename>
             <filename>image/Backgroundlvl5_0038_Background38.png.png</filename>
             <filename>image/Backgroundlvl5_0039_Background0.png-copia.png</filename>
+            <filename>Backgroundflore_0000_background1.png.png</filename>
+            <filename>Backgroundflore_0001_background0.png.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
