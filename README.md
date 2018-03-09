@@ -9,6 +9,7 @@ You can find all the information and the necessary material to create Last Resor
 * _Github profile: https://github.com/YessicaSD_
 
 > Alejandro Gamarra Niño
+* _Find him on Instragram as @ax3_rt_
 * _Github profile: https://github.com/alejandro61299_
 
 > Dani Sanchez Flores
