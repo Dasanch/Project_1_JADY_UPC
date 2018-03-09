@@ -11,12 +11,15 @@ In this project you can find all the information and the necessary material to c
 > _Github profile: https://github.com/YessicaSD_
 
 > Alejandro Gamarra Niño
+
 > _Github profile: https://github.com/alejandro61299_
 
 > Dani Sanchez Flores
+
 > _Github profile: https://github.com/Dasanch_
 
 > Jaume Montagut i Guix
+
 > _Github profile: https://github.com/JaumeMontagut_
 
 ## Find project
