@@ -1,4 +1,4 @@
-# Project JADY
+# We are the team JADY
 ## Introduction
 In this project we will recreate the game Last Resort, we'll use the sprites of the original game and we'll program it from scratch.
 You can find all the information and the necessary material to create Last Resort.
