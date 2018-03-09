@@ -8,16 +8,16 @@ In this project you can find all the information and the necessary material to c
 ## Credits
 > Yessica Servin Dominguez          
 > _Find her on Instragram as @randomgerbit_
-> Github profile: https://github.com/YessicaSD
+> _Github profile: https://github.com/YessicaSD_
 
 > Alejandro Gamarra Niño
-> Github profile: https://github.com/alejandro61299
+> _Github profile: https://github.com/alejandro61299_
 
 > Dani Sanchez Flores
-> Github profile: https://github.com/Dasanch
+> _Github profile: https://github.com/Dasanch_
 
 > Jaume Montagut i Guix
-> Github profile: https://github.com/JaumeMontagut
+> _Github profile: https://github.com/JaumeMontagut_
 
 ## Find project
 https://github.com/Dasanch/Project_1_JADY_UPC
