@@ -13,9 +13,11 @@ You can find all the information and necessary material we used to recreate this
 * _Github profile: https://github.com/alejandro61299_
 
 > Dani Sanchez Flores
+* _Find him on Instragram as @vampir_nex
 * _Github profile: https://github.com/Dasanch_
 
 > Jaume Montagut i Guix
+* _Find him on his webpage https://wadoren.wixsite.com/gamedev
 * _Github profile: https://github.com/JaumeMontagut_
 
 ## Find project
