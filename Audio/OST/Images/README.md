@@ -1,1 +1,0 @@
-Screenshots of the area where music plays
