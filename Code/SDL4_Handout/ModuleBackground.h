@@ -19,11 +19,16 @@ public:
 public:
 	
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect background;
-	SDL_Rect ship;
-	Animation girl;
-	Animation flag;
+	typedef struct RectBackground
+	{
+		SDL_Rect Rect;
+		int Speed;
+	};
+
+	RectBackground Background;
+
+	
+
 
 };
 
