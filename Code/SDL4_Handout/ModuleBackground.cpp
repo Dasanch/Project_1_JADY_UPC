@@ -33,7 +33,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	// Draw everything --------------------------------------
-	
+	App->render->Render(graphics, &Background.Rect);
 
 
 	

@@ -7,7 +7,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer() //Constructor 
 {
 	
 	position.x = 0;
@@ -69,6 +69,7 @@ update_status ModulePlayer::Update()
 		
 		position.y -= speed;
 	}
+	
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
 	{
 		if (StaticShip == InstanFrameNum)
@@ -81,7 +82,10 @@ update_status ModulePlayer::Update()
 		}
 		position.y += speed;
 	}
+	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && App->input->keyboard[SDL_SCANCODE_W] == 1)
+	{
 
+	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		position.x += speed;
