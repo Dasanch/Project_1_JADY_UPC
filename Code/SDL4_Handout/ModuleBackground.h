@@ -18,14 +18,13 @@ public:
 
 public:
 	
-	SDL_Texture* graphics = nullptr;
-	typedef struct RectBackground
-	{
-		SDL_Rect Rect;
-		int Speed;
-	};
+	SDL_Texture * groundAndTunel = nullptr;
+	SDL_Texture* PurpleBuildings = nullptr;
+	SDL_Texture* BackgroundBuildings = nullptr;
 
-	RectBackground Background;
+	SDL_Rect BGBuildings;
+	SDL_Rect ground;
+	SDL_Rect PBuildings;
 
 	
 
