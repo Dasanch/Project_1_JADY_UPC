@@ -46,6 +46,8 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	int shipWidth = 32;
+	int shipHeight = 13;
 	Animation* current_animation = &ship;
 	int speed = 3;
 	int StaticShip = 2;
@@ -66,8 +68,11 @@ update_status ModulePlayer::Update()
 			InstanFrameNum = UpShip;
 		}
 		
+		if (position.y > 0)
+		{
+			position.y -= speed;
+		}
 		
-		position.y -= speed;
 	}
 	
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
@@ -80,7 +85,11 @@ update_status ModulePlayer::Update()
 		{
 			InstanFrameNum = DownShip;
 		}
-		position.y += speed;
+		if (position.y < SCREEN_HEIGHT-shipHeight)
+		{
+			position.y += speed;
+		}
+		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
@@ -88,12 +97,19 @@ update_status ModulePlayer::Update()
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
-		position.x += speed;
+		if (position.x < SCREEN_WIDTH - shipWidth)
+		{
+			position.x += speed;
+		}
+		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
-	
-		position.x -= speed;
+		if (position.x > 0)
+		{
+			position.x -= speed;
+	 }
+		
 	}
 	
 
