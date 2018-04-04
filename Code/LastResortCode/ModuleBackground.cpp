@@ -11,19 +11,19 @@ ModuleBackground::ModuleBackground()
 {
 	//TileMaplvl1
 	ground.x = 0;
-	ground.y = 0;
+	ground.y = 0; 
 	ground.w = 4408;
 	ground.h = 239;
 
 	PBuildings.h = 160;
 	PBuildings.w = 1303;
 	PBuildings.x = 0;
-	PBuildings.y = 20;
+	PBuildings.y = 0; 
 
 	BGBuildings.x = 0;
 	BGBuildings.y = 0;
-	BGBuildings.w = 304;
-	BGBuildings.h = 176;
+	BGBuildings.w = 803;
+	BGBuildings.h = 160;
 	
 }
 
@@ -38,14 +38,26 @@ bool ModuleBackground::Start()
 	groundAndTunel = App->textures->Load("../Game/Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
+	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
 	return ret;
 }
+
+
 
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+	App->render->camera.x -= 1; //CAMERA AUTO MOV
+
+	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f); //everytime printed->need change
+	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.25f);
+	App->render->Blit(PurpleBuildings, 0, 32, &PBuildings, 0.50f);
+	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+
+	
+
 	// Draw everything --------------------------------------
-	int speedBG = 1;
+	/*int speedBG = 1;
 	SDL_RenderCopy(App->render->renderer, BackgroundBuildings, NULL, &BGBuildings);
 
 	int speedPB = 1;
@@ -63,7 +75,7 @@ update_status ModuleBackground::Update()
 
 	int speed = 1;
 	SDL_RenderCopy(App->render->renderer, groundAndTunel, NULL, &ground);
-	ground.x -= speed;
+	ground.x -= speed;*/
 
 
 	
