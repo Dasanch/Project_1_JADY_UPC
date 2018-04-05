@@ -7,6 +7,8 @@
 
 #define midgndOffset 32
 #define midgndSpeed 0.5f
+//midgndLoopDist = Distance when the first building on the tilemap repeats
+#define midgndLoopDist 512
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -114,14 +116,35 @@ update_status ModuleBackground::Update()
 	
 
 	//Midground lights
+	//- Loop 1
 	App->render->Blit(midgroundLightsTx,  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgroundLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgroundLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgroundLightsTx, 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgroundLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgroundLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	//- Loop 2
+	App->render->Blit(midgroundLightsTx, midgndLoopDist +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	//- Loop 3
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 40, midgndOffset +  28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+
 	//Positions calculated from the png
 	//!TO IMPLEMENT: See when the background loops so we can put the lights over again
+	//IMPLEMENTATION 01- Possible implementation with ifs comparing the camera.x with the position.x of each rect of animation
+	//IMPLEMENTATION 02
+	//int loops; //Each time it repeats goes to a next loop
+	//=/ it would change all of them at the same time
+	//App->render->Blit(midgroundLightsTx, midgndLoopDist * loops + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 
 	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
 
