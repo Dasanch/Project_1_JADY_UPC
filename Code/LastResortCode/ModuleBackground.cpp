@@ -5,10 +5,11 @@
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
 
+#define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
-#define midgndSpeed 0.5f
-//midgndLoopDist = Distance when the first building on the tilemap repeats
-#define midgndLoopDist 512
+#define midgndSpeed 0.50f
+
+#define bckgndSpeed 0.25f
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -30,7 +31,70 @@ ModuleBackground::ModuleBackground()
 	BGBuildings.w = 803;
 	BGBuildings.h = 160;
 
+	//Background lights
+	//1
+	bckgndLightsAnim01.PushBack({   1,  1, 89, 78 });
+	bckgndLightsAnim01.PushBack({  91,  1, 89, 78 });
+	bckgndLightsAnim01.PushBack({ 181,  1, 89, 78 });
+	bckgndLightsAnim01.PushBack({ 271,  1, 89, 78 });
+	bckgndLightsAnim01.PushBack({ 361,  1, 89, 78 });
+	bckgndLightsAnim01.PushBack({   1, 80, 89, 78 });
+	bckgndLightsAnim01.PushBack({  91, 80, 89, 78 });
+	bckgndLightsAnim01.PushBack({ 181, 80, 89, 78 });
+	bckgndLightsAnim01.speed = 0.08f;
+	//2
+	bckgndLightsAnim02.PushBack({ 271, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 284, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 297, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 310, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 323, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 336, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 349, 80, 12, 16 });
+	bckgndLightsAnim02.PushBack({ 362, 80, 12, 16 });
+	bckgndLightsAnim02.speed = 0.08f;
+	//3
+	bckgndLightsAnim03.PushBack({   1, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({  66, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 131, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 197, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 261, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 326, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 391, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({   1, 239, 64, 75 });
+	bckgndLightsAnim03.speed = 0.08f;
+	//4
+	bckgndLightsAnim04.PushBack({   1, 315, 167, 89 });
+	bckgndLightsAnim04.PushBack({ 169, 315, 167, 89 });
+	bckgndLightsAnim04.PushBack({ 337, 315, 167, 89 });
+	bckgndLightsAnim04.PushBack({   1, 405, 167, 89 });
+	bckgndLightsAnim04.PushBack({ 169, 405, 167, 89 });
+	bckgndLightsAnim04.PushBack({ 337, 405, 167, 89 });
+	bckgndLightsAnim04.PushBack({   1, 495, 167, 89 });
+	bckgndLightsAnim04.PushBack({ 169, 495, 167, 89 });
+	bckgndLightsAnim04.speed = 0.08f;
+	//5
+	bckgndLightsAnim05.PushBack({   1, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({  33, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({  65, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({  97, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({ 129, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({ 161, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({ 193, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({ 255, 585, 31, 58 });
+	bckgndLightsAnim05.speed = 0.08f;
+	//6
+	bckgndLightsAnim06.PushBack({   1, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({  49, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({  97, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({ 145, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({ 193, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({ 241, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({ 289, 644, 47, 51 });
+	bckgndLightsAnim06.PushBack({ 337, 644, 47, 51 });
+	bckgndLightsAnim06.speed = 0.08f;
+
 	//Midground lights
+	//1
 	midgndLightsAnim01.PushBack({   1, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({  98, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({ 195, 1, 95, 86 });
@@ -39,7 +103,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim01.PushBack({ 486, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({ 583, 1, 95, 86 });
 	midgndLightsAnim01.speed = 0.08f;
-
+	//2
 	midgndLightsAnim02.PushBack({   1, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({  39, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({  77, 88, 37, 61 });
@@ -48,7 +112,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim02.PushBack({ 191, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({ 229, 88, 37, 61 });
 	midgndLightsAnim02.speed = 0.08f;
-
+	//3
 	midgndLightsAnim03.PushBack({   1, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 110, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 219, 150, 108, 47 });
@@ -57,7 +121,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim03.PushBack({ 546, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 655, 150, 108, 47 });
 	midgndLightsAnim03.speed = 0.08f;
-
+	//4
 	midgndLightsAnim04.PushBack({   1, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  17, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  33, 198, 15, 12 });
@@ -66,7 +130,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim04.PushBack({  81, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({   97, 198, 15, 12 });
 	midgndLightsAnim04.speed = 0.08f;
-
+	//5
 	midgndLightsAnim05.PushBack({  1, 211,  48, 93 });
 	midgndLightsAnim05.PushBack({ 50, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 99, 211, 48, 93 });
@@ -75,7 +139,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim05.PushBack({ 246, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 295, 211, 48, 93 });
 	midgndLightsAnim05.speed = 0.08f;
-
+	//6
 	midgndLightsAnim06.PushBack({ 1, 305,  61, 77 });
 	midgndLightsAnim06.PushBack({ 63, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 125, 305, 61, 77 });
@@ -99,7 +163,8 @@ bool ModuleBackground::Start()
 	PurpleBuildings = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
 	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
-	midgroundLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
+	bckgndLightsTx = App->textures->Load("../Game/Assets/BackgroundLights");
+	midgndLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
 	return ret;
 }
 
@@ -108,45 +173,48 @@ bool ModuleBackground::Start()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+	//Camera movement
 	App->render->camera.x -= 1; //CAMERA AUTO MOV
 
 	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f); //everytime printed->need change
-	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.25f);
+	//Background buildings
+	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
+	//Background lights
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
+	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
+	//Midground buildings
 	App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
-	
-
 	//Midground lights
 	//- Loop 1
-	App->render->Blit(midgroundLightsTx,  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx,  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 	//- Loop 2
-	App->render->Blit(midgroundLightsTx, midgndLoopDist +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 	//- Loop 3
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 40, midgndOffset +  28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgroundLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, midgndOffset +  28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 	//Positions calculated from the png
-	//!TO IMPLEMENT: See when the background loops so we can put the lights over again
-	//IMPLEMENTATION 01- Possible implementation with ifs comparing the camera.x with the position.x of each rect of animation
-	//IMPLEMENTATION 02
-	//int loops; //Each time it repeats goes to a next loop
-	//=/ it would change all of them at the same time
-	//App->render->Blit(midgroundLightsTx, midgndLoopDist * loops + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-
+	
+	//Ground and tunnel
 	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+	//Ground and tunnel lights
 
 	// Draw everything --------------------------------------
 	/*int speedBG = 1;
