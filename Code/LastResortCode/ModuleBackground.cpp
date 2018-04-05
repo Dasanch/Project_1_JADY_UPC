@@ -7,7 +7,7 @@
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
-#define midgndSpeed 0.50f
+#define midgndSpeed 0.4f
 
 #define bckgndSpeed 0.25f
 
@@ -173,8 +173,7 @@ bool ModuleBackground::Start()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
-	//Camera movement
-	App->render->camera.x -= 1; //CAMERA AUTO MOV
+	
 
 
 	//Boss buildings
@@ -223,7 +222,7 @@ update_status ModuleBackground::Update()
 	//Positions calculated from the png
 	
 	//Ground and tunnel
-	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+	App->render->Blit(groundAndTunel, 0, 0, &ground, 0.6f);
 	
 	return UPDATE_CONTINUE;
 }
