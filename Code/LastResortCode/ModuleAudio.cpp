@@ -36,8 +36,8 @@ bool ModuleAudio::Init()
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-	LoadMUS("Assets/stage1.ogg", "stage1");
-	ControlMUS("stage1", PLAY);
+	//LoadMUS("Assets/stage1.ogg", "stage1");
+	//ControlMUS("stage1", PLAY);
 
 	return ret;
 }
@@ -46,17 +46,19 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing audios and Mixer library and shutdown mixer");
 
-	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
-		if (sfx[i].chunk == nullptr) {
-			Mix_FreeChunk(sfx[i].chunk);
-		}
+	//for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
+	//	if (sfx[i].chunk != nullptr) {
+	//		Mix_FreeChunk(sfx[i].chunk);
+	//	}
 
-	for (uint i = 0; i < MAX_MUSICS; ++i)
-		if (musics[i].music != nullptr) {
-			Mix_FreeMusic(musics[i].music);
-		}
+	//for (uint i = 0; i < MAX_MUSICS; ++i)
+	//	if (musics[i].music != nullptr) {
+	//		Mix_FreeMusic(musics[i].music);
+	//	}
+	//
 
-	
+	delete[] musics;
+	delete[] sfx;
 
 	Mix_CloseAudio();
 	Mix_Quit();
