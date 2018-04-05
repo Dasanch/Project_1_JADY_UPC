@@ -5,6 +5,8 @@
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
 
+#define midgroundOffset 32
+
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleBackground::ModuleBackground()
@@ -24,6 +26,18 @@ ModuleBackground::ModuleBackground()
 	BGBuildings.y = 0;
 	BGBuildings.w = 803;
 	BGBuildings.h = 160;
+
+	//Midground lights
+	midgndLightsAnim01.PushBack({   1,  1, 95, 86 });
+	midgndLightsAnim01.PushBack({  98,  1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 195 , 1 ,95, 86 });
+	midgndLightsAnim01.PushBack({ 292 , 1 ,95, 86 });
+	midgndLightsAnim01.PushBack({ 389 , 1 ,95, 86 });
+	midgndLightsAnim01.PushBack({ 486 , 1 ,95, 86 });
+	midgndLightsAnim01.PushBack({ 583 , 1 ,95, 86 });
+	midgndLightsAnim01.speed = 0.08f;
+	//!TO IMPLEMENT: Adjust animation speed
+	//!TO IMPLEMENT: Create middlegroundLights01, 02...
 	
 }
 
@@ -39,6 +53,7 @@ bool ModuleBackground::Start()
 	PurpleBuildings = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
 	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
+	midgroundLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
 	return ret;
 }
 
@@ -51,10 +66,13 @@ update_status ModuleBackground::Update()
 
 	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f); //everytime printed->need change
 	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.25f);
-	App->render->Blit(PurpleBuildings, 0, 32, &PBuildings, 0.50f);
+	App->render->Blit(PurpleBuildings, 0, midgroundOffset, &PBuildings, 0.50f);
 	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
 
-	
+	//Midground lights
+	App->render->Blit(midgroundLightsTx, 40, midgroundOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), 0.50f);
+	//Positions calculated from the png
+	//!TO IMPLEMENT: See when the background loops so we can put the lights over again
 
 	// Draw everything --------------------------------------
 	/*int speedBG = 1;
