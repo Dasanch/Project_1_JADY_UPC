@@ -49,20 +49,10 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-	//int speed = 3;
+	int speed = 3;
 
-	//if(App->input->keyboard[SDL_SCANCODE_UP] == 1)
-	//	camera.y += speed;
-
-	//if(App->input->keyboard[SDL_SCANCODE_DOWN] == 1)
-	//	camera.y -= speed;
-
-	//if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1)
-	//	camera.x += speed;
-
-	//if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
-	//	camera.x -= speed;
-	//// TODO 1: Make the camera move left and right --DONE
+	//Camera movement
+	camera.x -= speed; //CAMERA AUTO MOV
 
 	return update_status::UPDATE_CONTINUE;
 }

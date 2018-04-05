@@ -7,7 +7,12 @@
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
+<<<<<<< HEAD
 #define midgndSpeed 0.50f
+=======
+#define midgndSpeed 0.4f
+
+>>>>>>> abeaf4ffdc7f0b08e40600ebd99a060d4cd07032
 #define bckgndSpeed 0.25f
 #define foregndSpeed 1.00f
 #define tunnelLightDist 256
@@ -186,8 +191,12 @@ bool ModuleBackground::Start()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+<<<<<<< HEAD
 	//Camera movement
 	App->render->camera.x -= 5; //CAMERA AUTO MOV
+=======
+	
+>>>>>>> abeaf4ffdc7f0b08e40600ebd99a060d4cd07032
 
 
 	//Boss buildings
@@ -236,6 +245,7 @@ update_status ModuleBackground::Update()
 	//Positions calculated from the png
 	
 	//Ground and tunnel
+<<<<<<< HEAD
 	App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	//Tunnel lights
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
@@ -248,6 +258,9 @@ update_status ModuleBackground::Update()
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 	//Could be implemented with a for, but probably all the frames would be the same
 	//2048 = distance from the start of the tilemap to the first light
+=======
+	App->render->Blit(groundAndTunel, 0, 0, &ground, 0.6f);
+>>>>>>> abeaf4ffdc7f0b08e40600ebd99a060d4cd07032
 	
 	return UPDATE_CONTINUE;
 }
