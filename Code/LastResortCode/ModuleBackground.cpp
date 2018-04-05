@@ -8,8 +8,9 @@
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
 #define midgndSpeed 0.50f
-
 #define bckgndSpeed 0.25f
+#define foregndSpeed 1.00f
+#define tunnelLightDist 256
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -30,6 +31,17 @@ ModuleBackground::ModuleBackground()
 	BGBuildings.y = 0;
 	BGBuildings.w = 304;
 	BGBuildings.h = 176;
+
+	//Tunnel lights
+	tunnelLightsAnim.PushBack({   1,   1, 116, 168 });
+	tunnelLightsAnim.PushBack({ 118,   1, 116, 168 });
+	tunnelLightsAnim.PushBack({ 235,   1, 116, 168 });
+	tunnelLightsAnim.PushBack({ 352,   1, 116, 168 });
+	tunnelLightsAnim.PushBack({   1, 169, 116, 168 });
+	tunnelLightsAnim.PushBack({ 118, 169, 116, 168 });
+	tunnelLightsAnim.PushBack({ 235, 169, 116, 168 });
+	tunnelLightsAnim.PushBack({ 352, 169, 116, 168 });
+	tunnelLightsAnim.speed = 0.08f;
 
 	//Background lights
 	//1
@@ -128,20 +140,20 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim04.PushBack({  49, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  65, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  81, 198, 15, 12 });
-	midgndLightsAnim04.PushBack({   97, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  97, 198, 15, 12 });
 	midgndLightsAnim04.speed = 0.08f;
 	//5
-	midgndLightsAnim05.PushBack({  1, 211,  48, 93 });
-	midgndLightsAnim05.PushBack({ 50, 211, 48, 93 });
-	midgndLightsAnim05.PushBack({ 99, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({   1, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({  50, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({  99, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 148, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 197, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 246, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 295, 211, 48, 93 });
 	midgndLightsAnim05.speed = 0.08f;
 	//6
-	midgndLightsAnim06.PushBack({ 1, 305,  61, 77 });
-	midgndLightsAnim06.PushBack({ 63, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({   1, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({  63, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 125, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 187, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 249, 305, 61, 77 });
@@ -159,12 +171,13 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	groundAndTunel = App->textures->Load("../Game/Assets/TileMaplvl1Ground&Tunel.png");
-	PurpleBuildings = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
+	groundAndTunel      = App->textures->Load("../Game/Assets/TileMaplvl1Ground&Tunel.png");
+	PurpleBuildings     = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
-	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
-	bckgndLightsTx = App->textures->Load("../Game/Assets/BackgroundLights");
-	midgndLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
+	Boss1Background     = App->textures->Load("../Game/Assets/StaticBackground.png");
+	bckgndLightsTx      = App->textures->Load("../Game/Assets/BackgroundLights.png");
+	midgndLightsTx      = App->textures->Load("../Game/Assets/MidgroundLights.png");
+	tunnelLightsTx      = App->textures->Load("../Game/Assets/TunnelLights.png");
 	return ret;
 }
 
@@ -174,7 +187,7 @@ bool ModuleBackground::Start()
 update_status ModuleBackground::Update()
 {
 	//Camera movement
-	App->render->camera.x -= 1; //CAMERA AUTO MOV
+	App->render->camera.x -= 5; //CAMERA AUTO MOV
 
 
 	//Boss buildings
@@ -210,11 +223,11 @@ update_status ModuleBackground::Update()
 	App->render->Blit(midgndLightsTx, midgndLoopDist +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 	//- Loop 3
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, midgndOffset +  28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
 	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
@@ -223,7 +236,18 @@ update_status ModuleBackground::Update()
 	//Positions calculated from the png
 	
 	//Ground and tunnel
-	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+	App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
+	//Tunnel lights
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	//Could be implemented with a for, but probably all the frames would be the same
+	//2048 = distance from the start of the tilemap to the first light
 	
 	return UPDATE_CONTINUE;
 }

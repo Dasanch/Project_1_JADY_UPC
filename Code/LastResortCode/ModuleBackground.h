@@ -24,11 +24,13 @@ public:
 	SDL_Texture* Boss1Background = nullptr;
 	SDL_Texture* midgndLightsTx = nullptr;
 	SDL_Texture* bckgndLightsTx = nullptr;
+	SDL_Texture* tunnelLightsTx = nullptr;
 
 	SDL_Rect BGBuildings;
 	SDL_Rect ground;
 	SDL_Rect PBuildings;
 
+	Animation tunnelLightsAnim;
 	//Background lights
 	Animation bckgndLightsAnim01;
 	Animation bckgndLightsAnim02;
@@ -36,7 +38,6 @@ public:
 	Animation bckgndLightsAnim04;
 	Animation bckgndLightsAnim05;
 	Animation bckgndLightsAnim06;
-
 	//Middleground lights
 	Animation midgndLightsAnim01;
 	Animation midgndLightsAnim02;
