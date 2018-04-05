@@ -4,11 +4,16 @@
 #include "ModuleRender.h"
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
+#include <stdlib.h>
+#include <time.h> //Asure that we can use this library
 
 #define midgndOffset 32
 #define midgndSpeed 0.5f
 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndLoopDist 512
+
+#define streetLightDist 64
+#define streetLightLoopDist 64
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -85,7 +90,22 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim06.PushBack({ 373, 305, 61, 77 });
 	midgndLightsAnim06.speed = 0.08f;
 	//!TO IMPLEMENT: Adjust animation speed
+
+	//Street Lights
+
+	streetLightsAnim.PushBack({ 0,0, 48, 65 });
+	streetLightsAnim.PushBack({ 49, 0, 48, 65 });
+	streetLightsAnim.PushBack({ 98, 0, 48, 65 });
+	streetLightsAnim.PushBack({ 147, 0, 48, 65 });
+	streetLightsAnim.PushBack({ 98, 0, 48, 65 });
+	streetLightsAnim.PushBack({ 49, 0, 48, 65 });
+	streetLightsAnim.speed = 0.10f;
+
 }
+
+
+
+
 
 ModuleBackground::~ModuleBackground()
 {}
@@ -100,6 +120,13 @@ bool ModuleBackground::Start()
 	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
 	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
 	midgroundLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
+	streetLightsTx = App->textures->Load("../Game/Assets/StreetLights.png");
+
+	srand(time(NULL));
+
+	for (int i = 1; i < 27; ++i) {
+		randoms[i] = rand() % 6 + 1;
+	}
 	return ret;
 }
 
@@ -146,7 +173,18 @@ update_status ModuleBackground::Update()
 	//=/ it would change all of them at the same time
 	//App->render->Blit(midgroundLightsTx, midgndLoopDist * loops + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 
+
+
 	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+
+	//Street Lights
+
+	App->render->Blit(streetLightsTx, 40 , 136, &streetLightsAnim.GetCurrentFrame(), 1.0f);
+	for (int i = 1; i < 27; ++i) {
+		App->render->Blit(streetLightsTx, 40 + streetLightDist*i, 136, &streetLightsAnim.GetFrame(randoms[i]), 1.0f);
+
+	}
+	
 
 	// Draw everything --------------------------------------
 	/*int speedBG = 1;

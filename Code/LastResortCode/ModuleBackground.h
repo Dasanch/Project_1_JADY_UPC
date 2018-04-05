@@ -17,12 +17,14 @@ public:
 	update_status Update();
 
 public:
-	
+	uint randoms[27];
+
 	SDL_Texture * groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;
 	SDL_Texture* BackgroundBuildings = nullptr;
 	SDL_Texture* Boss1Background = nullptr;
 	SDL_Texture* midgroundLightsTx = nullptr;
+	SDL_Texture* streetLightsTx = nullptr;
 
 	SDL_Rect BGBuildings;
 	SDL_Rect ground;
@@ -35,6 +37,9 @@ public:
 	Animation midgndLightsAnim04;
 	Animation midgndLightsAnim05;
 	Animation midgndLightsAnim06;
+	
+	//Street Lights animation
+	Animation streetLightsAnim;
 
 };
 

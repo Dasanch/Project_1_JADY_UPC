@@ -33,6 +33,23 @@ public:
 		return frames[(int)current_frame];
 	}
 
+	SDL_Rect& GetFrame()
+	{
+		return frames[(int)current_frame];
+	}
+	SDL_Rect& GetFrame(uint random)
+	{
+		uint i = 0;
+		float frame = current_frame;
+		while (i <= random) {
+			if (frame > last_frame)
+				frame = 0;
+			++frame;
+			++i;
+		}
+		return frames[(int)frame];
+	}
+
 };
 
 #endif
