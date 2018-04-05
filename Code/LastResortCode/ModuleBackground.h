@@ -45,11 +45,7 @@ public:
 	Animation midgndLightsAnim04;
 	Animation midgndLightsAnim05;
 	Animation midgndLightsAnim06;
-
 	//Road lights
-
-	//Tunnel lights
-
 };
 
 #endif
