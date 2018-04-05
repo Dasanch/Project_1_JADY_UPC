@@ -23,14 +23,27 @@ public:
 	SDL_Texture* PurpleBuildings = nullptr;
 	SDL_Texture* BackgroundBuildings = nullptr;
 	SDL_Texture* Boss1Background = nullptr;
-	SDL_Texture* midgroundLightsTx = nullptr;
+
+	//SDL_Texture* midgroundLightsTx = nullptr;
 	SDL_Texture* streetLightsTx = nullptr;
+	SDL_Texture* midgndLightsTx = nullptr;
+	SDL_Texture* bckgndLightsTx = nullptr;
+	SDL_Texture* tunnelLightsTx = nullptr;
+
 
 	SDL_Rect BGBuildings;
 	SDL_Rect ground;
 	SDL_Rect PBuildings;
 
-	//Middle ground lights
+	Animation tunnelLightsAnim;
+	//Background lights
+	Animation bckgndLightsAnim01;
+	Animation bckgndLightsAnim02;
+	Animation bckgndLightsAnim03;
+	Animation bckgndLightsAnim04;
+	Animation bckgndLightsAnim05;
+	Animation bckgndLightsAnim06;
+	//Middleground lights
 	Animation midgndLightsAnim01;
 	Animation midgndLightsAnim02;
 	Animation midgndLightsAnim03;
