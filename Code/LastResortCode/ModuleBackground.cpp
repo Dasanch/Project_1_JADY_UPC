@@ -5,7 +5,8 @@
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
 
-#define midgroundOffset 32
+#define midgndOffset 32
+#define midgndSpeed 0.5f
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -28,17 +29,60 @@ ModuleBackground::ModuleBackground()
 	BGBuildings.h = 160;
 
 	//Midground lights
-	midgndLightsAnim01.PushBack({   1,  1, 95, 86 });
-	midgndLightsAnim01.PushBack({  98,  1, 95, 86 });
-	midgndLightsAnim01.PushBack({ 195 , 1 ,95, 86 });
-	midgndLightsAnim01.PushBack({ 292 , 1 ,95, 86 });
-	midgndLightsAnim01.PushBack({ 389 , 1 ,95, 86 });
-	midgndLightsAnim01.PushBack({ 486 , 1 ,95, 86 });
-	midgndLightsAnim01.PushBack({ 583 , 1 ,95, 86 });
+	midgndLightsAnim01.PushBack({   1, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({  98, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 195, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 292, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 389, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 486, 1, 95, 86 });
+	midgndLightsAnim01.PushBack({ 583, 1, 95, 86 });
 	midgndLightsAnim01.speed = 0.08f;
+
+	midgndLightsAnim02.PushBack({   1, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({  39, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({  77, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({ 115, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({ 153, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({ 191, 88, 37, 61 });
+	midgndLightsAnim02.PushBack({ 229, 88, 37, 61 });
+	midgndLightsAnim02.speed = 0.08f;
+
+	midgndLightsAnim03.PushBack({   1, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 110, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 219, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 328, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 437, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 546, 150, 108, 47 });
+	midgndLightsAnim03.PushBack({ 655, 150, 108, 47 });
+	midgndLightsAnim03.speed = 0.08f;
+
+	midgndLightsAnim04.PushBack({   1, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  17, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  33, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  49, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  65, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({  81, 198, 15, 12 });
+	midgndLightsAnim04.PushBack({   97, 198, 15, 12 });
+	midgndLightsAnim04.speed = 0.08f;
+
+	midgndLightsAnim05.PushBack({  1, 211,  48, 93 });
+	midgndLightsAnim05.PushBack({ 50, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({ 99, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({ 148, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({ 197, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({ 246, 211, 48, 93 });
+	midgndLightsAnim05.PushBack({ 295, 211, 48, 93 });
+	midgndLightsAnim05.speed = 0.08f;
+
+	midgndLightsAnim06.PushBack({ 1, 305,  61, 77 });
+	midgndLightsAnim06.PushBack({ 63, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({ 125, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({ 187, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({ 249, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({ 311, 305, 61, 77 });
+	midgndLightsAnim06.PushBack({ 373, 305, 61, 77 });
+	midgndLightsAnim06.speed = 0.08f;
 	//!TO IMPLEMENT: Adjust animation speed
-	//!TO IMPLEMENT: Create middlegroundLights01, 02...
-	
 }
 
 ModuleBackground::~ModuleBackground()
@@ -66,13 +110,20 @@ update_status ModuleBackground::Update()
 
 	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f); //everytime printed->need change
 	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.25f);
-	App->render->Blit(PurpleBuildings, 0, midgroundOffset, &PBuildings, 0.50f);
-	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
+	App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
+	
 
 	//Midground lights
-	App->render->Blit(midgroundLightsTx, 40, midgroundOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), 0.50f);
+	App->render->Blit(midgroundLightsTx,  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgroundLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 	//Positions calculated from the png
 	//!TO IMPLEMENT: See when the background loops so we can put the lights over again
+
+	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
 
 	// Draw everything --------------------------------------
 	/*int speedBG = 1;

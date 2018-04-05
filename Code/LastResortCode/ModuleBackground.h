@@ -30,16 +30,11 @@ public:
 
 	//Middle ground lights
 	Animation midgndLightsAnim01;
-	//Animation midgndLightsAnim02;
-	//Animation midgndLightsAnim03;
-	//Animation midgndLightsAnim04;
-	//Animation midgndLightsAnim05;
-	//Animation midgndLightsAnim06;
-	//Animation midgndLightsAnim07;
-
-
-	
-
+	Animation midgndLightsAnim02;
+	Animation midgndLightsAnim03;
+	Animation midgndLightsAnim04;
+	Animation midgndLightsAnim05;
+	Animation midgndLightsAnim06;
 
 };
 
