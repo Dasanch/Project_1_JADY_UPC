@@ -28,8 +28,8 @@ ModuleBackground::ModuleBackground()
 
 	BGBuildings.x = 0;
 	BGBuildings.y = 0;
-	BGBuildings.w = 803;
-	BGBuildings.h = 160;
+	BGBuildings.w = 304;
+	BGBuildings.h = 176;
 
 	//Background lights
 	//1
@@ -176,9 +176,19 @@ update_status ModuleBackground::Update()
 	//Camera movement
 	App->render->camera.x -= 1; //CAMERA AUTO MOV
 
-	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f); //everytime printed->need change
+
+	//Boss buildings
+	if (App->render->camera.x < -2320) {
+		
+		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
+	}
+
 	//Background buildings
-	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
+	else if (App->render->camera.x > -2820) {
+		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.0f);
+	} //-2820 and -2320 change
+
+
 	//Background lights
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
@@ -214,31 +224,6 @@ update_status ModuleBackground::Update()
 	
 	//Ground and tunnel
 	App->render->Blit(groundAndTunel, 0, 0, &ground, 1.0f);
-	//Ground and tunnel lights
-
-	// Draw everything --------------------------------------
-	/*int speedBG = 1;
-	SDL_RenderCopy(App->render->renderer, BackgroundBuildings, NULL, &BGBuildings);
-
-	int speedPB = 1;
-	SDL_RenderCopy(App->render->renderer, PurpleBuildings, NULL, &PBuildings);
-	if (PBuildings.x > -PBuildings.w)
-	{
-		PBuildings.x -= speedPB;
-		BGBuildings.x -= speedBG;
-		if (BGBuildings.x == -BGBuildings.w)
-		{
-			BGBuildings.x = 0;
-		}
-	}
-
-
-	int speed = 1;
-	SDL_RenderCopy(App->render->renderer, groundAndTunel, NULL, &ground);
-	ground.x -= speed;*/
-
-
 	
-
 	return UPDATE_CONTINUE;
 }
