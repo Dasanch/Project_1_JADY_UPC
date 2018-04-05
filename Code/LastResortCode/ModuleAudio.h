@@ -9,15 +9,20 @@
 #define MAX_SOUNDEFECTS 20
 
 
-enum Music_State {
+enum Audio_State {
 	PLAY,
 	STOP, 
 	RESUME
 };
 
+struct Music {
+	Mix_Music * music;
+	char *name;
+};
+
 struct Sfx {
 	Mix_Chunk *chunk;
-	char *file;
+	char *name;
 };
 
 class ModuleAudio : public Module {
@@ -28,13 +33,13 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	Mix_Chunk* const LoadSfx(const char* path);
-	Mix_Music* const LoadMUS(const char* path);
-	void PlayMusic(const char* path);
+	Mix_Chunk* const LoadSfx(const char* path, char* name);
+	Mix_Music* const LoadMUS(const char* path, char *name);
+	void ControlMUS (char* name, Audio_State state);
 
 private:
-	Mix_Music *musics [MAX_MUSICS];
-	Mix_Chunk *sfx [MAX_SOUNDEFECTS];
+	Music * musics= nullptr;
+	Sfx *sfx = nullptr;
 	uint last_chunk = 0;
 	uint last_music = 0;
 };

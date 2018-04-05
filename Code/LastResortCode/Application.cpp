@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleBackground.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 Application::Application()
 {
@@ -14,6 +15,7 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = background = new ModuleBackground();
 	modules[5] = player = new ModulePlayer();
+	modules[6] = audios = new ModuleAudio();
 }	
 
 Application::~Application()
