@@ -52,8 +52,8 @@ public:
 	Animation midgndLightsAnim06;
 	
 	//Street Lights animation
-	Animation streetLightsAnim;
-
+	Animation streetLightsAnim01;
+	Animation streetLightsAnim02;
 };
 
 #endif

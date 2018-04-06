@@ -15,7 +15,7 @@
 #define tunnelLightDist 256
 
 #define streetLightDist 64
-#define streetLightLoopDist 64
+#define roadLightDist 121
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -168,15 +168,25 @@ ModuleBackground::ModuleBackground()
 	//!TO IMPLEMENT: Adjust animation speed
 
 	//Street Lights
+	//1
+	streetLightsAnim01.PushBack({ 0,0, 48, 65 });
+	streetLightsAnim01.PushBack({ 49, 0, 48, 65 });
+	streetLightsAnim01.PushBack({ 98, 0, 48, 65 });
+	streetLightsAnim01.PushBack({ 147, 0, 48, 65 });
+	streetLightsAnim01.PushBack({ 98, 0, 48, 65 });
+	streetLightsAnim01.PushBack({ 49, 0, 48, 65 });
+	streetLightsAnim01.speed = 0.10f;
+	//2
+	streetLightsAnim02.PushBack({ 0,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 62,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 124,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 186,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 0,87, 61, 20 });
+	streetLightsAnim02.PushBack({ 186,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 124,66, 61, 20 });
+	streetLightsAnim02.PushBack({ 62,66, 61, 20 });
 
-	streetLightsAnim.PushBack({ 0,0, 48, 65 });
-	streetLightsAnim.PushBack({ 49, 0, 48, 65 });
-	streetLightsAnim.PushBack({ 98, 0, 48, 65 });
-	streetLightsAnim.PushBack({ 147, 0, 48, 65 });
-	streetLightsAnim.PushBack({ 98, 0, 48, 65 });
-	streetLightsAnim.PushBack({ 49, 0, 48, 65 });
-	streetLightsAnim.speed = 0.10f;
-
+	streetLightsAnim02.speed = 0.10f;
 }
 
 
@@ -264,10 +274,15 @@ update_status ModuleBackground::Update()
 	App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 
 	//Street Lights
-
-	App->render->Blit(streetLightsTx, 40 , 136, &streetLightsAnim.GetCurrentFrame(), 1.0f);
+	//1
+	App->render->Blit(streetLightsTx, 40 , 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
 	for (int i = 1; i < 27; ++i) {
-		App->render->Blit(streetLightsTx, 40 + streetLightDist*i, 136, &streetLightsAnim.GetFrame(randoms[i]), 1.0f);
+		App->render->Blit(streetLightsTx, 40 + streetLightDist *i, 136, &streetLightsAnim01.GetFrame(randoms[i]), 1.0f);
+	}
+	//2
+	App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
+	for (int i = 1; i < 14; ++i) {
+		App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), 1.0f);
 	}
 	
 	//Tunnel lights

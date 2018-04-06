@@ -41,10 +41,10 @@ public:
 	{
 		uint i = 0;
 		float frame = current_frame;
-		while (i <= random) {
+		while (i < random) {
+			++frame;
 			if (frame > last_frame)
 				frame = 0;
-			++frame;
 			++i;
 		}
 		return frames[(int)frame];
