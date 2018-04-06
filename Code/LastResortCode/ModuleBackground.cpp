@@ -201,15 +201,15 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	groundAndTunel = App->textures->Load("../Game/Assets/TileMaplvl1Ground&Tunel.png");
-	PurpleBuildings = App->textures->Load("../Game/Assets/midGroundBuildingsFull.png");
-	BackgroundBuildings = App->textures->Load("../Game/Assets/firstCameraMovBuilding04.png");
+	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
+	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
+	BackgroundBuildings = App->textures->Load("Assets/firstCameraMovBuilding04.png");
 
-	Boss1Background = App->textures->Load("../Game/Assets/StaticBackground.png");
-	bckgndLightsTx = App->textures->Load("../Game/Assets/BackgroundLights.png");
-	midgndLightsTx = App->textures->Load("../Game/Assets/MidgroundLights.png");
-	tunnelLightsTx = App->textures->Load("../Game/Assets/TunnelLights.png");
-	streetLightsTx = App->textures->Load("../Game/Assets/StreetLights.png");
+	Boss1Background = App->textures->Load("Assets/StaticBackground.png");
+	bckgndLightsTx = App->textures->Load("Assets/BackgroundLights.png");
+	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
+	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
+	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
 
 	srand(time(NULL));
 
