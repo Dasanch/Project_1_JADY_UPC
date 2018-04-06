@@ -25,7 +25,7 @@ public:
 	ModuleTextures* textures = nullptr;
 	ModuleBackground* background = nullptr;
 	ModulePlayer* player = nullptr;
-	ModuleAudio *audios = nullptr;
+	ModuleAudio *audio = nullptr;
 
 public:
 

@@ -33,13 +33,13 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	Mix_Chunk* const LoadSfx(const char* path, char* name);
+	Mix_Chunk* const LoadSfx(const char* path, char *name);
 	Mix_Music* const LoadMUS(const char* path, char *name);
 	void ControlMUS (char* name, Audio_State state);
 
 private:
-	Music * musics= nullptr;
-	Sfx *sfx = nullptr;
+	Music musics[MAX_MUSICS];
+	Sfx sfx[MAX_SOUNDEFECTS];
 	uint last_chunk = 0;
 	uint last_music = 0;
 };

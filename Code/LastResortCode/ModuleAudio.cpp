@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+#include "Module.h"
 #include "ModuleAudio.h"
 
 #include "SDL/include/SDL.h"
@@ -10,13 +11,13 @@
 ModuleAudio::ModuleAudio() : Module()
 {
 	
-	//for (uint i = 0; i < MAX_MUSICS; ++i)
-	//	musics[i] = nullptr;
-	//for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
-	//	sfx[i] = nullptr;
+	for (uint i = 0; i < MAX_MUSICS; ++i)
+		musics[i] = { nullptr , nullptr};
+	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
+		sfx[i] = { nullptr, nullptr };
 
-	musics = new Music[MAX_MUSICS];
-	sfx = new Sfx[MAX_SOUNDEFECTS];
+	//musics = new Music[MAX_MUSICS];
+	//sfx = new Sfx[MAX_SOUNDEFECTS];
 }
 
 ModuleAudio::~ModuleAudio() {}
@@ -36,8 +37,8 @@ bool ModuleAudio::Init()
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-	//LoadMUS("Assets/stage1.ogg", "stage1");
-	//ControlMUS("stage1", PLAY);
+	LoadMUS("Assets/stage1.ogg", "stage1");
+	ControlMUS("stage1", PLAY);
 
 	return ret;
 }
@@ -46,19 +47,16 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing audios and Mixer library and shutdown mixer");
 
-	//for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
-	//	if (sfx[i].chunk != nullptr) {
-	//		Mix_FreeChunk(sfx[i].chunk);
-	//	}
+	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
+		if (sfx[i].chunk != nullptr) {
+			Mix_FreeChunk(sfx[i].chunk);
+		}
 
-	//for (uint i = 0; i < MAX_MUSICS; ++i)
-	//	if (musics[i].music != nullptr) {
-	//		Mix_FreeMusic(musics[i].music);
-	//	}
+	for (uint i = 0; i < MAX_MUSICS; ++i)
+		if (musics[i].music != nullptr) {
+			Mix_FreeMusic(musics[i].music);
+		}
 	
-
-	delete[] musics;
-	delete[] sfx;
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -69,16 +67,16 @@ bool ModuleAudio::CleanUp()
 Mix_Chunk* const ModuleAudio::LoadSfx(const char* path, char *name) {
 
 	Mix_Chunk *chunk;
-
+	char *_name = name;
 	chunk = Mix_LoadWAV(path);
 
-	if (chunk == NULL)
+	if (chunk == nullptr)
 	{
 		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
 	}
 	else
 	{
-		sfx[last_chunk].name = name;
+		sfx[last_chunk].name = _name;
 		sfx[last_chunk].chunk = chunk;
 	}
 	return chunk;
@@ -87,6 +85,7 @@ Mix_Chunk* const ModuleAudio::LoadSfx(const char* path, char *name) {
 Mix_Music* const ModuleAudio::LoadMUS(const char* path, char* name) {
 
 	Mix_Music *music = nullptr;
+	char *_name = name;
 
 	music = Mix_LoadMUS(path);
 
@@ -96,9 +95,8 @@ Mix_Music* const ModuleAudio::LoadMUS(const char* path, char* name) {
 	}
 	else
 	{
-		
 		musics[last_music].music = music;
-		musics[last_music++].name = name;
+		musics[last_music++].name = _name;
 	}
 	return music;
 }
@@ -106,9 +104,9 @@ Mix_Music* const ModuleAudio::LoadMUS(const char* path, char* name) {
 void ModuleAudio::ControlMUS(char* name, Audio_State state) {
 	
 	Mix_Music *music= nullptr;
-
+	char *_name = name;
 	for (uint i = 0; i <= last_music; ++i) {
-		if (musics[i].name = name) {
+		if (musics[i].name == _name) {
 			music = musics[i].music;
 		}
 	}
