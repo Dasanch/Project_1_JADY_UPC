@@ -1,4 +1,4 @@
-# We are the team JADY
+﻿# We are the team JADY
 ## Introduction
 This game was created by 4 students of UPC, CITM on the Game Design and Development degree. In this project we will recreate the arcade game Last Resort, we will use the sprites of the original game and we will program it from scratch.
 You can find all the information and necessary material we used to recreate this game.
@@ -22,3 +22,8 @@ You can find all the information and necessary material we used to recreate this
 
 ## Find project
 https://github.com/Dasanch/Project_1_JADY_UPC
+
+## CHANGES IN 0.1
+* Added paralax for all backgrounds
+* Added player 1 movment and animation
+* Added unfunctional audio module
