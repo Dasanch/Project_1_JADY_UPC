@@ -38,7 +38,7 @@ bool ModuleAudio::Init()
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
 	LoadMUS("Assets/stage1.ogg", "stage1");
-	ControlMUS("stage1", PLAY);
+	ControlMUS("stage1", PLAY_AUDIO);
 
 	return ret;
 }
@@ -118,13 +118,13 @@ void ModuleAudio::ControlMUS(char* name, Audio_State state) {
 	else {
 		switch (state)
 		{
-		case PLAY:
+		case PLAY_AUDIO:
 			if (!Mix_PlayingMusic())
 				Mix_PlayMusic(music, 3);
 			else
 				LOG("Music is already played : %s\n", name);
 			break;
-		case STOP:
+		case STOP_AUDIO:
 			if (!Mix_PausedMusic())
 				Mix_PauseMusic();
 			else

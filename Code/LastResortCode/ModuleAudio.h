@@ -10,9 +10,8 @@
 
 
 enum Audio_State {
-	PLAY,
-	STOP, 
-	RESUME
+	PLAY_AUDIO,
+	STOP_AUDIO, 
 };
 
 struct Music {
