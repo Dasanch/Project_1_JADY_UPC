@@ -6,6 +6,7 @@
 #include "ModuleBackground.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleFadeToBlack.h"
 
 Application::Application()
 {
@@ -16,6 +17,7 @@ Application::Application()
 	modules[4] = background = new ModuleBackground();
 	modules[5] = player = new ModulePlayer();
 	modules[6] = audio = new ModuleAudio();
+	modules[7] = fade = new ModuleFadeToBlack();
 }	
 
 Application::~Application()
