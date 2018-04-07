@@ -214,7 +214,7 @@ bool ModuleBackground::Start()
 	srand(time(NULL));
 
 	for (int i = 1; i < 27; ++i) {
-		randoms[i] = (uint) (rand() % 6 + 1);
+		randoms[i] =  (rand() % 6 + 1);
 	}
 	return ret;
 }
