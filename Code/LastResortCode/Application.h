@@ -12,6 +12,7 @@ class ModuleRender;
 class ModuleBackground;
 class ModulePlayer;
 class ModuleAudio;
+class ModuleFadeToBlack;
 class Module;
 
 class Application
@@ -27,7 +28,7 @@ public:
 	ModuleBackground* background = nullptr;
 	ModulePlayer* player = nullptr;
 	ModuleAudio *audio = nullptr;
-	ModuleAudio *fade = nullptr;
+	ModuleFadeToBlack* fade = nullptr;
 
 public:
 
