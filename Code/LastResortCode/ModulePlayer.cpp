@@ -23,7 +23,7 @@ ModulePlayer::ModulePlayer() //Constructor
 	ship.PushBack({ 95, 0, 32, 12 }); // Frame num 3
 	ship.PushBack({ 128, 0, 32, 12 }); //  Frame num 4
 
-	ship.speed = 1;
+	ship.speed = 1.4f;
 
 
 	
@@ -40,6 +40,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
+
+	
 	return ret;
 }
 
@@ -55,7 +57,8 @@ update_status ModulePlayer::Update()
 	int UpShip = 0;
 	int MiddleDownShip = 3;
 	int DownShip = 4;
-	int InstanFrameNum=3;
+	int InstanFrameNum = 3;
+
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
 	{
