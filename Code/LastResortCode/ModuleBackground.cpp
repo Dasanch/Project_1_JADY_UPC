@@ -12,7 +12,7 @@
 #define midgndSpeed 0.4f
 #define backgroundspeed 0.2f
 #define bckgndSpeed 0.25f
-#define foregndSpeed 1.00f
+#define foregndSpeed 1.0f
 #define tunnelLightDist 256
 
 #define streetLightDist 64
@@ -53,7 +53,7 @@ ModuleBackground::ModuleBackground()
 	tunnelLightsAnim.PushBack({ 118, 169, 116, 168 });
 	tunnelLightsAnim.PushBack({ 235, 169, 116, 168 });
 	tunnelLightsAnim.PushBack({ 352, 169, 116, 168 });
-	tunnelLightsAnim.speed = 0.08f;
+	tunnelLightsAnim.speed = 0.02f;
 
 	//Background lights
 	//1

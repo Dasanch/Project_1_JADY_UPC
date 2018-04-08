@@ -49,7 +49,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-	int speed = 3;
+	int speed = 10;
 
 	//Camera movement
 	camera.x -= speed; //CAMERA AUTO MOV
