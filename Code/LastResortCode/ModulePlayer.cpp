@@ -17,7 +17,7 @@ ModulePlayer::ModulePlayer() //Constructor
 	ShipOne.PushBack({ 32, 0, 32, 12 }); // MiddleUpShip = 1;
 	ShipOne.PushBack({ 64, 3, 32, 12 }); //idle =2;
 	ShipOne.PushBack({ 95, 0, 32, 12 }); //MiddleDownShip=  3
-	ShipOne.PushBack({ 128, 0, 32, 12 }); //  DownShip= 4
+	ShipOne.PushBack({ 128, 4, 32, 11 }); //  DownShip= 4
 
 
 	
