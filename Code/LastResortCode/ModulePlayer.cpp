@@ -65,7 +65,7 @@ update_status ModulePlayer::Update()
 
 	Animation* current_animation = &ShipOne;
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1 )
+	if (App->input->keyboard[SDL_SCANCODE_W] == 1 && App->input->keyboard[SDL_SCANCODE_S] == 0)
 	{
 		
 		if (CurrentFrame > UpShip)
@@ -120,7 +120,7 @@ update_status ModulePlayer::Update()
 		}
 		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->input->keyboard[SDL_SCANCODE_A] == 0)
 	{
 		position.x += playerSpeed;
 		if (position.x <SCREEN_SIZE)
