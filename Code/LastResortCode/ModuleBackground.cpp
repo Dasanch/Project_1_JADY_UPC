@@ -247,6 +247,8 @@ bool ModuleBackground::Start()
 
 bool ModuleBackground::CleanUp()
 {
+	// TODO 5: Remove all memory leaks
+	
 	LOG("Unloading player");
 
 	App->player->Disable(); //Disable the player module

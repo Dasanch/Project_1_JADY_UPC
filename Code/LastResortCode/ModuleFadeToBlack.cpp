@@ -41,12 +41,10 @@ update_status ModuleFadeToBlack::Update()
 
 			module_off->Disable();
 			module_on->Enable();
-			
-			/*fade_out->Disable();
-			fade_in->Enable();
 
-			fade_out = nullptr;
-			fade_in = nullptr;*/
+			module_off = nullptr;
+			module_on = nullptr;
+		
 
 			// ---
 

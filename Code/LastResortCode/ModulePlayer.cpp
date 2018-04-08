@@ -19,10 +19,6 @@ ModulePlayer::ModulePlayer() //Constructor
 	ShipOne.PushBack({ 95, 0, 32, 12 }); //MiddleDownShip=  3
 	ShipOne.PushBack({ 128, 4, 32, 11 }); //  DownShip= 4
 
-
-	
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -127,11 +123,8 @@ update_status ModulePlayer::Update()
 		{
 			position.x += playerSpeed;
 		}
-
 	}
-	
-
-	
+		
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->frames[(int)CurrentFrame];

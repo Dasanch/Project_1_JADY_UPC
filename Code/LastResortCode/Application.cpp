@@ -18,8 +18,9 @@ Application::Application()
 	modules[4] = background = new ModuleBackground();
 	modules[5] = player = new ModulePlayer();
 	modules[6] = audio = new ModuleAudio();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = scene_ready = new ModuleStageReady();
+	modules[7] = scene_ready = new ModuleStageReady();
+	modules[8] = fade = new ModuleFadeToBlack();
+	
 }	
 
 Application::~Application()
@@ -32,11 +33,14 @@ bool Application::Init()
 {
 	bool ret = true;
 
+	player->Disable();
+	scene_ready->Disable();
+
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
-		ret = modules[i]->Start();
+		ret = modules[i]->IsEnabled() ? modules[i]->Start() : true;
 
 	return ret;
 }
@@ -45,14 +49,15 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->PreUpdate();
 
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->Update();
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
 
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->PostUpdate();
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
+
+	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
 	return ret;
 }
