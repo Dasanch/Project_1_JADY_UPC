@@ -10,11 +10,8 @@ public:
 	bool invert = false;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
-
-private:
-	float current_frame;
+	float current_frame = 0;
 	int last_frame = 0;
-
 
 public:
 
@@ -55,7 +52,7 @@ public:
 	SDL_Rect& LoopAnimation ()
 	{
 		
-		if (invert = false) {
+		if (invert == false) {
 			current_frame += speed;
 			if (current_frame >= last_frame) {
 				current_frame = last_frame - 1;

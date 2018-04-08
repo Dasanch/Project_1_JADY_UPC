@@ -18,6 +18,7 @@ public:
 
 public:
 	uint randoms[27];
+	uint frame;
 
 	SDL_Texture * groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;

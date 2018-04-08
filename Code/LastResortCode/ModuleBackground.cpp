@@ -21,6 +21,12 @@
 
 ModuleBackground::ModuleBackground()
 {
+	frame = 0;
+	srand(time(NULL));
+	for (int i = 1; i < 27; ++i) {
+		randoms[i] = (rand() % 6 + 1);
+	}
+
 	//TileMaplvl1
 	ground.x = 0;
 	ground.y = 0; 
@@ -188,20 +194,27 @@ ModuleBackground::ModuleBackground()
 	streetLightsAnim02.speed = 0.10f;
 
 	//Orange Laser
+
+	orangLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangLaserAnim.PushBack({ 393 ,0, 99, 145 });
+	orangLaserAnim.PushBack({ 312 ,0, 81, 145 });
+	orangLaserAnim.PushBack({ 247 ,0, 65, 145 });
+	orangLaserAnim.PushBack({ 195 ,0, 52, 145 });
+	orangLaserAnim.PushBack({ 157 ,0, 38, 145 });
 	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
-	orangLaserAnim.PushBack({ 195 ,0, 38, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 52, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 65, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 81, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 99, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 121, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 142, 145 });
+
 	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
+	orangLaserAnim.PushBack({ 157 ,0, 38, 145 });
+	orangLaserAnim.PushBack({ 195 ,0, 52, 145 });
+	orangLaserAnim.PushBack({ 247 ,0, 65, 145 });
+	orangLaserAnim.PushBack({ 312 ,0, 81, 145 });
+	orangLaserAnim.PushBack({ 393 ,0, 99, 145 });
+	orangLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangLaserAnim.PushBack({ 121 ,145, 142, 145 });
+
+	orangLaserAnim.speed = 0.30f;
 }
-
-
-
-
 
 ModuleBackground::~ModuleBackground()
 {}
@@ -221,12 +234,9 @@ bool ModuleBackground::Start()
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
 
-	srand(time(NULL));
 
-	for (int i = 1; i < 27; ++i) {
-		randoms[i] =  (rand() % 6 + 1);
-	}
 	return ret;
+
 }
 
 
@@ -245,8 +255,16 @@ update_status ModuleBackground::Update()
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.0f);
 	} //-2820 and -2320 change
 
-	//Orange Laser
-
+	  //Orange Laser
+	if (frame < 2) {
+		frame++;
+		if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
+			App->render->FlippedBlit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+		else
+			App->render->Blit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+	}
+	else
+		frame = 0;
 
 	//Background lights
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
@@ -308,6 +326,6 @@ update_status ModuleBackground::Update()
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 	//Could be implemented with a for, but probably all the frames would be the same
 	//2048 = distance from the start of the tilemap to the first light
-	
+
 	return UPDATE_CONTINUE;
 }
