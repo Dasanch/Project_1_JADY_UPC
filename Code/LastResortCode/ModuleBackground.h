@@ -16,7 +16,6 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-
 public:
 	uint randoms[27];
 	uint frame;

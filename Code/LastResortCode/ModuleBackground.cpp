@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleBackground.h"
+#include "ModulePlayer.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
 #include <time.h> //Asure that we can use this library
@@ -238,7 +239,6 @@ bool ModuleBackground::Start()
 	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
-
 	App->player->Enable();
 
 	return ret;
@@ -355,3 +355,10 @@ update_status ModuleBackground::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+//bool ModuleBackground::CleanUp()
+//{
+//	LOG("Unloading level 1 stage");
+//	App->player->Disable();
+//	return true;
+//}
