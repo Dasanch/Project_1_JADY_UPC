@@ -10,6 +10,7 @@
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
 #define midgndSpeed 0.4f
+#define backgroundspeed 0.2f
 #define bckgndSpeed 0.25f
 #define foregndSpeed 1.00f
 #define tunnelLightDist 256
@@ -34,8 +35,8 @@ ModuleBackground::ModuleBackground()
 
 	BGBuildings.x = 0;
 	BGBuildings.y = 0;
-	BGBuildings.w = 304;
-	BGBuildings.h = 176;
+	BGBuildings.w = 803;
+	BGBuildings.h = 160;
 
 	//Tunnel lights
 	tunnelLightsAnim.PushBack({   1,   1, 116, 168 });
@@ -241,9 +242,9 @@ update_status ModuleBackground::Update()
 	}
 
 	//Background buildings
-	else if (App->render->camera.x > -2820) {
-		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.0f);
-	} //-2820 and -2320 change
+	if(BGBuildings.x<2234)
+		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
+	
 
 	//Orange Laser
 
