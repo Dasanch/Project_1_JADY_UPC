@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleStageReady.h"
 
 Application::Application()
 {
@@ -18,6 +19,7 @@ Application::Application()
 	modules[5] = player = new ModulePlayer();
 	modules[6] = audio = new ModuleAudio();
 	modules[7] = fade = new ModuleFadeToBlack();
+	modules[8] = scene_ready = new ModuleStageReady();
 }	
 
 Application::~Application()

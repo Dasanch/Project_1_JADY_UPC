@@ -14,6 +14,7 @@ class ModulePlayer;
 class ModuleAudio;
 class ModuleFadeToBlack;
 class Module;
+class ModuleStageReady;
 
 class Application
 {
@@ -29,6 +30,8 @@ public:
 	ModulePlayer* player = nullptr;
 	ModuleAudio *audio = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
+	ModuleStageReady* scene_ready = nullptr;
+
 
 public:
 

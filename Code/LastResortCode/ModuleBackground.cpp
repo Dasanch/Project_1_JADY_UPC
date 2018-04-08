@@ -6,6 +6,10 @@
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
 #include <time.h> //Asure that we can use this library
+#include "ModulePlayer.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleInput.h"
+#include "ModuleStageReady.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -235,11 +239,24 @@ bool ModuleBackground::Start()
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
 
+	App->player->Enable();
 
 	return ret;
 
 }
 
+bool ModuleBackground::CleanUp()
+{
+	LOG("Unloading player");
+
+	App->player->Disable(); //Disable the player module
+
+	/*LOG("Unloading background");
+	App->textures->Unload();*/
+
+
+	return true;
+}
 
 
 // Update: draw background
@@ -327,6 +344,12 @@ update_status ModuleBackground::Update()
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 	//Could be implemented with a for, but probably all the frames would be the same
 	//2048 = distance from the start of the tilemap to the first light
+
+	//make so pressing SPACE the other stage is loaded
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	{
+		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+	}
 
 	return UPDATE_CONTINUE;
 }
