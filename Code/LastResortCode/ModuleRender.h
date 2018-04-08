@@ -21,7 +21,7 @@ public:
 
 	/*void Render(SDL_Texture* Texture, SDL_Rect* section);*/
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
-	/*bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);*/
+	bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
 
 public:
 	SDL_Renderer* renderer = nullptr;

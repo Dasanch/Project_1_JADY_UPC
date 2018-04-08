@@ -8,6 +8,8 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
+#include "ModuleStageReady.h"
+
 
 Application::Application()
 {
@@ -20,6 +22,7 @@ Application::Application()
 	modules[6] = audio = new ModuleAudio();
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = GameTitle = new ModuleGameTitle();
+	modules[9] = scene_ready = new ModuleStageReady();
 }	
 
 Application::~Application()
