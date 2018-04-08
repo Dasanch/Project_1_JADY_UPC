@@ -185,8 +185,18 @@ ModuleBackground::ModuleBackground()
 	streetLightsAnim02.PushBack({ 186,66, 61, 20 });
 	streetLightsAnim02.PushBack({ 124,66, 61, 20 });
 	streetLightsAnim02.PushBack({ 62,66, 61, 20 });
-
 	streetLightsAnim02.speed = 0.10f;
+
+	//Orange Laser
+	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
+	orangLaserAnim.PushBack({ 195 ,0, 38, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 52, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 65, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 81, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 99, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 121, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 142, 145 });
+	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
 }
 
 
@@ -204,7 +214,7 @@ bool ModuleBackground::Start()
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("Assets/firstCameraMovBuilding04.png");
-
+	orangeLaserTx = App->textures->Load("Assets/Lasers_bg.png");
 	Boss1Background = App->textures->Load("Assets/StaticBackground.png");
 	bckgndLightsTx = App->textures->Load("Assets/BackgroundLights.png");
 	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
@@ -234,6 +244,8 @@ update_status ModuleBackground::Update()
 	else if (App->render->camera.x > -2820) {
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, 0.0f);
 	} //-2820 and -2320 change
+
+	//Orange Laser
 
 
 	//Background lights
@@ -284,7 +296,7 @@ update_status ModuleBackground::Update()
 	for (int i = 1; i < 14; ++i) {
 		App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), 1.0f);
 	}
-	
+
 	//Tunnel lights
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);

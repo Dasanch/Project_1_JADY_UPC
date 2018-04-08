@@ -25,6 +25,7 @@ public:
 	SDL_Texture* Boss1Background = nullptr;
 
 	//SDL_Texture* midgroundLightsTx = nullptr;
+	SDL_Texture* orangeLaserTx = nullptr;
 	SDL_Texture* streetLightsTx = nullptr;
 	SDL_Texture* midgndLightsTx = nullptr;
 	SDL_Texture* bckgndLightsTx = nullptr;
@@ -50,10 +51,11 @@ public:
 	Animation midgndLightsAnim04;
 	Animation midgndLightsAnim05;
 	Animation midgndLightsAnim06;
-	
 	//Street Lights animation
 	Animation streetLightsAnim01;
 	Animation streetLightsAnim02;
+	//Orange Laser animation
+	Animation orangLaserAnim;
 };
 
 #endif

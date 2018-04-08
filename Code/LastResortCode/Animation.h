@@ -7,12 +7,14 @@
 class Animation
 {
 public:
+	bool invert = false;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 
 private:
 	float current_frame;
 	int last_frame = 0;
+
 
 public:
 
@@ -43,13 +45,34 @@ public:
 		float frame = current_frame;
 		while (i < random) {
 			++frame;
-			if (frame > last_frame)
+			if (frame >= last_frame)
 				frame = 0;
 			++i;
 		}
 		return frames[(int)frame];
 	}
 
+	SDL_Rect& LoopAnimation ()
+	{
+		
+		if (invert = false) {
+			current_frame += speed;
+			if (current_frame >= last_frame) {
+				current_frame = last_frame - 1;
+				invert = true;
+			}
+		}
+		else {
+			current_frame -= speed;
+			if (current_frame < 0) {
+				current_frame = 0;
+				invert = false;
+			}
+		}
+
+		return frames[(int)current_frame];
+		
+		}
 };
 
 #endif
