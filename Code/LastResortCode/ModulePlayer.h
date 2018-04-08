@@ -19,9 +19,16 @@ public:
 
 public:
 
-	SDL_Texture* graphics = nullptr;
-	Animation ship;
+	SDL_Texture* PlayerTexture = nullptr;
 	iPoint position;
+
+	Animation ShipOne;
+	float CurrentFrame =NULL;
+	float ignitionSpeed = NULL;
+	float releaseSpeed=NULL;
+
+	float playerSpeed=NULL;
+
 
 };
 
