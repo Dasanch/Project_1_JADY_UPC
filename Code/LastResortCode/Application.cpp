@@ -20,15 +20,10 @@ Application::Application()
 	modules[4] = background = new ModuleBackground();
 	modules[5] = player = new ModulePlayer();
 	modules[6] = audio = new ModuleAudio();
-<<<<<<< HEAD
-	modules[7] = scene_ready = new ModuleStageReady();
-	modules[8] = fade = new ModuleFadeToBlack();
-	
-=======
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
->>>>>>> da16a1cb325a07dca1108c7cb69a36a7206ef41f
+
 }	
 
 Application::~Application()
@@ -49,14 +44,10 @@ bool Application::Init()
 	player->Disable();
 	scene_ready->Disable();
 
-	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 
-<<<<<<< HEAD
-	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
-=======
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
->>>>>>> da16a1cb325a07dca1108c7cb69a36a7206ef41f
 		ret = modules[i]->IsEnabled() ? modules[i]->Start() : true;
 
 	return ret;
@@ -66,8 +57,6 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
-<<<<<<< HEAD
-
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
 
@@ -75,15 +64,6 @@ update_status Application::Update()
 		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
 
 	for (int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-=======
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : UPDATE_CONTINUE;
-
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->Update() : UPDATE_CONTINUE;
-
-	for(int i = 0; i < NUM_MODULES && ret == UPDATE_CONTINUE; ++i)
->>>>>>> da16a1cb325a07dca1108c7cb69a36a7206ef41f
 		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : UPDATE_CONTINUE;
 
 	return ret;
