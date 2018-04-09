@@ -10,6 +10,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "ModuleAudio.h"
 
 ModuleStageReady::ModuleStageReady()
 {
@@ -20,8 +21,8 @@ ModuleStageReady::ModuleStageReady()
 	//Ready
 	BGroundReady.x = 0;
 	BGroundReady.y = 112;
-	BGroundReady.w = 2.82;
-	BGroundReady.h = 0.56;
+	BGroundReady.w = 80;
+	BGroundReady.h = 16;
 
 	//Black
 	backgroundBlack.x = 0;
@@ -81,9 +82,9 @@ update_status ModuleStageReady::Update()
 {
 	// Draw everything
 
-	App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
+	//App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
 
-	//App->render->Blit(backgroundReady, 0, 0, &BGroundReady, 0.5f);
+	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f);
 
 
 	// TODO 2: make so pressing SPACE other stage is loaded

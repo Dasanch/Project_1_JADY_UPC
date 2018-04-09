@@ -29,7 +29,7 @@ public:
 	ModuleTextures* textures = nullptr;
 	ModuleBackground* background = nullptr;
 	ModulePlayer* player = nullptr;
-	ModuleAudio *audio = nullptr;
+	ModuleAudio* audio = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
 	ModuleGameTitle* GameTitle = nullptr;
 	ModuleStageReady* scene_ready = nullptr;
