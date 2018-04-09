@@ -13,17 +13,17 @@
 
 ModuleStageReady::ModuleStageReady()
 {
-	
+
 	// BackgroundsRect  
 
 
-		//Ready
+	//Ready
 	BGroundReady.x = 0;
 	BGroundReady.y = 112;
 	BGroundReady.w = 2.82;
 	BGroundReady.h = 0.56;
 
-		//Black
+	//Black
 	backgroundBlack.x = 0;
 	backgroundBlack.y = 0;
 	backgroundBlack.w = SCREEN_WIDTH;
@@ -37,15 +37,15 @@ ModuleStageReady::~ModuleStageReady()
 // Load assets
 bool ModuleStageReady::Start()
 {
-	LOG("Loading background assets");	
-	bool ret = true;					
-	
+	LOG("Loading background assets");
+	bool ret = true;
+
 	backgroundReady = App->textures->Load("Assets/UI.png");
-	
+
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	//SDL_RenderPresent(App->render->renderer);
+
 
 	//App->player->Enable();
 	App->player->Disable();
@@ -67,12 +67,12 @@ bool ModuleStageReady::CleanUp()
 /*
 bool ModuleStageReady::CleanUp()
 {
-	App->player->Disable();
+App->player->Disable();
 
-	//LOG("Unloading players stage");
-	App->textures->Unload();
+//LOG("Unloading players stage");
+App->textures->Unload(backgroundReady);
 
-	return true;
+return true;
 }*/
 
 // Update: draw background
@@ -81,12 +81,14 @@ update_status ModuleStageReady::Update()
 {
 	// Draw everything
 
-	App->render->Blit(backgroundReady, 0, 0, &BGroundReady, 0.0f);
-	
+	App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
 
-																			// TODO 2: make so pressing SPACE other stage is loaded
+	//App->render->Blit(backgroundReady, 0, 0, &BGroundReady, 0.5f);
+
+
+	// TODO 2: make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		//App->fade->FadeToBlack(this, App-> , 0.5f); //this=scene_ready
+		App->fade->FadeToBlack(this, App->background, 0.5f); //this=scene_ready
 	}
 
 

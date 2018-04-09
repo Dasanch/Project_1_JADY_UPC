@@ -9,10 +9,10 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	
+
 	position.x = 0;
 	position.y = 130;
-	
+
 	ShipOne.PushBack({ 0, 0, 32, 12 }); //UpShip = 0;
 	ShipOne.PushBack({ 32, 0, 32, 12 }); // MiddleUpShip = 1;
 	ShipOne.PushBack({ 64, 3, 32, 12 }); //idle =2;
@@ -34,8 +34,8 @@ bool ModulePlayer::Start()
 	CurrentFrame = 2;
 	ignitionSpeed = 0.2f;
 	releaseSpeed = 0.1f;
-	
-	
+
+
 
 	return ret;
 }
@@ -63,29 +63,29 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == 1 && App->input->keyboard[SDL_SCANCODE_S] == 0)
 	{
-		
+
 		if (CurrentFrame > UpShip)
 		{
 			CurrentFrame -= ignitionSpeed;
 		}
-		
+
 		if (position.y > 0)
 		{
 			position.y -= playerSpeed;
 		}
-		
+
 	}
-	
+
 	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
 	{
 		CurrentFrame += ignitionSpeed;
 
 		if (CurrentFrame >= 5)
 		{
-		CurrentFrame = 4.99;
+			CurrentFrame = 4.99;
 		}
 
-		if (position.y < SCREEN_HEIGHT-shipHeight)
+		if (position.y < SCREEN_HEIGHT - shipHeight)
 		{
 			position.y += playerSpeed;
 		}
@@ -97,9 +97,9 @@ update_status ModulePlayer::Update()
 
 		if (position.y + (int)playerSpeed >= SCREEN_HEIGHT - 8) // 8 = player height/2 + required offset
 			position.y = 216; //target max down player position (original game pixel)
-		
+
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && CurrentFrame < StaticShip )
+	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && CurrentFrame < StaticShip)
 	{
 		CurrentFrame += releaseSpeed;
 	}
@@ -114,7 +114,7 @@ update_status ModulePlayer::Update()
 		{
 			position.x -= playerSpeed;
 		}
-		
+
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->input->keyboard[SDL_SCANCODE_A] == 0)
 	{
@@ -124,12 +124,21 @@ update_status ModulePlayer::Update()
 			position.x += playerSpeed;
 		}
 	}
-		
+
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->frames[(int)CurrentFrame];
 
-	App->render->Blit(PlayerTexture, position.x, position.y , &r,0.0f);
-	
+	App->render->Blit(PlayerTexture, position.x, position.y, &r, 0.0f);
+
 	return UPDATE_CONTINUE;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading player");
+
+	//App->textures->Unload(graphics);
+
+	return true;
 }

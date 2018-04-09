@@ -35,13 +35,19 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	// Player will be enabled on the first update of a new scene
-	player->Disable();
 
-	// Disable the map that you do not start with
-	background->Disable();
+
+	// Disable all stopped modules here
+
+	
+	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
 	audio->Disable();
+	
+	//background->Disable();
+
+	// Disable the map that you do not start with
+	// ---
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
@@ -72,7 +78,7 @@ bool Application::CleanUp()
 {
 	bool ret = true;
 
-	for(int i = NUM_MODULES - 1; i >= 0 && ret == true; --i)
+	for (int i = NUM_MODULES - 1; i >= 0 && ret == true; --i)
 		ret = modules[i]->CleanUp();
 
 	return ret;

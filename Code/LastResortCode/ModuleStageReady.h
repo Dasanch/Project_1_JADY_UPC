@@ -21,12 +21,12 @@ public:
 	//Textures
 	SDL_Texture* backgroundReady = nullptr;
 	//SDL_Texture* map2Text = nullptr;
-	
+
 
 	//Rectangles
 	SDL_Rect BGroundReady;
 	SDL_Rect backgroundBlack;
-	
+
 
 	// Background movement (position) values
 	/*float movementx = 0;
