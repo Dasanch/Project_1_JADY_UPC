@@ -124,7 +124,7 @@ update_status ModulePlayer::Update()
 			position.x += playerSpeed;
 		}
 	}
-		
+	
 
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->frames[(int)CurrentFrame];
@@ -132,4 +132,13 @@ update_status ModulePlayer::Update()
 	App->render->Blit(PlayerTexture, position.x, position.y , &r,0.0f);
 	
 	return UPDATE_CONTINUE;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading player");
+
+	//App->textures->Unload(graphics);
+
+	return true;
 }

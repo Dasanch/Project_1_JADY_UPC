@@ -7,9 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleGameTitle.h"
 #include "ModuleStageReady.h"
-
 
 Application::Application()
 {
@@ -20,10 +18,9 @@ Application::Application()
 	modules[4] = background = new ModuleBackground();
 	modules[5] = player = new ModulePlayer();
 	modules[6] = audio = new ModuleAudio();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = GameTitle = new ModuleGameTitle();
-	modules[9] = scene_ready = new ModuleStageReady();
-
+	modules[7] = scene_ready = new ModuleStageReady();
+	modules[8] = fade = new ModuleFadeToBlack();
+	
 }	
 
 Application::~Application()
@@ -35,13 +32,11 @@ Application::~Application()
 bool Application::Init()
 {
 	bool ret = true;
-	// Player will be enabled on the first update of a new scene
-	player->Disable();
 
-	// Disable the map that you do not start with
-	background->Disable();
+	// Disable all stopped modules here
+	player->Disable();
 	scene_ready->Disable();
-	audio->Disable();
+	// ---
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
@@ -51,6 +46,7 @@ bool Application::Init()
 
 	return ret;
 }
+
 
 update_status Application::Update()
 {

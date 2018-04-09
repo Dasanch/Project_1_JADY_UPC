@@ -14,7 +14,7 @@
     <ProjectGuid>{746CC4C3-787F-4B0E-AA66-E388FE3FF4F6}</ProjectGuid>
     <RootNamespace>SDLGame</RootNamespace>
     <ProjectName>LastResort</ProjectName>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -85,7 +85,6 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleStageReady.h" />
     <ClInclude Include="ModuleTextures.h" />
-    <ClInclude Include="ModuleGameTitle.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
   </ItemGroup>
@@ -101,7 +100,6 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleStageReady.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
-    <ClCompile Include="ModuleGameTitle.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

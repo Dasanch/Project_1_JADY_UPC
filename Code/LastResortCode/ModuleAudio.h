@@ -35,7 +35,6 @@ public:
 	Mix_Chunk* const LoadSfx(const char* path, char *name);
 	Mix_Music* const LoadMUS(const char* path, char *name);
 	void ControlMUS (char* name, Audio_State state);
-	void ControlSFX(char* name, Audio_State state);
 
 private:
 	Music musics[MAX_MUSICS];

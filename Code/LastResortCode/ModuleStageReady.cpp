@@ -45,7 +45,7 @@ bool ModuleStageReady::Start()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	//SDL_RenderPresent(App->render->renderer);
+
 
 	//App->player->Enable();
 	App->player->Disable();
@@ -70,7 +70,7 @@ bool ModuleStageReady::CleanUp()
 	App->player->Disable();
 
 	//LOG("Unloading players stage");
-	App->textures->Unload();
+	App->textures->Unload(backgroundReady);
 
 	return true;
 }*/
@@ -81,12 +81,14 @@ update_status ModuleStageReady::Update()
 {
 	// Draw everything
 
-	App->render->Blit(backgroundReady, 0, 0, &BGroundReady, 0.0f);
+	App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
+
+	//App->render->Blit(backgroundReady, 0, 0, &BGroundReady, 0.5f);
 	
 
 																			// TODO 2: make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		//App->fade->FadeToBlack(this, App-> , 0.5f); //this=scene_ready
+		App->fade->FadeToBlack(this, App->background, 0.5f); //this=scene_ready
 	}
 
 
