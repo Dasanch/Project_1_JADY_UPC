@@ -84,7 +84,7 @@ update_status ModuleStageReady::Update()
 
 	//App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
 
-	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f);
+	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f); //MAGIC NUMBERS
 
 
 	// TODO 2: make so pressing SPACE other stage is loaded
