@@ -3,6 +3,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleBackground.h"
+#include "ModulePlayer.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
 #include <time.h> //Asure that we can use this library
@@ -238,11 +239,7 @@ bool ModuleBackground::Start()
 	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
-
 	App->player->Enable();
-	App->player->position.x = 0;
-	App->player->position.y = 130;
-	
 
 	return ret;
 
@@ -255,7 +252,6 @@ bool ModuleBackground::CleanUp()
 	LOG("Unloading player");
 
 	App->player->Disable(); //Disable the player module
-	App->render->camera.x = 0;
 
 	/*LOG("Unloading background");
 	App->textures->Unload();*/
@@ -268,7 +264,6 @@ bool ModuleBackground::CleanUp()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
-	
 	//Boss buildings
 	if (App->render->camera.x < -2320) {
 		
@@ -360,3 +355,10 @@ update_status ModuleBackground::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+//bool ModuleBackground::CleanUp()
+//{
+//	LOG("Unloading level 1 stage");
+//	App->player->Disable();
+//	return true;
+//}

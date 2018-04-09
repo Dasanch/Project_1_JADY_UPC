@@ -137,3 +137,30 @@ void ModuleAudio::ControlMUS(char* name, Audio_State state) {
 	}
 
 }
+
+void ModuleAudio::ControlSFX(char* name, Audio_State state) {
+
+	Mix_Chunk *chunk = nullptr;
+	char *_name = name;
+	for (uint i = 0; i <= last_music; ++i) {
+		if (musics[i].name == _name) {
+			chunk = sfx[i].chunk;
+		}
+	}
+
+
+	if (chunk == nullptr) {
+		LOG("Music not found ControlMUS : %s\n", name);
+	}
+	else {
+		switch (state)
+		{
+		case PLAY_AUDIO:
+			LOG("Chunck is already playing : %s\n", name);
+				Mix_PlayChannel( -1, chunk, 0);
+		default:
+			LOG("Chunck is already playing : %s\n", name);
+			break;
+		}
+	}
+}

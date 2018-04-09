@@ -49,7 +49,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 {
-	int speed = 10;
+	int speed = 2;
 
 	//Camera movement
 	camera.x -= speed; //CAMERA AUTO MOV
@@ -105,7 +105,6 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 
 	return ret;
 }
-
 bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
 {
 	bool ret = true;
@@ -134,5 +133,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 
 	return ret;
 }
+
+
 
 
