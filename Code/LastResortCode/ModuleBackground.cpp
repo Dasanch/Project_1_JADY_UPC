@@ -134,7 +134,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim01.PushBack({ 389, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({ 486, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({ 583, 1, 95, 86 });
-	midgndLightsAnim01.speed = 0.08f;
+	midgndLightsAnim01.speed = 0.05f;
 	//2
 	midgndLightsAnim02.PushBack({   1, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({  39, 88, 37, 61 });
@@ -143,7 +143,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim02.PushBack({ 153, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({ 191, 88, 37, 61 });
 	midgndLightsAnim02.PushBack({ 229, 88, 37, 61 });
-	midgndLightsAnim02.speed = 0.08f;
+	midgndLightsAnim02.speed = 0.04f;
 	//3
 	midgndLightsAnim03.PushBack({   1, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 110, 150, 108, 47 });
@@ -152,7 +152,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim03.PushBack({ 437, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 546, 150, 108, 47 });
 	midgndLightsAnim03.PushBack({ 655, 150, 108, 47 });
-	midgndLightsAnim03.speed = 0.08f;
+	midgndLightsAnim03.speed = 0.03f;
 	//4
 	midgndLightsAnim04.PushBack({   1, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  17, 198, 15, 12 });
@@ -161,7 +161,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim04.PushBack({  65, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  81, 198, 15, 12 });
 	midgndLightsAnim04.PushBack({  97, 198, 15, 12 });
-	midgndLightsAnim04.speed = 0.08f;
+	midgndLightsAnim04.speed = 0.03f;
 	//5
 	midgndLightsAnim05.PushBack({   1, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({  50, 211, 48, 93 });
@@ -170,7 +170,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim05.PushBack({ 197, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 246, 211, 48, 93 });
 	midgndLightsAnim05.PushBack({ 295, 211, 48, 93 });
-	midgndLightsAnim05.speed = 0.08f;
+	midgndLightsAnim05.speed = 0.03f;
 	//6
 	midgndLightsAnim06.PushBack({   1, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({  63, 305, 61, 77 });
@@ -179,7 +179,7 @@ ModuleBackground::ModuleBackground()
 	midgndLightsAnim06.PushBack({ 249, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 311, 305, 61, 77 });
 	midgndLightsAnim06.PushBack({ 373, 305, 61, 77 });
-	midgndLightsAnim06.speed = 0.08f;
+	midgndLightsAnim06.speed = 0.03f;
 	//!TO IMPLEMENT: Adjust animation speed
 
 	//Street Lights
