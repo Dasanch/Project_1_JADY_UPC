@@ -12,7 +12,10 @@
 
 ModuleGameTitle::ModuleGameTitle()
 {
-
+	LastResortRect.x = 0;
+	LastResortRect.y = 0;
+	LastResortRect.w = 240;
+	LastResortRect.h = 31;
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
@@ -21,15 +24,16 @@ bool ModuleGameTitle:: Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	
-	App->player->Enable();
-	App->audio->Disable();
+	TitleTexture = App->textures->Load("Assets/UI-TitleScreen.png");
 	
 	return ret;
 }
 update_status ModuleGameTitle::Update() {
-	if (App->input->keyboard[SDL_SCANCODE_ESCAPE]==1)
+
+	App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);
+	if (App->input->keyboard[SDL_SCANCODE_SPACE]==1)
 	{
-		App->fade->FadeToBlack(App->GameTitle,App->background,1);
+		App->fade->FadeToBlack(this,App->background,0.5f);
 	}
 
 	return UPDATE_CONTINUE;

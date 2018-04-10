@@ -39,7 +39,7 @@ bool Application::Init()
 
 	// Disable all stopped modules here
 
-	
+	background->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
 	audio->Disable();

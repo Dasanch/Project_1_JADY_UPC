@@ -49,6 +49,7 @@ bool ModuleStageReady::Start()
 
 
 	//App->player->Enable();
+	App->audio->Disable();
 	App->player->Disable();
 
 	return ret;
@@ -59,7 +60,7 @@ bool ModuleStageReady::CleanUp()
 	// TODO 5: Remove all memory leaks
 
 	LOG("Unloading ready scene");
-
+	App->audio->Disable();
 	App->player->Disable(); // TODO 1: Disable the player module
 
 	return true;
