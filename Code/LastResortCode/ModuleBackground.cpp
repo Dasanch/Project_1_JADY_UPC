@@ -278,17 +278,22 @@ update_status ModuleBackground::Update()
 	int speed = 2;
 
 	//Camera movement
-	App->render->camera.x -= speed; //CAMERA AUTO MOV
+	if (App->render->camera.x > -4400 * SCREEN_SIZE)
+	{
+		App->render->camera.x -= speed; //CAMERA AUTO MOV
+
+	}
+	
 
 	//Boss buildings
-	if (App->render->camera.x < -2320) {
-		
+	if (App->render->camera.x < -(3800*SCREEN_SIZE)) //9500 is take from Isolate the position of the camera when the texture of the purple buildings is at 3800px usif the funcion of the Blit
+	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 
 	//Background buildings
-	if(BGBuildings.x<2234)
-		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
+
+	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
 	
 
 	  //Orange Laser
