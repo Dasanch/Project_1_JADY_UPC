@@ -281,11 +281,11 @@ bool ModuleBackground::CleanUp()
 	App->textures->Unload(tunnelLightsTx);
 	App->textures->Unload(streetLightsTx);
 	//audios------------------------------------------------------------------------
+	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
 	//player------------------------------------------------------------------------
 	LOG("Unloading player");
 	App->player->Disable(); //Disable the player module
-	App->audio->Disable();
 	App->render->camera.x = 0;
 
 	/*LOG("Unloading background");

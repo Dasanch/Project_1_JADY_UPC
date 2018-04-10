@@ -17,9 +17,9 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = background = new ModuleBackground();
-	modules[5] = player = new ModulePlayer();
-	modules[6] = audio = new ModuleAudio();
+	modules[4] = audio = new ModuleAudio();
+	modules[5] = background = new ModuleBackground();
+	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
