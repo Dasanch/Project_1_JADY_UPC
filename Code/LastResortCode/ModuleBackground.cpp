@@ -205,6 +205,10 @@ ModuleBackground::ModuleBackground()
 	//Orange Laser
 
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
 	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
 	orangeLaserAnim.PushBack({ 393 ,0, 99, 145 });
 	orangeLaserAnim.PushBack({ 312 ,0, 81, 145 });
@@ -212,17 +216,20 @@ ModuleBackground::ModuleBackground()
 	orangeLaserAnim.PushBack({ 195 ,0, 52, 145 });
 	orangeLaserAnim.PushBack({ 157 ,0, 38, 145 });
 	orangeLaserAnim.PushBack({ 132 ,0, 25, 145 });
-
 	orangeLaserAnim.PushBack({ 132 ,0, 25, 145 });
 	orangeLaserAnim.PushBack({ 157 ,0, 38, 145 });
 	orangeLaserAnim.PushBack({ 195 ,0, 52, 145 });
 	orangeLaserAnim.PushBack({ 247 ,0, 65, 145 });
 	orangeLaserAnim.PushBack({ 312 ,0, 81, 145 });
 	orangeLaserAnim.PushBack({ 393 ,0, 99, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
 	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
 
-	orangeLaserAnim.speed = 0.30f;
+	orangeLaserAnim.speed = 0.4f;
 
 	//Blue Laser
 	blueLaserAnim.PushBack({ 0,290, 38, 88 });
@@ -232,7 +239,7 @@ ModuleBackground::ModuleBackground()
 	blueLaserAnim.PushBack({ 78,290, 27, 88 });
 	blueLaserAnim.PushBack({ 105,290, 36, 88 });
 
-	blueLaserAnim.speed = 0.1f;
+	blueLaserAnim.speed = 0.25f;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -333,14 +340,15 @@ update_status ModuleBackground::Update()
 	
 
 	//Orange Laser-----------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= -33 * SCREEN_SIZE)
 	{
-		if (frame < 2 && App->render->camera.x <= -33 * SCREEN_SIZE) {
+		orangeLaserAnim.LoopAnimation();
+		if (frame < 2 ) {
 			frame++;
-			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame / 2)
-				App->render->FlippedBlit(LasersTx, 358, 0, &orangeLaserAnim.LoopAnimation(), orangeLaserSpeed);
+			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame/ 2)
+				App->render->FlippedBlit(LasersTx, 359- orangeLaserAnim.GetFrame().w, 0, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
 			else
-				App->render->Blit(LasersTx, 358, 0, &orangeLaserAnim.LoopAnimation(), orangeLaserSpeed);
+				App->render->Blit(LasersTx, 358, 0, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
 		}
 		else
 			frame = 0;
@@ -382,8 +390,24 @@ update_status ModuleBackground::Update()
 		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//Positions calculated from the png
 	}
-	
-	
+
+	//Blue Lasers-------------------------------------------------------------------------------------------
+	blueLaserAnim.LoopAnimation();
+
+	if (blueLaserAnim.current_frame < blueLaserAnim.last_frame / 2) {
+		App->render->Blit(LasersTx, 201 - blueLaserAnim.GetFrame().w, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 713 - blueLaserAnim.GetFrame().w, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 793 - blueLaserAnim.GetFrame().w, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 856 - blueLaserAnim.GetFrame().w, -55, &blueLaserAnim.GetFrame(), midgndSpeed);
+	}
+	else {
+		App->render->Blit(LasersTx, 200, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 712, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 792, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 855, -55, &blueLaserAnim.GetFrame(), midgndSpeed);
+	}
+		
+
 	//Ground and tunnel-----------------------------------------------------------------------------------
 
 	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
@@ -397,20 +421,15 @@ update_status ModuleBackground::Update()
 		//1
 		App->render->Blit(streetLightsTx, 40, 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 27; ++i) {
-			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.GetFrame(randoms[i]), foregndSpeed);
+			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
 		}
 		//2
 		App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 14; ++i) {
-			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), foregndSpeed);
+			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 		}
 	}
-	
-	//Blue Lasers-------------------------------------------------------------------------------------------
-	if (blueLaserAnim.current_frame <= blueLaserAnim.last_frame / 2)
-		App->render->Blit(LasersTx, 140 - blueLaserAnim.GetFrame().w, 0, &blueLaserAnim.LoopAnimation(), 0);
-	else
-		App->render->Blit(LasersTx, 140 , 0, &blueLaserAnim.LoopAnimation(), 0);
+
 
 	//Tunnel lights----------------------------------------------------------------------------------------
 	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
@@ -431,7 +450,6 @@ update_status ModuleBackground::Update()
 	//make so pressing SPACE the other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->audio->ControlMUS(music_01, STOP_AUDIO);
 		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
 	}
 

@@ -25,7 +25,7 @@ bool ModuleRender::Init()
 
 	if(REN_VSYNC == true)
 	{
-		flags |= SDL_RENDERER_PRESENTVSYNC;
+		flags |= SDL_RENDERER_PRESENTVSYNC ;
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
@@ -118,7 +118,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE - section->w* SCREEN_SIZE;
+	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
 	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
 	if (section != NULL)
