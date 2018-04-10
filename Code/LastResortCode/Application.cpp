@@ -9,6 +9,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
 #include "ModuleStageReady.h"
+#include "Module2lvlScene.h"
+
 
 
 Application::Application()
@@ -23,6 +25,7 @@ Application::Application()
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
+	modules[10] = scene_lvl2 = new Module2lvlScene();
 
 }	
 
@@ -43,6 +46,7 @@ bool Application::Init()
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
 	audio->Disable();
+	scene_lvl2->Disable();
 	
 	//background->Disable();
 
