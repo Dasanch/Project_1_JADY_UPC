@@ -274,6 +274,12 @@ bool ModuleBackground::CleanUp()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+
+	int speed = 2;
+
+	//Camera movement
+	App->render->camera.x -= speed; //CAMERA AUTO MOV
+
 	//Boss buildings
 	if (App->render->camera.x < -2320) {
 		
