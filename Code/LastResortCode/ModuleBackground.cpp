@@ -20,9 +20,11 @@
 #define bckgndSpeed 0.25f
 #define foregndSpeed 1.0f
 #define tunnelLightDist 256
+#define orangeLaserSpeed 0.25f
 
 #define streetLightDist 64
 #define roadLightDist 121
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -292,12 +294,12 @@ update_status ModuleBackground::Update()
 	
 
 	  //Orange Laser
-	if (frame < 2) {
+	if (frame < 2 && App->render->camera.x <= -33 * SCREEN_SIZE) {
 		frame++;
 		if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
-			App->render->FlippedBlit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+			App->render->FlippedBlit(orangeLaserTx, 358, 0, &orangLaserAnim.LoopAnimation(), orangeLaserSpeed);
 		else
-			App->render->Blit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+			App->render->Blit(orangeLaserTx, 358, 0, &orangLaserAnim.LoopAnimation(), orangeLaserSpeed);
 	}
 	else
 		frame = 0;
