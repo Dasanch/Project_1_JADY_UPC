@@ -19,12 +19,9 @@ public:
 
 public:
 
-	SDL_Texture * graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect roof;
-	SDL_Rect foreground;
-	SDL_Rect background;
-	Animation water;
+	SDL_Texture * TitleTexture = nullptr;
+	SDL_Rect LastResortRect;
+	
 };
 
 #endif // __MODULEGAMETITLE_H__

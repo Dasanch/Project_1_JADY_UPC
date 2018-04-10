@@ -263,6 +263,7 @@ bool ModuleBackground::CleanUp()
 	LOG("Unloading player");
 
 	App->player->Disable(); //Disable the player module
+	App->audio->Disable();
 	App->render->camera.x = 0;
 
 	/*LOG("Unloading background");
