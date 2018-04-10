@@ -88,7 +88,7 @@ ModuleBackground::ModuleBackground()
 	bckgndLightsAnim03.PushBack({   1, 161, 64, 75 });
 	bckgndLightsAnim03.PushBack({  66, 161, 64, 75 });
 	bckgndLightsAnim03.PushBack({ 131, 161, 64, 75 });
-	bckgndLightsAnim03.PushBack({ 197, 161, 64, 75 });
+	bckgndLightsAnim03.PushBack({ 196, 161, 64, 75 });
 	bckgndLightsAnim03.PushBack({ 261, 161, 64, 75 });
 	bckgndLightsAnim03.PushBack({ 326, 161, 64, 75 });
 	bckgndLightsAnim03.PushBack({ 391, 161, 64, 75 });
@@ -112,7 +112,7 @@ ModuleBackground::ModuleBackground()
 	bckgndLightsAnim05.PushBack({ 129, 585, 31, 58 });
 	bckgndLightsAnim05.PushBack({ 161, 585, 31, 58 });
 	bckgndLightsAnim05.PushBack({ 193, 585, 31, 58 });
-	bckgndLightsAnim05.PushBack({ 255, 585, 31, 58 });
+	bckgndLightsAnim05.PushBack({ 225, 585, 31, 58 });
 	bckgndLightsAnim05.speed = 0.08f;
 	//6
 	bckgndLightsAnim06.PushBack({   1, 644, 47, 51 });
@@ -125,7 +125,7 @@ ModuleBackground::ModuleBackground()
 	bckgndLightsAnim06.PushBack({ 337, 644, 47, 51 });
 	bckgndLightsAnim06.speed = 0.08f;
 
-	//Midground lights
+	//Midground lights----------------------------------------
 	//1
 	midgndLightsAnim01.PushBack({   1, 1, 95, 86 });
 	midgndLightsAnim01.PushBack({  98, 1, 95, 86 });
@@ -296,10 +296,17 @@ update_status ModuleBackground::Update()
 	//Background buildings
 	if (App->render->camera.x > -((3800/foregndSpeed) * SCREEN_SIZE))
 	{
-		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
+		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
 	}
 	
-	
+	//Background lights-----------------------------------------------------------------------------
+	App->render->Blit(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx,634,10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx,88,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx,321,0 , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx, 167 ,0 , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
 
 	  //Orange Laser
 
@@ -324,16 +331,10 @@ update_status ModuleBackground::Update()
 		}*/
 	}
 
-	//Background lights
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
+	
 
 
-	//Midground buildings
+	//Midground buildings-------------------------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
@@ -363,7 +364,7 @@ update_status ModuleBackground::Update()
 	}
 	
 	
-	//Ground and tunnel
+	//Ground and tunnel-----------------------------------------------------------------------------------
 
 	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
 	{
@@ -387,7 +388,7 @@ update_status ModuleBackground::Update()
 	
 	
 
-	//Tunnel lights
+	//Tunnel lights----------------------------------------------------------------------------------------------------------------------
 	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
