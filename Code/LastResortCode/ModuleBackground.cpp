@@ -321,12 +321,16 @@ update_status ModuleBackground::Update()
 	
 	//Background lights-----------------------------------------------------------------------------
 	App->render->Blit(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx,634,10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx, 122, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx,88,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit(bckgndLightsTx, 600,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx,321,0 , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx, 167 ,0 , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
+	
 
 	//Orange Laser-----------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
