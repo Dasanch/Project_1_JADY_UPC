@@ -204,25 +204,35 @@ ModuleBackground::ModuleBackground()
 
 	//Orange Laser
 
-	orangLaserAnim.PushBack({ 121 ,145, 142, 145 });
-	orangLaserAnim.PushBack({ 0 ,145, 121, 145 });
-	orangLaserAnim.PushBack({ 393 ,0, 99, 145 });
-	orangLaserAnim.PushBack({ 312 ,0, 81, 145 });
-	orangLaserAnim.PushBack({ 247 ,0, 65, 145 });
-	orangLaserAnim.PushBack({ 195 ,0, 52, 145 });
-	orangLaserAnim.PushBack({ 157 ,0, 38, 145 });
-	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangeLaserAnim.PushBack({ 393 ,0, 99, 145 });
+	orangeLaserAnim.PushBack({ 312 ,0, 81, 145 });
+	orangeLaserAnim.PushBack({ 247 ,0, 65, 145 });
+	orangeLaserAnim.PushBack({ 195 ,0, 52, 145 });
+	orangeLaserAnim.PushBack({ 157 ,0, 38, 145 });
+	orangeLaserAnim.PushBack({ 132 ,0, 25, 145 });
 
-	orangLaserAnim.PushBack({ 132 ,0, 25, 145 });
-	orangLaserAnim.PushBack({ 157 ,0, 38, 145 });
-	orangLaserAnim.PushBack({ 195 ,0, 52, 145 });
-	orangLaserAnim.PushBack({ 247 ,0, 65, 145 });
-	orangLaserAnim.PushBack({ 312 ,0, 81, 145 });
-	orangLaserAnim.PushBack({ 393 ,0, 99, 145 });
-	orangLaserAnim.PushBack({ 0 ,145, 121, 145 });
-	orangLaserAnim.PushBack({ 121 ,145, 142, 145 });
+	orangeLaserAnim.PushBack({ 132 ,0, 25, 145 });
+	orangeLaserAnim.PushBack({ 157 ,0, 38, 145 });
+	orangeLaserAnim.PushBack({ 195 ,0, 52, 145 });
+	orangeLaserAnim.PushBack({ 247 ,0, 65, 145 });
+	orangeLaserAnim.PushBack({ 312 ,0, 81, 145 });
+	orangeLaserAnim.PushBack({ 393 ,0, 99, 145 });
+	orangeLaserAnim.PushBack({ 0 ,145, 121, 145 });
+	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
 
-	orangLaserAnim.speed = 0.30f;
+	orangeLaserAnim.speed = 0.30f;
+
+	//Blue Laser
+	blueLaserAnim.PushBack({ 0,290, 38, 88 });
+	blueLaserAnim.PushBack({ 38,290, 30, 88 });
+	blueLaserAnim.PushBack({ 68,290, 5, 88 });
+	blueLaserAnim.PushBack({ 73,290, 5, 88 });
+	blueLaserAnim.PushBack({ 78,290, 27, 88 });
+	blueLaserAnim.PushBack({ 105,290, 36, 88 });
+
+	blueLaserAnim.speed = 0.1f;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -233,20 +243,21 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	//textures
+	//textures-----------------------------------------------------------------------
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("Assets/firstCameraMovBuilding04.png");
-	orangeLaserTx = App->textures->Load("Assets/Lasers_bg.png");
+	LasersTx = App->textures->Load("Assets/Lasers_bg.png");
 	Boss1Background = App->textures->Load("Assets/StaticBackground.png");
 	bckgndLightsTx = App->textures->Load("Assets/BackgroundLights.png");
 	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
-	//audios 
+	//audios------------------------------------------------------------------------
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 
+	//player------------------------------------------------------------------------
 	App->player->Enable();
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
@@ -258,17 +269,26 @@ bool ModuleBackground::Start()
 
 bool ModuleBackground::CleanUp()
 {
-	// TODO 5: Remove all memory leaks
-
+	// TODO : Remove all memory leaks
+	//textures-----------------------------------------------------------------------
+	App->textures->Unload(groundAndTunel);
+	App->textures->Unload(PurpleBuildings);
+	App->textures->Unload(BackgroundBuildings);
+	App->textures->Unload(LasersTx);
+	App->textures->Unload(Boss1Background);
+	App->textures->Unload(bckgndLightsTx);
+	App->textures->Unload(midgndLightsTx);
+	App->textures->Unload(tunnelLightsTx);
+	App->textures->Unload(streetLightsTx);
+	//audios------------------------------------------------------------------------
+	App->audio->UnloadMUS(music_01);
+	//player------------------------------------------------------------------------
 	LOG("Unloading player");
-
 	App->player->Disable(); //Disable the player module
 	App->render->camera.x = 0;
 
 	/*LOG("Unloading background");
 	App->textures->Unload();*/
-
-
 	return true;
 }
 
@@ -285,43 +305,35 @@ update_status ModuleBackground::Update()
 		App->render->camera.x -= speed; //CAMERA AUTO MOV
 
 	}
-	
+
 	//Boss buildings
-	if (App->render->camera.x < -(3800*SCREEN_SIZE)) 
+	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 
 	//Background buildings
-	if (App->render->camera.x > -((3800/foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x > -((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
 	}
-	
-	
 
-	  //Orange Laser
 
+
+	//Orange Laser-----------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
-			if (frame < 2) {
-				frame++;
-				if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
-					App->render->FlippedBlit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
-				else
-					App->render->Blit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
-			}
-			else
-				frame = 0;
-		/*if (frame < 2 && App->render->camera.x <= -33 * SCREEN_SIZE) {
+		if (frame < 2 && App->render->camera.x <= -33 * SCREEN_SIZE) {
 			frame++;
-			if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
-				App->render->FlippedBlit(orangeLaserTx, 358, 0, &orangLaserAnim.LoopAnimation(), orangeLaserSpeed);
+			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame / 2)
+				App->render->FlippedBlit(LasersTx, 358, 0, &orangeLaserAnim.LoopAnimation(), orangeLaserSpeed);
 			else
-				App->render->Blit(orangeLaserTx, 358, 0, &orangLaserAnim.LoopAnimation(), orangeLaserSpeed);
-
-		}*/
+				App->render->Blit(LasersTx, 358, 0, &orangeLaserAnim.LoopAnimation(), orangeLaserSpeed);
+		}
+		else
+			frame = 0;
 	}
+
 
 	//Background lights
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
@@ -375,18 +387,22 @@ update_status ModuleBackground::Update()
 		//1
 		App->render->Blit(streetLightsTx, 40, 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 27; ++i) {
-			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.GetFrame(randoms[i]), 1.0f);
+			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.GetFrame(randoms[i]), foregndSpeed);
 		}
 		//2
 		App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 14; ++i) {
-			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), 1.0f);
+			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), foregndSpeed);
 		}
 	}
 	
-	
+	//Blue Lasers-------------------------------------------------------------------------------------------
+	if (blueLaserAnim.current_frame <= blueLaserAnim.last_frame / 2)
+		App->render->Blit(LasersTx, 140 - blueLaserAnim.GetFrame().w, 0, &blueLaserAnim.LoopAnimation(), 0);
+	else
+		App->render->Blit(LasersTx, 140 , 0, &blueLaserAnim.LoopAnimation(), 0);
 
-	//Tunnel lights
+	//Tunnel lights----------------------------------------------------------------------------------------
 	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
@@ -405,6 +421,7 @@ update_status ModuleBackground::Update()
 	//make so pressing SPACE the other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
+		App->audio->ControlMUS(music_01, STOP_AUDIO);
 		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
 	}
 
