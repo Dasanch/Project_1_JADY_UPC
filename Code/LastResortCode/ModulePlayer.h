@@ -19,18 +19,25 @@ public:
 	bool CleanUp();
 
 public:
+	iPoint position;
+	float const movementSpeed = 1;
 
 	SDL_Texture* PlayerTexture = nullptr;
-	iPoint position;
-
-	Animation ShipOne;
-	float CurrentFrame =NULL;
-	float ignitionSpeed = NULL;
-	float releaseSpeed=NULL;
-
-	float playerSpeed=NULL;
-
-
+	Animation shipPlayer1;
+	float yAxis = 0;
+	const float keyPressSpeed = 0.05f;
+	const float keyReleaseSpeed = 0.05f;
+	int currentFrame;
+	float const transitionLimit = 0.5f;
+	float const MaxLimit = 0.90f;
+	enum ShipFrames
+	{
+		MaxUp,
+		TransitionUp,
+		Idle,
+		TransitionDown,
+		MaxDown
+	};
 };
 
 #endif

@@ -13,123 +13,105 @@ ModulePlayer::ModulePlayer() //Constructor
 	position.x = 0;
 	position.y = 130;
 
-	ShipOne.PushBack({ 0, 0, 32, 12 }); //UpShip = 0;
-	ShipOne.PushBack({ 32, 0, 32, 12 }); // MiddleUpShip = 1;
-	ShipOne.PushBack({ 64, 3, 32, 12 }); //idle =2;
-	ShipOne.PushBack({ 95, 0, 32, 12 }); //MiddleDownShip=  3
-	ShipOne.PushBack({ 128, 4, 32, 11 }); //  DownShip= 4
+	shipPlayer1.PushBack({ 0, 0, 32, 12 });		//0 = UpShip
+	shipPlayer1.PushBack({ 32, 0, 32, 12 });	//1 = MiddleUpShip
+	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
+	shipPlayer1.PushBack({ 95, 0, 32, 12 });	//3 = MiddleDownShip
+	shipPlayer1.PushBack({ 128, 4, 32, 11 });	//4 = DownShip
 
 }
 
 ModulePlayer::~ModulePlayer()
 {}
 
-// Load assets
 bool ModulePlayer::Start()
 {
-	LOG("Loading player textures");
 	bool ret = true;
+	LOG("Loading player textures");
 
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
-	CurrentFrame = 2;
-	ignitionSpeed = 0.2f;
-	releaseSpeed = 0.1f;
-
-
 
 	return ret;
 }
 
-// Update: draw background
 update_status ModulePlayer::Update()
 {
-	/*
-	Animation* current_animation = &ship;
-	int speed = 3;
-	*/
-	int shipWidth = 32;
-	int shipHeight = 13;
-
-	int UpShip = 0;
-	int MiddleUpShip = 1;
-	int StaticShip = 2;
-	int MiddleDownShip = 3;
-	int DownShip = 4;
-
-	playerSpeed = 1.4f;
-	int speed = 0.5f;
-
-	Animation* current_animation = &ShipOne;
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1 && App->input->keyboard[SDL_SCANCODE_S] == 0)
+	//INPUT
+	if(App->input->keyboard[SDL_SCANCODE_A] == true)
 	{
-
-		if (CurrentFrame > UpShip)
-		{
-			CurrentFrame -= ignitionSpeed;
-		}
-
-		if (position.y > 0)
-		{
-			position.y -= playerSpeed;
-		}
-
+		position.x -= movementSpeed;
 	}
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == 1)
+	if(App->input->keyboard[SDL_SCANCODE_D] == true)
 	{
-		CurrentFrame += ignitionSpeed;
-
-		if (CurrentFrame >= 5)
+		position.x += movementSpeed;
+	}
+	if(App->input->keyboard[SDL_SCANCODE_W] == true)
+	{
+		//MOVEMENT
+		position.y -= movementSpeed;
+		//ANIMATION
+		yAxis -= keyPressSpeed;
+		//We check that the yAxis doesn't get bellow -1
+		if(yAxis < -1)
 		{
-			CurrentFrame = 4.99;
+			yAxis = -1;
 		}
-
-		if (position.y < SCREEN_HEIGHT - shipHeight)
+	}
+	if (App->input->keyboard[SDL_SCANCODE_S] == true)
+	{
+		//MOVEMENT
+		position.y += movementSpeed;
+		//ANIMATION
+		yAxis += keyPressSpeed;
+		//We check that the yAxis doesn't get above 1
+		if (yAxis > 1)
 		{
-			position.y += playerSpeed;
-		}
-
-		playerSpeed += speed;
-		position.y += (int)playerSpeed;
-		if (playerSpeed >= speed + 1) //returns correct value to cast incrementer
-			playerSpeed = speed;
-
-		if (position.y + (int)playerSpeed >= SCREEN_HEIGHT - 8) // 8 = player height/2 + required offset
-			position.y = 216; //target max down player position (original game pixel)
-
-	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == 0 && CurrentFrame < StaticShip)
-	{
-		CurrentFrame += releaseSpeed;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == 0 && CurrentFrame > StaticShip)
-	{
-		CurrentFrame -= releaseSpeed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
-	{
-		if (position.x > 0)
-		{
-			position.x -= playerSpeed;
-		}
-
-	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->input->keyboard[SDL_SCANCODE_A] == 0)
-	{
-		position.x += playerSpeed;
-		if (position.x <SCREEN_SIZE)
-		{
-			position.x += playerSpeed;
+			yAxis = 1;
 		}
 	}
 
+	//If there isn't any input on the y axis
+	if (App->input->keyboard[SDL_SCANCODE_W] == false && App->input->keyboard[SDL_SCANCODE_S] == false)
+	{
+		if(yAxis > 0.1)
+		{
+			//Decrement the y axis
+			yAxis -= keyReleaseSpeed;
+		}
+		else if (yAxis < -0.1)
+		{
+			//Increment the y axis
+			yAxis += keyReleaseSpeed;
+		}
+	}
 
-	// Draw everything --------------------------------------
-	SDL_Rect r = current_animation->frames[(int)CurrentFrame];
+	//RENDER
+	//Check what is the value of the yAxis variable
+	//-Idle
+	if (yAxis > -transitionLimit && yAxis < transitionLimit)
+	{
+		currentFrame = Idle;
+	}
+	//-Transitions
+	if (yAxis >= transitionLimit && yAxis < MaxLimit)
+	{
+		currentFrame = TransitionDown;
+	}
+	if (yAxis <= -transitionLimit && yAxis > -MaxLimit)
+	{
+		currentFrame = TransitionUp;
+	}
+	//-Maximums
+	if(yAxis >= MaxLimit)
+	{
+		currentFrame = MaxDown;
+	}
+	if(yAxis <= -MaxLimit)
+	{
+		currentFrame = MaxUp;
+	}
 
-	App->render->Blit(PlayerTexture, position.x, position.y, &r, 0.0f);
+	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
 
 	return UPDATE_CONTINUE;
 }
