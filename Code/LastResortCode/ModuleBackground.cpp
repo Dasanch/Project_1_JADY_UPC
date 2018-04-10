@@ -278,34 +278,40 @@ update_status ModuleBackground::Update()
 	int speed = 2;
 
 	//Camera movement
-	if (App->render->camera.x > -4400 * SCREEN_SIZE)
+	if (App->render->camera.x > -((4400 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->camera.x -= speed; //CAMERA AUTO MOV
 
 	}
 	
-
 	//Boss buildings
-	if (App->render->camera.x < -(3800*SCREEN_SIZE)) //9500 is take from Isolate the position of the camera when the texture of the purple buildings is at 3800px usif the funcion of the Blit
+	if (App->render->camera.x < -(3800*SCREEN_SIZE)) 
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 
 	//Background buildings
-
-	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
+	if (App->render->camera.x > -((3800/foregndSpeed) * SCREEN_SIZE))
+	{
+		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, backgroundspeed);
+	}
+	
 	
 
 	  //Orange Laser
-	if (frame < 2) {
-		frame++;
-		if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
-			App->render->FlippedBlit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	{
+		if (frame < 2) {
+			frame++;
+			if (orangLaserAnim.current_frame < orangLaserAnim.last_frame / 2)
+				App->render->FlippedBlit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+			else
+				App->render->Blit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+		}
 		else
-			App->render->Blit(orangeLaserTx, 142, 0, &orangLaserAnim.LoopAnimation(), 0);
+			frame = 0;
 	}
-	else
-		frame = 0;
+	
 
 	//Background lights
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
@@ -314,59 +320,77 @@ update_status ModuleBackground::Update()
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
+
+
 	//Midground buildings
-	App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
-	//Midground lights
-	//- Loop 1
-	App->render->Blit(midgndLightsTx,  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-	//- Loop 2
-	App->render->Blit(midgndLightsTx, midgndLoopDist +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-	//- Loop 3
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 +  40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset +  2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-	//Positions calculated from the png
-
-
+	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	{
+		App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
+		//Midground lights
+		//- Loop 1
+		App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		//- Loop 2
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		//- Loop 3
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		//Positions calculated from the png
+	}
+	
+	
 	//Ground and tunnel
-	App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 
-	//Street Lights
-	//1
-	App->render->Blit(streetLightsTx, 40 , 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
-	for (int i = 1; i < 27; ++i) {
-		App->render->Blit(streetLightsTx, 40 + streetLightDist *i, 136, &streetLightsAnim01.GetFrame(randoms[i]), 1.0f);
+	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
+	{
+		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	}
-	//2
-	App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
-	for (int i = 1; i < 14; ++i) {
-		App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), 1.0f);
+
+	//Street Lights-----------------------------------------------------------------------------------------
+	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	{
+		//1
+		App->render->Blit(streetLightsTx, 40, 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
+		for (int i = 1; i < 27; ++i) {
+			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.GetFrame(randoms[i]), 1.0f);
+		}
+		//2
+		App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
+		for (int i = 1; i < 14; ++i) {
+			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.GetFrame(randoms[i]), 1.0f);
+		}
 	}
+	
+	
 
 	//Tunnel lights
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-	//Could be implemented with a for, but probably all the frames would be the same
-	//2048 = distance from the start of the tilemap to the first light
+	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
+	{
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		//Could be implemented with a for, but probably all the frames would be the same
+		//2048 = distance from the start of the tilemap to the first light
+	}
+	
 
 	//make so pressing SPACE the other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
