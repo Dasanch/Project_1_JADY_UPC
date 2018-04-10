@@ -11,6 +11,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleStageReady.h"
+#include "ModuleAudio.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -230,6 +231,7 @@ bool ModuleBackground::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
+	//textures
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
 	BackgroundBuildings = App->textures->Load("Assets/firstCameraMovBuilding04.png");
@@ -239,6 +241,9 @@ bool ModuleBackground::Start()
 	midgndLightsTx = App->textures->Load("Assets/MidgroundLights.png");
 	tunnelLightsTx = App->textures->Load("Assets/TunnelLights.png");
 	streetLightsTx = App->textures->Load("Assets/StreetLights.png");
+	//audios 
+	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
+	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 
 	App->player->Enable();
 	//"Reset ship position when fadetoblackends" 

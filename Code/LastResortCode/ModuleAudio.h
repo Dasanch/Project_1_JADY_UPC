@@ -8,21 +8,22 @@
 #define MAX_MUSICS 3
 #define MAX_SOUNDEFECTS 20
 
+typedef struct _Mix_Music Mix_Music;
 
 enum Audio_State {
 	PLAY_AUDIO,
 	STOP_AUDIO, 
 };
 
-struct Music {
-	Mix_Music * music;
-	char *name;
-};
-
-struct Sfx {
-	Mix_Chunk *chunk;
-	char *name;
-};
+//struct Music {
+//	Mix_Music * music;
+//	char *name;
+//};
+//
+//struct Sfx {
+//	Mix_Chunk *chunk;
+//	char *name;
+//};
 
 class ModuleAudio : public Module {
 public:
@@ -32,14 +33,16 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	Mix_Chunk* const LoadSfx(const char* path, char *name);
-	Mix_Music* const LoadMUS(const char* path, char *name);
-	void ControlMUS (char* name, Audio_State state);
-	void ControlSFX(char* name, Audio_State state);
+	Mix_Chunk* const LoadSFX(const char* path);
+	Mix_Music* const LoadMUS(const char* path);
+	bool ControlMUS (Mix_Music* music, Audio_State state);
+	bool ControlSFX(Mix_Chunk* chunk, Audio_State state);
+	bool UnloadMUS(Mix_Music* music);
+	bool UnloadSFX(Mix_Chunk* chunk);
+private: 
 
-private:
-	Music musics[MAX_MUSICS];
-	Sfx sfx[MAX_SOUNDEFECTS];
+	Mix_Music* musics[MAX_MUSICS];
+	Mix_Chunk* sfx[MAX_SOUNDEFECTS];
 	uint last_chunk = 0;
 	uint last_music = 0;
 };

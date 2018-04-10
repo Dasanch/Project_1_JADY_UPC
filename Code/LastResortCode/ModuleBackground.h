@@ -6,6 +6,7 @@
 #include "Globals.h"
 
 struct SDL_Texture;
+typedef struct _Mix_Music Mix_Music;
 
 class ModuleBackground : public Module
 {
@@ -19,6 +20,10 @@ public:
 public:
 	uint randoms[27];
 	uint frame;
+	
+	//audios
+	Mix_Music* music_01 = nullptr;
+
 
 	SDL_Texture * groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;

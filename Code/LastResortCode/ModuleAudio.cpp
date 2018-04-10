@@ -12,9 +12,9 @@ ModuleAudio::ModuleAudio() : Module()
 {
 	
 	for (uint i = 0; i < MAX_MUSICS; ++i)
-		musics[i] = { nullptr , nullptr};
+		musics[i] = nullptr;
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
-		sfx[i] = { nullptr, nullptr };
+		sfx[i] = nullptr;
 
 	//musics = new Music[MAX_MUSICS];
 	//sfx = new Sfx[MAX_SOUNDEFECTS];
@@ -37,9 +37,6 @@ bool ModuleAudio::Init()
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
-	LoadMUS("Assets/stage1.ogg", "stage1");
-	ControlMUS("stage1", PLAY_AUDIO);
-
 	return ret;
 }
 
@@ -48,13 +45,13 @@ bool ModuleAudio::CleanUp()
 	LOG("Freeing audios and Mixer library and shutdown mixer");
 
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
-		if (sfx[i].chunk != nullptr) {
-			Mix_FreeChunk(sfx[i].chunk);
+		if (sfx[i] != nullptr) {
+			Mix_FreeChunk(sfx[i]);
 		}
 
 	for (uint i = 0; i < MAX_MUSICS; ++i)
-		if (musics[i].music != nullptr) {
-			Mix_FreeMusic(musics[i].music);
+		if (musics[i] != nullptr) {
+			Mix_FreeMusic(musics[i]);
 		}
 	
 
@@ -63,29 +60,9 @@ bool ModuleAudio::CleanUp()
 
 	return true;
 }
-
-Mix_Chunk* const ModuleAudio::LoadSfx(const char* path, char *name) {
-
-	Mix_Chunk *chunk;
-	char *_name = name;
-	chunk = Mix_LoadWAV(path);
-
-	if (chunk == nullptr)
-	{
-		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
-	}
-	else
-	{
-		sfx[last_chunk].name = _name;
-		sfx[last_chunk].chunk = chunk;
-	}
-	return chunk;
-}
-
-Mix_Music* const ModuleAudio::LoadMUS(const char* path, char* name) {
+Mix_Music* const ModuleAudio::LoadMUS(const char* path) {
 
 	Mix_Music *music = nullptr;
-	char *_name = name;
 
 	music = Mix_LoadMUS(path);
 
@@ -95,25 +72,38 @@ Mix_Music* const ModuleAudio::LoadMUS(const char* path, char* name) {
 	}
 	else
 	{
-		musics[last_music].music = music;
-		musics[last_music++].name = _name;
+		musics[last_music++] = music;
 	}
 	return music;
 }
 
-void ModuleAudio::ControlMUS(char* name, Audio_State state) {
-	
-	Mix_Music *music= nullptr;
-	char *_name = name;
-	for (uint i = 0; i <= last_music; ++i) {
-		if (musics[i].name == _name) {
-			music = musics[i].music;
+Mix_Chunk* const ModuleAudio::LoadSFX(const char* path) {
+
+	Mix_Chunk *chunk;
+	chunk = Mix_LoadWAV(path);
+
+	if (chunk == nullptr)
+	{
+		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
+	}
+	else
+		sfx[last_chunk++] = chunk;
+
+	return chunk;
+}
+
+bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
+
+	bool music_found = false;
+
+	for (uint i = 0; i < last_music; ++i) {
+		if (musics[i] == music) {
+			music_found = true;
 		}
 	}
 	
-
-	if (music == nullptr) {
-		LOG("Music not found ControlMUS : %s\n", name);
+	if (!music_found) {
+		LOG("Music not found ControlMUS");
 	}
 	else {
 		switch (state)
@@ -122,45 +112,47 @@ void ModuleAudio::ControlMUS(char* name, Audio_State state) {
 			if (!Mix_PlayingMusic())
 				Mix_PlayMusic(music, 3);
 			else
-				LOG("Music is already played : %s\n", name);
+				LOG("Music is already playing");
 			break;
 		case STOP_AUDIO:
 			if (!Mix_PausedMusic())
 				Mix_PauseMusic();
 			else
-				LOG("Music is already stoped : %s\n", name);
+				LOG("Music is already stopped");
 			break;
 
 		default:
 			break;
 		}
 	}
-
+	return true;
 }
 
-void ModuleAudio::ControlSFX(char* name, Audio_State state) {
-
-	Mix_Chunk *chunk = nullptr;
-	char *_name = name;
+bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
+	
+	bool sfx_found = false;
 	for (uint i = 0; i <= last_music; ++i) {
-		if (musics[i].name == _name) {
-			chunk = sfx[i].chunk;
+		if (sfx[i] == chunk) {
+			sfx_found = true;
 		}
 	}
 
 
-	if (chunk == nullptr) {
-		LOG("Music not found ControlMUS : %s\n", name);
+	if (!sfx_found) {
+		LOG("Music not found ControlSFX");
+		return false;
 	}
 	else {
 		switch (state)
 		{
 		case PLAY_AUDIO:
-			LOG("Chunck is already playing : %s\n", name);
+			LOG("Chunck is already playing");
 				Mix_PlayChannel( -1, chunk, 0);
 		default:
-			LOG("Chunck is already playing : %s\n", name);
+			LOG("Chunck have not this audio state");
+			return false;
 			break;
 		}
 	}
+	return true;
 }
