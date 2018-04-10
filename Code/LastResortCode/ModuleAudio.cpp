@@ -44,16 +44,17 @@ bool ModuleAudio::CleanUp()
 {
 	LOG("Freeing audios and Mixer library and shutdown mixer");
 
-	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i)
+	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] != nullptr) {
 			Mix_FreeChunk(sfx[i]);
 		}
+	}
 
-	for (uint i = 0; i < MAX_MUSICS; ++i)
+	for (uint i = 0; i < MAX_MUSICS; ++i) {
 		if (musics[i] != nullptr) {
 			Mix_FreeMusic(musics[i]);
 		}
-	
+	}
 
 	Mix_CloseAudio();
 	Mix_Quit();
@@ -75,6 +76,28 @@ Mix_Music* const ModuleAudio::LoadMUS(const char* path) {
 		musics[last_music++] = music;
 	}
 	return music;
+}
+
+bool ModuleAudio::UnloadMUS(Mix_Music * music) {
+
+
+	bool ret = false;
+
+	if (music != nullptr)
+	{
+		for (int i = 0; i < MAX_MUSICS; ++i)
+		{
+			if (musics[i] == music)
+			{
+				musics[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+		Mix_FreeMusic(music);
+	}
+
+	return ret;
 }
 
 Mix_Chunk* const ModuleAudio::LoadSFX(const char* path) {
