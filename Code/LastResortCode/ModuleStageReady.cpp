@@ -10,6 +10,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
+#include "Module2lvlScene.h"
 #include "ModuleAudio.h"
 
 ModuleStageReady::ModuleStageReady()
@@ -90,7 +91,7 @@ update_status ModuleStageReady::Update()
 
 	// TODO 2: make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(this, App->background, 0.5f); //this=scene_ready
+		App->fade->FadeToBlack(this, App->scene_lvl2, 0.5f); //this=scene_ready
 	}
 
 
