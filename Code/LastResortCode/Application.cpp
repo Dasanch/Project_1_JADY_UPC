@@ -22,11 +22,11 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
 	modules[5] = background = new ModuleBackground();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = GameTitle = new ModuleGameTitle();
-	modules[9] = scene_ready = new ModuleStageReady();
-	modules[10] = scene_lvl2 = new Module2lvlScene();
+	modules[6] = scene_lvl2 = new Module2lvlScene();
+	modules[7] = player = new ModulePlayer();
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = GameTitle = new ModuleGameTitle();
+	modules[10] = scene_ready = new ModuleStageReady();
 	modules[11] = gameover = new ModuleGameOver();
 	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }	

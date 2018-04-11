@@ -20,8 +20,12 @@ public:
 public:
 
 	SDL_Texture * TitleTexture = nullptr;
+	SDL_Texture *L1Texture;
 	SDL_Rect LastResortRect;
+
+	Animation L1;
 	
+	int current_frame = 37;
 };
 
 #endif // __MODULEGAMETITLE_H__
