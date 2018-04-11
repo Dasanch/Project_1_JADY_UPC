@@ -12,6 +12,7 @@
 #include "ModuleInput.h"
 #include "ModuleStageReady.h"
 #include "ModuleAudio.h"
+#include "ModuleGameOver.h" //delete (provitional)
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -446,9 +447,13 @@ update_status ModuleBackground::Update()
 	
 
 	//make so pressing SPACE the other stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE])
 	{
 		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+	}
+	//pass to game over
+	if (App->input->keyboard[SDL_SCANCODE_G]) {
+		App->fade->FadeToBlack(this, App->gameover, 0.5f); 
 	}
 
 	return UPDATE_CONTINUE;

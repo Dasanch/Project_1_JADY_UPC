@@ -47,10 +47,8 @@ bool Application::Init()
 	background->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
-	audio->Disable();
 	scene_lvl2->Disable();
-	
-	//background->Disable();
+	gameover->Disable();
 
 	// Disable the map that you do not start with
 	// ---
