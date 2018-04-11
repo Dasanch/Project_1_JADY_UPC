@@ -89,12 +89,13 @@ bool ModuleAudio::UnloadMUS(Mix_Music * music) {
 		{
 			if (musics[i] == music)
 			{
+				Mix_FreeMusic(music);
 				musics[i] = nullptr;
 				ret = true;
 				break;
 			}
 		}
-		Mix_FreeMusic(music);
+		
 	}
 
 	return ret;

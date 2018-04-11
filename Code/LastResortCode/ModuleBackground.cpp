@@ -276,7 +276,7 @@ bool ModuleBackground::Start()
 
 bool ModuleBackground::CleanUp()
 {
-	// TODO : Remove all memory leaks
+	LOG("Unloading background assets");
 	//textures-----------------------------------------------------------------------
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);
@@ -290,13 +290,10 @@ bool ModuleBackground::CleanUp()
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
-	//player------------------------------------------------------------------------
-	LOG("Unloading player");
+	//modules-----------------------------------------------------------------------
 	App->player->Disable(); //Disable the player module
 	App->render->camera.x = 0;
-
-	/*LOG("Unloading background");
-	App->textures->Unload();*/
+	//------------------------------------------------------------------------------
 	return true;
 }
 
@@ -340,7 +337,8 @@ update_status ModuleBackground::Update()
 	
 
 	//Orange Laser-----------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= -33 * SCREEN_SIZE)
+
+	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= (-33)* SCREEN_SIZE* foregndSpeed)
 	{
 		orangeLaserAnim.LoopAnimation();
 		if (frame < 2 ) {
@@ -398,13 +396,13 @@ update_status ModuleBackground::Update()
 		App->render->Blit(LasersTx, 201 - blueLaserAnim.GetFrame().w, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 713 - blueLaserAnim.GetFrame().w, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 793 - blueLaserAnim.GetFrame().w, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
-		App->render->Blit(LasersTx, 856 - blueLaserAnim.GetFrame().w, -55, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 857 - blueLaserAnim.GetFrame().w, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
 	else {
 		App->render->Blit(LasersTx, 200, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 712, -40, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 792, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
-		App->render->Blit(LasersTx, 855, -55, &blueLaserAnim.GetFrame(), midgndSpeed);
+		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
 		
 
