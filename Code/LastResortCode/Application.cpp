@@ -9,9 +9,9 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
 #include "ModuleStageReady.h"
+#include "ModuleNeoGeo.h"
 #include "Module2lvlScene.h"
 #include "ModuleGameOver.h"
-
 
 
 Application::Application()
@@ -28,7 +28,7 @@ Application::Application()
 	modules[9] = scene_ready = new ModuleStageReady();
 	modules[10] = scene_lvl2 = new Module2lvlScene();
 	modules[11] = gameover = new ModuleGameOver();
-
+	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }	
 
 Application::~Application()
@@ -43,12 +43,13 @@ bool Application::Init()
 
 
 	// Disable all stopped modules here
-
 	background->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
-	scene_lvl2->Disable();
 	gameover->Disable();
+	audio->Disable();
+	//GameTitle->Disable();//NeoGeoModule goes first
+	scene_lvl2->Disable();
 
 	// Disable the map that you do not start with
 	// ---
