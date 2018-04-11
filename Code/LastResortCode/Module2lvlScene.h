@@ -23,6 +23,7 @@ public:
 	bool CleanUp();
 public:
 	SDL_Texture * lvl2Text;
+	SDL_Texture * lvl2ground;
 
 };
 

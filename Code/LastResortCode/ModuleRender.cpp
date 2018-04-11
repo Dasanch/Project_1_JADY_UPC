@@ -142,7 +142,10 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 
 	return ret;
 }
+float  ModuleRender::getCameraPosition(int position,float speed) {
+	return(-position*SCREEN_SIZE/speed);
 
+}
 
 
 
