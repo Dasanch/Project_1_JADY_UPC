@@ -23,6 +23,7 @@ public:
 	bool Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
 	bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f);
 	float getCameraPosition(int position,float speed);
+	bool ModuleRender::FlippedBlit2_0(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed,int Flip_horizontal,int Flip_Vertical);
 
 public:
 	SDL_Renderer* renderer = nullptr;

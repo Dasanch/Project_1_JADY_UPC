@@ -24,6 +24,10 @@ public:
 public:
 	SDL_Texture * lvl2Text;
 	SDL_Texture * lvl2ground;
+	SDL_Texture* BckSpam;
+
+	SDL_Rect  BckSpamRect;
+	SDL_Rect  BckSpamRect2;
 
 };
 
