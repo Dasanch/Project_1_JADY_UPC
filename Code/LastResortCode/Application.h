@@ -3,11 +3,7 @@
 
 #include "Globals.h"
 
-<<<<<<< HEAD
-#define NUM_MODULES 10//11
-=======
-#define NUM_MODULES 12
->>>>>>> 20cb3e00ef131a26380fbd789121226f31d9d8b3
+#define NUM_MODULES 12//+1 for neoGeo
 
 class ModuleWindow;
 class ModuleInput;
@@ -40,12 +36,9 @@ public:
 	ModuleFadeToBlack* fade = nullptr;
 	ModuleGameTitle* GameTitle = nullptr;
 	ModuleStageReady* scene_ready = nullptr;
-<<<<<<< HEAD
 	//ModuleNeoGeo* neogeoScene = nullptr;
-=======
 	Module2lvlScene* scene_lvl2 = nullptr;
 	ModuleGameOver* gameover = nullptr;
->>>>>>> 20cb3e00ef131a26380fbd789121226f31d9d8b3
 
 public:
 
