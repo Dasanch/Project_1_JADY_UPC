@@ -13,11 +13,11 @@ ModulePlayer::ModulePlayer() //Constructor
 	position.x = 0;
 	position.y = 130;
 
-	shipPlayer1.PushBack({ 0, 0, 32, 12 });		//0 = UpShip
-	shipPlayer1.PushBack({ 32, 0, 32, 12 });	//1 = MiddleUpShip
-	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
-	shipPlayer1.PushBack({ 95, 0, 32, 12 });	//3 = MiddleDownShip
-	shipPlayer1.PushBack({ 128, 4, 32, 11 });	//4 = DownShip
+	shipPlayer1.PushBack({   0, 3, 32, 12 });	//0 = UpShip
+	shipPlayer1.PushBack({  32, 3, 32, 12 });	//1 = MiddleUpShip
+	shipPlayer1.PushBack({  64, 3, 32, 12 });	//2 = idle
+	shipPlayer1.PushBack({  96, 3, 32, 12 });	//3 = MiddleDownShip
+	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
 
 }
 
@@ -39,16 +39,30 @@ update_status ModulePlayer::Update()
 	//INPUT
 	if(App->input->keyboard[SDL_SCANCODE_A] == true)
 	{
+		//MOVEMENT
 		position.x -= movementSpeed;
+		if (position.x < 0)
+		{
+			position.x = 0;
+		}
 	}
 	if(App->input->keyboard[SDL_SCANCODE_D] == true)
 	{
+		//MOVEMENT
 		position.x += movementSpeed;
+		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
+		{
+			position.x = SCREEN_WIDTH - 32;
+		}
 	}
 	if(App->input->keyboard[SDL_SCANCODE_W] == true)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
+		if(position.y < 0)
+		{
+			position.y = 0;
+		}
 		//ANIMATION
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -61,6 +75,10 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
+		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
+		{
+			position.y = SCREEN_HEIGHT - 12;
+		}
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
