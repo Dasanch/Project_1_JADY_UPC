@@ -9,7 +9,13 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
 #include "ModuleStageReady.h"
+<<<<<<< HEAD
 #include "ModuleNeoGeo.h"
+=======
+#include "Module2lvlScene.h"
+#include "ModuleGameOver.h"
+
+>>>>>>> 20cb3e00ef131a26380fbd789121226f31d9d8b3
 
 
 Application::Application()
@@ -20,11 +26,21 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = audio = new ModuleAudio();
 	modules[5] = background = new ModuleBackground();
+<<<<<<< HEAD
 	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
 	//modules[10] = neogeoScene = new ModuleNeoGeo();
+=======
+	modules[6] = scene_lvl2 = new Module2lvlScene();
+	modules[7] = player = new ModulePlayer();
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = GameTitle = new ModuleGameTitle();
+	modules[10] = scene_ready = new ModuleStageReady();
+	modules[11] = gameover = new ModuleGameOver();
+
+>>>>>>> 20cb3e00ef131a26380fbd789121226f31d9d8b3
 
 }	
 
@@ -45,7 +61,13 @@ bool Application::Init()
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
 	audio->Disable();
+<<<<<<< HEAD
 	//GameTitle->Disable();//NeoGeoModule goes first
+=======
+	scene_lvl2->Disable();
+	
+	//background->Disable();
+>>>>>>> 20cb3e00ef131a26380fbd789121226f31d9d8b3
 
 	// Disable the map that you do not start with
 	// ---

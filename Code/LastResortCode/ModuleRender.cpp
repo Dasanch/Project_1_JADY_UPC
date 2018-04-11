@@ -25,7 +25,7 @@ bool ModuleRender::Init()
 
 	if(REN_VSYNC == true)
 	{
-		flags |= SDL_RENDERER_PRESENTVSYNC;
+		flags |= SDL_RENDERER_PRESENTVSYNC ;
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
@@ -118,7 +118,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE - section->w* SCREEN_SIZE;
+	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
 	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
 	if (section != NULL)
@@ -142,7 +142,50 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 
 	return ret;
 }
+bool ModuleRender::FlippedBlit2_0(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed,int Flip_horizontal,int Flip_vertical)
+{
+	bool ret = true;
+	SDL_Rect rect;
+	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
+	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
 
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= SCREEN_SIZE;
+	rect.h *= SCREEN_SIZE;
+
+	if (Flip_horizontal == 1)
+	{
+		if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, SDL_FLIP_HORIZONTAL) != 0)
+		{
+			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+			ret = false;
+		}
+	}
+	if (Flip_vertical == 1)
+	{
+		if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, SDL_FLIP_VERTICAL) != 0)
+		{
+			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+			ret = false;
+		}
+	}
+	
+
+	return ret;
+}
+float  ModuleRender::getCameraPosition(int position,float speed) {
+	return(-position*SCREEN_SIZE/speed);
+
+}
 
 
 
