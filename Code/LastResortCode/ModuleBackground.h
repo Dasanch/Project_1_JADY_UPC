@@ -20,7 +20,7 @@ public:
 public:
 	uint randoms[27];
 	uint frame;
-	
+
 	//audios
 	Mix_Music* music_01 = nullptr;
 

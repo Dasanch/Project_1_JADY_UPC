@@ -10,6 +10,7 @@
 #include "ModuleGameTitle.h"
 #include "ModuleStageReady.h"
 #include "Module2lvlScene.h"
+#include "ModuleGameOver.h"
 
 
 
@@ -26,7 +27,8 @@ Application::Application()
 	modules[8] = fade = new ModuleFadeToBlack();
 	modules[9] = GameTitle = new ModuleGameTitle();
 	modules[10] = scene_ready = new ModuleStageReady();
-	
+	modules[11] = gameover = new ModuleGameOver();
+
 
 }	
 
