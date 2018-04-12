@@ -45,7 +45,7 @@ bool ModuleNeoGeo::Start()
 	neogeoAnim.PushBack({ 0,899,227,40 });
 	neogeoAnim.PushBack({ 0,855,227,40 });
 	neogeoAnim.PushBack({ 0,810,227,40 });
-	neogeoAnim.PushBack({ 0,767,227,40 });
+	neogeoAnim.PushBack({ 0,767,227,40 });//This is when size starts to reduce
 	neogeoAnim.PushBack({ 0,725,227,38 });
 	neogeoAnim.PushBack({ 0,686,227,35 });
 	neogeoAnim.PushBack({ 0,650,227,32 });
@@ -78,20 +78,30 @@ bool ModuleNeoGeo::Start()
 	neogeoAnim.PushBack({ 0,44,227,38 });
 	neogeoAnim.PushBack({ 0,0,227,40 });
 
-	//neogeoAnim.loop = false;
-	neogeoAnim.speed = 0.25;
+	neogeoAnim.loop = false;
+	neogeoAnim.speed = neogeoAnimSpeed;
 
 	return ret;
 }
 update_status ModuleNeoGeo::Update()
-{
-
-	
+{	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
 		App->fade->FadeToBlack(this, App-> GameTitle, 0.5f);
 	}
 
+	//Fade to white
+	if(neogeoAnim.current_frame >= 15 && currentFade != 0)
+	{
+		currentFade -= 255/(46-15)*neogeoAnimSpeed;//RGB max / number of frames * speed of each frame
+		if(currentFade < 0)
+		{
+			currentFade = 0;
+		}
+	}
+	SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
+
+	//Render NeoGeo logo
 	App->render->Blit(neogeoTx, SCREEN_WIDTH/2 - NEOGEOWIDTH / 2, 50, &neogeoAnim.GetCurrentFrame(), 0.0f);
 
 	return UPDATE_CONTINUE;

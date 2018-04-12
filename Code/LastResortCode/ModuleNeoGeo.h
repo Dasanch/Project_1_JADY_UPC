@@ -24,11 +24,15 @@ public:
 	SDL_Texture * neogeoTx = nullptr;
 	SDL_Rect neogeoRect;
 	Animation neogeoAnim;
+	float neogeoAnimSpeed = 0.5f;
+
+	SDL_Rect proGearSpecRect;
 
 	//SDL_Texture * snkTx = nullptr;
 	//SDL_Texture * proGearSpecTx = nullptr;
 	//SDL_Rect snkRect;
-	//SDL_Rect proGearSpecRect;
+
+	int currentFade = 255;
 };
 
 #endif // __MODULENEOGEO_H__
