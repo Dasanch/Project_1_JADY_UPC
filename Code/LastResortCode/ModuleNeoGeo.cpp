@@ -47,10 +47,12 @@ update_status ModuleNeoGeo::Update()
 }
 bool ModuleNeoGeo::CleanUp() {
 	LOG("Unloading NeoGeo scene");
+	// Disable player, neogeoTx, snkTx, proGearSpecTx
+	App->player->Disable(); 
+	App->textures->Unload(neogeoTx);
+	App->textures->Unload(snkTx);
+	App->textures->Unload(proGearSpecTx);
 
-	//Unload neogeoTx
-	//Unload snkTx
-	//Unload proGearSpecTx
 
 	return true;
 }

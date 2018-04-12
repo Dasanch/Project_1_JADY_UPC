@@ -33,9 +33,6 @@ ModuleGameTitle::ModuleGameTitle()
 	L1.PushBack({ 141,174,46,77 });*/
 
 
-	
-	
-
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
@@ -67,5 +64,7 @@ update_status ModuleGameTitle::Update() {
 bool ModuleGameTitle::CleanUp() {
 	LOG("Unloading Title scene");
 	App->player->Disable();
+	App->textures->Unload(TitleTexture);
+	App->textures->Unload(L1Texture);
 	return true;
 }
