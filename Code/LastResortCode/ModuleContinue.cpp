@@ -80,7 +80,7 @@ update_status ModuleContinue::Update() {
 
 	// make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+		App->fade->FadeToBlack(this, App->scene_gameover, 0.5f);
 	}
 
 	return UPDATE_CONTINUE;

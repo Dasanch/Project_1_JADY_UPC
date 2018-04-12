@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+typedef struct _Mix_Music Mix_Music;
 
 struct SDL_Texture;
 
@@ -21,12 +22,17 @@ public:
 
 	SDL_Texture * TitleTexture = nullptr;
 	SDL_Texture *L1Texture;
+	SDL_Texture *A2Texture;
 	SDL_Rect LastResortRect;
 
 	Animation L1;
 	Animation A2;
 	
 	float current_frame;
+	float currenA2 = 0;
+
+	//audios
+	Mix_Music* Titlemusic = nullptr;
 };
 
 #endif // __MODULEGAMETITLE_H__
