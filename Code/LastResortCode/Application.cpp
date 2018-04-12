@@ -16,7 +16,6 @@
 
 Application::Application()
 {
-<<<<<<< HEAD
 	modules [0] = window = new ModuleWindow();
 	modules [1] = render = new ModuleRender();
 	modules [2] = input = new ModuleInput();
@@ -27,28 +26,11 @@ Application::Application()
 	modules [7] = player = new ModulePlayer();
 	modules [8] = neogeoScene = new ModuleNeoGeo();
 	modules [9] = GameTitle = new ModuleGameTitle();
-=======
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = background = new ModuleBackground();
-	modules[6] = scene_lvl2 = new Module2lvlScene();
-	modules[7] = player = new ModulePlayer();
-	modules[8] = neogeoScene = new ModuleNeoGeo();
-	modules[9] = GameTitle = new ModuleGameTitle();
->>>>>>> bf441af1002d46da22e2e333a0a481fe7958ec01
 	modules[10] = scene_ready = new ModuleStageReady();
 	modules[11] = scene_gameover = new ModuleGameOver();
 	modules[12] = scene_continue = new ModuleContinue();
 	modules[13] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
-<<<<<<< HEAD
-}	
-=======
-	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }
->>>>>>> bf441af1002d46da22e2e333a0a481fe7958ec01
 
 Application::~Application()
 {
@@ -70,10 +52,6 @@ bool Application::Init()
 	scene_ready->Disable();
 	scene_gameover->Disable();
 	scene_continue->Disable();
-<<<<<<< HEAD
-=======
-	//GameTitle->Disable();//NeoGeoModule goes first
->>>>>>> bf441af1002d46da22e2e333a0a481fe7958ec01
 
 	// Disable the map that you do not start with
 	// ---
