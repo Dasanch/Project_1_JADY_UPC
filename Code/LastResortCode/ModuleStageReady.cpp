@@ -55,24 +55,14 @@ bool ModuleStageReady::Start()
 
 bool ModuleStageReady::CleanUp()
 {
-	// TODO 5: Remove all memory leaks
+	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player->Disable(); // TODO 1: Disable the player module
+	App->player->Disable(); //Disable the player module
 	App->textures->Unload(backgroundReady);
 	return true;
 }
 
-/*
-bool ModuleStageReady::CleanUp()
-{
-App->player->Disable();
-
-//LOG("Unloading players stage");
-App->textures->Unload(backgroundReady);
-
-return true;
-}*/
 
 // Update: draw background
 
@@ -85,7 +75,7 @@ update_status ModuleStageReady::Update()
 	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f); //MAGIC NUMBERS
 
 
-	// TODO 2: make so pressing SPACE other stage is loaded
+	// make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		App->fade->FadeToBlack(this, App->scene_lvl2, 0.5f); //this=scene_ready
 	}
