@@ -9,6 +9,8 @@
 #include "ModuleBackground.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
+#include "ModuleGameTitle.h"
+
 
 #define FireAnimSpeed 0.01
 
@@ -75,5 +77,12 @@ update_status ModuleContinue::Update() {
 	fireAnim.speed = (float)FireAnimSpeed  ;
 	App->render->Blit(continueTex, 253, 96, &fireAnim.GetCurrentFrame(), 1.0f);
 	//-----------------------------------------------------------------------------
+
+	// make so pressing SPACE other stage is loaded
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+	}
+
 	return UPDATE_CONTINUE;
 }
+
