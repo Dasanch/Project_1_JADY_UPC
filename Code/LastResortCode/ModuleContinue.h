@@ -21,9 +21,11 @@ public:
 
 	//Textures
 	SDL_Texture* backgroundCont = nullptr;
+	SDL_Texture* backgroundContBack = nullptr;
 
 
 	//Rectangles
+	SDL_Rect BGroundCont;
 	SDL_Rect BGroundCont;
 	SDL_Rect BBlack;
 
