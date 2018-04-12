@@ -7,6 +7,8 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "SDL\include\SDL.h"
+#include "ModuleContinue.h"
+
 Module2lvlScene::Module2lvlScene()
 {
 	BckSpamRect.x = 0;
@@ -55,7 +57,8 @@ update_status Module2lvlScene::Update() {
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+		//App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+		App->fade->FadeToBlack(this, App->cont, 0.5f);
 	}
 
 	return UPDATE_CONTINUE;

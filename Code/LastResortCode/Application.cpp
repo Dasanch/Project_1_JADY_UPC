@@ -12,7 +12,7 @@
 #include "ModuleNeoGeo.h"
 #include "Module2lvlScene.h"
 #include "ModuleGameOver.h"
-
+#include "ModuleContinue.h"
 
 Application::Application()
 {
@@ -27,7 +27,8 @@ Application::Application()
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
 	modules[10] = gameover = new ModuleGameOver();
-	modules[11] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
+	modules[11] = cont = new ModuleContinue();
+	modules[12] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }	
 
