@@ -17,7 +17,7 @@ public:
 	bool CleanUp();
 private:
 	int current_time = 0;
-	int init_time = 0;
+	int start_time = 0;
 	float whiteAlpha;
 	float blackAlpha;
 	float black_go_Alpha;

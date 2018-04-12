@@ -1,11 +1,9 @@
-#ifndef __ModuleContinue_H__
-#define __ModuleContinue_H__
-
+#ifndef _ModuleContinue_H_
+#define _ModuleGameOver_H_
 #include "Module.h"
-#include "Animation.h"
 #include "Globals.h"
-
 struct SDL_Texture;
+typedef struct _Mix_Music Mix_Music;
 
 class ModuleContinue : public Module
 {
@@ -16,17 +14,15 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+private:
+	int current_time = 0;
+	int start_time = 0;
 
-public:
+	Animation numbersAnim;
+	Animation fireAnim;
 
-	//Textures
-	SDL_Texture* backgroundCont = nullptr;
-
-
-	//Rectangles
-	SDL_Rect BGroundCont;
-	SDL_Rect BBlack;
-
+	SDL_Texture* backgroundTex = nullptr;
+	SDL_Texture* continueTex = nullptr;
+	
 };
-
-#endif
+#endif // !_ModuleContinue_H_

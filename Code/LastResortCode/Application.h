@@ -17,6 +17,7 @@ class ModuleGameTitle;
 class ModuleStageReady;
 class Module2lvlScene;
 class ModuleGameOver;
+class ModuleContinue;
 class Module;
 class ModuleContinue;
 class ModuleNeoGeo;
@@ -40,9 +41,14 @@ public:
 	ModuleGameTitle* GameTitle = nullptr;
 	ModuleStageReady* scene_ready = nullptr;
 	Module2lvlScene* scene_lvl2 = nullptr;
+<<<<<<< HEAD
+	ModuleGameOver* scene_gameover = nullptr;
+	ModuleContinue* scene_continue = nullptr;
+=======
 	ModuleGameOver* gameover = nullptr;
 	ModuleContinue* cont = nullptr;
 
+>>>>>>> 000f94830e87cc7e8bd57c3c13907146cc2964d9
 public:
 
 	Application();

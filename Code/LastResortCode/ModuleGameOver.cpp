@@ -50,7 +50,7 @@ ModuleGameOver:: ~ModuleGameOver() {}
 bool ModuleGameOver::Start() {
 	LOG("Loading ModuleGameOver assets");
 	bool ret = true;
-	init_time = SDL_GetTicks(); 
+	start_time = SDL_GetTicks(); 
 	whiteAlpha = MIN_ALPHA;
 	blackAlpha = MAX_ALPHA;
 	black_go_Alpha = MAX_ALPHA;
@@ -79,7 +79,7 @@ bool ModuleGameOver::CleanUp() {
 
 update_status ModuleGameOver::Update() {
 	//Timer---------------------------------------------------------------------
-	current_time = SDL_GetTicks() - init_time;
+	current_time = SDL_GetTicks() - start_time;
 	//Normal GameOver , Metal GameOve & Black Metal GameOverr---------------------
 	if (current_time < 2800)
 		App->render->Blit(goTex, 19, 32, &go_rect, 1.0);
