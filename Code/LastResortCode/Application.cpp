@@ -30,7 +30,6 @@ Application::Application()
 	modules[11] = scene_gameover = new ModuleGameOver();
 	modules[12] = scene_continue = new ModuleContinue();
 	modules[13] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
-	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }
 
 Application::~Application()

@@ -10,6 +10,8 @@
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
 
+#define FireAnimSpeed 0.01
+
 ModuleContinue::ModuleContinue() {
 	//Number animation-------------------------------------------------------------
 	for (int i = 0; i < 10; ++i) {
@@ -26,7 +28,7 @@ ModuleContinue::ModuleContinue() {
 		else
 			fireAnim.PushBack({ 32 * (i - 8), 128, 32, 32 });
 	}
-	fireAnim.speed = 0.1f;
+	fireAnim.speed = FireAnimSpeed;
 }
 
 ModuleContinue:: ~ModuleContinue() {}
@@ -65,10 +67,13 @@ update_status ModuleContinue::Update() {
 	current_time = SDL_GetTicks() - start_time;
 	//Fire--------------------------------------------------------------------------
 	fireAnim.GetCurrentFrame();
-	for (int i = 0; i < 7; --i) {
-		App->render->Blit(continueTex, 21 + 32*i, 96, &fireAnim.AddFrame(-i), 1.0f);
+	for (float i = 0; i < 7; ++i) {
+		fireAnim.speed = (float)FireAnimSpeed + 0.01f*(7.00f- i);
+		App->render->Blit(continueTex, 21 + 32*i, 96, &fireAnim.GetCurrentFrame(), 1.0f);
+		
 	}
-	App->render->Blit(continueTex, 253, 96, &fireAnim.AddFrame(-7), 1.0f);
+	fireAnim.speed = (float)FireAnimSpeed  ;
+	App->render->Blit(continueTex, 253, 96, &fireAnim.GetCurrentFrame(), 1.0f);
 	//-----------------------------------------------------------------------------
 	return UPDATE_CONTINUE;
 }
