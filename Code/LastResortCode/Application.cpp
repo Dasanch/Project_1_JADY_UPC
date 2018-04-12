@@ -12,6 +12,7 @@
 #include "ModuleNeoGeo.h"
 #include "Module2lvlScene.h"
 #include "ModuleGameOver.h"
+#include "ModuleContinue.h"
 
 
 Application::Application()
@@ -26,8 +27,9 @@ Application::Application()
 	modules[7] = player = new ModulePlayer();
 	modules[8] = GameTitle = new ModuleGameTitle();
 	modules[9] = scene_ready = new ModuleStageReady();
-	modules[10] = gameover = new ModuleGameOver();
-	modules[11] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
+	modules[10] = scene_gameover = new ModuleGameOver();
+	modules[11] = scene_continue = new ModuleContinue();
+	modules[12] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }	
 
@@ -46,8 +48,8 @@ bool Application::Init()
 	background->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
-	gameover->Disable();
-	audio->Disable();
+	scene_gameover->Disable();
+	scene_continue->Disable();
 	//GameTitle->Disable();//NeoGeoModule goes first
 	scene_lvl2->Disable();
 
