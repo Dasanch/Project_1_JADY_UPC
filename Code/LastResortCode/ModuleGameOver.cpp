@@ -12,7 +12,6 @@
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
-#define BLACK_METAL_ALPHA 255
 
 ModuleGameOver::ModuleGameOver() {
 	//White Rect
@@ -54,7 +53,7 @@ bool ModuleGameOver::Start() {
 	init_time = SDL_GetTicks(); 
 	whiteAlpha = MIN_ALPHA;
 	blackAlpha = MAX_ALPHA;
-	black_go_Alpha = BLACK_METAL_ALPHA;
+	black_go_Alpha = MAX_ALPHA;
 	//textures-----------------------------------------------------------------------
 	goTex = App->textures->Load("Assets/GameOver.png");
 	//audios------------------------------------------------------------------------
@@ -87,7 +86,7 @@ update_status ModuleGameOver::Update() {
 	else {
 		App->render->Blit(goTex, 35, 46, &metal_go_rect, 1.0);
 
-		black_go_Alpha = BLACK_METAL_ALPHA - (current_time - 2800) / (2000 / 255);
+		black_go_Alpha = MAX_ALPHA - (current_time - 2800) / (2000 / 255);
 		if (black_go_Alpha < MIN_ALPHA) {
 			black_go_Alpha = MIN_ALPHA;
 		}
