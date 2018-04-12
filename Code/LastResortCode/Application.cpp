@@ -24,10 +24,10 @@ Application::Application()
 	modules[5] = background = new ModuleBackground();
 	modules[6] = scene_lvl2 = new Module2lvlScene();
 	modules[7] = player = new ModulePlayer();
-	modules[8] = fade = new ModuleFadeToBlack();
-	modules[9] = GameTitle = new ModuleGameTitle();
-	modules[10] = scene_ready = new ModuleStageReady();
-	modules[11] = gameover = new ModuleGameOver();
+	modules[8] = GameTitle = new ModuleGameTitle();
+	modules[9] = scene_ready = new ModuleStageReady();
+	modules[10] = gameover = new ModuleGameOver();
+	modules[11] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 	//modules[10] = neogeoScene = new ModuleNeoGeo();
 }	
 

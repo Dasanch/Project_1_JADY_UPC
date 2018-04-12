@@ -453,7 +453,7 @@ update_status ModuleBackground::Update()
 	}
 	//pass to game over
 	if (App->input->keyboard[SDL_SCANCODE_G]) {
-		App->fade->FadeToBlack(this, App->gameover, 2.8f); 
+		App->fade->FadeToBlack(this, App->gameover, 0.0); 
 	}
 
 	return UPDATE_CONTINUE;

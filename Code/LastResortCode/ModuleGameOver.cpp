@@ -12,6 +12,7 @@
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
+#define BLACK_METAL_ALPHA 255
 
 ModuleGameOver::ModuleGameOver() {
 	//White Rect
@@ -39,10 +40,11 @@ ModuleGameOver::ModuleGameOver() {
 	metal_go_rect.y = 320;
 	metal_go_rect.w = 234;
 	metal_go_rect.h = 132;
-	//White Metal GameOver
-
-	whiteAlpha = MIN_ALPHA;
-	white_goAlpha = MIN_ALPHA;
+	//Black Metal GameOver
+	black_metal_go_rect.x = 260;
+	black_metal_go_rect.y = 160;
+	black_metal_go_rect.w = 234;
+	black_metal_go_rect.h = 132;
 }
 ModuleGameOver:: ~ModuleGameOver() {}
 
@@ -50,10 +52,11 @@ bool ModuleGameOver::Start() {
 	LOG("Loading ModuleGameOver assets");
 	bool ret = true;
 	init_time = SDL_GetTicks(); 
+	whiteAlpha = MIN_ALPHA;
+	blackAlpha = MAX_ALPHA;
+	black_go_Alpha = BLACK_METAL_ALPHA;
 	//textures-----------------------------------------------------------------------
 	goTex = App->textures->Load("Assets/GameOver.png");
-	white_goTex = App->textures->Load("Assets/WhiteGameOver.png");
-	SDL_SetTextureBlendMode(white_goTex, SDL_BLENDMODE_ADD);
 	//audios------------------------------------------------------------------------
 
 	//modules-----------------------------------------------------------------------
@@ -67,7 +70,6 @@ bool ModuleGameOver::CleanUp() {
 	LOG("Unloading ModuleGameOver assets");
 	//textures----------------------------------------------------------------------
 	App->textures->Unload(goTex);
-	App->textures->Unload(white_goTex);
 	//audios------------------------------------------------------------------------
 
 	//modules-----------------------------------------------------------------------
@@ -79,33 +81,63 @@ bool ModuleGameOver::CleanUp() {
 update_status ModuleGameOver::Update() {
 	//Timer---------------------------------------------------------------------
 	current_time = SDL_GetTicks() - init_time;
-	//Black Rect (background)---------------------------------------------------
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(App->render->renderer, &black_rect);
-	//Normal GameOver-----------------------------------------------------------
-	App->render->Blit(goTex, 19, 32, &go_rect, 1.0);
-	//Metal GameOver-------------------------------------------------------------
-	/*App->render->Blit(goTex, 35, 46, , 1.0);*/
+	//Normal GameOver , Metal GameOve & Black Metal GameOverr---------------------
+	if (current_time < 2800)
+		App->render->Blit(goTex, 19, 32, &go_rect, 1.0);
+	else {
+		App->render->Blit(goTex, 35, 46, &metal_go_rect, 1.0);
 
-	//White GameOver------------------------------------------------------------
-	SDL_SetTextureAlphaMod(white_goTex, (int) white_goAlpha);
-	App->render->Blit(white_goTex, 19, 32, &white_go_rect, 1.0);
-	if (white_goAlpha < MAX_ALPHA) {
-		white_goAlpha= white_goAlpha+ 0.9f;
+		black_go_Alpha = BLACK_METAL_ALPHA - (current_time - 2800) / (2000 / 255);
+		if (black_go_Alpha < MIN_ALPHA) {
+			black_go_Alpha = MIN_ALPHA;
+		}
+		SDL_SetTextureAlphaMod(goTex, black_go_Alpha);
+		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
+		App->render->Blit(goTex, 35, 46, &black_metal_go_rect, 1.0);
+		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+		SDL_SetTextureAlphaMod(goTex, 255);
 	}
+		
+
+	//Black -------------------------------------------------------------------
+	if (current_time >= 0 && current_time < 1400) {
+
+		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, (int)blackAlpha);
+		SDL_RenderFillRect(App->render->renderer, &black_rect);
+		blackAlpha = MAX_ALPHA - (current_time) / (1400 / 255);
+		if (blackAlpha < MIN_ALPHA) {
+			blackAlpha = MIN_ALPHA;
+		}
+	}
+
+
 	//White Rect----------------------------------------------------------------
-	if (current_time >= 1400) {
+
+	if (current_time >= 1400 && current_time < 2800) {
+		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
 		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, (int)whiteAlpha);
 		SDL_RenderFillRect(App->render->renderer, &white_rect);
-		whiteAlpha = whiteAlpha + 4.0f;
+		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+
+		whiteAlpha = (current_time - 1400) / (1400 / 255);
 		if (whiteAlpha > MAX_ALPHA) {
 			whiteAlpha = MAX_ALPHA;
 		}
 	}
+	if (current_time >= 2800  && current_time < 4200) {
+		
+		SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, (int)whiteAlpha);
+		SDL_RenderFillRect(App->render->renderer, &white_rect);
+		
+		whiteAlpha = MAX_ALPHA - (current_time - 2800)/(1400/255);
+		if (whiteAlpha < MIN_ALPHA) {
+			whiteAlpha = MIN_ALPHA;
+		}
+	}
 	//---------------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_G]) {
+	if (App->input->keyboard[SDL_SCANCODE_G] && current_time > 7400) {
 		App->fade->FadeToBlack(this, App->background, 0.5f);
 	}
-
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);// Defect RenderDraColor
 	return UPDATE_CONTINUE;
 }

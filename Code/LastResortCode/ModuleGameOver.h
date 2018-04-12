@@ -19,12 +19,13 @@ private:
 	int current_time = 0;
 	int init_time = 0;
 	float whiteAlpha;
-	float white_goAlpha;
+	float blackAlpha;
+	float black_go_Alpha;
 	SDL_Texture* goTex = nullptr;
-	SDL_Texture* white_goTex = nullptr;
 	SDL_Rect white_rect;
 	SDL_Rect black_rect;
 	SDL_Rect metal_go_rect;
+	SDL_Rect black_metal_go_rect;
 	SDL_Rect white_go_rect;
 	SDL_Rect go_rect;
 
