@@ -6,7 +6,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "SDL\include\SDL.h"
-
+typedef struct _Mix_Music Mix_Music;
 
 
 
@@ -28,6 +28,7 @@ public:
 
 	SDL_Rect  BckSpamRect;
 	SDL_Rect  BckSpamRect2;
+	Mix_Music* lvl2Music = nullptr;
 
 };
 
