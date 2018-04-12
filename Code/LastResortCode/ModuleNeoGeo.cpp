@@ -27,8 +27,9 @@ bool ModuleNeoGeo::Start()
 	bool ret = true;
 
 	neogeoTx = App->textures->Load("Assets/NeoGeo/NeoGeoLogo.png");
-	//snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
-	//proGearSpecTx = App->textures->Load("Assets/NeoGeo/ProGearSpec.png");
+	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
+	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
+	
 
 	neogeoAnim.PushBack({ 0,1415,227,40 });
 	neogeoAnim.PushBack({ 0,1371,227,40 });
@@ -77,9 +78,22 @@ bool ModuleNeoGeo::Start()
 	neogeoAnim.PushBack({ 0,88,227,35 });
 	neogeoAnim.PushBack({ 0,44,227,38 });
 	neogeoAnim.PushBack({ 0,0,227,40 });
-
 	neogeoAnim.loop = false;
 	neogeoAnim.speed = neogeoAnimSpeed;
+
+	proGearSpecRect.x =   0;
+	proGearSpecRect.y =   0;
+	proGearSpecRect.w = 133;
+	proGearSpecRect.h =  30;
+	blackCoverRect.x = 0;
+	blackCoverRect.y = 32;
+	blackCoverRect.w = 133;
+	blackCoverRect.h = 14;
+
+	snkAnim.PushBack({ 0,0,72,19 });
+
+	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
+	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);
 
 	return ret;
 }
@@ -101,8 +115,30 @@ update_status ModuleNeoGeo::Update()
 	}
 	SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
 
+	//When the neogeo animation has finished, show this
+	if (neogeoAnim.current_frame >= 46)//46 = last frame
+	{
+		//Render Max 330 Pro Gear Spec
+		App->render->Blit(proGearSpecTx, 89, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
+		//Render the rectangle on top of it
+		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
+		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
+		cover01PosX++;
+		cover02PosX++;
+	}
+
+	//When the Max 330 Pro Gear Spec appears
+	//!TO CHANGE: Correct condition
+	if(neogeoAnim.current_frame >= 46)
+	{
+		App->render->Blit(snkTx, 116, 162, &snkAnim.GetCurrentFrame(), 0.0f);
+	}
+
+
 	//Render NeoGeo logo
-	App->render->Blit(neogeoTx, SCREEN_WIDTH/2 - NEOGEOWIDTH / 2, 50, &neogeoAnim.GetCurrentFrame(), 0.0f);
+	App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+
+
 
 	return UPDATE_CONTINUE;
 }
@@ -110,8 +146,10 @@ bool ModuleNeoGeo::CleanUp() {
 	LOG("Unloading NeoGeo scene");
 
 	App->textures->Unload(neogeoTx);
-	//App->textures->Unload(snkTx);
-	//App->textures->Unload(proGearSpecTx);
+	App->textures->Unload(snkTx);
+	App->textures->Unload(proGearSpecTx);
+	App->audio->ControlMUS(neogeoMusic, STOP_AUDIO);
+	App->audio->UnloadMUS(neogeoMusic);
 
 	return true;
 }

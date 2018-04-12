@@ -8,6 +8,7 @@
 #define NEOGEOWIDTH 227
 
 struct SDL_Texture;
+typedef struct _Mix_Music Mix_Music;
 
 class ModuleNeoGeo : public Module
 {
@@ -20,17 +21,23 @@ public:
 	bool CleanUp();
 
 public:
+	Mix_Music * neogeoMusic = nullptr;
 
+	//NEO GEO
 	SDL_Texture * neogeoTx = nullptr;
-	SDL_Rect neogeoRect;
 	Animation neogeoAnim;
 	float neogeoAnimSpeed = 0.5f;
 
+	//Max 330 Pro Gear Spec
+	SDL_Texture * proGearSpecTx = nullptr;
 	SDL_Rect proGearSpecRect;
+	SDL_Rect blackCoverRect;
+	int cover01PosX = 89;
+	int cover02PosX = 89;
 
-	//SDL_Texture * snkTx = nullptr;
-	//SDL_Texture * proGearSpecTx = nullptr;
-	//SDL_Rect snkRect;
+	//SNK
+	SDL_Texture * snkTx = nullptr;
+	Animation snkAnim;
 
 	int currentFade = 255;
 };
