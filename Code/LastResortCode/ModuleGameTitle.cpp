@@ -69,6 +69,8 @@ ModuleGameTitle::ModuleGameTitle()
 	A2.PushBack({ 23,0,13,38 });
 	A2.PushBack({ 36,0,13,45 });
 	A2.PushBack({ 49,0,13,56 });
+	A2.PushBack({ 62,0,13,63 });
+	A2.PushBack({ 62,0,13,63 });
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
