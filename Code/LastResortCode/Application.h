@@ -4,7 +4,7 @@
 #include "Globals.h"
 
 #define NUM_MODULES 14
-
+class Module;
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
@@ -17,8 +17,6 @@ class ModuleGameTitle;
 class ModuleStageReady;
 class Module2lvlScene;
 class ModuleGameOver;
-class ModuleContinue;
-class Module;
 class ModuleContinue;
 class ModuleNeoGeo;
 

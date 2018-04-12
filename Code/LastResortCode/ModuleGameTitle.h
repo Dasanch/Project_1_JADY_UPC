@@ -24,8 +24,9 @@ public:
 	SDL_Rect LastResortRect;
 
 	Animation L1;
+	Animation A2;
 	
-	int current_frame = 37;
+	float current_frame;
 };
 
 #endif // __MODULEGAMETITLE_H__

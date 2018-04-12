@@ -2,7 +2,11 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 47
+
+#define MAX_FRAMES 100
+
+
+
 
 class Animation
 {
@@ -52,6 +56,13 @@ public:
 	{
 		return frames[(int)current_frame];
 	}
+
+	SDL_Rect& GetFrameEx()
+	{
+		float frame = current_frame + speed;
+		return frames[(int)frame];
+	}
+
 	SDL_Rect& AddFrame(uint added_frames)
 	{
 		uint i = 0;
