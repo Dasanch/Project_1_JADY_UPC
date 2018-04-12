@@ -1,5 +1,5 @@
 #ifndef _ModuleContinue_H_
-#define _ModuleGameOver_H_
+#define _ModuleContinue_H_
 #include "Module.h"
 #include "Globals.h"
 struct SDL_Texture;
