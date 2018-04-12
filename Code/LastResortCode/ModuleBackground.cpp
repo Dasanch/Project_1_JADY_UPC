@@ -306,6 +306,17 @@ update_status ModuleBackground::Update()
 
 	int speed = 2;
 
+	/*if (App->render->camera.x > ) {
+		//App->render->camera.y -= speed;
+	}*/
+
+	if (App->render->camera.x < -320)
+	{
+		App->render->camera.y=-100;
+
+	}
+	App->render->camera.y;
+
 	//Camera movement
 	if (App->render->camera.x > -((4400 / foregndSpeed) * SCREEN_SIZE))
 	{
