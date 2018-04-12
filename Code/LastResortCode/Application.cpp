@@ -24,12 +24,12 @@ Application::Application()
 	modules[5] = background = new ModuleBackground();
 	modules[6] = scene_lvl2 = new Module2lvlScene();
 	modules[7] = player = new ModulePlayer();
-	modules[8] = GameTitle = new ModuleGameTitle();
-	modules[9] = scene_ready = new ModuleStageReady();
-	modules[10] = gameover = new ModuleGameOver();
-	modules[11] = cont = new ModuleContinue();
-	modules[12] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
-	//modules[10] = neogeoScene = new ModuleNeoGeo();
+	modules[8] = neogeoScene = new ModuleNeoGeo();
+	modules[9] = GameTitle = new ModuleGameTitle();
+	modules[10] = scene_ready = new ModuleStageReady();
+	modules[11] = gameover = new ModuleGameOver();
+	modules[12] = cont = new ModuleContinue();
+	modules[13] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 }	
 
 Application::~Application()
@@ -44,13 +44,13 @@ bool Application::Init()
 
 
 	// Disable all stopped modules here
-	background->Disable();
+	audio->Disable();
+	GameTitle->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
+	background->Disable();
+	scene_lvl2->Disable();
 	scene_ready->Disable();
 	gameover->Disable();
-	audio->Disable();
-	//GameTitle->Disable();//NeoGeoModule goes first
-	scene_lvl2->Disable();
 
 	// Disable the map that you do not start with
 	// ---

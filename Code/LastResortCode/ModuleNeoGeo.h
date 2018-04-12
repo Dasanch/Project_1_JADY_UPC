@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "Globals.h"
 
+#define NEOGEOWIDTH 227
+
 struct SDL_Texture;
 
 class ModuleNeoGeo : public Module
@@ -20,12 +22,13 @@ public:
 public:
 
 	SDL_Texture * neogeoTx = nullptr;
-	SDL_Texture * snkTx = nullptr;
-	SDL_Texture * proGearSpecTx = nullptr;
 	SDL_Rect neogeoRect;
-	SDL_Rect snkRect;
-	SDL_Rect proGearSpecRect;
+	Animation neogeoAnim;
 
+	//SDL_Texture * snkTx = nullptr;
+	//SDL_Texture * proGearSpecTx = nullptr;
+	//SDL_Rect snkRect;
+	//SDL_Rect proGearSpecRect;
 };
 
 #endif // __MODULENEOGEO_H__
