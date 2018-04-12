@@ -6,8 +6,9 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleBackground.h" //REMEMBER DELETE
 #include "ModuleGameOver.h"
+#include "ModuleContinue.h"
+#include "ModuleGameTitle.h"
 
 
 #define MAX_ALPHA 255
@@ -53,13 +54,10 @@ bool ModuleGameOver::Start() {
 	start_time = SDL_GetTicks(); 
 	whiteAlpha = MIN_ALPHA;
 	blackAlpha = MAX_ALPHA;
-	black_go_Alpha = MAX_ALPHA;
+	black_go_Alpha = MIN_ALPHA;
 	//textures-----------------------------------------------------------------------
 	goTex = App->textures->Load("Assets/GameOver.png");
-	//audios------------------------------------------------------------------------
 
-	//modules-----------------------------------------------------------------------
-	App->player->Disable();
 	//------------------------------------------------------------------------------
 	return ret;
 }
@@ -70,9 +68,9 @@ bool ModuleGameOver::CleanUp() {
 	//textures----------------------------------------------------------------------
 	App->textures->Unload(goTex);
 	//audios------------------------------------------------------------------------
-
-	//modules-----------------------------------------------------------------------
-
+	if(App->scene_continue->continue_and_go != nullptr)
+	App->audio->ControlMUS(App->scene_continue->continue_and_go, STOP_AUDIO);
+	App->audio->UnloadMUS(App->scene_continue->continue_and_go);
 	//------------------------------------------------------------------------------
 	return true;
 }
@@ -83,16 +81,14 @@ update_status ModuleGameOver::Update() {
 	//Normal GameOver , Metal GameOve & Black Metal GameOverr---------------------
 	if (current_time < 2800)
 		App->render->Blit(goTex, 19, 32, &go_rect, 1.0);
-	else {
-		App->render->Blit(goTex, 35, 46, &metal_go_rect, 1.0);
-
-		black_go_Alpha = MAX_ALPHA - (current_time - 2800) / (2000 / 255);
-		if (black_go_Alpha < MIN_ALPHA) {
-			black_go_Alpha = MIN_ALPHA;
+	else if(current_time >= 3200) {
+		black_go_Alpha = MIN_ALPHA + (current_time - 3200) / (4000 / 255);
+		if (black_go_Alpha > MAX_ALPHA) {
+			black_go_Alpha = MAX_ALPHA;
 		}
 		SDL_SetTextureAlphaMod(goTex, black_go_Alpha);
 		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_ADD);
-		App->render->Blit(goTex, 35, 46, &black_metal_go_rect, 1.0);
+		App->render->Blit(goTex, 35, 46, &metal_go_rect, 1.0);
 		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
 		SDL_SetTextureAlphaMod(goTex, 255);
 	}
@@ -134,9 +130,9 @@ update_status ModuleGameOver::Update() {
 		}
 	}
 	//---------------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_G] && current_time > 7400) {
-		App->fade->FadeToBlack(this, App->background, 0.5f);
+	if (current_time> 7700) {
+		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
 	}
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);// Defect RenderDraColor
+	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 0.1f);// Defect RenderDraColor
 	return UPDATE_CONTINUE;
 }

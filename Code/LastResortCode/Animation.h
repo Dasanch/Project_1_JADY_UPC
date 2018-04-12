@@ -14,6 +14,7 @@ public:
 
 	bool invert = false;
 	bool first_loop = true;
+	bool finished = false;
 public:
 
 	void PushBack(const SDL_Rect& rect)
@@ -39,8 +40,13 @@ public:
 
 	SDL_Rect& GetFrameEx()
 	{
-		float frame = current_frame + speed;
-		return frames[(int)frame];
+		current_frame += speed;
+		if (current_frame >= last_frame) {
+			current_frame = 0;
+			finished = true;
+			return frames[last_frame -1];
+		}
+		return frames[(int)current_frame];
 	}
 
 	SDL_Rect& AddFrame(uint added_frames)
