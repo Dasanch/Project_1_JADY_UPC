@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-<<<<<<< HEAD
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
@@ -64,53 +63,12 @@ update_status ModuleContinue::Update()
 
 
 
-																											  // TODO 2: make so pressing SPACE other stage is loaded
+																											// TODO 2: make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(this, App->GameTitle, 0.5f); //this=scene_ready
+		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
 	}
 
 
-=======
-#include "ModuleAudio.h"
-#include "ModulePlayer.h" //Remove
-#include "ModuleInput.h"
-#include "ModuleFadeToBlack.h"
-#include "ModuleBackground.h"
-#include "ModuleGameOver.h"
-#include "ModuleContinue.h"
-
-ModuleContinue::ModuleContinue() {
-
-}
-ModuleContinue:: ~ModuleContinue() {}
-
-bool ModuleContinue::Start() {
-	LOG("Loading ModuleContinue assets");
-	bool ret = true;
-	//textures-----------------------------------------------------------------------
-
-	//audios------------------------------------------------------------------------
-
-	//modules-----------------------------------------------------------------------
-	App->player->Disable();
-	//------------------------------------------------------------------------------
-	return ret;
-}
-
-bool ModuleGameOver::CleanUp() {
-	LOG("Unloading ModuleContinue assets");
-	//textures----------------------------------------------------------------------
-
-	//audios------------------------------------------------------------------------
-
-	//modules-----------------------------------------------------------------------
-
-	//------------------------------------------------------------------------------
-	return true;
-}
-
-update_status ModuleGameOver::Update() {
->>>>>>> e76574445e14842f0932ccecef5ce952dd97c6d2
 
 	return UPDATE_CONTINUE;
 }
