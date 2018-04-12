@@ -16,10 +16,18 @@ public:
 	update_status Update();
 	bool CleanUp();
 private:
-	int whiteAlpha;
-	SDL_Texture* gameover = nullptr;
-	SDL_Rect white;
-	Animation gameOverAnim;
+	int current_time = 0;
+	int start_time = 0;
+	float whiteAlpha;
+	float blackAlpha;
+	float black_go_Alpha;
+	SDL_Texture* goTex = nullptr;
+	SDL_Rect white_rect;
+	SDL_Rect black_rect;
+	SDL_Rect metal_go_rect;
+	SDL_Rect black_metal_go_rect;
+	SDL_Rect white_go_rect;
+	SDL_Rect go_rect;
 
 };
 #endif // !_ModuleGameOver_H_

@@ -12,7 +12,8 @@
 #include "ModuleInput.h"
 #include "ModuleStageReady.h"
 #include "ModuleAudio.h"
-#include "ModuleGameOver.h" //delete (provitional)
+#include "ModuleGameOver.h"//delete (provitional)
+#include "ModuleContinue.h" 
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -453,8 +454,12 @@ update_status ModuleBackground::Update()
 	}
 	//pass to game over
 	if (App->input->keyboard[SDL_SCANCODE_G]) {
-		App->fade->FadeToBlack(this, App->gameover, 0.5f); 
+		App->fade->FadeToBlack(this, App->scene_gameover, 0.0); 
 	}
+	if (App->input->keyboard[SDL_SCANCODE_C]) {
+		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
+	}
+
 
 	return UPDATE_CONTINUE;
 }

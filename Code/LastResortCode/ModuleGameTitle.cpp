@@ -68,7 +68,7 @@ ModuleGameTitle::ModuleGameTitle()
 	A2.PushBack({ 11,0,12,24 });
 	A2.PushBack({ 23,0,13,38 });
 	A2.PushBack({ 36,0,13,45 });
-	A2.PushBack({ 36,0,13,45 });
+	A2.PushBack({ 49,0,13,56 });
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
@@ -84,7 +84,7 @@ bool ModuleGameTitle:: Start()
 update_status ModuleGameTitle::Update() {
 
 	
-	App->render->Blit(L1Texture, 10*SCREEN_SIZE, 30, &L1.frames[(int)current_frame], 0.0f);
+	App->render->Blit(L1Texture, 10, 30, &L1.frames[(int)current_frame], 0.0f);
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1 && current_frame>0)
 	{
 		current_frame -= 0.2f;
