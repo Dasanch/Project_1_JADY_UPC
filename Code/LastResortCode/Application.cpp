@@ -16,16 +16,16 @@
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = audio = new ModuleAudio();
-	modules[5] = background = new ModuleBackground();
-	modules[6] = scene_lvl2 = new Module2lvlScene();
-	modules[7] = player = new ModulePlayer();
-	modules[8] = neogeoScene = new ModuleNeoGeo();
-	modules[9] = GameTitle = new ModuleGameTitle();
+	modules [0] = window = new ModuleWindow();
+	modules [1] = render = new ModuleRender();
+	modules [2] = input = new ModuleInput();
+	modules [3] = textures = new ModuleTextures();
+	modules [4] = audio = new ModuleAudio();
+	modules [5] = background = new ModuleBackground();
+	modules [6] = scene_lvl2 = new Module2lvlScene();
+	modules [7] = player = new ModulePlayer();
+	modules [8] = neogeoScene = new ModuleNeoGeo();
+	modules [9] = GameTitle = new ModuleGameTitle();
 	modules[10] = scene_ready = new ModuleStageReady();
 	modules[11] = scene_gameover = new ModuleGameOver();
 	modules[12] = scene_continue = new ModuleContinue();
@@ -52,7 +52,6 @@ bool Application::Init()
 	scene_ready->Disable();
 	scene_gameover->Disable();
 	scene_continue->Disable();
-	//GameTitle->Disable();//NeoGeoModule goes first
 
 	// Disable the map that you do not start with
 	// ---
