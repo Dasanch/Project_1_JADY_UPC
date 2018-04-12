@@ -63,8 +63,15 @@ update_status Module2lvlScene::Update() {
 
 	return UPDATE_CONTINUE;
 }
+
 bool Module2lvlScene::CleanUp() {
+
+	LOG("Unloading ready scene");
 	App->render->camera.x = 0;
 	App->player->Disable();
+
+	App->textures->Unload(lvl2Text);
+	App->textures->Unload(lvl2ground);
+	App->textures->Unload(BckSpam);
 	return true;
 }

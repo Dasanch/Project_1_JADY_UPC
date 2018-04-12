@@ -47,6 +47,7 @@ bool Application::Init()
 	background->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	scene_ready->Disable();
+	cont->Disable();
 	gameover->Disable();
 	audio->Disable();
 	//GameTitle->Disable();//NeoGeoModule goes first

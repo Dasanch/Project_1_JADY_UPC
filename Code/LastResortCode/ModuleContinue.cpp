@@ -17,8 +17,19 @@
 ModuleContinue::ModuleContinue()
 {
 
-	// BackgroundsRect  
+	// BackgroundsRect
 
+	//Continue
+	BGroundCont.x = 0;
+	BGroundCont.y = 64;
+	BGroundCont.w = 240;
+	BGroundCont.h = 32;
+
+	//Back Black (it's white)
+	BBlack.x = 0;
+	BBlack.y = 0;
+	BBlack.w = SCREEN_WIDTH;
+	BBlack.h = SCREEN_HEIGHT;
 
 }
 
@@ -33,7 +44,7 @@ bool ModuleContinue::Start()
 
 	backgroundCont = App->textures->Load("Assets/continue.png");
 
-	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(App->render->renderer, 255, 255, 255, 255);
 	SDL_RenderFillRect(App->render->renderer, &BBlack);
 
 	App->player->Disable();
@@ -43,10 +54,10 @@ bool ModuleContinue::Start()
 
 bool ModuleContinue::CleanUp()
 {
-	// TODO 5: Remove all memory leaks
+	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player->Disable(); // TODO 1: Disable the player module
+	App->player->Disable(); //Disable the player module
 	App->textures->Unload(backgroundCont);
 	return true;
 }
@@ -63,7 +74,7 @@ update_status ModuleContinue::Update()
 
 
 
-																											// TODO 2: make so pressing SPACE other stage is loaded
+	// make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
 		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
 	}
