@@ -8,6 +8,7 @@
 #include "ModuleRender.h"
 #include "SDL\include\SDL.h"
 #include "ModuleContinue.h"
+#include "ModuleAudio.h"
 
 Module2lvlScene::Module2lvlScene()
 {
@@ -32,7 +33,9 @@ bool Module2lvlScene::Start()
 	lvl2Text = App->textures->Load("Assets/lvl2/Background_2.png");
 	lvl2ground = App->textures->Load("Assets/lvl2/Foreground_2.png");
 	BckSpam= App->textures->Load("Assets/lvl2/Backgroundlvl2Spritesheet.png");
-
+	//audios------------------------------------------------------------------------
+	lvl2Music = App->audio->LoadMUS("Assets/lvl2/04-THE-RUINS-OF-METRO-STAGE-2-_-TYRANNICAL-BOSS-2-.ogg");
+	App->audio->ControlMUS(lvl2Music, PLAY_AUDIO);
 	return ret;
 }
 update_status Module2lvlScene::Update() {
@@ -71,5 +74,8 @@ bool Module2lvlScene::CleanUp() {
 	App->textures->Unload(lvl2Text);
 	App->textures->Unload(lvl2ground);
 	App->textures->Unload(BckSpam);
+	//audios------------------------------------------------------------------------
+	App->audio->ControlMUS(lvl2Music, STOP_AUDIO);
+	App->audio->UnloadMUS(lvl2Music);
 	return true;
 }

@@ -20,7 +20,7 @@ public:
 
 public:
 	iPoint position;
-	float const movementSpeed = 1;
+	float const movementSpeed = 2;
 
 	SDL_Texture* PlayerTexture = nullptr;
 	Animation shipPlayer1;

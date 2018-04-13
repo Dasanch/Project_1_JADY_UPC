@@ -3,12 +3,14 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h" //Remove
+#include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleBackground.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
+#include "ModuleGameTitle.h"
+
 
 #define MAX_ALPHA 255
 #define MIN_ALPHA 0
@@ -144,5 +146,7 @@ update_status ModuleContinue::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]){
 		App->fade->FadeToBlack(this, App->background, 0.5f);
 	}
+
 	return UPDATE_CONTINUE;
 }
+

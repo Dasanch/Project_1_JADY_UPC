@@ -2,15 +2,21 @@
 #define __ANIMATION_H__
 
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 47
+
+#define MAX_FRAMES 100
+
+
+
 
 class Animation
 {
 public:
+	bool loop = true;
 	float speed = 1.0f;
 	SDL_Rect frames[MAX_FRAMES];
 	float current_frame = 0;
 	int last_frame = 0;
+	int loops = 0;
 
 	bool invert = false;
 	bool first_loop = true;
@@ -29,8 +35,22 @@ public:
 	{
 		current_frame += speed;
 		if(current_frame >= last_frame)
-			current_frame = 0;
+		{
+			current_frame = (loop) ? 0.0f : last_frame - 1;
+			loops++;
+		}
+
 		return frames[(int)current_frame];
+	}
+
+	bool Finished() const
+	{
+		return loops > 0;
+	}
+
+	void Reset()
+	{
+		current_frame = 0;
 	}
 
 	SDL_Rect& GetFrame()
