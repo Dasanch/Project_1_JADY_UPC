@@ -73,7 +73,7 @@ bool ModuleContinue::Start() {
 	//animations--------------------------------------------------------------------
 	numbersAnim.current_frame = 9;
 	for (int x = 0; x < 8; ++x) {
-		fireAnim[x].current_frame = 0;
+		fireAnim[x].Reset();
 		fireAnim[x].finished = false;
 	}
 	//------------------------------------------------------------------------------

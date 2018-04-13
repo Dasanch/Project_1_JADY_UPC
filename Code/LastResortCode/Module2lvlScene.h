@@ -7,9 +7,6 @@
 #include "Globals.h"
 #include "SDL\include\SDL.h"
 typedef struct _Mix_Music Mix_Music;
-
-
-
 class Module2lvlScene : public Module
 {
 public:

@@ -82,7 +82,7 @@ update_status ModuleGameOver::Update() {
 	if (current_time < 2800)
 		App->render->Blit(goTex, 19, 32, &go_rect, 1.0);
 	else if(current_time >= 3200) {
-		black_go_Alpha = MIN_ALPHA + (current_time - 3200) / (4000 / 255);
+		black_go_Alpha = MIN_ALPHA + (current_time - 3200) / (2000 / 255);
 		if (black_go_Alpha > MAX_ALPHA) {
 			black_go_Alpha = MAX_ALPHA;
 		}
