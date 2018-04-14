@@ -35,7 +35,7 @@
 ModuleBackground::ModuleBackground()
 {
 	frame = 0;
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	for (int i = 1; i < 27; ++i) {
 		randoms[i] = (rand() % 6 + 1);
 	}
