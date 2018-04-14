@@ -23,14 +23,28 @@ public:
 	SDL_Texture * TitleTexture = nullptr;
 	SDL_Texture *L1Texture;
 	SDL_Texture *A2Texture;
-	SDL_Rect LastResortRect;
+	SDL_Texture *S3Texture;
+	SDL_Texture *T4Texture;
+	SDL_Texture *R5Texture;
+	SDL_Texture *E6Texture;
+	SDL_Texture *S7Texture;
+	SDL_Texture *O8Texture;
+	SDL_Texture *R9Texture;
+
+	//SDL_Rect LastResortRect;
 
 	Animation L1;
 	Animation A2;
-	
-	float current_frame;
-	float currenA2 = 0;
+	Animation S3;
+	Animation T4;
+	Animation R5;
+	Animation E6;
+	Animation S7;
+	Animation O8;
+	Animation R9;
 
+	unsigned int time;
+	float speed = 0.3f;
 	//audios
 	Mix_Music* Titlemusic = nullptr;
 };
