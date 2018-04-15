@@ -90,7 +90,22 @@ bool ModuleNeoGeo::Start()
 	blackCoverRect.w = 133;
 	blackCoverRect.h = 14;
 
-	snkAnim.PushBack({ 0,0,72,19 });
+	//SNK LOGO
+	for(int i = 0; i < snkHeight*6; i += snkHeight)
+	{
+		for(int j = 0; j < snkWidth*3; j += snkWidth)
+		{
+			snkAnim.PushBack({ j, i, snkWidth, snkHeight});
+			//If we reach the last snk logo, we exit the loop
+			if(i == snkHeight*5 && j == 0)
+			{
+				break;
+			}
+		}
+	}
+	snkAnim.loop = false;
+	snkAnim.speed = 0.5f;
+
 
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
 	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);

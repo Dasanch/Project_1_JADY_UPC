@@ -26,7 +26,7 @@ public:
 	//NEO GEO
 	SDL_Texture * neogeoTx = nullptr;
 	Animation neogeoAnim;
-	float neogeoAnimSpeed = 0.5f;
+	const float neogeoAnimSpeed = 0.5f;
 
 	//Max 330 Pro Gear Spec
 	SDL_Texture * proGearSpecTx = nullptr;
@@ -39,7 +39,10 @@ public:
 	//SNK
 	SDL_Texture * snkTx = nullptr;
 	Animation snkAnim;
+	const int snkWidth = 72;
+	const int snkHeight = 19;
 
+	//Transition from white to black
 	int currentFade = 255;
 };
 
