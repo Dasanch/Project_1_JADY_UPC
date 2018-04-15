@@ -190,7 +190,6 @@ update_status ModuleNeoGeo::Update()
 		//Render
 		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
 		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
-		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
 		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
 		break;
 	case SNK:
