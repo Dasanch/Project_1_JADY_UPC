@@ -6,6 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleFadeToBlack.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
@@ -30,6 +31,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
+	//We add a collider to the player
+	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
+	playerColPosX = position.x;
+	playerColPosY = position.y;
 
 	return ret;
 }
@@ -41,6 +46,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
+		playerColPosX -= movementSpeed;
 		if (position.x < 0)
 		{
 			position.x = 0;
@@ -50,6 +56,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
+		playerColPosX += movementSpeed;
 		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
 		{
 			position.x = SCREEN_WIDTH - 32;
@@ -59,6 +66,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
+		playerColPosY -= movementSpeed;
 		if(position.y < 0)
 		{
 			position.y = 0;
@@ -75,6 +83,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
+		playerColPosY += movementSpeed;
 		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
 		{
 			position.y = SCREEN_HEIGHT - 12;
@@ -102,6 +111,11 @@ update_status ModulePlayer::Update()
 			yAxis += keyReleaseSpeed;
 		}
 	}
+
+	//COLLISION
+	//- We update the collider position
+	playerColPosX += 0.5f;//0.5f = tilemap speed
+	playerCol->SetPos(playerColPosX, playerColPosY);
 
 	//RENDER
 	//Check what is the value of the yAxis variable
@@ -157,4 +171,10 @@ bool ModulePlayer::CleanUp()
 
 
 	return true;
+}
+
+//Detect collision with a wall. If so, go back to intro screen.
+void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
+{
+	App->fade->FadeToBlack((Module*)App->background,(Module*)App->GameTitle, 0.5f);
 }

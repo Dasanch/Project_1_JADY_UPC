@@ -29,9 +29,6 @@
 #define streetLightDist 64
 #define roadLightDist 121
 
-
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleBackground::ModuleBackground()
 {
 	frame = 0;
@@ -275,6 +272,9 @@ bool ModuleBackground::Start()
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
 	App->player->position.y = 130;
+	//Static enemy
+	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
+	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
 
 	return ret;
 
@@ -550,6 +550,8 @@ update_status ModuleBackground::Update()
 		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
 	}
 
+	//Static enemy
+	App->render->Blit(staticEnemyTx, 500, 100, NULL, foregndSpeed);
 
 	return UPDATE_CONTINUE;
 }

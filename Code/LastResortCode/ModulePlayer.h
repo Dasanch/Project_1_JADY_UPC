@@ -18,6 +18,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void OnCollision(Collider*, Collider*);
 
 public:
 	iPoint position;
@@ -41,6 +42,10 @@ public:
 		TransitionDown,
 		MaxDown
 	};
+	//Collision
+	Collider* playerCol = nullptr;
+	float playerColPosX;
+	float playerColPosY;
 };
 
 #endif
