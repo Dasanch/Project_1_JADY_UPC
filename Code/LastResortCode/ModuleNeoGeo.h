@@ -26,7 +26,8 @@ public:
 		NeoGeo = 0,
 		Max330ProGearSpecLine1,
 		Max330ProGearSpecLine2,
-		SNK
+		SNK,
+		Finish
 	};
 
 	AnimationStates currentAnimation = NeoGeo;
