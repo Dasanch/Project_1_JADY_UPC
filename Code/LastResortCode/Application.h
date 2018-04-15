@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 14
+#define NUM_MODULES 16
 class Module;
 class ModuleWindow;
 class ModuleInput;
@@ -19,6 +19,8 @@ class Module2lvlScene;
 class ModuleGameOver;
 class ModuleContinue;
 class ModuleNeoGeo;
+class ModuleParticles;
+class ModuleCollision;
 
 
 class Application
@@ -41,6 +43,8 @@ public:
 	Module2lvlScene* scene_lvl2 = nullptr;
 	ModuleGameOver* scene_gameover = nullptr;
 	ModuleContinue* scene_continue = nullptr;
+	ModuleParticles* particles = nullptr;
+	ModuleCollision* collision = nullptr;
 
 public:
 

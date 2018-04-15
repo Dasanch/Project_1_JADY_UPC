@@ -34,6 +34,7 @@ public:
 	SDL_Rect blackCoverRect;
 	int cover01PosX = 89;
 	int cover02PosX = 89;
+	int coverSpeed;
 
 	//SNK
 	SDL_Texture * snkTx = nullptr;
