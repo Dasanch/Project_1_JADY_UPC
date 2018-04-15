@@ -33,9 +33,6 @@ bool ModulePlayer::Start()
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 	//We add a collider to the player
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
-	playerColPosX = position.x;
-	playerColPosY = position.y;
-
 	return ret;
 }
 
@@ -46,31 +43,28 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
-		playerColPosX -= movementSpeed;
-		if (position.x < 0)
-		{
-			position.x = 0;
-		}
+		//if (position.x < App->render->camera.x - SCREEN_WIDTH / 2)
+		//{
+		//	position.x = App->render->camera.x - SCREEN_WIDTH/2;
+		//}
 	}
 	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
-		playerColPosX += movementSpeed;
-		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
-		{
-			position.x = SCREEN_WIDTH - 32;
-		}
+		//if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
+		//{
+		//	position.x = SCREEN_WIDTH - 32;
+		//}
 	}
 	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
-		playerColPosY -= movementSpeed;
-		if(position.y < 0)
-		{
-			position.y = 0;
-		}
+		//if(position.y < 0)
+		//{
+		//	position.y = 0;
+		//}
 		//ANIMATION
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -83,11 +77,10 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
-		playerColPosY += movementSpeed;
-		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
-		{
-			position.y = SCREEN_HEIGHT - 12;
-		}
+		//if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
+		//{
+		//	position.y = SCREEN_HEIGHT - 12;
+		//}
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -114,8 +107,7 @@ update_status ModulePlayer::Update()
 
 	//COLLISION
 	//- We update the collider position
-	playerColPosX += 0.5f;//0.5f = tilemap speed
-	playerCol->SetPos(playerColPosX, playerColPosY);
+	playerCol->SetPos(position.x, position.y);
 
 	//RENDER
 	//Check what is the value of the yAxis variable
@@ -143,7 +135,9 @@ update_status ModulePlayer::Update()
 		currentFrame = MaxUp;
 	}
 
-	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
+	
+	// Draw everything --------------------------------------
+	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
 
 	//SHOTS WITH M
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
@@ -151,14 +145,8 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, COLLIDER_PLAYER_SHOT);
 	}
 
-	/*
-	// TODO 3: Update collider position to player position
 
-	// Draw everything --------------------------------------
-	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
-
-	App->render->Blit(PlayerTexture, position.x, position.y, &(current_animation->GetCurrentFrame()));
-	*/
+	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);
 
 	return UPDATE_CONTINUE;
 }
