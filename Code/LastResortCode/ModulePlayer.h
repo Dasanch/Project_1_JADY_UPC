@@ -4,10 +4,12 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "ModuleParticles.h" 
 #include "p2Point.h"
 
 struct SDL_Texture;
 struct Collider; //SHOT
+struct Particle;
 
 class ModulePlayer : public Module
 {
@@ -18,15 +20,19 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void OnCollision(Collider*, Collider*);
 
 public:
 	iPoint position;
 	float const movementSpeed = 2;
 	Animation* current_animation = nullptr;
-
+	Animation shipPlayer1;
+	Particle basicShot_p;
 	SDL_Texture* PlayerTexture = nullptr;
 	//SDL_Texture* graphics = nullptr;
-	Animation shipPlayer1;
+
+	
+
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
 	const float keyReleaseSpeed = 0.05f;//The speed at which the ship goes basck to the idle frame when the key is release
@@ -41,6 +47,10 @@ public:
 		TransitionDown,
 		MaxDown
 	};
+	//Collision
+	Collider* playerCol = nullptr;
+	float playerColPosX;
+	float playerColPosY;
 };
 
 #endif

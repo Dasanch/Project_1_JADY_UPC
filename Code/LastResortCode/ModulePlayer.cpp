@@ -6,12 +6,10 @@
 #include "ModulePlayer.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleFadeToBlack.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-
-	position.x = 0;
-	position.y = 130;
 
 	shipPlayer1.PushBack({   0, 3, 32, 12 });	//0 = UpShip
 	shipPlayer1.PushBack({  32, 3, 32, 12 });	//1 = MiddleUpShip
@@ -19,6 +17,11 @@ ModulePlayer::ModulePlayer() //Constructor
 	shipPlayer1.PushBack({  96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
 
+	//Player Basic Shoot Particle
+
+	basicShot_p.anim.PushBack({ 148,127, 15,7 });
+	basicShot_p.anim.speed = 0.0f;
+	basicShot_p.speed = { 1, 0 };
 }
 
 ModulePlayer::~ModulePlayer()
@@ -28,8 +31,15 @@ bool ModulePlayer::Start()
 {
 	bool ret = true;
 	LOG("Loading player textures");
-
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
+	//Reset Position
+	position.x = 10 ;
+	position.y = 100 ;
+
+	//We add a collider to the player
+	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
+	playerColPosX = position.x;
+	playerColPosY = position.y;
 
 	return ret;
 }
@@ -41,6 +51,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
+		playerColPosX -= movementSpeed;
 		if (position.x < 0)
 		{
 			position.x = 0;
@@ -50,6 +61,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
+		playerColPosX += movementSpeed;
 		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
 		{
 			position.x = SCREEN_WIDTH - 32;
@@ -59,6 +71,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
+		playerColPosY -= movementSpeed;
 		if(position.y < 0)
 		{
 			position.y = 0;
@@ -75,6 +88,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
+		playerColPosY += movementSpeed;
 		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
 		{
 			position.y = SCREEN_HEIGHT - 12;
@@ -103,6 +117,11 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//COLLISION
+	//- We update the collider position
+	playerColPosX += 0.5f;//0.5f = tilemap speed
+	playerCol->SetPos(playerColPosX, playerColPosY);
+
 	//RENDER
 	//Check what is the value of the yAxis variable
 	//-Idle
@@ -128,15 +147,15 @@ update_status ModulePlayer::Update()
 	{
 		currentFrame = MaxUp;
 	}
+	//SHOTS WITH B
 
-	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
-
-	//SHOTS WITH M
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, COLLIDER_PLAYER_SHOT);
-	}
+		App->particles->AddParticle(basicShot_p, App->render->camera.x + position.x, App->render->camera.y + position.y, PlayerTexture, COLLIDER_PLAYER_SHOT,500);
 
+	}
+	//Draw player 1
+	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
 	/*
 	// TODO 3: Update collider position to player position
 
@@ -157,4 +176,10 @@ bool ModulePlayer::CleanUp()
 
 
 	return true;
+}
+
+//Detect collision with a wall. If so, go back to intro screen.
+void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
+{
+	App->fade->FadeToBlack((Module*)App->background,(Module*)App->GameTitle, 0.5f);
 }

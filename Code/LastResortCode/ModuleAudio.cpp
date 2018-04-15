@@ -36,6 +36,7 @@ bool ModuleAudio::Init()
 	}
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+	Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
 
 	return ret;
 }
@@ -133,7 +134,7 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 		switch (state)
 		{
 		case PLAY_AUDIO:
-			if (!Mix_PlayingMusic())
+			if (!Mix_PlayingMusic()) 
 				Mix_PlayMusic(music, 3);
 			else
 				LOG("Music is already playing");

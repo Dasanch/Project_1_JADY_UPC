@@ -4,8 +4,6 @@
 #include "ModuleRender.h"
 #include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
-#include <stdlib.h>
-#include <time.h>
 #include "ModuleStageReady.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
