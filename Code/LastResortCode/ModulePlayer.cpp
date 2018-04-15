@@ -21,7 +21,7 @@ ModulePlayer::ModulePlayer() //Constructor
 
 	basicShot_p.anim.PushBack({ 148,127, 15,7 });
 	basicShot_p.anim.speed = 0.0f;
-	basicShot_p.speed = { 6, 0 };
+	basicShot_p.speed = { 1, 0 };
 }
 
 ModulePlayer::~ModulePlayer()
@@ -32,7 +32,6 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	LOG("Loading player textures");
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
-
 	//Reset Position
 	position.x = 10 ;
 	position.y = 100 ;
@@ -54,17 +53,23 @@ update_status ModulePlayer::Update()
 		position.x -= movementSpeed;
 		playerColPosX -= movementSpeed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		//if (position.x < App->render->camera.x - SCREEN_WIDTH / 2)
 		//{
 		//	position.x = App->render->camera.x - SCREEN_WIDTH/2;
 		//}
 =======
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		if (position.x < 0)
 		{
 			position.x = 0;
 		}
+<<<<<<< HEAD
 >>>>>>> parent of d64c0f2... Player collider now matches the player
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 	}
 	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
@@ -72,22 +77,29 @@ update_status ModulePlayer::Update()
 		position.x += movementSpeed;
 		playerColPosX += movementSpeed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
 		//{
 		//	position.x = SCREEN_WIDTH - 32;
 		//}
 =======
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
 		{
 			position.x = SCREEN_WIDTH - 32;
 		}
+<<<<<<< HEAD
 >>>>>>> parent of d64c0f2... Player collider now matches the player
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 	}
 	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
 		playerColPosY -= movementSpeed;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		//if(position.y < 0)
@@ -96,11 +108,16 @@ update_status ModulePlayer::Update()
 		//}
 
 =======
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		if(position.y < 0)
 		{
 			position.y = 0;
 		}
+<<<<<<< HEAD
 >>>>>>> parent of d64c0f2... Player collider now matches the player
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		//ANIMATION
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -115,6 +132,7 @@ update_status ModulePlayer::Update()
 		position.y += movementSpeed;
 		playerColPosY += movementSpeed;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		//if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
 		//{
@@ -122,11 +140,16 @@ update_status ModulePlayer::Update()
 		//}
 
 =======
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
 		{
 			position.y = SCREEN_HEIGHT - 12;
 		}
+<<<<<<< HEAD
 >>>>>>> parent of d64c0f2... Player collider now matches the player
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -154,6 +177,7 @@ update_status ModulePlayer::Update()
 	//COLLISION
 	//- We update the collider position
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	playerColPosX += 0.5f;//0.5f = tilemap speed
 	playerCol->SetPos(playerColPosX, playerColPosY);
@@ -163,6 +187,11 @@ update_status ModulePlayer::Update()
 	playerCol->SetPos(playerColPosX, playerColPosY);
 >>>>>>> parent of d64c0f2... Player collider now matches the player
 
+=======
+	playerColPosX += 0.5f;//0.5f = tilemap speed
+	playerCol->SetPos(playerColPosX, playerColPosY);
+
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 	//RENDER
 	//Check what is the value of the yAxis variable
 	//-Idle
@@ -199,13 +228,18 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
 >>>>>>> parent of d64c0f2... Player collider now matches the player
 	{
-		App->particles->AddParticle(basicShot_p,  position.x, position.y, PlayerTexture, COLLIDER_PLAYER_SHOT, 500);
+		App->particles->AddParticle(basicShot_p, App->render->camera.x + position.x, App->render->camera.y + position.y, PlayerTexture, COLLIDER_PLAYER_SHOT,500);
+
 	}
 	//Draw player 1
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
 =======
+=======
+	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 	/*
 	// TODO 3: Update collider position to player position
 
@@ -214,7 +248,10 @@ update_status ModulePlayer::Update()
 
 	App->render->Blit(PlayerTexture, position.x, position.y, &(current_animation->GetCurrentFrame()));
 	*/
+<<<<<<< HEAD
 >>>>>>> parent of d64c0f2... Player collider now matches the player
+=======
+>>>>>>> 7bb6257cb3cc75ae6c97e4c7a1b849c460ee2550
 
 	return UPDATE_CONTINUE;
 }
