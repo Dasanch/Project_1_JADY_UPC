@@ -17,13 +17,21 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+
+	//Supportive functions
+	void TakeTileMap();
+	void TakeTunnelLights();
+	void TakeBckLights();
+	void TakeMidLights();
+	void TakeStreetLights();
+	void TakeOrangeLaser();
+	void TakeBlueLaser();
 public:
 	uint randoms[27];
 	uint frame;
 
-	//audios
+	//Audios
 	Mix_Music* music_01 = nullptr;
-
 
 	SDL_Texture * groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;
@@ -37,12 +45,12 @@ public:
 	SDL_Texture* bckgndLightsTx = nullptr;
 	SDL_Texture* tunnelLightsTx = nullptr;
 
-
 	SDL_Rect BGBuildings;
 	SDL_Rect ground;
 	SDL_Rect PBuildings;
 
 	Animation tunnelLightsAnim;
+
 	//Background lights
 	Animation bckgndLightsAnim01;
 	Animation bckgndLightsAnim02;
@@ -50,6 +58,7 @@ public:
 	Animation bckgndLightsAnim04;
 	Animation bckgndLightsAnim05;
 	Animation bckgndLightsAnim06;
+
 	//Middleground lights
 	Animation midgndLightsAnim01;
 	Animation midgndLightsAnim02;
@@ -57,12 +66,15 @@ public:
 	Animation midgndLightsAnim04;
 	Animation midgndLightsAnim05;
 	Animation midgndLightsAnim06;
+
 	//Street Lights animation
 	Animation streetLightsAnim01;
 	Animation streetLightsAnim02;
+
 	//Lasers animation
 	Animation orangeLaserAnim;
 	Animation blueLaserAnim;
+
 	//Static enemy
 	SDL_Texture* staticEnemyTx = nullptr;
 };
