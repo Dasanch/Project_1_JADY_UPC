@@ -21,12 +21,23 @@ public:
 	bool CleanUp();
 
 public:
-	Mix_Music * neogeoMusic = nullptr;
+	enum AnimationStates
+	{
+		NeoGeo = 0,
+		Max330ProGearSpecLine1,
+		Max330ProGearSpecLine2,
+		SNK
+	};
+
+	AnimationStates currentAnimation = NeoGeo;
 
 	//NEO GEO
 	SDL_Texture * neogeoTx = nullptr;
 	Animation neogeoAnim;
 	const float neogeoAnimSpeed = 0.5f;
+
+	//Transition from white to black
+	int currentFade = 255;
 
 	//Max 330 Pro Gear Spec
 	SDL_Texture * proGearSpecTx = nullptr;
@@ -34,7 +45,9 @@ public:
 	SDL_Rect blackCoverRect;
 	int cover01PosX = 89;
 	int cover02PosX = 89;
-	int coverSpeed;
+	int currentFrame = 0;
+	const int frameLimit = 5;
+	const int coverSpeed = 8;
 	const int proGearSpecPosX = 89;
 	const int proGearSpecWidth = 133;
 
@@ -44,8 +57,8 @@ public:
 	const int snkWidth = 72;
 	const int snkHeight = 19;
 
-	//Transition from white to black
-	int currentFade = 255;
+	//Music
+	Mix_Music * neogeoMusic = nullptr;
 };
 
 #endif // __MODULENEOGEO_H__

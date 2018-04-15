@@ -29,7 +29,6 @@ bool ModuleNeoGeo::Start()
 	neogeoTx = App->textures->Load("Assets/NeoGeo/NeoGeoLogo.png");
 	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
 	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
-	
 
 	neogeoAnim.PushBack({ 0,1415,227,40 });
 	neogeoAnim.PushBack({ 0,1371,227,40 });
@@ -115,53 +114,95 @@ bool ModuleNeoGeo::Start()
 }
 update_status ModuleNeoGeo::Update()
 {	
+	//We change the scene if the player presses space
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
 		App->fade->FadeToBlack(this, App-> GameTitle, 0.5f);
 	}
 
-	//Fade background to white
-	if(neogeoAnim.current_frame >= 15 && currentFade != 0)
+	//We check the conditions to change animation
+	//- If we've reached the last frame (46) of the title animation
+	if(currentAnimation == NeoGeo && neogeoAnim.current_frame >= 46)
 	{
-		currentFade -= 255/(46-15)*neogeoAnimSpeed;//RGB max / number of frames * speed of each frame
-		if(currentFade < 0)
-		{
-			currentFade = 0;
-		}
+		currentFrame = 0;
+		currentAnimation = Max330ProGearSpecLine1;
+		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	}
-	SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
-
-	//When the neogeo animation has finished, show this
-	if (neogeoAnim.current_frame >= 46)//46 = last frame
+	//- If the first rect doesn't hide Max330ProGear spec anymore
+	else if(currentAnimation == Max330ProGearSpecLine1 && cover01PosX >= proGearSpecPosX + proGearSpecWidth)
 	{
-		//Render Max 330 Pro Gear Spec
+		currentFrame = 0;
+		currentAnimation = Max330ProGearSpecLine2;
+	}
+	//- If the second rect doesn't hide Max330ProGear spec anymore
+	else if(currentAnimation == Max330ProGearSpecLine2 && cover02PosX >= proGearSpecPosX + proGearSpecWidth)
+	{
+		currentAnimation = SNK;
+	}
+
+	//We animate what needs to be animated
+	switch(currentAnimation)
+	{
+	case NeoGeo:
+		//Fade background to white
+		if (neogeoAnim.current_frame >= 15 && currentFade != 0)
+		{
+			currentFade -= 255 / (46 - 15)*neogeoAnimSpeed;//RGB max / number of frames * speed of each frame
+			if (currentFade < 0)
+			{
+				currentFade = 0;
+			}
+		}
+		SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
+		//Animate the logo
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+		break;
+	case Max330ProGearSpecLine1:
+		//Move the fist rectangle
+		//- Limit how much it moves
+		if (currentFrame >= frameLimit)
+		{
+			cover01PosX += coverSpeed;
+			currentFrame = 0;
+		}
+		else
+		{
+			currentFrame++;
+		}
+		//Render
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
 		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
-		//Render the rectangle on top of it
 		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
 		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
-		cover01PosX++;
-	}
-
-	//When the first rectangle has finished moving, move the other rectangle
-	if(cover01PosX >= proGearSpecPosX + proGearSpecWidth)
-	{
-		//Stop moving the other rectangle
-		cover02PosX++;
-	}
-
-	//When the Max 330 Pro Gear Spec appears
-	//!TO CHANGE: Correct condition
-	if(neogeoAnim.current_frame >= 46)
-	{
+		break;
+	case Max330ProGearSpecLine2:
+		//Move the second rectangle
+		//- Limit how much it moves
+		if (currentFrame >= frameLimit)
+		{
+			cover02PosX += coverSpeed;
+			currentFrame = 0;
+		}
+		else
+		{
+			currentFrame++;
+		}
+		//Render
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
+		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
+		break;
+	case SNK:
+		//Animate the SNK Logo
+		//Render
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
+		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
 		App->render->Blit(snkTx, 116, 162, &snkAnim.GetCurrentFrame(), 0.0f);
+		break;
 	}
-
-
-	//Render NeoGeo logo
-	App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
-
-
-
 	return UPDATE_CONTINUE;
 }
 bool ModuleNeoGeo::CleanUp() {
