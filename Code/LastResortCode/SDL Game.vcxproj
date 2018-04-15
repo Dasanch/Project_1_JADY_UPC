@@ -80,13 +80,11 @@
     <ClInclude Include="Module2lvlScene.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleBackground.h" />
-    <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleContinue.h" />
     <ClInclude Include="ModuleFadeToBlack.h" />
     <ClInclude Include="ModuleGameOver.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleNeoGeo.h" />
-    <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleStageReady.h" />
@@ -102,13 +100,11 @@
     <ClCompile Include="Module2lvlScene.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
     <ClCompile Include="ModuleBackground.cpp" />
-    <ClCompile Include="ModuleCollision.cpp" />
     <ClCompile Include="ModuleContinue.cpp" />
     <ClCompile Include="ModuleFadeToBlack.cpp" />
     <ClCompile Include="ModuleGameOver.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleNeoGeo.cpp" />
-    <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleStageReady.cpp" />

@@ -14,8 +14,6 @@
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"//delete (provitional)
 #include "ModuleContinue.h" 
-#include "ModuleParticles.h"
-#include "ModuleCollision.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -35,7 +33,7 @@
 ModuleBackground::ModuleBackground()
 {
 	frame = 0;
-	srand((unsigned int)time(NULL));
+	srand(time(NULL));
 	for (int i = 1; i < 27; ++i) {
 		randoms[i] = (rand() % 6 + 1);
 	}
@@ -268,10 +266,8 @@ bool ModuleBackground::Start()
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 
-	//Enable------------------------------------------------------------------------
+	//player------------------------------------------------------------------------
 	App->player->Enable();
-	App->particles->Enable();
-	App->collision->Enable();
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
 	App->player->position.y = 130;
@@ -296,10 +292,8 @@ bool ModuleBackground::CleanUp()
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
-	//Modules-----------------------------------------------------------------------
+	//modules-----------------------------------------------------------------------
 	App->player->Disable(); //Disable the player module
-	App->particles->Disable();
-	App->collision->Disable();
 	App->render->camera.x = 0;
 	//------------------------------------------------------------------------------
 	return true;

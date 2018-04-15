@@ -13,29 +13,23 @@
 #include "Module2lvlScene.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
-#include "ModuleParticles.h"
-#include "ModuleCollision.h"
 
 Application::Application()
 {
-	int i = 0;
-	modules[i++] = window = new ModuleWindow();
-	modules[i++] = render = new ModuleRender();
-	modules[i++] = input = new ModuleInput();
-	modules[i++] = textures = new ModuleTextures();
-	modules[i++] = audio = new ModuleAudio();
-	modules[i++] = background = new ModuleBackground();
-	modules[i++] = scene_lvl2 = new Module2lvlScene();
-	//Add module orbit here (particles are rendererd in front of the orbit)
-	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
-	modules[i++] = player = new ModulePlayer();
-	modules[i++] = neogeoScene = new ModuleNeoGeo();
-	modules[i++] = GameTitle = new ModuleGameTitle();
-	modules[i++] = scene_ready = new ModuleStageReady();
-	modules[i++] = scene_gameover = new ModuleGameOver();
-	modules[i++] = scene_continue = new ModuleContinue();
-	modules[i++] = collision = new ModuleCollision();
-	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
+	modules [0] = window = new ModuleWindow();
+	modules [1] = render = new ModuleRender();
+	modules [2] = input = new ModuleInput();
+	modules [3] = textures = new ModuleTextures();
+	modules [4] = audio = new ModuleAudio();
+	modules [5] = background = new ModuleBackground();
+	modules [6] = scene_lvl2 = new Module2lvlScene();
+	modules [7] = player = new ModulePlayer();
+	modules [8] = neogeoScene = new ModuleNeoGeo();
+	modules [9] = GameTitle = new ModuleGameTitle();
+	modules[10] = scene_ready = new ModuleStageReady();
+	modules[11] = scene_gameover = new ModuleGameOver();
+	modules[12] = scene_continue = new ModuleContinue();
+	modules[13] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 }
 
 Application::~Application()

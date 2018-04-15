@@ -9,8 +9,6 @@
 #include "SDL\include\SDL.h"
 #include "ModuleContinue.h"
 #include "ModuleAudio.h"
-#include "ModuleParticles.h"
-#include "ModuleCollision.h"
 
 Module2lvlScene::Module2lvlScene()
 {
@@ -29,12 +27,7 @@ bool Module2lvlScene::Start()
 {
 	
 	bool ret = true;
-	//Enable
 	App->player->Enable();
-	App->particles->Enable();
-	App->collision->Enable();
-
-
 	App->player->position.x = 0;
 	App->player->position.y = 130;
 	lvl2Text = App->textures->Load("Assets/lvl2/Background_2.png");
@@ -84,9 +77,5 @@ bool Module2lvlScene::CleanUp() {
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(lvl2Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl2Music);
-	//Modules-----------------------------------------------------------------------
-	App->player->Disable();
-	App->particles->Disable();
-	App->collision->Disable();
 	return true;
 }

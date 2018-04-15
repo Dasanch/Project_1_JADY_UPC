@@ -36,7 +36,7 @@ bool ModuleTextures::Init()
 	return ret;
 }
 
-// Called before quitting
+// Called before q	uitting
 bool ModuleTextures::CleanUp()
 {
 	LOG("Freeing textures and Image library");

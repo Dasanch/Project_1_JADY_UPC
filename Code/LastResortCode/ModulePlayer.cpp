@@ -35,7 +35,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	//INPUT
-	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if(App->input->keyboard[SDL_SCANCODE_A] == true)
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
@@ -44,7 +44,7 @@ update_status ModulePlayer::Update()
 			position.x = 0;
 		}
 	}
-	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if(App->input->keyboard[SDL_SCANCODE_D] == true)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
@@ -53,7 +53,7 @@ update_status ModulePlayer::Update()
 			position.x = SCREEN_WIDTH - 32;
 		}
 	}
-	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if(App->input->keyboard[SDL_SCANCODE_W] == true)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
@@ -69,7 +69,7 @@ update_status ModulePlayer::Update()
 			yAxis = -1;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keyboard[SDL_SCANCODE_S] == true)
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
