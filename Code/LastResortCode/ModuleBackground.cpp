@@ -409,28 +409,11 @@ update_status ModuleBackground::Update()
 		
 
 	//Ground and tunnel-----------------------------------------------------------------------------------
-	
-    if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
+
+	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	}
-
-	//-----Move Up and Down---------------------------------------------------------------
-	
-/*
-	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		if (App->render->camera.x <= -324 && App->render->camera.x >= -663)
-		{
-			App->render->Blit(groundAndTunel, 0, -15, &ground, foregndSpeed);
-		}
-
-		else {
-			App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
-		}
-	}*/
-
-	//--------------------------------------------------------------------------------------------
 
 	//Street Lights-----------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
