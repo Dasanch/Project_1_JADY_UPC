@@ -21,9 +21,11 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("Assets/particles.png"); //SHOT
+	graphics = App->textures->Load("Assets/SpaceShip_player1.png"); //SHOT
 
-	// Explosion particle
+	// Explosion particle with shot
+
+	/*
 	explosion.anim.PushBack({ 274, 296, 33, 30 });
 	explosion.anim.PushBack({ 313, 296, 33, 30 });
 	explosion.anim.PushBack({ 346, 296, 33, 30 });
@@ -32,12 +34,15 @@ bool ModuleParticles::Start()
 	explosion.anim.PushBack({ 457, 296, 33, 30 });
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
+*/
+	
 
-	laser.anim.PushBack({ 232, 103, 16, 12 });
-	laser.anim.PushBack({ 249, 103, 16, 12 });
+	//shot
+	laser.anim.PushBack({ 148, 127, 15, 7 });
 	laser.anim.speed = 0.2f;
-	laser.speed.x = 5;
+	laser.speed.x = 8;
 	laser.life = 3000;
+	//positios 2 explosions with shot: 1: (115, 124, 13, 12), 2: (128, 126, 10, 9)
 
 	return true;
 }
