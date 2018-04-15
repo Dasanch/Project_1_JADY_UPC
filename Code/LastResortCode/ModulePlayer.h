@@ -7,6 +7,7 @@
 #include "p2Point.h"
 
 struct SDL_Texture;
+struct Collider; //SHOT
 
 class ModulePlayer : public Module
 {
@@ -21,8 +22,10 @@ public:
 public:
 	iPoint position;
 	float const movementSpeed = 2;
+	Animation* current_animation = nullptr;
 
 	SDL_Texture* PlayerTexture = nullptr;
+	//SDL_Texture* graphics = nullptr;
 	Animation shipPlayer1;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed

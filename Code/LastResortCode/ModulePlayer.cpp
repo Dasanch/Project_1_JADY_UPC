@@ -4,6 +4,8 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleCollision.h"
+#include "ModuleParticles.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
@@ -128,6 +130,21 @@ update_status ModulePlayer::Update()
 	}
 
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
+
+	//SHOTS WITH M
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	{
+		App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, COLLIDER_PLAYER_SHOT);
+	}
+
+	/*
+	// TODO 3: Update collider position to player position
+
+	// Draw everything --------------------------------------
+	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+	App->render->Blit(PlayerTexture, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	*/
 
 	return UPDATE_CONTINUE;
 }
