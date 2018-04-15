@@ -81,13 +81,14 @@ bool ModuleNeoGeo::Start()
 	neogeoAnim.loop = false;
 	neogeoAnim.speed = neogeoAnimSpeed;
 
+	//ProGearSpec
 	proGearSpecRect.x =   0;
 	proGearSpecRect.y =   0;
-	proGearSpecRect.w = 133;
+	proGearSpecRect.w = proGearSpecWidth;
 	proGearSpecRect.h =  30;
 	blackCoverRect.x = 0;
 	blackCoverRect.y = 32;
-	blackCoverRect.w = 133;
+	blackCoverRect.w = proGearSpecWidth;
 	blackCoverRect.h = 14;
 
 	//SNK LOGO
@@ -119,7 +120,7 @@ update_status ModuleNeoGeo::Update()
 		App->fade->FadeToBlack(this, App-> GameTitle, 0.5f);
 	}
 
-	//Fade to white
+	//Fade background to white
 	if(neogeoAnim.current_frame >= 15 && currentFade != 0)
 	{
 		currentFade -= 255/(46-15)*neogeoAnimSpeed;//RGB max / number of frames * speed of each frame
@@ -134,11 +135,17 @@ update_status ModuleNeoGeo::Update()
 	if (neogeoAnim.current_frame >= 46)//46 = last frame
 	{
 		//Render Max 330 Pro Gear Spec
-		App->render->Blit(proGearSpecTx, 89, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
 		//Render the rectangle on top of it
 		App->render->Blit(proGearSpecTx, cover01PosX, 113, &blackCoverRect, 0.0f);
 		App->render->Blit(proGearSpecTx, cover02PosX, 130, &blackCoverRect, 0.0f);
 		cover01PosX++;
+	}
+
+	//When the first rectangle has finished moving, move the other rectangle
+	if(cover01PosX >= proGearSpecPosX + proGearSpecWidth)
+	{
+		//Stop moving the other rectangle
 		cover02PosX++;
 	}
 

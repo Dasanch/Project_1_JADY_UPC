@@ -35,6 +35,8 @@ public:
 	int cover01PosX = 89;
 	int cover02PosX = 89;
 	int coverSpeed;
+	const int proGearSpecPosX = 89;
+	const int proGearSpecWidth = 133;
 
 	//SNK
 	SDL_Texture * snkTx = nullptr;
