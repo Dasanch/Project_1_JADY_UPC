@@ -53,33 +53,54 @@ update_status ModulePlayer::Update()
 		//MOVEMENT
 		position.x -= movementSpeed;
 		playerColPosX -= movementSpeed;
+<<<<<<< HEAD
 
 		//if (position.x < App->render->camera.x - SCREEN_WIDTH / 2)
 		//{
 		//	position.x = App->render->camera.x - SCREEN_WIDTH/2;
 		//}
+=======
+		if (position.x < 0)
+		{
+			position.x = 0;
+		}
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 	}
 	if(App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
 		playerColPosX += movementSpeed;
+<<<<<<< HEAD
 		//if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
 		//{
 		//	position.x = SCREEN_WIDTH - 32;
 		//}
+=======
+		if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
+		{
+			position.x = SCREEN_WIDTH - 32;
+		}
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 	}
 	if(App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
 		playerColPosY -= movementSpeed;
+<<<<<<< HEAD
 
 		//if(position.y < 0)
 		//{
 		//	position.y = 0;
 		//}
 
+=======
+		if(position.y < 0)
+		{
+			position.y = 0;
+		}
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 		//ANIMATION
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -93,12 +114,19 @@ update_status ModulePlayer::Update()
 		//MOVEMENT
 		position.y += movementSpeed;
 		playerColPosY += movementSpeed;
+<<<<<<< HEAD
 
 		//if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
 		//{
 		//	position.y = SCREEN_HEIGHT - 12;
 		//}
 
+=======
+		if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
+		{
+			position.y = SCREEN_HEIGHT - 12;
+		}
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -125,10 +153,15 @@ update_status ModulePlayer::Update()
 
 	//COLLISION
 	//- We update the collider position
+<<<<<<< HEAD
 
 	playerColPosX += 0.5f;//0.5f = tilemap speed
 	playerCol->SetPos(playerColPosX, playerColPosY);
 
+=======
+	playerColPosX += 0.5f;//0.5f = tilemap speed
+	playerCol->SetPos(playerColPosX, playerColPosY);
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 
 	//RENDER
 	//Check what is the value of the yAxis variable
@@ -157,13 +190,31 @@ update_status ModulePlayer::Update()
 	}
 	//SHOTS WITH B
 
+<<<<<<< HEAD
 	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+=======
+	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
+
+	//SHOTS WITH M
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 	{
 		App->particles->AddParticle(basicShot_p,  position.x, position.y, PlayerTexture, COLLIDER_PLAYER_SHOT, 500);
 	}
 	//Draw player 1
 
+<<<<<<< HEAD
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame], 0.0f);
+=======
+	/*
+	// TODO 3: Update collider position to player position
+
+	// Draw everything --------------------------------------
+	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
+
+	App->render->Blit(PlayerTexture, position.x, position.y, &(current_animation->GetCurrentFrame()));
+	*/
+>>>>>>> parent of d64c0f2... Player collider now matches the player
 
 	return UPDATE_CONTINUE;
 }
