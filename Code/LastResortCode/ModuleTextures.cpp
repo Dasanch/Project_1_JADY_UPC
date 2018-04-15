@@ -69,7 +69,14 @@ SDL_Texture* const ModuleTextures::Load(const char* path)
 		}
 		else
 		{
-			textures[last_texture++] = texture;
+			for(uint i = 0; i < MAX_TEXTURES; ++i)
+			{
+				if(textures[i] == nullptr)
+				{
+					textures[last_texture++] = texture;
+					break;
+				}
+			}
 		}
 
 		SDL_FreeSurface(surface);
@@ -84,16 +91,16 @@ bool ModuleTextures::Unload(SDL_Texture * texture)
 
 	if (texture != nullptr)
 	{
-		for (int i = 0; i < MAX_TEXTURES; ++i)
+		for (uint i = 0; i < MAX_TEXTURES; ++i)
 		{
-			if (textures[i] == texture)
+			if (texture == textures[i])
 			{
+				SDL_DestroyTexture(texture);
 				textures[i] = nullptr;
 				ret = true;
 				break;
 			}
 		}
-		SDL_DestroyTexture(texture);
 	}
 
 	return ret;
