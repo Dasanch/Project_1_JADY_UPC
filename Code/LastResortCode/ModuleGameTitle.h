@@ -43,7 +43,10 @@ public:
 	Animation O8;
 	Animation R9;
 
-	unsigned int time;
+	//Time variables
+	Uint32 start_time; 
+	Uint32 current_time;
+
 	float speed = 0.3f;
 	//audios
 	Mix_Music* Titlemusic = nullptr;

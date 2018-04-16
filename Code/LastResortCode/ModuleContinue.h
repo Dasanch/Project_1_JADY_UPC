@@ -26,6 +26,7 @@ private:
 	SDL_Texture* backgroundTex = nullptr;
 	SDL_Texture* continueTex = nullptr;
 public:
-	Mix_Music* continue_and_go;
+	Mix_Music* continue_and_go; 
+	//needs to be public because in case that music is not stopped here, we stop it in game over
 };
 #endif // !_ModuleContinue_H_

@@ -351,7 +351,8 @@ bool ModuleGameTitle:: Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	
+	start_time = SDL_GetTicks(); //fix the real time that we start this module
+	//textures--------------------------------------------------------------------------------
 	TitleTexture = App->textures->Load("Assets/UI-TitleScreen.png");
 	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
 	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
@@ -362,16 +363,16 @@ bool ModuleGameTitle:: Start()
 	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
 	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
 	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-
-	time = 0;
-	//Music --------------------------------------------------------------------------------
+	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
 	return ret;
 }
 update_status ModuleGameTitle::Update() {
+	//timer------------------------------------------------------------------------
+	current_time = SDL_GetTicks() - start_time; //current time init 0 and increment from star_time 
 
-	time=SDL_GetTicks();
+	//title letters---------------------------------------------------------------------
 	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
 	App->render->Blit(L1Texture, 20, 30, &L1.GetCurrentFrame(), 0.0f);
 	App->render->Blit(A2Texture, 60, 30, &A2.GetCurrentFrame(), 0.0f);
@@ -382,11 +383,11 @@ update_status ModuleGameTitle::Update() {
 	App->render->Blit(S7Texture, 105, 101, &S7.GetCurrentFrame(), 0.0f);
 	App->render->Blit(O8Texture, 140, 101, &O8.GetCurrentFrame(), 0.0f);
 	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 || time>18000)
+
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 || current_time>18000) //refix it please 
 	{
 		App->fade->FadeToBlack(this, App->stage01, 0.5f);
 	}
-
 	return UPDATE_CONTINUE;
 }
 bool ModuleGameTitle::CleanUp() {

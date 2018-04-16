@@ -278,7 +278,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(LasersTx, 792, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
-		
 	//Ground and tunnel-----------------------------------------------------------------------------------
 	/*
     if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
