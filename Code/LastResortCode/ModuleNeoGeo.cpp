@@ -117,7 +117,7 @@ update_status ModuleNeoGeo::Update()
 	//We change the scene if the player presses space
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		App->fade->FadeToBlack(this, App-> GameTitle, 0.5f);
+		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 	}
 
 	//We check the conditions to change animation
@@ -206,7 +206,7 @@ update_status ModuleNeoGeo::Update()
 		break;
 	case Finish:
 		//Fade to black
-		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 		break;
 	}
 	return UPDATE_CONTINUE;

@@ -131,7 +131,7 @@ update_status ModuleGameOver::Update() {
 	}
 	//---------------------------------------------------------------------------
 	if (current_time> 7700) {
-		App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
+		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 	}
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 0.1f);// Defect RenderDraColor
 	return UPDATE_CONTINUE;

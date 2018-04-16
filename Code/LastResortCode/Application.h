@@ -40,7 +40,7 @@ public:
 	ModuleAudio* audio = nullptr;
 	ModuleFadeToBlack* fade = nullptr;
 	ModuleNeoGeo* neogeoScene = nullptr;
-	ModuleGameTitle* GameTitle = nullptr;
+	ModuleGameTitle* titleScene = nullptr;
 	ModuleStageReady* scene_ready = nullptr;
 	Module2lvlScene* scene_lvl2 = nullptr;
 	ModuleGameOver* scene_gameover = nullptr;

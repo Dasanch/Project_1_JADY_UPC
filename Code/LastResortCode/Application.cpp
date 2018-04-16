@@ -32,7 +32,7 @@ Application::Application()
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
-	modules[i++] = GameTitle = new ModuleGameTitle();
+	modules[i++] = titleScene = new ModuleGameTitle();
 	modules[i++] = scene_ready = new ModuleStageReady();
 	modules[i++] = scene_gameover = new ModuleGameOver();
 	modules[i++] = scene_continue = new ModuleContinue();
@@ -53,7 +53,7 @@ bool Application::Init()
 
 	// Disable all stopped modules here
 	audio->Disable();
-	GameTitle->Disable();
+	titleScene->Disable();
 	player->Disable(); // Player will be enabled on the first update of a new scene
 	background->Disable();
 	scene_lvl2->Disable();
