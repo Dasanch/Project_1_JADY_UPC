@@ -8,11 +8,11 @@
 struct SDL_Texture;
 typedef struct _Mix_Music Mix_Music;
 
-class ModuleBackground : public Module
+class ModuleStage01 : public Module
 {
 public:
-	ModuleBackground();
-	~ModuleBackground();
+	ModuleStage01();
+	~ModuleStage01();
 
 	bool Start();
 	update_status Update();

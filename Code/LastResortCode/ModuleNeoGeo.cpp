@@ -6,7 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModuleAudio.h"
 #include "ModuleGameTitle.h"
 
