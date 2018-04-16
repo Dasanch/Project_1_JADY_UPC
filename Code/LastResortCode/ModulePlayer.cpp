@@ -160,5 +160,5 @@ bool ModulePlayer::CleanUp()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
+	App->fade->FadeToBlack((Module*)App->background, (Module*)App->titleScene, 0.5f);
 }
