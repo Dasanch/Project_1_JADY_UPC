@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleStageReady.h"
@@ -71,11 +72,16 @@ bool ModuleBackground::Start()
 	
 	//Enable------------------------------------------------------------------------
 	App->player->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
 	App->player->position.y = 100;
+
+	App->player2->position.x = 0;
+	App->player2->position.y = 150;
+
 	//Static enemy
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
@@ -102,6 +108,7 @@ bool ModuleBackground::CleanUp()
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
 	App->player->Disable(); //Disable the player module
+	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->render->camera.x = 0;
@@ -116,6 +123,7 @@ update_status ModuleBackground::Update()
 	// Move camera forward -----------------------------
 
 	App->player->position.x += 1;
+	App->player2->position.x += 1;
 	App->render->camera.x -= 3;
 
 	//-------------------------------------------------

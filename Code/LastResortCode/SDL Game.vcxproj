@@ -93,6 +93,7 @@
     <ClInclude Include="ModuleNeoGeo.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModulePlayer2.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleStage1Clear.h" />
     <ClInclude Include="ModuleStageReady.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="ModuleNeoGeo.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModulePlayer2.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleStage1Clear.cpp" />
     <ClCompile Include="ModuleStageReady.cpp" />
