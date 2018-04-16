@@ -1,8 +1,8 @@
 #include "Application.h"
-#include "Enemy_Basic.h"
+#include "Enemy_Oscilator.h"
 #include "ModuleCollision.h"
 
-Enemy_Basic::Enemy_Basic(int x, int y) : Enemy(x, y)
+Enemy_Oscilator::Enemy_Oscilator(int x, int y) : Enemy(x, y)
 {
 	/*fly.PushBack({ 5,6,24,24 });
 	fly.PushBack({ 38, 6, 24, 24 });
@@ -21,7 +21,7 @@ Enemy_Basic::Enemy_Basic(int x, int y) : Enemy(x, y)
 	original_y = y;*/
 }
 
-void Enemy_Basic::Move()
+void Enemy_Oscilator::Move()
 {
 	/*
 	if (going_up)
