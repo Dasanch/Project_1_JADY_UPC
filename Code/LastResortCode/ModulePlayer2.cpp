@@ -20,11 +20,10 @@ ModulePlayer2::ModulePlayer2() //Constructor
 	shipPlayer2.PushBack({ 64, 3, 32, 12 });	//2 = idle
 	shipPlayer2.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer2.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
-	//Player Basic Shoot Particle-----------------------------
+	//Player Basic Shot Particle-----------------------------
 	basicShot_p.anim.PushBack({ 148,127, 15,7 });
-	basicShot_p.speed.x = 5;
+	basicShot_p.speed.x = 9;
 	basicShot_p.anim.loop = false;
-	basicShot_p.position = { 0,0 };
 	basicShot_p.life = 3000;
 }
 
@@ -130,7 +129,7 @@ update_status ModulePlayer2::Update()
 	//Basic shoot-------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN) {
 		App->audio->ControlSFX(basic_shoot_sfx, PLAY_AUDIO);
-		App->particles->AddParticle(basicShot_p, position.x + 20, position.y, PlayerTexture, COLLIDER_PLAYER_SHOT);
+		App->particles->AddParticle(basicShot_p, position.x + 20, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
 	//Draw ship-------------------------------------------------------------------------
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer2.frames[currentFrame]);

@@ -16,8 +16,8 @@ enum COLLIDER_TYPE;
 struct Particle
 {
 	Collider* collider = nullptr;
-	SDL_Texture *texture = nullptr;
 	Animation anim;
+	SDL_Texture* texture = nullptr;
 	uint fx = 0;
 	iPoint position;
 	iPoint speed;
@@ -42,19 +42,15 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	void AddParticle(const Particle& particle, int x, int y, SDL_Texture* tex, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex ,COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
 
 private:
-
-	
+	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
-
 	Particle general_explosion02;
-	SDL_Texture* graphics = nullptr;
-	//Particle laser;
-
 };
 
 #endif // __MODULEPARTICLES_H__
+

@@ -195,9 +195,9 @@ bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 		switch (state)
 		{
 		case PLAY_AUDIO:
-			LOG("Chunck is already playing");
 			Mix_VolumeChunk(chunk, GENERAL_SFX_VOLUME);
-				Mix_PlayChannel( -1, chunk, 0);
+			Mix_PlayChannel( -1, chunk, 0);
+			break;
 		default:
 			LOG("Chunck has not this audio state");
 			return false;
