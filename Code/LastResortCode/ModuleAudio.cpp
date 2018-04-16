@@ -37,6 +37,7 @@ bool ModuleAudio::Init()
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 	Mix_VolumeMusic(GENERAL_MUSIC_VOLUME);
+	
 
 	return ret;
 }
@@ -97,6 +98,29 @@ bool ModuleAudio::UnloadMUS(Mix_Music * music) {
 			}
 		}
 		
+	}
+
+	return ret;
+}
+
+bool ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
+
+
+	bool ret = false;
+
+	if (sound_fx != nullptr)
+	{
+		for (int i = 0; i < MAX_MUSICS; ++i)
+		{
+			if (sfx[i] == sound_fx)
+			{
+				Mix_FreeChunk(sound_fx);
+				sfx[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+
 	}
 
 	return ret;
@@ -172,6 +196,7 @@ bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 		{
 		case PLAY_AUDIO:
 			LOG("Chunck is already playing");
+			Mix_VolumeChunk(chunk, GENERAL_SFX_VOLUME);
 				Mix_PlayChannel( -1, chunk, 0);
 		default:
 			LOG("Chunck has not this audio state");

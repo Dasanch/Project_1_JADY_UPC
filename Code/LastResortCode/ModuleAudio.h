@@ -8,6 +8,7 @@
 #define MAX_MUSICS 8
 #define MAX_SOUNDEFECTS 20
 #define GENERAL_MUSIC_VOLUME 15 //0 to 180
+#define GENERAL_SFX_VOLUME 20 //0 to 100
 
 typedef struct _Mix_Music Mix_Music;
 

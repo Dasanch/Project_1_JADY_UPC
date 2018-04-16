@@ -50,11 +50,13 @@ update_status Module2lvlScene::Update() {
 	float backgroundspeed=0.2f;
 	float groundspeed = 0.3f;
 	/*if(App->render->camera.x>-(3576 *SCREEN_SIZE)/backgroundspeed)*/
-	if (App->render->camera.x > App->render->getCameraPosition(3576, backgroundspeed))
-	{
-		App->render->camera.x -= speedcamera;
-		}
 	
+	// Move camera forward -----------------------------
+
+	App->player->position.x += 1;
+	App->render->camera.x -= 3;
+
+
 	App->render->Blit(lvl2Text, 0, 0, NULL, backgroundspeed);
 	App->render->Blit(lvl2ground, 2000, 0, NULL, groundspeed);
 

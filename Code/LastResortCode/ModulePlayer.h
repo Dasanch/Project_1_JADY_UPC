@@ -10,6 +10,7 @@
 struct SDL_Texture;
 struct Collider; //SHOT
 struct Particle;
+struct Mix_Chunk;
 
 class ModulePlayer : public Module
 {
@@ -51,6 +52,8 @@ public:
 	Collider* playerCol = nullptr;
 	float playerColPosX;
 	float playerColPosY;
+	//Audios
+	Mix_Chunk* basic_shoot_sfx = nullptr;
 };
 
 #endif

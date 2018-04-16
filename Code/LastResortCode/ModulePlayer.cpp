@@ -7,6 +7,7 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
@@ -23,8 +24,10 @@ ModulePlayer::ModulePlayer() //Constructor
 	//Player Basic Shoot Particle
 
 	basicShot_p.anim.PushBack({ 148,127, 15,7 });
-	basicShot_p.anim.speed = 0.0f;
-	basicShot_p.speed = { 7, 0 };
+	basicShot_p.speed.x = 5;
+	basicShot_p.anim.loop = false;
+	basicShot_p.position = { 0,0 };
+	basicShot_p.life = 3000;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -37,6 +40,8 @@ bool ModulePlayer::Start()
 
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 																		 //We add a collider to the player
+	basic_shoot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
 	return ret;
 }
@@ -48,28 +53,19 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
-		//if (position.x < App->render->camera.x - SCREEN_WIDTH / 2)
-		//{
-		//	position.x = App->render->camera.x - SCREEN_WIDTH/2;
-		//}
+
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
-		//if (position.x > SCREEN_WIDTH - 32)//32 = pixel width of the player ship
-		//{
-		//	position.x = SCREEN_WIDTH - 32;
-		//}
+
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
-		//if(position.y < 0)
-		//{
-		//	position.y = 0;
-		//}
+
 		//ANIMATION
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -82,10 +78,7 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
-		//if (position.y > SCREEN_HEIGHT - 12)//12 = pixel height of the player ship
-		//{
-		//	position.y = SCREEN_HEIGHT - 12;
-		//}
+
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -143,7 +136,9 @@ update_status ModulePlayer::Update()
 	//SHOTS WITH M
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
 	{
+		App->audio->ControlSFX(basic_shoot_sfx, PLAY_AUDIO);
 		App->particles->AddParticle(basicShot_p, position.x + 20, position.y, PlayerTexture, COLLIDER_PLAYER_SHOT);
+
 	}
 
 
@@ -157,7 +152,7 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player");
 
 	App->textures->Unload(PlayerTexture);
-
+	App->audio->UnloadSFX(basic_shoot_sfx);
 
 	return true;
 }

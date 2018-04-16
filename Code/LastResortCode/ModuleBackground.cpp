@@ -67,14 +67,14 @@ bool ModuleBackground::Start()
 	//audios------------------------------------------------------------------------
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
-
+	
 	//Enable------------------------------------------------------------------------
 	App->player->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
-	App->player->position.y = 130;
+	App->player->position.y = 100;
 	//Static enemy
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
@@ -112,23 +112,28 @@ bool ModuleBackground::CleanUp()
 // Update: draw background
 update_status ModuleBackground::Update()
 {
+	// Move camera forward -----------------------------
 
-	int speed = 2;
+	App->player->position.x += 1;
+	App->render->camera.x -= 3;
 
-	//Camera movement
-	if (App->render->camera.x > -((4400 / foregndSpeed) * SCREEN_SIZE))
-	{
-		App->render->camera.x -= speed; //CAMERA AUTO MOV
+	//-------------------------------------------------
+	//int speed = 2;
 
-	}
+	////Camera movement
+	//if (App->render->camera.x > -((4400 / foregndSpeed) * SCREEN_SIZE))
+	//{
+	//	App->render->camera.x -= speed; //CAMERA AUTO MOV
 
-	//Boss buildings
+	//}
+
+	//Boss buildings--------------------------------------
 	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 
-	//Background buildings
+	//Background buildings-----------------------------------------------------------------------
 	if (App->render->camera.x > -((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
