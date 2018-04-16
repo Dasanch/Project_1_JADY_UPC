@@ -19,7 +19,12 @@ ModulePlayer::ModulePlayer() //Constructor
 	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
 	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
+												
+	//Player Basic Shoot Particle
 
+	basicShot_p.anim.PushBack({ 148,127, 15,7 });
+	basicShot_p.anim.speed = 0.0f;
+	basicShot_p.speed = { 7, 0 };
 }
 
 ModulePlayer::~ModulePlayer()
@@ -135,15 +140,11 @@ update_status ModulePlayer::Update()
 		currentFrame = MaxUp;
 	}
 
-
-	// Draw everything --------------------------------------
-	//App->render->Blit(graphics, position.x, position.y, &(current_animation->GetCurrentFrame()));
-
 	//SHOTS WITH M
-	//if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
-	//{
-	//	App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, COLLIDER_PLAYER_SHOT);
-	//}
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	{
+		App->particles->AddParticle(basicShot_p, position.x + 20, position.y, PlayerTexture, COLLIDER_PLAYER_SHOT);
+	}
 
 
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);
