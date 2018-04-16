@@ -5,9 +5,6 @@
 
 #define MAX_FRAMES 100
 
-
-
-
 class Animation
 {
 public:
