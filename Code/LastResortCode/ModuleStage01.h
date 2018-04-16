@@ -74,9 +74,6 @@ public:
 	//Lasers animation
 	Animation orangeLaserAnim;
 	Animation blueLaserAnim;
-
-	//Static enemy
-	SDL_Texture* staticEnemyTx = nullptr;
 };
 
 #endif

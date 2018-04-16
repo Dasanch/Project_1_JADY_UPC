@@ -83,8 +83,6 @@ bool ModuleStage01::Start()
 	//App->player2->position.x = 0;
 	//App->player2->position.y = 150;
 	//Enemies----------------------------------------------------------------
-	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
-	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
 
 	return ret;
 }
@@ -352,7 +350,6 @@ update_status ModuleStage01::Update()
 		App->fade->FadeToBlack(this, App->stageclearScene, 0.0);
 	}
 	//Enemies------------------------------------------------------
-	App->render->Blit(staticEnemyTx, 500, 100, NULL, foregndSpeed);
 
 	//Create the player 2
 	if(App->player2->IsEnabled() == false)
