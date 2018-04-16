@@ -13,7 +13,7 @@ ModuleParticles::ModuleParticles()
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 
-	//General explosion 02 particle 
+	//General explosion 02 particle----------------------------------
 	general_explosion02.anim.PushBack({ 0,0,32,32 });
 	general_explosion02.anim.PushBack({ 32,0,32,32 });
 	general_explosion02.anim.PushBack({ 64,0,16,16 });
@@ -30,6 +30,8 @@ ModuleParticles::ModuleParticles()
 	general_explosion02.anim.PushBack({ 0,96,31,32 });
 	general_explosion02.anim.PushBack({ 31,96,30,32 });
 	general_explosion02.anim.PushBack({ 61,96,30,32 });
+	general_explosion02.anim.loop = false;
+	general_explosion02.anim.speed = 0.3f;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -41,6 +43,9 @@ bool ModuleParticles::Start()
 	LOG("Loading ModuleParticles assets ");
 	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Explosion_2.png");
+	//audios--------------------------------------------------
+
+	//--------------------------------------------------------
 	return true;
 }
 
@@ -48,8 +53,11 @@ bool ModuleParticles::Start()
 bool ModuleParticles::CleanUp()
 {
 	LOG("Unloading particles");
+	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
+	//audios---------------------------------------------------
 
+	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		if (active[i] != nullptr)
@@ -62,7 +70,6 @@ bool ModuleParticles::CleanUp()
 	return true;
 }
 
-// Update: draw background
 update_status ModuleParticles::Update()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -83,14 +90,14 @@ update_status ModuleParticles::Update()
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
+				//App->audio->PlayFx(p->fx);
 			}
 		}
 	}
-
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y,SDL_Texture* tex, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Texture *tex,  COLLIDER_TYPE collider_type, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -100,16 +107,16 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y,SDL_Tex
 			p->born = SDL_GetTicks() + delay;
 			p->position.x = x;
 			p->position.y = y;
-			p->texture = tex;
+			p->texture = tex; // texture
 			if (collider_type != COLLIDER_NONE)
-				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
+				//Updated for not spawn it since 1 frame on x,y animation rect values
+				p->collider = App->collision->AddCollider({p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);
 			active[i] = p;
 			break;
 		}
 	}
 }
 
-// TODO 5: Make so every time a particle hits a wall it triggers an explosion particle
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
@@ -117,25 +124,25 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
+			AddParticle(general_explosion02, active[i]->position.x, active[i]->position.y, graphics); //basic shot xplosion
 			delete active[i];
 			active[i] = nullptr;
 			break;
 		}
 	}
 }
-
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 
 Particle::Particle()
 {
-	position.SetToZero();
-	speed.SetToZero();
+	//position.SetToZero();
+	//speed.SetToZero();
 }
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life)
+	fx(p.fx), born(p.born), life(p.life) , texture(p.texture) //struct texture added
 {}
 
 Particle::~Particle()
@@ -165,3 +172,4 @@ bool Particle::Update()
 
 	return ret;
 }
+

@@ -70,7 +70,6 @@ bool ModuleStage01::Start()
 	//audios------------------------------------------------------------------------
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
-	
 	//Enable------------------------------------------------------------------------
 	App->player->Enable();
 	//App->player2->Enable();
@@ -83,6 +82,8 @@ bool ModuleStage01::Start()
 	//App->player2->position.x = 0;
 	//App->player2->position.y = 150;
 	//Enemies----------------------------------------------------------------
+	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png"); //delete after testing :Alejandro
+	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 
 	return ret;
 }
