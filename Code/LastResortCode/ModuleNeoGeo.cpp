@@ -34,11 +34,8 @@ bool ModuleNeoGeo::Start()
 	{
 		for(int j = 0; j < 40 * 25; j += 40)
 		{
+			if (i == 227 * 2 && j == 40 * 22) { break; }
 			neogeoAnim.PushBack({i,j,227,40});
-			//if(i = 227*2 && j == 40*22)
-			//{
-			//	break;
-			//}
 		}
 	}
 	//227 = width of each sprite
@@ -70,7 +67,7 @@ bool ModuleNeoGeo::Start()
 		}
 	}
 	snkAnim.loop = false;
-	snkAnim.speed = 0.5f;
+	snkAnim.speed = 0.2f;
 
 
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");

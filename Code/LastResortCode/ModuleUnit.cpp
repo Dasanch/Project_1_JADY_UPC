@@ -33,7 +33,9 @@ update_status ModuleUnit::Update()
 		//Limit the variable
 		if(x < -r) { x = -r; }
 		//Find the other component
-		y = sqrt(pow(r, 2) - pow(x, 2));
+		//-Look at if it's above or bellow 0 (there are two solutions to a square root, we need to get the one we need)
+		if (y >= 0) { y =  sqrt(pow(r, 2) - pow(x, 2)); }
+		else        { y = -sqrt(pow(r, 2) - pow(x, 2)); }
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
 	{
@@ -41,7 +43,9 @@ update_status ModuleUnit::Update()
 		//Limit the variable
 		if (x > r) { x = r; }
 		//Find the other component
-		y = sqrt(pow(r, 2) - pow(x, 2));
+		//-Look at if it's above or bellow 0 (there are two solutions to a square root, we need to get the one we need)
+		if(y >= 0) { y =  sqrt(pow(r, 2) - pow(x, 2)); }
+		else       { y = -sqrt(pow(r, 2) - pow(x, 2)); }
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
 	{
@@ -49,7 +53,10 @@ update_status ModuleUnit::Update()
 		//Limit the variable
 		if (y < -r)	{ y = -r; }
 		//Find the other component
-		x = sqrt(pow(r, 2) - pow(y, 2));
+		//-Look at if it's above or bellow 0 (there are two solutions to a square root, we need to get the one we need)
+		if(x >= 0) { x =  sqrt(pow(r, 2) - pow(y, 2)); }
+		else       { x = -sqrt(pow(r, 2) - pow(y, 2)); }
+		
 	}
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
 	{
@@ -57,7 +64,9 @@ update_status ModuleUnit::Update()
 		//Limit the variable
 		if (y > r) { y = r; }
 		//Find the other component
-		x = sqrt(pow(r, 2) - pow(y, 2));
+		//-Look at if it's above or bellow 0 (there are two solutions to a square root, we need to get the one we need)
+		if (x >= 0) { x = sqrt(pow(r, 2) - pow(y, 2)); }
+		else { x = -sqrt(pow(r, 2) - pow(y, 2)); }
 	}
 	//Set the position
 	position.x = x + App->player->position.x + 15; //15= offset from the top left. Adding this we get the center of the player
