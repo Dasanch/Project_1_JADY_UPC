@@ -85,7 +85,7 @@ update_status ModulePlayer2::Update()
 	}
 
 	//If there isn't any input on the y axis
-	if (App->input->keyboard[SDL_SCANCODE_W] == false && App->input->keyboard[SDL_SCANCODE_S] == false)
+	if (App->input->keyboard[SDL_SCANCODE_U] == false && App->input->keyboard[SDL_SCANCODE_J] == false)
 	{
 		if (yAxis > 0.1)
 		{

@@ -11,6 +11,7 @@
 #include "ModuleStage02.h"
 #include "ModuleAudio.h"
 #include "ModuleReady.h"
+#include "ModulePlayer2.h"
 
 ModuleStage1Clear::ModuleStage1Clear()
 {
@@ -74,12 +75,11 @@ update_status ModuleStage1Clear::Update()
 	App->render->Blit(backgroundStageClear1, 40 /*SCREEN_WIDTH/2*/, 60 /*SCREEN_HEIGHT/2*/, &BGroundStageClear1, 0.0f); //MAGIC NUMBERS
 
 
-																														// make so pressing SPACE other stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+	// Make that pressing SPACE loads another stage
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
+	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
-
-
 
 	return UPDATE_CONTINUE;
 }
