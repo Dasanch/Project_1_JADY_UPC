@@ -48,6 +48,12 @@ private:
 
 	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
+
+public:
+
+	Particle explosion;
+	//Particle laser;
+
 };
 
 #endif // __MODULEPARTICLES_H__
