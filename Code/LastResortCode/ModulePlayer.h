@@ -24,17 +24,15 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
-	iPoint position;
-	float const movementSpeed = 2;
+	//Animations--------------------------------------------
 	Animation* current_animation = nullptr;
 	Animation shipPlayer1;
-	Particle basicShot_p;
+	//Textures----------------------------------------------
 	SDL_Texture* PlayerTexture = nullptr;
+	//Variables--------------------------------------------
 	int const playerwidth = 32;
-	//SDL_Texture* graphics = nullptr;
-
-	
-
+	iPoint position;
+	float const movementSpeed = 2;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
 	const float keyReleaseSpeed = 0.05f;//The speed at which the ship goes basck to the idle frame when the key is release
@@ -49,12 +47,14 @@ public:
 		TransitionDown,
 		MaxDown
 	};
-	//Collision
+	//Collision-----------------------------------------
 	Collider* playerCol = nullptr;
-	float playerColPosX;
-	float playerColPosY;
-	//Audios
-	Mix_Chunk* basic_shoot_sfx = nullptr;
+	//Particles----------------------------------------------
+	Particle ;
+	Particle ;
+	Particle basicShot_p;
+	//Audios-------------------------------------------
+	Mix_Chunk* basic_shot_sfx = nullptr;
 };
 
 #endif

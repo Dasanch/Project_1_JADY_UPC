@@ -37,7 +37,7 @@ bool ModulePlayer2::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 	//audios-------------------------------------------------------------------------
-	basic_shoot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
 	//colliders-------------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
 	return ret;
@@ -129,7 +129,7 @@ update_status ModulePlayer2::Update()
 	}
 	//Basic shoot-------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN) {
-		App->audio->ControlSFX(basic_shoot_sfx, PLAY_AUDIO);
+		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
 		App->particles->AddParticle(basicShot_p, position.x + 20, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
 	//Draw ship-------------------------------------------------------------------------
@@ -144,7 +144,7 @@ bool ModulePlayer2::CleanUp()
 	//textures------------------------------------------------------------------
 	App->textures->Unload(PlayerTexture);
 	//audios------------------------------------------------------------------
-	App->audio->UnloadSFX(basic_shoot_sfx);
+	App->audio->UnloadSFX(basic_shot_sfx);
 	return true;
 }
 

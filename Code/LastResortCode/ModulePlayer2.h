@@ -53,7 +53,7 @@ public:
 	float playerColPosX;
 	float playerColPosY;
 	//Audios
-	Mix_Chunk* basic_shoot_sfx = nullptr;
+	Mix_Chunk* basic_shot_sfx = nullptr;
 };
 
 #endif
