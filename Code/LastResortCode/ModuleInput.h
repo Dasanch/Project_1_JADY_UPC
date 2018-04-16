@@ -28,6 +28,7 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
+	SDL_Event event;
 };
 
 #endif // __ModuleInput_H__
