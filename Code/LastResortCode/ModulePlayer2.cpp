@@ -8,6 +8,7 @@
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleStage01.h"
 
 ModulePlayer2::ModulePlayer2() //Constructor 
 {
@@ -160,5 +161,5 @@ bool ModulePlayer2::CleanUp()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer2::OnCollision(Collider* collider1, Collider* collider2)
 {
-	App->fade->FadeToBlack((Module*)App->background, (Module*)App->titleScene, 0.5f);
+	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
 }
