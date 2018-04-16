@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleStage01.h"
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
@@ -34,6 +35,7 @@ Application::Application()
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
 	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
+	modules[i++] = player2 = new ModulePlayer2();
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = titleScene = new ModuleGameTitle();
 	modules[i++] = readyScene = new ModuleStageReady();

@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "ModulePlayer.h"
+#include "ModulePlayer2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleReady.h"
@@ -71,17 +72,19 @@ bool ModuleStage01::Start()
 	
 	//Enable------------------------------------------------------------------------
 	App->player->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
 	App->player->position.x = 0;
 	App->player->position.y = 100;
+	App->player2->position.x = 0;
+	App->player2->position.y = 150;
 	//Enemies----------------------------------------------------------------
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
 
 	return ret;
-
 }
 
 bool ModuleStage01::CleanUp()
@@ -102,6 +105,7 @@ bool ModuleStage01::CleanUp()
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
 	App->player->Disable(); //Disable the player module
+	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->render->camera.x = 0;
@@ -115,6 +119,7 @@ update_status ModuleStage01::Update()
 {
 	// Move camera forward -----------------------------
 	App->player->position.x += 1;
+	App->player2->position.x += 1;
 	App->render->camera.x -= 3;
 	//-------------------------------------------------
 	//int speed = 2;
@@ -230,9 +235,11 @@ update_status ModuleStage01::Update()
 		}
 		
 	}*/
+
+	//Midground lights-------------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
 		App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
-		//Midground lights
+	
 		//- Loop 1
 		App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 		App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
@@ -256,7 +263,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//Positions calculated from the png
 	}
-
 	//Blue Lasers-------------------------------------------------------------------------------------------
 	blueLaserAnim.LoopAnimation();
 
@@ -273,7 +279,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
 		
-
 	//Ground and tunnel-----------------------------------------------------------------------------------
 	/*
     if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
@@ -300,7 +305,6 @@ update_status ModuleStage01::Update()
 
 		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	}
-	//--------------------------------------------------------------------------------------------
 	//Street Lights-----------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
