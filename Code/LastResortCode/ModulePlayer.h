@@ -50,9 +50,10 @@ public:
 	//Collision-----------------------------------------
 	Collider* playerCol = nullptr;
 	//Particles----------------------------------------------
-	Particle ;
-	Particle ;
-	Particle basicShot_p;
+	Particle explosion01; //Death explosion 
+	Particle explosion02; //Basic Shot Explosion
+	Particle shotFire; //Particle infront of ship when we are shooting basic shots
+	Particle basicShot; 
 	//Audios-------------------------------------------
 	Mix_Chunk* basic_shot_sfx = nullptr;
 };

@@ -13,19 +13,30 @@ ModulePlayer::ModulePlayer() //Constructor
 {
 	position.x = 0;
 	position.y = 130;
-	//Player animation-----------------------------------------
+	//Movement animation-----------------------------------------
 	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
 	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
 	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
 	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
-	//Player Basic Shoot Particle-----------------------------
-	basicShot_p.anim.PushBack({ 148,127, 15,7 });
-	basicShot_p.anim.speed = 0.0f;
-	basicShot_p.speed.x = 10;
-	basicShot_p.anim.loop = false;
-	basicShot_p.life = 3000;
+	//Initial animation-----------------------------------------
+	//TODO Alejandro
+	//Death animation-------------------------------------------
+	//TODO Alejandro
+	//Basic Shot Particle---------------------------------------
+	basicShot.anim.PushBack({ 148,127, 15,7 });
+	basicShot.anim.speed = 0.0f;
+	basicShot.speed.x = 10;
+	basicShot.anim.loop = false;
+	basicShot.life = 3000;
+	//Shot Fire Particle----------------------------------------
+	shotFire.anim.PushBack({ 148,127, 15,7 });
+	//Death Explosion Particle----------------------------------
+	explosion01.anim.PushBack({ 148,127, 15,7 });
+	//Basic Shot Explosion Particle-----------------------------
+	explosion02.anim.PushBack({ 148,127, 15,7 });
 	
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -142,7 +153,7 @@ update_status ModulePlayer::Update()
 	//Basic shoot-------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
 		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
-		App->particles->AddParticle(basicShot_p, position.x + 20, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(basicShot, position.x + 20, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
 	//Draw ship-------------------------------------------------------------------------
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);

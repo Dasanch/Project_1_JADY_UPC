@@ -28,7 +28,7 @@ public:
 	float const movementSpeed = 2;
 	Animation* current_animation = nullptr;
 	Animation shipPlayer2;
-	Particle basicShot_p;
+	Particle basicShot;
 	SDL_Texture* PlayerTexture = nullptr;
 	//SDL_Texture* graphics = nullptr;
 
