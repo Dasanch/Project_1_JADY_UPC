@@ -120,7 +120,7 @@ update_status ModuleStage01::Update()
 	// Move camera forward -----------------------------
 	App->player->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -= 3;
+	App->render->camera.x -= App->render->cameraspeed;
 	//-------------------------------------------------
 	//int speed = 2;
 

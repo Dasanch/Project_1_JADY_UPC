@@ -51,15 +51,15 @@ update_status ModulePlayer::Update()
 		//MOVEMENT
 		position.x -= movementSpeed;
 	
-		if (position.x < -(App->render->camera.x / 3))
-			position.x = -App->render->camera.x / 3;
+		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
+			position.x = -App->render->camera.x / App->render->cameraspeed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
-		if (position.x+32 > -(App->render->camera.x / 3)+ App->render->camera.w)
-			position.x = -(App->render->camera.x / 3) + App->render->camera.w-32;
+		if (position.x+playerwidth > -(App->render->camera.x / App->render->cameraspeed)+ App->render->camera.w)
+			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w-playerwidth;
 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
