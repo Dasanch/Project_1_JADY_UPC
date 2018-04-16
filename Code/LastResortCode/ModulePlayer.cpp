@@ -85,19 +85,22 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//If there isn't any input on the y axis
-	if (App->input->keyboard[SDL_SCANCODE_W] == false && App->input->keyboard[SDL_SCANCODE_S] == false)
+	if (App->input->keyboard[SDL_SCANCODE_S] == false)
 	{
 		if (yAxis > 0.1)
 		{
-			//Decrement the y axis
 			yAxis -= keyReleaseSpeed;
 		}
-		else if (yAxis < -0.1)
+	}
+
+	if(App->input->keyboard[SDL_SCANCODE_W] == false)
+	{
+		if (yAxis < -0.1)
 		{
-			//Increment the y axis
 			yAxis += keyReleaseSpeed;
 		}
 	}
+
 	//Collision------------------------------------------------------------------------------
 	//- We update the collider position
 	playerCol->SetPos(position.x, position.y);

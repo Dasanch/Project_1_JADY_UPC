@@ -98,6 +98,7 @@ update_status ModulePlayer2::Update()
 			yAxis += keyReleaseSpeed;
 		}
 	}
+
 	//Collision------------------------------------------------------------------------------
 	//- We update the collider position
 	playerCol->SetPos(position.x, position.y);

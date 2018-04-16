@@ -18,6 +18,7 @@
 #include "ModuleParticles.h"
 #include "ModuleStage1Clear.h"
 #include "ModuleCollision.h"
+#include "ModuleUnit.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -75,6 +76,7 @@ bool ModuleStage01::Start()
 	//App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
+	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
 	App->player->position.x = 0;
 	App->player->position.y = 100;
@@ -353,9 +355,10 @@ update_status ModuleStage01::Update()
 	//Enemies------------------------------------------------------
 	App->render->Blit(staticEnemyTx, 500, 100, NULL, foregndSpeed);
 
+	//Create the player 2
 	if(App->player2->IsEnabled() == false)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN)
+		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_KP_2])
 		{
 			//We enable the other player
 			App->player2->Enable();
