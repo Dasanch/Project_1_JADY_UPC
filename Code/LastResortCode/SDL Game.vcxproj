@@ -99,6 +99,7 @@
     <ClInclude Include="ModuleStage1Clear.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleGameTitle.h" />
+    <ClInclude Include="ModuleUnit.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="ModuleStage1Clear.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleGameTitle.cpp" />
+    <ClCompile Include="ModuleUnit.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

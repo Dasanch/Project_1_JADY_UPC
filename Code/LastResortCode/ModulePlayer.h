@@ -30,6 +30,7 @@ public:
 	Animation shipPlayer1;
 	Particle basicShot_p;
 	SDL_Texture* PlayerTexture = nullptr;
+	int const playerwidth = 32;
 	//SDL_Texture* graphics = nullptr;
 
 	

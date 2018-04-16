@@ -102,6 +102,6 @@ bool ModuleTextures::Unload(SDL_Texture * texture)
 			}
 		}
 	}
-
+	last_texture = 0;
 	return ret;
 }

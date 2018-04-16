@@ -53,16 +53,15 @@ update_status ModulePlayer::Update()
 		//MOVEMENT
 		position.x -= movementSpeed;
 	
-		if (position.x < App->render->camera.x)
-		{
-			position.x = App->render->camera.x;
-		}
+		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
+			position.x = -App->render->camera.x / App->render->cameraspeed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
-		
+		if (position.x+playerwidth > -(App->render->camera.x / App->render->cameraspeed)+ App->render->camera.w)
+			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w-playerwidth;
 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
@@ -95,23 +94,26 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//If there isn't any input on the y axis
-	if (App->input->keyboard[SDL_SCANCODE_W] == false && App->input->keyboard[SDL_SCANCODE_S] == false)
+	if (App->input->keyboard[SDL_SCANCODE_S] == false)
 	{
 		if (yAxis > 0.1)
 		{
-			//Decrement the y axis
 			yAxis -= keyReleaseSpeed;
 		}
-		else if (yAxis < -0.1)
+	}
+
+	if(App->input->keyboard[SDL_SCANCODE_W] == false)
+	{
+		if (yAxis < -0.1)
 		{
-			//Increment the y axis
 			yAxis += keyReleaseSpeed;
 		}
 	}
+
 	//Collision------------------------------------------------------------------------------
 	//- We update the collider position
 	playerCol->SetPos(position.x, position.y);
-	App->render->camera.x;
+	
 	//Render--------------------------------------------------------------------------------
 	//Check what is the value of the yAxis variable
 	//-Idle
