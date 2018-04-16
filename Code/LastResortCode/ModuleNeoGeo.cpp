@@ -30,53 +30,19 @@ bool ModuleNeoGeo::Start()
 	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
 	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
 
-	neogeoAnim.PushBack({ 0,1415,227,40 });
-	neogeoAnim.PushBack({ 0,1371,227,40 });
-	neogeoAnim.PushBack({ 0,1328,227,40 });
-	neogeoAnim.PushBack({ 0,1285,227,40 });
-	neogeoAnim.PushBack({ 0,1243,227,40 });
-	neogeoAnim.PushBack({ 0,1200,227,40 });
-	neogeoAnim.PushBack({ 0,1158,227,40 });
-	neogeoAnim.PushBack({ 0,1115,227,40 });
-	neogeoAnim.PushBack({ 0,1072,227,40 });
-	neogeoAnim.PushBack({ 0,1030,227,40 });
-	neogeoAnim.PushBack({ 0,987,227,40 });
-	neogeoAnim.PushBack({ 0,944,227,40 });
-	neogeoAnim.PushBack({ 0,899,227,40 });
-	neogeoAnim.PushBack({ 0,855,227,40 });
-	neogeoAnim.PushBack({ 0,810,227,40 });
-	neogeoAnim.PushBack({ 0,767,227,40 });//This is when size starts to reduce
-	neogeoAnim.PushBack({ 0,725,227,38 });
-	neogeoAnim.PushBack({ 0,686,227,35 });
-	neogeoAnim.PushBack({ 0,650,227,32 });
-	neogeoAnim.PushBack({ 0,617,227,30 });
-	neogeoAnim.PushBack({ 0,587,227,28 });
-	neogeoAnim.PushBack({ 0,559,227,25 });
-	neogeoAnim.PushBack({ 0,531,227,22 });
-	neogeoAnim.PushBack({ 0,508,227,20 });
-	neogeoAnim.PushBack({ 0,484,227,18 });
-	neogeoAnim.PushBack({ 0,466,227,15 });
-	neogeoAnim.PushBack({ 0,451,227,12 });
-	neogeoAnim.PushBack({ 0,438,227,10 });
-	neogeoAnim.PushBack({ 0,425,227,8 });
-	neogeoAnim.PushBack({ 0,414,227,5 });
-	neogeoAnim.PushBack({ 0,408,227,2 });
-	neogeoAnim.PushBack({ 0,401,227,2 });
-	neogeoAnim.PushBack({ 0,393,227,5 });
-	neogeoAnim.PushBack({ 0,381,227,8 });
-	neogeoAnim.PushBack({ 0,365,227,10 });
-	neogeoAnim.PushBack({ 0,348,227,12 });
-	neogeoAnim.PushBack({ 0,330,227,15 });
-	neogeoAnim.PushBack({ 0,310,227,18 });
-	neogeoAnim.PushBack({ 0,286,227,20 });
-	neogeoAnim.PushBack({ 0,262,227,22 });
-	neogeoAnim.PushBack({ 0,235,227,25 });
-	neogeoAnim.PushBack({ 0,203,227,28 });
-	neogeoAnim.PushBack({ 0,168,227,30 });
-	neogeoAnim.PushBack({ 0,129,227,32 });
-	neogeoAnim.PushBack({ 0,88,227,35 });
-	neogeoAnim.PushBack({ 0,44,227,38 });
-	neogeoAnim.PushBack({ 0,0,227,40 });
+	for(int i = 0; i < 227 * 2; i += 227)
+	{
+		for(int j = 0; j < 40 * 25; j += 40)
+		{
+			neogeoAnim.PushBack({i,j,227,40});
+			//if(i = 227*2 && j == 40*22)
+			//{
+			//	break;
+			//}
+		}
+	}
+	//227 = width of each sprite
+	// 40 = height of each sprite
 	neogeoAnim.loop = false;
 	neogeoAnim.speed = neogeoAnimSpeed;
 
