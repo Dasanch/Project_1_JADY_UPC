@@ -393,6 +393,7 @@ update_status ModuleGameTitle::Update() {
 bool ModuleGameTitle::CleanUp() {
 	LOG("Unloading Title scene");
 	App->player->Disable();
+	L1.Reset();
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	App->audio->UnloadMUS(Titlemusic);
