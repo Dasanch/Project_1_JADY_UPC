@@ -46,12 +46,13 @@ public:
 
 private:
 
-	SDL_Texture* graphics = nullptr;
+	
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
 
-	Particle explosion;
+	Particle general_explosion02;
+	SDL_Texture* graphics = nullptr;
 	//Particle laser;
 
 };

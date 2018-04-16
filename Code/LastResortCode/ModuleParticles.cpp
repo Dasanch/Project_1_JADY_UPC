@@ -12,6 +12,24 @@ ModuleParticles::ModuleParticles()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+
+	//General explosion 02 particle 
+	general_explosion02.anim.PushBack({ 0,0,32,32 });
+	general_explosion02.anim.PushBack({ 32,0,32,32 });
+	general_explosion02.anim.PushBack({ 64,0,16,16 });
+	general_explosion02.anim.PushBack({ 80,0,20,20 });
+	general_explosion02.anim.PushBack({ 100,0,25,25 });
+	general_explosion02.anim.PushBack({ 0,32,26,26 });
+	general_explosion02.anim.PushBack({ 26,32,32,32 });
+	general_explosion02.anim.PushBack({ 58,32,32,32 });
+	general_explosion02.anim.PushBack({ 90,32,32,32 });
+	general_explosion02.anim.PushBack({ 0,64,32,32 });
+	general_explosion02.anim.PushBack({ 32,64,32,32 });
+	general_explosion02.anim.PushBack({ 64,64,32,32 });
+	general_explosion02.anim.PushBack({ 96,64,32,32 });
+	general_explosion02.anim.PushBack({ 0,96,31,32 });
+	general_explosion02.anim.PushBack({ 31,96,30,32 });
+	general_explosion02.anim.PushBack({ 61,96,30,32 });
 }
 
 ModuleParticles::~ModuleParticles()
@@ -20,6 +38,9 @@ ModuleParticles::~ModuleParticles()
 // Load assets
 bool ModuleParticles::Start()
 {
+	LOG("Loading ModuleParticles assets ");
+	//textures-------------------------------------------------
+	graphics = App->textures->Load("Assets/General/Explosion_2.png");
 	return true;
 }
 

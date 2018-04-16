@@ -4,6 +4,7 @@
 #include "Globals.h"
 
 #define NUM_MODULES 17
+
 class Module;
 class ModuleWindow;
 class ModuleInput;
@@ -44,9 +45,10 @@ public:
 	Module2lvlScene* scene_lvl2 = nullptr;
 	ModuleGameOver* scene_gameover = nullptr;
 	ModuleContinue* scene_continue = nullptr;
+	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollision* collision = nullptr;
-	ModuleEnemies* enemies = nullptr;
+	
 
 public:
 

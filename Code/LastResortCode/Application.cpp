@@ -15,6 +15,7 @@
 #include "ModuleContinue.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleEnemies.h"
 
 Application::Application()
 {
@@ -28,6 +29,7 @@ Application::Application()
 	modules[i++] = scene_lvl2 = new Module2lvlScene();
 	//Add module orbit here (particles are rendererd in front of the orbit)
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
+	modules[i++] = enemies = new ModuleEnemies();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = GameTitle = new ModuleGameTitle();
@@ -62,9 +64,10 @@ bool Application::Init()
 	// Disable the map that you do not start with
 	// ---
 
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i){
+		LOG("init module %i ", i);
 		ret = modules[i]->Init();
-
+}
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->IsEnabled() ? modules[i]->Start() : true;
 
