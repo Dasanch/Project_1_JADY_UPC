@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModulePlayer.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
@@ -10,7 +10,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
-#include "ModuleStageReady.h"
+#include "ModuleReady.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"//delete (provitional)
 #include "ModuleContinue.h" 
@@ -30,7 +30,7 @@
 #define streetLightDist 64
 #define roadLightDist 121
 
-ModuleBackground::ModuleBackground()
+ModuleStage01::ModuleStage01()
 {
 	frame = 0;
 	srand((unsigned int)time(NULL));
@@ -47,11 +47,11 @@ ModuleBackground::ModuleBackground()
 	TakeBlueLaser();
 }
 
-ModuleBackground::~ModuleBackground()
+ModuleStage01::~ModuleStage01()
 {}
 
 // Load assets
-bool ModuleBackground::Start()
+bool ModuleStage01::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
@@ -84,7 +84,7 @@ bool ModuleBackground::Start()
 
 }
 
-bool ModuleBackground::CleanUp()
+bool ModuleStage01::CleanUp()
 {
 	LOG("Unloading background assets");
 	//textures-----------------------------------------------------------------------
@@ -111,7 +111,7 @@ bool ModuleBackground::CleanUp()
 
 
 // Update: draw background
-update_status ModuleBackground::Update()
+update_status ModuleStage01::Update()
 {
 	// Move camera forward -----------------------------
 
@@ -349,15 +349,15 @@ update_status ModuleBackground::Update()
 	//Change scenes on button press
 	if (App->input->keyboard[SDL_SCANCODE_SPACE])
 	{
-		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_G])
 	{
-		App->fade->FadeToBlack(this, App->scene_gameover, 0.0); 
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.0); 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_C])
 	{
-		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
+		App->fade->FadeToBlack(this, App->continueScene, 0.0);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_0])
 	{
@@ -370,7 +370,7 @@ update_status ModuleBackground::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleBackground::TakeTileMap()
+void ModuleStage01::TakeTileMap()
 {
 	ground.x = 0;
 	ground.y = 0;
@@ -387,7 +387,7 @@ void ModuleBackground::TakeTileMap()
 	BGBuildings.w = 803;
 	BGBuildings.h = 160;
 }
-void ModuleBackground::TakeTunnelLights()
+void ModuleStage01::TakeTunnelLights()
 {
 	tunnelLightsAnim.PushBack({ 1,   1, 116, 168 });
 	tunnelLightsAnim.PushBack({ 118,   1, 116, 168 });
@@ -400,7 +400,7 @@ void ModuleBackground::TakeTunnelLights()
 	tunnelLightsAnim.speed = 0.02f;
 }
 
-void ModuleBackground::TakeBckLights()
+void ModuleStage01::TakeBckLights()
 {
 	//1
 	bckgndLightsAnim01.PushBack({ 1,  1, 89, 78 });
@@ -464,7 +464,7 @@ void ModuleBackground::TakeBckLights()
 	bckgndLightsAnim06.speed = 0.08f;
 }
 
-void ModuleBackground::TakeMidLights()
+void ModuleStage01::TakeMidLights()
 {
 	//1
 	midgndLightsAnim01.PushBack({ 1, 1, 95, 86 });
@@ -522,7 +522,7 @@ void ModuleBackground::TakeMidLights()
 	midgndLightsAnim06.speed = 0.03f;
 }
 
-void ModuleBackground::TakeStreetLights()
+void ModuleStage01::TakeStreetLights()
 {
 	//1
 	streetLightsAnim01.PushBack({ 0,0, 48, 65 });
@@ -544,7 +544,7 @@ void ModuleBackground::TakeStreetLights()
 	streetLightsAnim02.speed = 0.10f;
 }
 
-void ModuleBackground::TakeOrangeLaser()
+void ModuleStage01::TakeOrangeLaser()
 {
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
@@ -573,7 +573,7 @@ void ModuleBackground::TakeOrangeLaser()
 	orangeLaserAnim.speed = 0.4f;
 }
 
-void ModuleBackground::TakeBlueLaser()
+void ModuleStage01::TakeBlueLaser()
 {
 	blueLaserAnim.PushBack({ 0,290, 38, 88 });
 	blueLaserAnim.PushBack({ 38,290, 30, 88 });
