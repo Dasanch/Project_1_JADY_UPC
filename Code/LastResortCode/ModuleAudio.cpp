@@ -99,7 +99,7 @@ bool ModuleAudio::UnloadMUS(Mix_Music * music) {
 		}
 		
 	}
-
+	last_music = 0;
 	return ret;
 }
 
@@ -122,7 +122,7 @@ bool ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 		}
 
 	}
-
+	last_chunk = 0;
 	return ret;
 }
 

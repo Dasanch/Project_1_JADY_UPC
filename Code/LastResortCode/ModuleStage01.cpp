@@ -82,7 +82,7 @@ bool ModuleStage01::Start()
 	//App->player2->position.y = 150;
 	//Enemies----------------------------------------------------------------
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
-	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
+	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
 
 	return ret;
 }
