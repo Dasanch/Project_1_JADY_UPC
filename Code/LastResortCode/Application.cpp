@@ -16,6 +16,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
+#include "ModuleStage1Clear.h"
 
 Application::Application()
 {
@@ -36,6 +37,7 @@ Application::Application()
 	modules[i++] = scene_ready = new ModuleStageReady();
 	modules[i++] = scene_gameover = new ModuleGameOver();
 	modules[i++] = scene_continue = new ModuleContinue();
+	modules[i++] = scene_stage1clear = new ModuleStage1Clear();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 }
@@ -60,6 +62,7 @@ bool Application::Init()
 	scene_ready->Disable();
 	scene_gameover->Disable();
 	scene_continue->Disable();
+	scene_stage1clear->Disable();
 
 	// Disable the map that you do not start with
 	// ---

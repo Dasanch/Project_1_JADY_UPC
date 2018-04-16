@@ -16,6 +16,7 @@
 #include "ModuleContinue.h" 
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleStage1Clear.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -357,6 +358,10 @@ update_status ModuleBackground::Update()
 	if (App->input->keyboard[SDL_SCANCODE_C])
 	{
 		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
+	}
+	if (App->input->keyboard[SDL_SCANCODE_0])
+	{
+		App->fade->FadeToBlack(this, App->scene_stage1clear, 0.0);
 	}
 
 	//Static enemy
