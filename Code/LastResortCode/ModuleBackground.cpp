@@ -72,27 +72,19 @@ bool ModuleBackground::Start()
 	
 	//Enable------------------------------------------------------------------------
 	App->player->Enable();
-	//App->player2->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	//"Reset ship position when fadetoblackends" 
 	App->player->position.x = 0;
 	App->player->position.y = 100;
 
-	//App->player2->position.x = 0;
-	//App->player2->position.y = 150;
+	App->player2->position.x = 0;
+	App->player2->position.y = 150;
 
 	//Static enemy
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
-
-	if (App->input->keyboard[SDL_SCANCODE_F7])
-	{
-		App->player2->Enable();
-		App->player2->position.x = 0;
-		App->player2->position.y = 150;
-
-	}
 
 	return ret;
 
