@@ -4,6 +4,8 @@
 #include "Module.h"
 
 #include "Enemy_Basic.h"
+#include "Enemy_Oscilator.h"
+#include "Enemy_PowerDropper.h"
 
 #define MAX_ENEMIES 100
 
@@ -11,6 +13,8 @@ enum ENEMY_TYPES
 {
 	NO_TYPE,
 	BASIC,
+	OSCILATOR,
+	POWERDROPPER,
 	
 };
 
