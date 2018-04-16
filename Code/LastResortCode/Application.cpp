@@ -3,7 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModulePlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
@@ -27,7 +27,7 @@ Application::Application()
 	modules[i++] = textures = new ModuleTextures();
 	modules[i++] = audio = new ModuleAudio();
 	//Stages----------------------------------------------------
-	modules[i++] = stage01 = new ModuleBackground();
+	modules[i++] = stage01 = new ModuleStage01();
 	modules[i++] = stage02 = new Module2lvlScene();
 	//Add module orbit here (particles are rendererd in front of the orbit)
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)

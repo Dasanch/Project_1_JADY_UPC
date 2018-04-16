@@ -6,10 +6,10 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
-#include "ModuleGameTitle.h"
+
 
 
 #define MAX_ALPHA 255

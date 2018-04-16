@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "SDL_image\include\SDL_image.h"
 #include "ModuleStageReady.h"
 #include "ModuleInput.h"

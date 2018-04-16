@@ -83,7 +83,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="Module2lvlScene.h" />
     <ClInclude Include="ModuleAudio.h" />
-    <ClInclude Include="ModuleBackground.h" />
+    <ClInclude Include="ModuleStage01.h" />
     <ClInclude Include="ModuleCollision.h" />
     <ClInclude Include="ModuleContinue.h" />
     <ClInclude Include="ModuleEnemies.h" />
@@ -111,7 +111,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Module2lvlScene.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />
-    <ClCompile Include="ModuleBackground.cpp" />
+    <ClCompile Include="ModuleStage01.cpp" />
     <ClCompile Include="ModuleCollision.cpp" />
     <ClCompile Include="ModuleContinue.cpp" />
     <ClCompile Include="ModuleEnemies.cpp" />
