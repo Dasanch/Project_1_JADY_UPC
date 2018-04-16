@@ -348,15 +348,15 @@ update_status ModuleBackground::Update()
 	//Change scenes on button press
 	if (App->input->keyboard[SDL_SCANCODE_SPACE])
 	{
-		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_G])
 	{
-		App->fade->FadeToBlack(this, App->scene_gameover, 0.0); 
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.0); 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_C])
 	{
-		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
+		App->fade->FadeToBlack(this, App->continueScene, 0.0);
 	}
 
 	//Static enemy
