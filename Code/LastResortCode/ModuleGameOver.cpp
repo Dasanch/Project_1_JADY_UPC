@@ -68,9 +68,9 @@ bool ModuleGameOver::CleanUp() {
 	//textures----------------------------------------------------------------------
 	App->textures->Unload(goTex);
 	//audios------------------------------------------------------------------------
-	if(App->continueScene->continue_and_go != nullptr)
-	App->audio->ControlMUS(App->continueScene->continue_and_go, STOP_AUDIO);
-	App->audio->UnloadMUS(App->continueScene->continue_and_go);
+	if(App->scene_continue->continue_and_go != nullptr)
+	App->audio->ControlMUS(App->scene_continue->continue_and_go, STOP_AUDIO);
+	App->audio->UnloadMUS(App->scene_continue->continue_and_go);
 	//------------------------------------------------------------------------------
 	return true;
 }

@@ -1,4 +1,4 @@
-
+#include "Module2lvlScene.h"
 #include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleInput.h"
@@ -9,7 +9,6 @@
 #include "SDL\include\SDL.h"
 #include "ModuleContinue.h"
 #include "ModuleAudio.h"
-#include "ModuleStage02.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 
@@ -69,7 +68,7 @@ update_status Module2lvlScene::Update() {
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
 		//App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
-		App->fade->FadeToBlack(this, App->continueScene, 0.2f);
+		App->fade->FadeToBlack(this, App->scene_continue, 0.2f);
 	}
 
 	return UPDATE_CONTINUE;
