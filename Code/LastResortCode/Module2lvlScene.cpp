@@ -84,6 +84,7 @@ bool Module2lvlScene::CleanUp() {
 	LOG("Unloading ready scene");
 	App->render->camera.x = 0;
 	App->player->Disable();
+	App->player2->Disable();
 
 	App->textures->Unload(lvl2Text);
 	App->textures->Unload(lvl2ground);
@@ -93,6 +94,7 @@ bool Module2lvlScene::CleanUp() {
 	App->audio->UnloadMUS(lvl2Music);
 	//Modules-----------------------------------------------------------------------
 	App->player->Disable();
+	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	return true;
