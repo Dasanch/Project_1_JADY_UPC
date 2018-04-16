@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModulePlayer.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
@@ -10,13 +10,13 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
-#include "ModuleStageReady.h"
+#include "ModuleReady.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"//delete (provitional)
 #include "ModuleContinue.h" 
 #include "ModuleParticles.h"
-#include "ModuleCollision.h"
 #include "ModuleStage1Clear.h"
+#include "ModuleCollision.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -30,7 +30,7 @@
 #define streetLightDist 64
 #define roadLightDist 121
 
-ModuleBackground::ModuleBackground()
+ModuleStage01::ModuleStage01()
 {
 	frame = 0;
 	srand((unsigned int)time(NULL));
@@ -47,11 +47,11 @@ ModuleBackground::ModuleBackground()
 	TakeBlueLaser();
 }
 
-ModuleBackground::~ModuleBackground()
+ModuleStage01::~ModuleStage01()
 {}
 
 // Load assets
-bool ModuleBackground::Start()
+bool ModuleStage01::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
@@ -73,10 +73,10 @@ bool ModuleBackground::Start()
 	App->player->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
-	//"Reset ship position when fadetoblackends" 
+	//"Reset ship position when fadetoblackends"------------------------------------
 	App->player->position.x = 0;
 	App->player->position.y = 100;
-	//Static enemy
+	//Enemies----------------------------------------------------------------
 	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png");
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_WALL);
 
@@ -84,7 +84,7 @@ bool ModuleBackground::Start()
 
 }
 
-bool ModuleBackground::CleanUp()
+bool ModuleStage01::CleanUp()
 {
 	LOG("Unloading background assets");
 	//textures-----------------------------------------------------------------------
@@ -111,13 +111,11 @@ bool ModuleBackground::CleanUp()
 
 
 // Update: draw background
-update_status ModuleBackground::Update()
+update_status ModuleStage01::Update()
 {
 	// Move camera forward -----------------------------
-
 	App->player->position.x += 1;
 	App->render->camera.x -= 3;
-
 	//-------------------------------------------------
 	//int speed = 2;
 
@@ -127,19 +125,16 @@ update_status ModuleBackground::Update()
 	//	App->render->camera.x -= speed; //CAMERA AUTO MOV
 
 	//}
-
 	//Boss buildings--------------------------------------
 	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
-
 	//Background buildings-----------------------------------------------------------------------
 	if (App->render->camera.x > -((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
 	}
-	
 	//Background lights-----------------------------------------------------------------------------
 	App->render->Blit(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
@@ -152,9 +147,7 @@ update_status ModuleBackground::Update()
 	App->render->Blit(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
 	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
 	
-
 	//Orange Laser-----------------------------------------------------------------------------
-
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= (-33)* SCREEN_SIZE* foregndSpeed)
 	{
 		orangeLaserAnim.LoopAnimation();
@@ -168,7 +161,6 @@ update_status ModuleBackground::Update()
 		else
 			frame = 0;
 	}
-
 	//Background lights
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
 	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
@@ -238,7 +230,6 @@ update_status ModuleBackground::Update()
 		}
 		
 	}*/
-
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
 		App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
 		//Midground lights
@@ -265,8 +256,6 @@ update_status ModuleBackground::Update()
 		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//Positions calculated from the png
 	}
-
-
 
 	//Blue Lasers-------------------------------------------------------------------------------------------
 	blueLaserAnim.LoopAnimation();
@@ -311,9 +300,7 @@ update_status ModuleBackground::Update()
 
 		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	}
-
 	//--------------------------------------------------------------------------------------------
-
 	//Street Lights-----------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
@@ -328,8 +315,6 @@ update_status ModuleBackground::Update()
 			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 		}
 	}
-
-
 	//Tunnel lights----------------------------------------------------------------------------------------
 	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
@@ -344,33 +329,30 @@ update_status ModuleBackground::Update()
 		//Could be implemented with a for, but probably all the frames would be the same
 		//2048 = distance from the start of the tilemap to the first light
 	}
-	
-
-	//Change scenes on button press
+	//Change scenes on button press-------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_SPACE])
 	{
-		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_G])
 	{
-		App->fade->FadeToBlack(this, App->scene_gameover, 0.0); 
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.0); 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_C])
 	{
-		App->fade->FadeToBlack(this, App->scene_continue, 0.0);
+		App->fade->FadeToBlack(this, App->continueScene, 0.0);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_0])
 	{
-		App->fade->FadeToBlack(this, App->scene_stage1clear, 0.0);
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.0);
 	}
-
-	//Static enemy
+	//Enemies------------------------------------------------------
 	App->render->Blit(staticEnemyTx, 500, 100, NULL, foregndSpeed);
 
 	return UPDATE_CONTINUE;
 }
 
-void ModuleBackground::TakeTileMap()
+void ModuleStage01::TakeTileMap()
 {
 	ground.x = 0;
 	ground.y = 0;
@@ -387,7 +369,7 @@ void ModuleBackground::TakeTileMap()
 	BGBuildings.w = 803;
 	BGBuildings.h = 160;
 }
-void ModuleBackground::TakeTunnelLights()
+void ModuleStage01::TakeTunnelLights()
 {
 	tunnelLightsAnim.PushBack({ 1,   1, 116, 168 });
 	tunnelLightsAnim.PushBack({ 118,   1, 116, 168 });
@@ -400,7 +382,7 @@ void ModuleBackground::TakeTunnelLights()
 	tunnelLightsAnim.speed = 0.02f;
 }
 
-void ModuleBackground::TakeBckLights()
+void ModuleStage01::TakeBckLights()
 {
 	//1
 	bckgndLightsAnim01.PushBack({ 1,  1, 89, 78 });
@@ -464,7 +446,7 @@ void ModuleBackground::TakeBckLights()
 	bckgndLightsAnim06.speed = 0.08f;
 }
 
-void ModuleBackground::TakeMidLights()
+void ModuleStage01::TakeMidLights()
 {
 	//1
 	midgndLightsAnim01.PushBack({ 1, 1, 95, 86 });
@@ -522,7 +504,7 @@ void ModuleBackground::TakeMidLights()
 	midgndLightsAnim06.speed = 0.03f;
 }
 
-void ModuleBackground::TakeStreetLights()
+void ModuleStage01::TakeStreetLights()
 {
 	//1
 	streetLightsAnim01.PushBack({ 0,0, 48, 65 });
@@ -544,7 +526,7 @@ void ModuleBackground::TakeStreetLights()
 	streetLightsAnim02.speed = 0.10f;
 }
 
-void ModuleBackground::TakeOrangeLaser()
+void ModuleStage01::TakeOrangeLaser()
 {
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
 	orangeLaserAnim.PushBack({ 121 ,145, 142, 145 });
@@ -573,7 +555,7 @@ void ModuleBackground::TakeOrangeLaser()
 	orangeLaserAnim.speed = 0.4f;
 }
 
-void ModuleBackground::TakeBlueLaser()
+void ModuleStage01::TakeBlueLaser()
 {
 	blueLaserAnim.PushBack({ 0,290, 38, 88 });
 	blueLaserAnim.PushBack({ 38,290, 30, 88 });
@@ -582,4 +564,5 @@ void ModuleBackground::TakeBlueLaser()
 	blueLaserAnim.PushBack({ 78,290, 27, 88 });
 	blueLaserAnim.PushBack({ 105,290, 36, 88 });
 	blueLaserAnim.speed = 0.25f;
+	blueLaserAnim.pingpong = true;
 }

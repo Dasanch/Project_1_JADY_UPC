@@ -6,10 +6,10 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleBackground.h"
+#include "ModuleStage01.h"
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
-#include "ModuleGameTitle.h"
+
 
 
 #define MAX_ALPHA 255
@@ -141,10 +141,10 @@ update_status ModuleContinue::Update() {
 	//-----------------------------------------------------------------------------
 	if (number < 0) {
 		time_finished = true;
-		App->fade->FadeToBlack(this, App->scene_gameover, 0.0f);
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.0f);
 	}
 	if (App->input->keyboard[SDL_SCANCODE_SPACE]){
-		App->fade->FadeToBlack(this, App->background, 0.5f);
+		App->fade->FadeToBlack(this, App->stage01, 0.5f);
 	}
 
 	return UPDATE_CONTINUE;

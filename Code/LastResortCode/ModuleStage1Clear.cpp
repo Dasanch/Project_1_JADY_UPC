@@ -2,15 +2,15 @@
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModuleBackground.h"
 #include "SDL_image\include\SDL_image.h"
 #include "ModuleStage1Clear.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
-#include "Module2lvlScene.h"
+#include "ModuleStage01.h"
+#include "ModuleStage02.h"
 #include "ModuleAudio.h"
-#include "ModuleStageReady.h"
+#include "ModuleReady.h"
 
 ModuleStage1Clear::ModuleStage1Clear()
 {
@@ -76,7 +76,7 @@ update_status ModuleStage1Clear::Update()
 
 																														// make so pressing SPACE other stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
-		App->fade->FadeToBlack(this, App->scene_ready, 0.5f);
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
 
 
