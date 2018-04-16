@@ -50,18 +50,24 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
-
+	
+		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
+			position.x = -App->render->camera.x / App->render->cameraspeed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
+		if (position.x+playerwidth > -(App->render->camera.x / App->render->cameraspeed)+ App->render->camera.w)
+			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w-playerwidth;
 
 	}
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
+		if (position.y < 0)
+			position.y = 0;
 
 		//ANIMATION
 		yAxis -= keyPressSpeed;
@@ -75,7 +81,8 @@ update_status ModulePlayer::Update()
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
-
+		if (position.y > SCREEN_HEIGHT - 12)
+			position.y = SCREEN_HEIGHT - 12;
 		//ANIMATION
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -104,7 +111,7 @@ update_status ModulePlayer::Update()
 	//Collision------------------------------------------------------------------------------
 	//- We update the collider position
 	playerCol->SetPos(position.x, position.y);
-
+	
 	//Render--------------------------------------------------------------------------------
 	//Check what is the value of the yAxis variable
 	//-Idle

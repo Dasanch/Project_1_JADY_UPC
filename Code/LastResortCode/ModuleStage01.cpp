@@ -122,7 +122,7 @@ update_status ModuleStage01::Update()
 	// Move camera forward -----------------------------
 	App->player->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -= 3;
+	App->render->camera.x -= App->render->cameraspeed;
 	//-------------------------------------------------
 	//int speed = 2;
 
@@ -280,7 +280,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(LasersTx, 792, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
-		
 	//Ground and tunnel-----------------------------------------------------------------------------------
 	/*
     if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
