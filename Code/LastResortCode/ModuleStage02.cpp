@@ -1,4 +1,4 @@
-#include "Module2lvlScene.h"
+
 #include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleInput.h"
@@ -9,6 +9,7 @@
 #include "SDL\include\SDL.h"
 #include "ModuleContinue.h"
 #include "ModuleAudio.h"
+#include "ModuleStage02.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 

@@ -4,11 +4,11 @@
 #include "ModuleRender.h"
 #include "ModuleStage01.h"
 #include "SDL_image\include\SDL_image.h"
-#include "ModuleStageReady.h"
+#include "ModuleReady.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModulePlayer.h"
-#include "Module2lvlScene.h"
+#include "ModuleStage02.h"
 #include "ModuleAudio.h"
 
 ModuleStageReady::ModuleStageReady()

@@ -10,7 +10,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
-#include "ModuleStageReady.h"
+#include "ModuleReady.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"//delete (provitional)
 #include "ModuleContinue.h" 
