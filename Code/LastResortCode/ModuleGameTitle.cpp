@@ -3,7 +3,7 @@
 #include "ModuleGameTitle.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"
@@ -436,7 +436,7 @@ update_status ModuleGameTitle::Update() {
 }
 bool ModuleGameTitle::CleanUp() {
 	LOG("Unloading Title scene");
-	App->player->Disable();
+	App->player1->Disable();
 	L1.Reset();
 	A2.Reset();
 	S3.Reset();

@@ -40,7 +40,9 @@ ModulePlayer::ModulePlayer() //Constructor
 }
 
 ModulePlayer::~ModulePlayer()
-{}
+{
+
+}
 
 bool ModulePlayer::Start()
 {
@@ -62,7 +64,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	//Input--------------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (MoveLeft() == true)
 	{
 		//MOVEMENT
 		position.x -= movementSpeed;
@@ -70,7 +72,7 @@ update_status ModulePlayer::Update()
 		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
 			position.x = -App->render->camera.x / App->render->cameraspeed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (MoveRight() == true)
 	{
 		//MOVEMENT
 		position.x += movementSpeed;
@@ -78,7 +80,7 @@ update_status ModulePlayer::Update()
 			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w-playerwidth;
 
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (MoveUp() == true)
 	{
 		//MOVEMENT
 		position.y -= movementSpeed;
@@ -93,7 +95,7 @@ update_status ModulePlayer::Update()
 			yAxis = -1;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (MoveDown() == true)
 	{
 		//MOVEMENT
 		position.y += movementSpeed;
@@ -108,7 +110,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 	//If there isn't any input on the y axis
-	if (App->input->keyboard[SDL_SCANCODE_S] == false)
+	if (MoveDown() == false)
 	{
 		if (yAxis > 0.1)
 		{
@@ -116,7 +118,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if(App->input->keyboard[SDL_SCANCODE_W] == false)
+	if(MoveUp() == false)
 	{
 		if (yAxis < -0.1)
 		{

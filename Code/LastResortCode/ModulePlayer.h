@@ -60,6 +60,14 @@ public:
 		TransitionDown,
 		MaxDown
 	};
+
+public:
+	//Functions that will be rewritten in each player
+	//virtual void LoadSprites();
+	virtual bool MoveUp() = 0;
+	virtual bool MoveDown() = 0;
+	virtual bool MoveLeft() = 0;
+	virtual bool MoveRight() = 0;
 };
 
 #endif

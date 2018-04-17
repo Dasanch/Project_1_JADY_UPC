@@ -7,7 +7,7 @@
 #include "ModuleReady.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
 #include "ModuleStage02.h"
 #include "ModuleAudio.h"
 
@@ -46,7 +46,7 @@ bool ModuleStageReady::Start()
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
 	//App->player->Enable();
-	App->player->Disable();
+	App->player1->Disable();
 
 	return ret;
 }
@@ -56,7 +56,7 @@ bool ModuleStageReady::CleanUp()
 	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player->Disable(); //Disable the player module
+	App->player1->Disable(); //Disable the player module
 	App->textures->Unload(backgroundReady);
 	return true;
 }

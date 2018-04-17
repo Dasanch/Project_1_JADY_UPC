@@ -3,7 +3,7 @@
 #include "ModuleUnit.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
 #include "ModuleInput.h"
 
 ModuleUnit::ModuleUnit() //Constructor 
@@ -69,8 +69,8 @@ update_status ModuleUnit::Update()
 		else { x = -sqrt(pow(r, 2) - pow(y, 2)); }
 	}
 	//Set the position
-	position.x = x + App->player->position.x + 15; //15= offset from the top left. Adding this we get the center of the player
-	position.y = y + App->player->position.y +  5; // 5= offset from the top left. Adding this we get the center of the player
+	position.x = x + App->player1->position.x + 15; //15= offset from the top left. Adding this we get the center of the player
+	position.y = y + App->player1->position.y +  5; // 5= offset from the top left. Adding this we get the center of the player
 	//Render
 	App->render->Blit(unitTx, position.x, position.y, &unitAnim.GetCurrentFrame());
 	return UPDATE_CONTINUE;

@@ -93,7 +93,6 @@
     <ClInclude Include="ModuleNeoGeo.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePlayer.h" />
-    <ClInclude Include="ModulePlayer2.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleReady.h" />
     <ClInclude Include="ModuleStage1Clear.h" />
@@ -103,6 +102,8 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
     <ClInclude Include="Path.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Player2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -124,7 +125,6 @@
     <ClCompile Include="ModuleNeoGeo.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
-    <ClCompile Include="ModulePlayer2.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleReady.cpp" />
     <ClCompile Include="ModuleStage1Clear.cpp" />
@@ -132,6 +132,8 @@
     <ClCompile Include="ModuleGameTitle.cpp" />
     <ClCompile Include="ModuleUnit.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Player2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

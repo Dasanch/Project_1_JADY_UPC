@@ -4,8 +4,6 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleStage01.h"
-#include "ModulePlayer.h"
-#include "ModulePlayer2.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleGameTitle.h"
@@ -19,6 +17,8 @@
 #include "ModuleEnemies.h"
 #include "ModuleStage1Clear.h"
 #include "ModuleUnit.h"
+#include "Player1.h"
+#include "Player2.h"
 
 Application::Application()
 {
@@ -35,8 +35,8 @@ Application::Application()
 	modules[i++] = unit = new ModuleUnit();
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
 	modules[i++] = enemies = new ModuleEnemies();
-	modules[i++] = player = new ModulePlayer();
-	modules[i++] = player2 = new ModulePlayer2();
+	modules[i++] = player1 = new Player1();
+	modules[i++] = player2 = new Player2();
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = titleScene = new ModuleGameTitle();
 	modules[i++] = readyScene = new ModuleStageReady();
@@ -59,7 +59,8 @@ bool Application::Init()
 	// Disable all stopped modules here-----------------------------------
 	audio->Disable();
 	titleScene->Disable();
-	player->Disable(); // Player will be enabled on the first update of a new scene
+	player1->Disable(); // Player will be enabled on the first update of a new scene
+	player2->Disable();
 	stage01->Disable();
 	stage02->Disable();
 	readyScene->Disable();

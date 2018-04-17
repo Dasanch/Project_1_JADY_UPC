@@ -1,6 +1,6 @@
 
-#include "ModulePlayer.h"
-#include "ModulePlayer2.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
@@ -32,14 +32,14 @@ bool Module2lvlScene::Start()
 	
 	bool ret = true;
 	//Enable
-	App->player->Enable();
+	App->player1->Enable();
 	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 
 
-	App->player->position.x = 0;
-	App->player->position.y = 130;
+	App->player1->position.x = 0;
+	App->player1->position.y = 130;
 	App->player2->position.x = 0;
 	App->player2->position.y = 110;
 	lvl2Text = App->textures->Load("Assets/lvl2/Background_2.png");
@@ -58,7 +58,7 @@ update_status Module2lvlScene::Update() {
 	
 	// Move camera forward -----------------------------
 
-	App->player->position.x += 1;
+	App->player1->position.x += 1;
 	App->player2->position.x += 1;
 	App->render->camera.x -= 3;
 
@@ -84,7 +84,7 @@ bool Module2lvlScene::CleanUp() {
 
 	LOG("Unloading ready scene");
 	App->render->camera.x = 0;
-	App->player->Disable();
+	App->player1->Disable();
 	App->player2->Disable();
 
 	App->textures->Unload(lvl2Text);
@@ -94,7 +94,7 @@ bool Module2lvlScene::CleanUp() {
 	App->audio->ControlMUS(lvl2Music, STOP_AUDIO);
 	App->audio->UnloadMUS(lvl2Music);
 	//Modules-----------------------------------------------------------------------
-	App->player->Disable();
+	App->player1->Disable();
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();

@@ -3,7 +3,7 @@
 #include "ModuleNeoGeo.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"

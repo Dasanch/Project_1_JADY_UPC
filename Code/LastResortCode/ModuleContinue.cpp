@@ -3,7 +3,8 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"
@@ -66,7 +67,7 @@ bool ModuleContinue::Start() {
 	continue_and_go = App->audio->LoadMUS("Assets/Continue/continue_and_go.ogg");
 	App->audio->ControlMUS(continue_and_go, PLAY_AUDIO);
 	//modules-----------------------------------------------------------------------
-	App->player->Disable();
+	App->player1->Disable();
 	//animations--------------------------------------------------------------------
 	numbersAnim.current_frame = 9;
 	for (int x = 0; x < 8; ++x) {

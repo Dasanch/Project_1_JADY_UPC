@@ -3,12 +3,11 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleStage01.h"
-#include "ModulePlayer.h"
 #include "SDL_image\include\SDL_image.h"
 #include <stdlib.h>
 #include <time.h>
-#include "ModulePlayer.h"
-#include "ModulePlayer2.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleReady.h"
@@ -71,14 +70,14 @@ bool ModuleStage01::Start()
 	music_01 = App->audio->LoadMUS("Assets/stage1.ogg");
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 	//Enable------------------------------------------------------------------------
-	App->player->Enable();
+	App->player1->Enable();
 	//App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
-	App->player->position.x = 0;
-	App->player->position.y = 100;
+	App->player1->position.x = 0;
+	App->player1->position.y = 100;
 	//App->player2->position.x = 0;
 	//App->player2->position.y = 150;
 	//Enemies----------------------------------------------------------------
@@ -105,7 +104,7 @@ bool ModuleStage01::CleanUp()
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
-	App->player->Disable(); //Disable the player module
+	App->player1->Disable(); //Disable the player module
 	App->player2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
@@ -119,7 +118,7 @@ bool ModuleStage01::CleanUp()
 update_status ModuleStage01::Update()
 {
 	// Move camera forward -----------------------------
-	App->player->position.x += 1;
+	App->player1->position.x += 1;
 	App->player2->position.x += 1;
 	App->render->camera.x -= App->render->cameraspeed;
 	//-------------------------------------------------
@@ -360,8 +359,8 @@ update_status ModuleStage01::Update()
 			//We enable the other player
 			App->player2->Enable();
 			//We put it on the position we need it
-			App->player2->position.x = App->player->position.x;
-			App->player2->position.y = App->player->position.y - 10;
+			App->player2->position.x = App->player1->position.x;
+			App->player2->position.y = App->player1->position.y - 10;
 		}
 	}
 
