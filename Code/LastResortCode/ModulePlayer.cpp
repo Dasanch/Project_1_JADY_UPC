@@ -11,8 +11,6 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	position.x = 0;
-	position.y = 130;
 	//Movement animation-----------------------------------------
 	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
 	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
@@ -30,13 +28,15 @@ ModulePlayer::ModulePlayer() //Constructor
 	basicShot.anim.loop = false;
 	basicShot.life = 3000;
 	//Shot Fire Particle----------------------------------------
-	shotFire.anim.PushBack({ 148,127, 15,7 });
+	shotFire.PushBack({ 125, 247, 10,9 });
+	shotFire.PushBack({ 137, 247, 10,9 });
+	shotFire.PushBack({ 125, 258, 13,12 });
+	shotFire.speed = 0.2f;
+	shotFire.loop = true;
 	//Death Explosion Particle----------------------------------
-	explosion01.anim.PushBack({ 148,127, 15,7 });
+	death_explosion.anim.PushBack({ 148,127, 10,7 });
 	//Basic Shot Explosion Particle-----------------------------
-	explosion02.anim.PushBack({ 148,127, 15,7 });
-	
-
+	basic_explosion.anim.PushBack({ 148,127, 15,7 });
 }
 
 ModulePlayer::~ModulePlayer()
@@ -46,6 +46,9 @@ bool ModulePlayer::Start()
 {
 	bool ret = true;
 	LOG("Loading player assets");
+	//variables-----------------------------------------------------------------------
+	isShooting = false;
+	shoot = false;
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 	//audios-------------------------------------------------------------------------
@@ -153,7 +156,21 @@ update_status ModulePlayer::Update()
 	//Basic shoot-------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
 		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
-		App->particles->AddParticle(basicShot, position.x + 20, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		if (isShooting == false)
+			shoot = true;
+	}
+	//----------Ship Fire----------------------------------------------------------
+	if (shoot == true) {
+		if (shotFire.finished == false) {
+			isShooting = true;
+			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+		}
+		else {
+			shotFire.finished = false;
+			isShooting = false;
+			shoot = false;
+		}
 	}
 	//Draw ship-------------------------------------------------------------------------
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);

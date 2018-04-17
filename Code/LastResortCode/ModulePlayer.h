@@ -27,9 +27,22 @@ public:
 	//Animations--------------------------------------------
 	Animation* current_animation = nullptr;
 	Animation shipPlayer1;
+	Animation shotFire; //Animation infront of ship when we are shooting basic shots
 	//Textures----------------------------------------------
 	SDL_Texture* PlayerTexture = nullptr;
+	//Collision-----------------------------------------
+	Collider* playerCol = nullptr;
+	//Particles----------------------------------------------
+	Particle death_explosion; //Death explosion 
+	Particle basic_explosion; //Basic Shot Explosion
+	Particle basicShot;
+	//Audios-------------------------------------------
+	Mix_Chunk* basic_shot_sfx = nullptr;
 	//Variables--------------------------------------------
+	//-----------Shots-------------------------------------
+	bool isShooting = false;
+	bool shoot = false;
+	//-----------Animation---------------------------------
 	int const playerwidth = 32;
 	iPoint position;
 	float const movementSpeed = 2;
@@ -47,15 +60,6 @@ public:
 		TransitionDown,
 		MaxDown
 	};
-	//Collision-----------------------------------------
-	Collider* playerCol = nullptr;
-	//Particles----------------------------------------------
-	Particle explosion01; //Death explosion 
-	Particle explosion02; //Basic Shot Explosion
-	Particle shotFire; //Particle infront of ship when we are shooting basic shots
-	Particle basicShot; 
-	//Audios-------------------------------------------
-	Mix_Chunk* basic_shot_sfx = nullptr;
 };
 
 #endif
