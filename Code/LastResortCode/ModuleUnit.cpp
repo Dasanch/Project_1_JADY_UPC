@@ -45,7 +45,7 @@ update_status ModuleUnit::Update()
 	if(App->player1->MoveLeft() == true)
 	{
 		//The unit goes to the right (0 or 0)
-		if(position.y <= App->player1->position.y)
+		if(position.y + yOffset <= App->player1->position.y)
 		{ LimitAddMovement(angleRight); }
 		else
 		{ LimitSubMovement(angleRight); }
@@ -53,7 +53,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveRight() == true)
 	{
 		//The unit goes to the left (180 or PI)
-		if (position.y >= App->player1->position.y)
+		if (position.y + yOffset >= App->player1->position.y)
 		{ LimitAddMovement(angleLeft); }
 		else
 		{ LimitSubMovement(angleLeft); }
@@ -61,7 +61,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveUp() == true)
 	{
 		//The unit goes down (270 or 3*PI/2)
-		if (position.x >= App->player1->position.x)
+		if (position.x + xOffset >= App->player1->position.x)
 		{ LimitAddMovement(angleDown); }
 		else
 		{ LimitSubMovement(angleDown); }
@@ -69,7 +69,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveDown() == true)
 	{
 		//The unit goes up (90 or PI/2)
-		if (position.x <= App->player1->position.x)
+		if (position.x +xOffset <= App->player1->position.x)
 		{ LimitAddMovement(angleUp); }
 		else
 		{ LimitSubMovement(angleUp); }
