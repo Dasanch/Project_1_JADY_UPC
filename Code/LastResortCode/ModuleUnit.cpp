@@ -4,7 +4,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "Player1.h"
-#include "ModuleInput.h"
 
 ModuleUnit::ModuleUnit() //Constructor 
 {
@@ -27,7 +26,7 @@ bool ModuleUnit::Start()
 update_status ModuleUnit::Update()
 {
 	//Conditions
-	if(App->input->keyboard[SDL_SCANCODE_A] == KEY_REPEAT)
+	if(App->player1->MoveLeft() == true)
 	{
 		x -= rotateSpeed;
 		//Limit the variable
@@ -37,7 +36,7 @@ update_status ModuleUnit::Update()
 		if (y >= 0) { y =  sqrt(pow(r, 2) - pow(x, 2)); }
 		else        { y = -sqrt(pow(r, 2) - pow(x, 2)); }
 	}
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_REPEAT)
+	if (App->player1->MoveRight() == true)
 	{
 		x += rotateSpeed;
 		//Limit the variable
@@ -47,7 +46,7 @@ update_status ModuleUnit::Update()
 		if(y >= 0) { y =  sqrt(pow(r, 2) - pow(x, 2)); }
 		else       { y = -sqrt(pow(r, 2) - pow(x, 2)); }
 	}
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_REPEAT)
+	if (App->player1->MoveUp() == true)
 	{
 		y -= rotateSpeed;
 		//Limit the variable
@@ -58,7 +57,7 @@ update_status ModuleUnit::Update()
 		else       { x = -sqrt(pow(r, 2) - pow(y, 2)); }
 		
 	}
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_REPEAT)
+	if (App->player1->MoveDown() == true)
 	{
 		y += rotateSpeed;
 		//Limit the variable
