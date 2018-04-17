@@ -25,11 +25,11 @@ public:
 	SDL_Texture* unitTx = nullptr;
 	iPoint position;
 
-	const int r = 31;//radius is 31 pixels (23 distance from the ship to the unit and 8 from the exterior of the unit to the center)
-	int x;//x
-	int y;//y
-
-	const int rotateSpeed = 1;
+	//We have an rotation (angular)
+	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
+	float rotation;
+	const float rotateSpeed = 1;
+	const float radius = 31;
 };
 
 #endif
