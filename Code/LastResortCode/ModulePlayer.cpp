@@ -18,7 +18,7 @@ ModulePlayer::ModulePlayer() //Constructor
 	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
 	//Initial animation-----------------------------------------
-		initAnim.PushBack({ 0, 122, 111, 2 });
+	initAnim.PushBack({ 0, 122, 111, 2 });
 	initAnim.PushBack({ 0, 124, 117, 3 });
 	initAnim.PushBack({ 0, 127, 88, 4 });
 	initAnim.PushBack({ 0, 131, 86, 8 });
@@ -33,8 +33,8 @@ ModulePlayer::ModulePlayer() //Constructor
 	initAnim.PushBack({ 64, 214, 64, 25 });
 	initAnim.PushBack({ 128, 139, 64, 25 });
 	initAnim.PushBack({ 128, 164, 64, 25 });
-	initAnim.speed = 0.3f;
-	initAnim_p = { 40, 80 };
+	initAnim.speed = 0.2f;
+	initAnim_p = { 40, 78 };
 	//Death animation-------------------------------------------
 	//TODO Alejandro
 	//Basic Shot Particle---------------------------------------
@@ -67,8 +67,10 @@ bool ModulePlayer::Start()
 	//variables-----------------------------------------------------------------------
 	isShooting = false;
 	shoot = false;
-	canMove = true;
-	canShoot = true;
+	canMove = false;
+	canShoot = false;
+	shipAnimations = ShipAnimations:: Initial;
+	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 	//audios-------------------------------------------------------------------------
@@ -81,39 +83,66 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	//Movement-----------------------------------------------------------------------
+	//Timer--------------------------------------------------------------------------
+	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
+	//Movement-------------------------------------------------------------------------
 	if (canMove == true)
 		MovementInput();
-	//Ship Animation-----------------------------------------------------------------
-	//Check what is the value of the yAxis variable
-	//-----------Idle----------------------------------------------
-	if (yAxis > -transitionLimit && yAxis < transitionLimit) {
-		currentFrame = Idle;
-	}
-	//----------Transitions----------------------------------------
-	if (yAxis >= transitionLimit && yAxis < MaxLimit) {
-		currentFrame = TransitionDown;
-	}
-	if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
-		currentFrame = TransitionUp;
-	}
-	//----------Maximums------------------------------------------
-	if (yAxis >= MaxLimit) {
-		currentFrame = MaxDown;
-	}
-	if (yAxis <= -MaxLimit) {
-		currentFrame = MaxUp;
-	}
 	//Shots----------------------------------------------------------------------------
 	if (canShoot == true) {
 		ShotInput();
 	}
-	//Collision-------------------------------------------------------------------------
+	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
 
-	//Draw ship-------------------------------------------------------------------------
-	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);
+	//Ship Animation-------------------------------------------------------------------
+	switch (shipAnimations) {
+	case Initial:
+		current_animation = &initAnim.GetFrameEx();
+		if (initAnim.finished == true) {
+			shipAnimations = ShipAnimations::Movment;
+			canMove = true;
+			canShoot = true;
+			break;
+		}
+		//Draw ship---------------------------------------------------
+		if (initAnim.current_frame > 4) {
+			App->render->Blit(PlayerTexture, initAnim_p.x - (current_animation->w / 2), initAnim_p.y - (current_animation->h / 2), current_animation);
+		}
+		else {
+			App->render->Blit(PlayerTexture, position.x - 40, initAnim_p.y - (current_animation->h / 2), current_animation);
+		}
+		initAnim_p.x += 1; //Increment pivot for follow position.x
+		//------------------------------------------------------------
+		break;
+	case Movment: //Check what is the value of the yAxis variable
+		//Idle--------------------------------------------------------
+		if (yAxis > -transitionLimit && yAxis < transitionLimit) {
+			currentFrame = Idle;
+		}
+		//Transitions-------------------------------------------------
+		if (yAxis >= transitionLimit && yAxis < MaxLimit) {
+			currentFrame = TransitionDown;
+		}
+		if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
+			currentFrame = TransitionUp;
+		}
+		//Maximums---------------------------------------------------
+		if (yAxis >= MaxLimit) {
+			currentFrame = MaxDown;
+		}
+		if (yAxis <= -MaxLimit) {
+			currentFrame = MaxUp;
+		}
+		//Draw ship--------------------------------------------------
+		current_animation = &shipPlayer1.frames[currentFrame]; //It set the animation frame 
+		App->render->Blit(PlayerTexture, position.x, position.y,  current_animation);
+		//-----------------------------------------------------------
+		break;
+	case Death:
 
+		break;
+	}
 	return UPDATE_CONTINUE;
 }
 

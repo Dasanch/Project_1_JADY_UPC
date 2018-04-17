@@ -28,7 +28,7 @@ public:
 
 public:
 	//Animations--------------------------------------------
-	Animation* current_animation = nullptr;
+	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
 	Animation shipPlayer1;
 	Animation shotFire; //Animation infront of ship when we are shooting basic shots
 	Animation initAnim;
@@ -45,15 +45,19 @@ public:
 	//Audios-----------------------------------------------
 	Mix_Chunk* basic_shot_sfx = nullptr;
 	//Variables--------------------------------------------
-	//-----------Shots-------------------------------------
+	//--------Time---------------------------------
+	//Time variables
+	Uint32 start_time;
+	Uint32 current_time;
+	//--------Shots--------------------------------
 	bool isShooting = false;
 	bool shoot = false;
-	//-----------Movment-----------------------------------
+	//--------Movment------------------------------
 	iPoint position;
 	float const movementSpeed = 2;
 	bool canMove;
 	bool canShoot;
-	//-----------Animation---------------------------------
+	//-------Animation-----------------------------
 	int const playerwidth = 32;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
@@ -69,6 +73,12 @@ public:
 		TransitionDown,
 		MaxDown
 	};
+	enum ShipAnimations
+	{
+		Initial,
+		Movment,
+		Death
+	} shipAnimations;
 
 public:
 	//Functions that will be rewritten in each player
