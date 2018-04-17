@@ -5,8 +5,6 @@
 #include "ModuleRender.h"
 #include "Player1.h"
 
-
-
 ModuleUnit::ModuleUnit() //Constructor 
 {
 	unitAnim.PushBack({ 66, 0, 22 , 16});
@@ -25,6 +23,22 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
+void ModuleUnit::LimitAddMovement(int targetRotation)
+{
+	if (fabs(rotation + rotateSpeed - targetRotation) < rotateSpeed)
+	{ rotation = targetRotation; }
+	else
+	{ rotation += rotateSpeed; }
+}
+
+void ModuleUnit::LimitSubMovement(int targetRotation)
+{
+	if (fabs(rotation - rotateSpeed - targetRotation) < rotateSpeed)
+	{ rotation = targetRotation; }
+	else
+	{ rotation -= rotateSpeed; }
+}
+
 update_status ModuleUnit::Update()
 {
 	//Conditions
@@ -32,42 +46,42 @@ update_status ModuleUnit::Update()
 	{
 		//The unit goes to the right (0 or 0)
 		if(position.y <= App->player1->position.y)
-		{ rotation += rotateSpeed; }
+		{ LimitAddMovement(angleRight); }
 		else
-		{ rotation -= rotateSpeed; }
+		{ LimitSubMovement(angleRight); }
 	}
 	if (App->player1->MoveRight() == true)
 	{
 		//The unit goes to the left (180 or PI)
 		if (position.y >= App->player1->position.y)
-		{ rotation += rotateSpeed; }
+		{ LimitAddMovement(angleLeft); }
 		else
-		{ rotation -= rotateSpeed; }
+		{ LimitSubMovement(angleLeft); }
 	}
 	if (App->player1->MoveUp() == true)
 	{
 		//The unit goes down (270 or 3*PI/2)
 		if (position.x >= App->player1->position.x)
-		{ rotation += rotateSpeed; }
+		{ LimitAddMovement(angleDown); }
 		else
-		{ rotation -= rotateSpeed; }
+		{ LimitSubMovement(angleDown); }
 	}
 	if (App->player1->MoveDown() == true)
 	{
 		//The unit goes up (90 or PI/2)
 		if (position.x <= App->player1->position.x)
-		{ rotation += rotateSpeed; }
+		{ LimitAddMovement(angleUp); }
 		else
-		{ rotation -= rotateSpeed; }
+		{ LimitSubMovement(angleUp); }
 	}
 	//Limit the rotation
-	if(rotation > 360)
+	while(rotation > 2*PI)
 	{
-		rotation - 360;
+		rotation -= 2*PI;
 	}
 	//Set the position
-	position.x = radius * cosf(rotation) + App->player1->position.x;
-	position.y = radius * sinf(rotation) + App->player1->position.y;
+	position.x = radius * cosf(rotation) + App->player1->position.x + xOffset;
+	position.y = radius * sinf(rotation) + App->player1->position.y + yOffset;
 	//Render
 	App->render->Blit(unitTx, position.x, position.y, &unitAnim.GetCurrentFrame());
 	return UPDATE_CONTINUE;
