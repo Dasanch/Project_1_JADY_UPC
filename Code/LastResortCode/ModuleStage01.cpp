@@ -76,17 +76,10 @@ bool ModuleStage01::Start()
 	App->collision->Enable();
 	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
-<<<<<<< HEAD
-	App->player1->position.x = 0;
-	App->player1->position.y = 100;
-	//App->player2->position.x = 0;
-	//App->player2->position.y = 150;
-=======
-	App->player->position.x = 40;
-	App->player->position.y = 74;
+	App->player1->position.x = 40;
+	App->player1->position.y = 74;
 	//App->player2->position.x = 40;
 	//App->player2->position.y = 74;
->>>>>>> 8184ed0cce79251d58542527f2835e6009b2e75c
 	//Enemies----------------------------------------------------------------
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 
