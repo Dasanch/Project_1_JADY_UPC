@@ -18,11 +18,27 @@ ModulePlayer::ModulePlayer() //Constructor
 	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
 	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
 	//Initial animation-----------------------------------------
-	//TODO Alejandro
+		initAnim.PushBack({ 0, 122, 111, 2 });
+	initAnim.PushBack({ 0, 124, 117, 3 });
+	initAnim.PushBack({ 0, 127, 88, 4 });
+	initAnim.PushBack({ 0, 131, 86, 8 });
+	//-----------------------------------------
+	initAnim.PushBack({ 0, 139, 64, 25 });
+	initAnim.PushBack({ 0, 164, 64, 25 });
+	initAnim.PushBack({ 0, 189, 64, 25 });
+	initAnim.PushBack({ 0, 214, 64, 25 });
+	initAnim.PushBack({ 64, 139, 64, 25 });
+	initAnim.PushBack({ 64, 164, 64, 25 });
+	initAnim.PushBack({ 64, 189, 64, 25 });
+	initAnim.PushBack({ 64, 214, 64, 25 });
+	initAnim.PushBack({ 128, 139, 64, 25 });
+	initAnim.PushBack({ 128, 164, 64, 25 });
+	initAnim.speed = 0.3f;
+	initAnim_p = { 40, 80 };
 	//Death animation-------------------------------------------
 	//TODO Alejandro
 	//Basic Shot Particle---------------------------------------
-	basicShot.anim.PushBack({ 148,127, 15,7 });
+	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
 	basicShot.speed.x = 10;
 	basicShot.anim.loop = false;
@@ -51,6 +67,8 @@ bool ModulePlayer::Start()
 	//variables-----------------------------------------------------------------------
 	isShooting = false;
 	shoot = false;
+	canMove = true;
+	canShoot = true;
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
 	//audios-------------------------------------------------------------------------
@@ -63,118 +81,36 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	//Input--------------------------------------------------------------------------
-	if (MoveLeft() == true)
-	{
-		//MOVEMENT
-		position.x -= movementSpeed;
-	
-		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
-			position.x = -App->render->camera.x / App->render->cameraspeed;
-	}
-	if (MoveRight() == true)
-	{
-		//MOVEMENT
-		position.x += movementSpeed;
-		if (position.x+playerwidth > -(App->render->camera.x / App->render->cameraspeed)+ App->render->camera.w)
-			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w-playerwidth;
-
-	}
-	if (MoveUp() == true)
-	{
-		//MOVEMENT
-		position.y -= movementSpeed;
-		if (position.y < 0)
-			position.y = 0;
-
-		//ANIMATION
-		yAxis -= keyPressSpeed;
-		//We check that the yAxis doesn't get bellow -1
-		if (yAxis < -1)
-		{
-			yAxis = -1;
-		}
-	}
-	if (MoveDown() == true)
-	{
-		//MOVEMENT
-		position.y += movementSpeed;
-		if (position.y > SCREEN_HEIGHT - 12)
-			position.y = SCREEN_HEIGHT - 12;
-		//ANIMATION
-		yAxis += keyPressSpeed;
-		//We check that the yAxis doesn't get above 1
-		if (yAxis > 1)
-		{
-			yAxis = 1;
-		}
-	}
-	//If there isn't any input on the y axis
-	if (MoveDown() == false)
-	{
-		if (yAxis > 0.1)
-		{
-			yAxis -= keyReleaseSpeed;
-		}
-	}
-
-	if(MoveUp() == false)
-	{
-		if (yAxis < -0.1)
-		{
-			yAxis += keyReleaseSpeed;
-		}
-	}
-
-	//Collision------------------------------------------------------------------------------
-	//- We update the collider position
-	playerCol->SetPos(position.x, position.y);
-	
-	//Render--------------------------------------------------------------------------------
+	//Movement-----------------------------------------------------------------------
+	if (canMove == true)
+		MovementInput();
+	//Ship Animation-----------------------------------------------------------------
 	//Check what is the value of the yAxis variable
-	//-Idle
-	if (yAxis > -transitionLimit && yAxis < transitionLimit)
-	{
+	//-----------Idle----------------------------------------------
+	if (yAxis > -transitionLimit && yAxis < transitionLimit) {
 		currentFrame = Idle;
 	}
-	//-Transitions
-	if (yAxis >= transitionLimit && yAxis < MaxLimit)
-	{
+	//----------Transitions----------------------------------------
+	if (yAxis >= transitionLimit && yAxis < MaxLimit) {
 		currentFrame = TransitionDown;
 	}
-	if (yAxis <= -transitionLimit && yAxis > -MaxLimit)
-	{
+	if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
 		currentFrame = TransitionUp;
 	}
-	//-Maximums
-	if (yAxis >= MaxLimit)
-	{
+	//----------Maximums------------------------------------------
+	if (yAxis >= MaxLimit) {
 		currentFrame = MaxDown;
 	}
-	if (yAxis <= -MaxLimit)
-	{
+	if (yAxis <= -MaxLimit) {
 		currentFrame = MaxUp;
 	}
-	//Basic shoot-------------------------------------------------------------------
-	if (Shoot() == true)
-	{
-		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
-		App->particles->AddParticle(basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
-		if (isShooting == false)
-			shoot = true;
+	//Shots----------------------------------------------------------------------------
+	if (canShoot == true) {
+		ShotInput();
 	}
-	//----------Ship Fire----------------------------------------------------------
-	if (shoot == true) {
-		if (shotFire.finished == false) {
-			isShooting = true;
-			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
-		}
-		else {
-			shotFire.finished = false;
-			isShooting = false;
-			shoot = false;
-		}
-	}
+	//Collision-------------------------------------------------------------------------
+	playerCol->SetPos(position.x, position.y); //We update the collider position
+
 	//Draw ship-------------------------------------------------------------------------
 	App->render->Blit(PlayerTexture, position.x, position.y, &shipPlayer1.frames[currentFrame]);
 
@@ -195,4 +131,79 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
 	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
+}
+
+void  ModulePlayer::ShotInput() {
+	//Basic shoot-------------------------------------------------------------------
+	if (Shoot() == true) {
+		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
+		App->particles->AddParticle(basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		if (isShooting == false)
+			shoot = true;
+	}
+	//----------Ship Fire-------------------------------------------
+	if (shoot == true) {
+		if (shotFire.finished == false) {
+			isShooting = true;
+			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+		}
+		else {
+			shotFire.finished = false;
+			isShooting = false;
+			shoot = false;
+		}
+	}
+}
+
+void ModulePlayer::MovementInput() {
+
+	if (MoveLeft() == true)	{
+		//---------Movment-----------------------------------------------------------
+		position.x -= movementSpeed;
+		if (position.x < -(App->render->camera.x / App->render->cameraspeed))
+			position.x = -App->render->camera.x / App->render->cameraspeed;
+	}
+	if (MoveRight() == true) {
+		//---------Movment-----------------------------------------------------------
+		position.x += movementSpeed;
+		if (position.x + playerwidth > -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
+			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;
+	}
+	if (MoveUp() == true) {
+		//---------Movment-----------------------------------------------------------
+		position.y -= movementSpeed;
+		if (position.y < 0)
+			position.y = 0;
+		//---------Animation---------------------------------------------------------
+		yAxis -= keyPressSpeed;
+		//We check that the yAxis doesn't get bellow -1
+		if (yAxis < -1) {
+			yAxis = -1;
+		}
+	}
+	if (MoveDown() == true)	{
+		//---------Movment-----------------------------------------------------------
+		position.y += movementSpeed;
+		if (position.y > SCREEN_HEIGHT - 12)
+			position.y = SCREEN_HEIGHT - 12;
+		//---------Animation---------------------------------------------------------
+		yAxis += keyPressSpeed;
+		//We check that the yAxis doesn't get above 1
+		if (yAxis > 1)
+		{
+			yAxis = 1;
+		}
+	}
+	//If there isn't any input on the y axis
+	if (MoveDown() == false) {
+		if (yAxis > 0.1) {
+			yAxis -= keyReleaseSpeed;
+		}
+	}
+
+	if (MoveUp() == false) {
+		if (yAxis < -0.1) {
+			yAxis += keyReleaseSpeed;
+		}
+	}
 }

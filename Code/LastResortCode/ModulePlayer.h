@@ -21,31 +21,40 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void MovementInput(); //Added 
+	void ShotInput(); //Added 
 	void OnCollision(Collider*, Collider*);
+
 
 public:
 	//Animations--------------------------------------------
 	Animation* current_animation = nullptr;
 	Animation shipPlayer1;
 	Animation shotFire; //Animation infront of ship when we are shooting basic shots
-	//Textures----------------------------------------------
+	Animation initAnim;
+	iPoint initAnim_p; //Initial animation pivot
+	Animation deathAnim;
+	//Textures---------------------------------------------
 	SDL_Texture* PlayerTexture = nullptr;
-	//Collision-----------------------------------------
+	//Collision--------------------------------------------
 	Collider* playerCol = nullptr;
-	//Particles----------------------------------------------
+	//Particles--------------------------------------------
 	Particle death_explosion; //Death explosion 
 	Particle basic_explosion; //Basic Shot Explosion
 	Particle basicShot;
-	//Audios-------------------------------------------
+	//Audios-----------------------------------------------
 	Mix_Chunk* basic_shot_sfx = nullptr;
 	//Variables--------------------------------------------
 	//-----------Shots-------------------------------------
 	bool isShooting = false;
 	bool shoot = false;
-	//-----------Animation---------------------------------
-	int const playerwidth = 32;
+	//-----------Movment-----------------------------------
 	iPoint position;
 	float const movementSpeed = 2;
+	bool canMove;
+	bool canShoot;
+	//-----------Animation---------------------------------
+	int const playerwidth = 32;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
 	const float keyReleaseSpeed = 0.05f;//The speed at which the ship goes basck to the idle frame when the key is release
