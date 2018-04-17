@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "Player1.h"
+#include <stdio.h>
 
 ModuleUnit::ModuleUnit() //Constructor 
 {
@@ -74,11 +75,18 @@ update_status ModuleUnit::Update()
 		else
 		{ LimitSubMovement(angleUp); }
 	}
-	//Limit the rotation
-	while(rotation > 2*PI)
+	//Limit the rotation to positive numbers
+	if(rotation < 0)
+	{
+		rotation = 2 * PI + rotation;//We add the rotation because it's negative, so it will efectively substract it
+	}
+	//Limit the rotation to 2PI (not more than one full circle)
+	while(rotation >= 2*PI)
 	{
 		rotation -= 2*PI;
 	}
+	//Debug rotation
+	//LOG("Rotation: %f", rotation);
 	//Set the position
 	position.x = radius * cosf(rotation) + App->player1->position.x + xOffset;
 	position.y = radius * sinf(rotation) + App->player1->position.y + yOffset;
@@ -89,6 +97,11 @@ update_status ModuleUnit::Update()
 //UCM (Uniform Circular Motion):
 //rotation = initial rotation + angular speed * time
 //angular speed = speed / radius
+
+//Animations
+//if(rotation > 90-5 && rotation < 90+5)
+//animation = that
+//Possible fer una funcio que faci els intervals directament
 
 bool ModuleUnit::CleanUp()
 {
