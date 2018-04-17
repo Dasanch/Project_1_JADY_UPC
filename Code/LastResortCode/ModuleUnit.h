@@ -6,6 +6,8 @@
 #include "Animation.h"
 #include "p2Point.h"
 
+#define PI 3.14159265358979323846264338327950288
+
 struct SDL_Texture;
 struct Collider;
 
@@ -28,8 +30,9 @@ public:
 	//We have an rotation (angular)
 	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
 	float rotation;
-	const float rotateSpeed = 1;
+	const float rotateSpeed = 0.25f;
 	const float radius = 31;
+	float ToRadian(float);//TO DO: Put somewhere else
 };
 
 #endif

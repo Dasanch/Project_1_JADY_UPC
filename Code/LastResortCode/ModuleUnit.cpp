@@ -5,6 +5,8 @@
 #include "ModuleRender.h"
 #include "Player1.h"
 
+
+
 ModuleUnit::ModuleUnit() //Constructor 
 {
 	unitAnim.PushBack({ 66, 0, 22 , 16});
@@ -28,20 +30,40 @@ update_status ModuleUnit::Update()
 	//Conditions
 	if(App->player1->MoveLeft() == true)
 	{
-		rotation -= rotateSpeed;
+		//The unit goes to the right (0)
+		if(rotation > 0)
+		{ rotation -= rotateSpeed; }
+		else
+		{ rotation += rotateSpeed; }
 	}
 	if (App->player1->MoveRight() == true)
 	{
-		rotation += rotateSpeed;
+		//The unit goes to the left (180)
+		if (rotation > PI)
+		{ rotation -= rotateSpeed; }
+		else
+		{ rotation += rotateSpeed; }
 	}
 	if (App->player1->MoveUp() == true)
 	{
-		rotation -= rotateSpeed;
-		
+		//The unit goes down (270)
+		if (rotation > 3 * PI / 2)
+		{ rotation -= rotateSpeed; }
+		else
+		{ rotation += rotateSpeed; }
 	}
 	if (App->player1->MoveDown() == true)
 	{
-		rotation += rotateSpeed;
+		//The unit goes up (90)
+		if (rotation > PI / 2)
+		{ rotation -= rotateSpeed; }
+		else
+		{ rotation += rotateSpeed; }
+	}
+	//Limit the rotation
+	if(rotation > 360)
+	{
+		rotation - 360;
 	}
 	//Set the position
 	position.x = radius * cosf(rotation) + App->player1->position.x;
@@ -64,4 +86,9 @@ bool ModuleUnit::CleanUp()
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
 
+}
+
+float ModuleUnit::ToRadian(float degreeRotation)
+{
+	return degreeRotation * 180 / (2 * PI);
 }
