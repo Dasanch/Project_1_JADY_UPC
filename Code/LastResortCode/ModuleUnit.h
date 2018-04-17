@@ -21,8 +21,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
-	void LimitAddMovement(int);//Limit when adding rotation
-	void LimitSubMovement(int);//Limit when substracting rotation
+	void LimitAddMovement(float);//Limit when adding rotation
+	void LimitSubMovement(float);//Limit when substracting rotation
 
 public:
 	Animation unitAnim;
@@ -32,7 +32,7 @@ public:
 	//We have an rotation (angular)
 	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
 	float rotation = 0;
-	const float rotateSpeed = 0.25f;
+	const float rotateSpeed = PI/20;
 	const float radius = 31;
 	float ToRadian(float);//TO DO: Put somewhere else
 	const int xOffset = 6;
