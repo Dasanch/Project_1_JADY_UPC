@@ -101,6 +101,7 @@ update_status ModulePlayer::Update()
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.finished == true) {
 			shipAnimations = ShipAnimations::Movment;
+			initAnim.finished = false;
 			canMove = true;
 			canShoot = true;
 			break;
@@ -159,7 +160,7 @@ bool ModulePlayer::CleanUp()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	shipAnimations = ShipAnimations::Death; 
+	shipAnimations = ShipAnimations::Initial;
 	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
 }
 

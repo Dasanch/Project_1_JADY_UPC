@@ -31,8 +31,9 @@ class ModuleAudio : public Module {
 public:
 	ModuleAudio();
 	~ModuleAudio();
-
+	
 	bool Init();
+	update_status Update();
 	bool CleanUp();
 
 	Mix_Chunk* const LoadSFX(const char* path);
@@ -45,6 +46,8 @@ private:
 
 	Mix_Music* musics[MAX_MUSICS];
 	Mix_Chunk* sfx[MAX_SOUNDEFECTS];
+	int volumeMUS = GENERAL_MUSIC_VOLUME;
+	int volumeSFX= GENERAL_SFX_VOLUME;
 	uint last_chunk = 0;
 	uint last_music = 0;
 };

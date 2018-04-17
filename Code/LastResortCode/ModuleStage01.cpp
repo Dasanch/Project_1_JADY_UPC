@@ -61,8 +61,6 @@ bool ModuleStage01::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	//Variables-----------------------------------------------------------------------
-	initPosition = { 40, 78 };
 	//textures-----------------------------------------------------------------------
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
@@ -85,8 +83,11 @@ bool ModuleStage01::Start()
 	//"Reset ship position when fadetoblackends"------------------------------------
 	App->player1->position.x = INIT_X_PLAYER_1;
 	App->player1->position.y = INIT_Y_PLAYER_1;
+	App->player1->initAnim_p.x = 0; //Fix the initial animation pivot 
+	App->player2->initAnim_p.x = 0;
 	App->player1->initAnim_p.y = 79;
 	App->player2->initAnim_p.y = 144;
+	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 

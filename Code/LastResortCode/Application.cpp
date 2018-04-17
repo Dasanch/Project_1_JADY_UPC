@@ -57,7 +57,6 @@ bool Application::Init()
 {
 	bool ret = true;
 	// Disable all stopped modules here-----------------------------------
-	audio->Disable();
 	titleScene->Disable();
 	player1->Disable(); // Player will be enabled on the first update of a new scene
 	player2->Disable();

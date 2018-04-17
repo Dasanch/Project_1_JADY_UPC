@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "Module.h"
 #include "ModuleAudio.h"
+#include "ModuleInput.h"
 
-#include "SDL/include/SDL.h"
 #include "SDL_mixer\include\SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
@@ -40,6 +40,25 @@ bool ModuleAudio::Init()
 	
 
 	return ret;
+}
+
+update_status ModuleAudio::Update() {
+
+	if (App->input->keyboard[SDL_SCANCODE_KP_PLUS] == KEY_STATE::KEY_DOWN) {
+		volumeMUS += 5;
+		if (volumeMUS > 180) {
+			volumeMUS = 180;
+		}	
+		Mix_VolumeMusic(volumeMUS);
+	}
+	if (App->input->keyboard[SDL_SCANCODE_KP_MINUS] == KEY_STATE::KEY_DOWN) {
+		volumeMUS -= 5;
+		if (volumeMUS < 0) {
+			volumeMUS = 0;
+		}
+		Mix_VolumeMusic(volumeMUS);
+	}
+	return UPDATE_CONTINUE;
 }
 
 bool ModuleAudio::CleanUp()
@@ -195,7 +214,7 @@ bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 		switch (state)
 		{
 		case PLAY_AUDIO:
-			Mix_VolumeChunk(chunk, GENERAL_SFX_VOLUME);
+			Mix_VolumeChunk(chunk, volumeSFX);
 			Mix_PlayChannel( -1, chunk, 0);
 			break;
 		default:
