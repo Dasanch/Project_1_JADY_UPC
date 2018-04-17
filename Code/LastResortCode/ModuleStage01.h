@@ -4,6 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "Globals.h"
+#include "p2Point.h"
 
 struct SDL_Texture;
 typedef struct _Mix_Music Mix_Music;
@@ -29,7 +30,8 @@ public:
 public:
 	uint randoms[27];
 	uint frame;
-
+	//Points
+	iPoint initPosition;
 	//Audios
 	Mix_Music* music_01 = nullptr;
 
@@ -75,8 +77,6 @@ public:
 	Animation orangeLaserAnim;
 	Animation blueLaserAnim;
 
-	//Static enemy
-	SDL_Texture* staticEnemyTx = nullptr;
 };
 
 #endif

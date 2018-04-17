@@ -34,7 +34,7 @@ ModulePlayer::ModulePlayer() //Constructor
 	initAnim.PushBack({ 128, 139, 64, 25 });
 	initAnim.PushBack({ 128, 164, 64, 25 });
 	initAnim.speed = 0.2f;
-	initAnim_p = { 40, 78 };
+	
 	//Death animation-------------------------------------------
 	//TODO Alejandro
 	//Basic Shot Particle---------------------------------------
@@ -69,11 +69,11 @@ bool ModulePlayer::Start()
 	shoot = false;
 	canMove = false;
 	canShoot = false;
-	shipAnimations = ShipAnimations:: Initial;
+	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
-	//audios-------------------------------------------------------------------------
+																		 //audios-------------------------------------------------------------------------
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
 	//colliders-------------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
@@ -83,7 +83,7 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	//Timer--------------------------------------------------------------------------
+	//Timer----------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Movement-------------------------------------------------------------------------
 	if (canMove == true)
@@ -112,7 +112,7 @@ update_status ModulePlayer::Update()
 		else {
 			App->render->Blit(PlayerTexture, position.x - 40, initAnim_p.y - (current_animation->h / 2), current_animation);
 		}
-		initAnim_p.x += 1; //Increment pivot for follow position.x
+		//initAnim_p.x += 1; //Increment pivot for follow position.x
 		//------------------------------------------------------------
 		break;
 	case Movment: //Check what is the value of the yAxis variable
@@ -159,6 +159,7 @@ bool ModulePlayer::CleanUp()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
+	shipAnimations = ShipAnimations::Death; 
 	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
 }
 

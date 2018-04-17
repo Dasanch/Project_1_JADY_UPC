@@ -19,6 +19,11 @@
 #include "ModuleCollision.h"
 #include "ModuleUnit.h"
 
+#define INIT_X_PLAYER_1 40
+#define INIT_Y_PLAYER_1 74
+#define INIT_X_PLAYER_2 40
+#define INIT_Y_PLAYER_2 138
+
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
 #define midgndSpeed 0.4f
@@ -56,6 +61,8 @@ bool ModuleStage01::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
+	//Variables-----------------------------------------------------------------------
+	initPosition = { 40, 78 };
 	//textures-----------------------------------------------------------------------
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
@@ -76,10 +83,10 @@ bool ModuleStage01::Start()
 	App->collision->Enable();
 	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
-	App->player1->position.x = 40;
-	App->player1->position.y = 74;
-	//App->player2->position.x = 40;
-	//App->player2->position.y = 74;
+	App->player1->position.x = INIT_X_PLAYER_1;
+	App->player1->position.y = INIT_Y_PLAYER_1;
+	App->player1->initAnim_p.y = 79;
+	App->player2->initAnim_p.y = 144;
 	//Enemies----------------------------------------------------------------
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 
@@ -116,20 +123,15 @@ bool ModuleStage01::CleanUp()
 // Update: draw background
 update_status ModuleStage01::Update()
 {
-	// Move camera forward -----------------------------
+	// Move camera forward -------------------------------------------------------------------
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
 	App->render->camera.x -= App->render->cameraspeed;
-	//-------------------------------------------------
-	//int speed = 2;
-
-	////Camera movement
-	//if (App->render->camera.x > -((4400 / foregndSpeed) * SCREEN_SIZE))
-	//{
-	//	App->render->camera.x -= speed; //CAMERA AUTO MOV
-
-	//}
-	//Boss buildings--------------------------------------
+	//Initial Position-------------------------------------------------------------------------
+	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
+	App->player2->initAnim_p.x = initPosition.x;	
+	
+	//Boss buildings----------------------------------------------------------------------------
 	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
@@ -358,8 +360,9 @@ update_status ModuleStage01::Update()
 			//We enable the other player
 			App->player2->Enable();
 			//We put it on the position we need it
-			App->player2->position.x = App->player1->position.x;
-			App->player2->position.y = App->player1->position.y - 10;
+			App->player2->position.x = initPosition.x ;
+			App->player2->position.y = INIT_Y_PLAYER_2;
+			
 		}
 	}
 
