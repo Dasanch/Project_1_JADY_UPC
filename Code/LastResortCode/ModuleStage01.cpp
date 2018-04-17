@@ -77,12 +77,11 @@ bool ModuleStage01::Start()
 	App->collision->Enable();
 	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
-	App->player->position.x = 0;
-	App->player->position.y = 100;
-	//App->player2->position.x = 0;
-	//App->player2->position.y = 150;
+	App->player->position.x = 40;
+	App->player->position.y = 74;
+	//App->player2->position.x = 40;
+	//App->player2->position.y = 74;
 	//Enemies----------------------------------------------------------------
-	staticEnemyTx = App->textures->Load("Assets/NeoGeo/StaticEnemy.png"); //delete after testing :Alejandro
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 
 	return ret;
