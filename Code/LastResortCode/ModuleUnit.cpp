@@ -24,7 +24,7 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
-void ModuleUnit::LimitAddMovement(int targetRotation)
+void ModuleUnit::LimitAddMovement(float targetRotation)
 {
 	if (fabs(rotation - targetRotation) < rotateSpeed)
 	{ rotation = targetRotation; }
@@ -32,7 +32,7 @@ void ModuleUnit::LimitAddMovement(int targetRotation)
 	{ rotation += rotateSpeed; }
 }
 
-void ModuleUnit::LimitSubMovement(int targetRotation)
+void ModuleUnit::LimitSubMovement(float targetRotation)
 {
 	if (fabs(rotation - targetRotation) < rotateSpeed)
 	{ rotation = targetRotation; }
@@ -86,7 +86,7 @@ update_status ModuleUnit::Update()
 		rotation -= 2*PI;
 	}
 	//Debug rotation
-	//LOG("Rotation: %f", rotation);
+	LOG("Rotation: %f", rotation);
 	//Set the position
 	position.x = radius * cosf(rotation) + App->player1->position.x + xOffset;
 	position.y = radius * sinf(rotation) + App->player1->position.y + yOffset;

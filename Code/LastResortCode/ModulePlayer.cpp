@@ -77,7 +77,6 @@ bool ModulePlayer::Start()
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
 	//colliders-------------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
-
 	return ret;
 }
 
