@@ -30,35 +30,35 @@ update_status ModuleUnit::Update()
 	//Conditions
 	if(App->player1->MoveLeft() == true)
 	{
-		//The unit goes to the right (0)
-		if(rotation > 0)
-		{ rotation -= rotateSpeed; }
-		else
+		//The unit goes to the right (0 or 0)
+		if(position.y <= App->player1->position.y)
 		{ rotation += rotateSpeed; }
+		else
+		{ rotation -= rotateSpeed; }
 	}
 	if (App->player1->MoveRight() == true)
 	{
-		//The unit goes to the left (180)
-		if (rotation > PI)
-		{ rotation -= rotateSpeed; }
-		else
+		//The unit goes to the left (180 or PI)
+		if (position.y >= App->player1->position.y)
 		{ rotation += rotateSpeed; }
+		else
+		{ rotation -= rotateSpeed; }
 	}
 	if (App->player1->MoveUp() == true)
 	{
-		//The unit goes down (270)
-		if (rotation > 3 * PI / 2)
-		{ rotation -= rotateSpeed; }
-		else
+		//The unit goes down (270 or 3*PI/2)
+		if (position.x >= App->player1->position.x)
 		{ rotation += rotateSpeed; }
+		else
+		{ rotation -= rotateSpeed; }
 	}
 	if (App->player1->MoveDown() == true)
 	{
-		//The unit goes up (90)
-		if (rotation > PI / 2)
-		{ rotation -= rotateSpeed; }
-		else
+		//The unit goes up (90 or PI/2)
+		if (position.x <= App->player1->position.x)
 		{ rotation += rotateSpeed; }
+		else
+		{ rotation -= rotateSpeed; }
 	}
 	//Limit the rotation
 	if(rotation > 360)
