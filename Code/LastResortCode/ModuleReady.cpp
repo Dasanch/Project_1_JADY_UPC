@@ -74,7 +74,7 @@ update_status ModuleStageReady::Update()
 
 
 	// make so pressing SPACE other stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN) {
 		App->fade->FadeToBlack(this, App->stage02, 0.5f); //this=readyScene
 	}
 

@@ -156,7 +156,8 @@ update_status ModulePlayer::Update()
 		currentFrame = MaxUp;
 	}
 	//Basic shoot-------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
+	if (Shoot() == true)
+	{
 		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
 		App->particles->AddParticle(basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 		if (isShooting == false)

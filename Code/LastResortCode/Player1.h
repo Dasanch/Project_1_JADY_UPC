@@ -7,10 +7,11 @@ class Player1 : public ModulePlayer
 {
 public:
 	Player1(){}
-	//void LoadSprites() override;
+	//void LoadSprites();
 	bool MoveUp();
 	bool MoveDown();
 	bool MoveLeft();
 	bool MoveRight();
+	bool Shoot();
 };
 #endif

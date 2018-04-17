@@ -332,7 +332,7 @@ update_status ModuleStage01::Update()
 		//2048 = distance from the start of the tilemap to the first light
 	}
 	//Change scenes on button press-------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_SPACE])
+	if (App->input->keyboard[SDL_SCANCODE_N])
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}

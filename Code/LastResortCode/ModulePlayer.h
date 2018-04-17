@@ -68,6 +68,7 @@ public:
 	virtual bool MoveDown() = 0;
 	virtual bool MoveLeft() = 0;
 	virtual bool MoveRight() = 0;
+	virtual bool Shoot() = 0;
 };
 
 #endif

@@ -38,3 +38,12 @@ bool Player1::MoveUp()
 	}
 	return false;
 }
+
+bool Player1::Shoot()
+{
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		return true;
+	}
+	return false;
+}

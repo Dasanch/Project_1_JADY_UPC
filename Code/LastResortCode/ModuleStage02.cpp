@@ -71,7 +71,7 @@ update_status Module2lvlScene::Update() {
 	App->render->Blit(BckSpam, 1800, SCREEN_HEIGHT - BckSpamRect.h, &BckSpamRect, groundspeed);
 	App->render->Blit(BckSpam, 1600, 0, &BckSpamRect2, groundspeed);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_N] == 1)
 	{
 		//App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
 		App->fade->FadeToBlack(this, App->continueScene, 0.2f);
