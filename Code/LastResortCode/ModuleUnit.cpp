@@ -25,7 +25,7 @@ bool ModuleUnit::Start()
 
 void ModuleUnit::LimitAddMovement(int targetRotation)
 {
-	if (fabs(rotation + rotateSpeed - targetRotation) < rotateSpeed)
+	if (fabs(rotation - targetRotation) < rotateSpeed)
 	{ rotation = targetRotation; }
 	else
 	{ rotation += rotateSpeed; }
@@ -33,7 +33,7 @@ void ModuleUnit::LimitAddMovement(int targetRotation)
 
 void ModuleUnit::LimitSubMovement(int targetRotation)
 {
-	if (fabs(rotation - rotateSpeed - targetRotation) < rotateSpeed)
+	if (fabs(rotation - targetRotation) < rotateSpeed)
 	{ rotation = targetRotation; }
 	else
 	{ rotation -= rotateSpeed; }
