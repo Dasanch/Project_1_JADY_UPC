@@ -28,7 +28,7 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
-	int const cameraspeed=3;
+	int const cameraspeed = SCREEN_SIZE;
 };
 
 #endif //__ModuleRenderer_H__
