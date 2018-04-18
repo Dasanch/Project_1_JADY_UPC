@@ -27,6 +27,31 @@ public:
 	void TakeStreetLights();
 	void TakeOrangeLaser();
 	void TakeBlueLaser();
+
+	struct MoveUD {
+		int xbetween_mov;
+		int ymax_road;
+		int ymin_road;
+		//int ymax_road;
+		int ymin_buildings;
+		int ymax_buildings;
+		//int ymin_road;
+		int last_positionCam;
+
+		float vel_road;
+		float vel_buildings;
+
+		int yroadPos;
+		int ymgPos;
+
+		float temporalSubstraction;
+	
+		bool up;
+
+	}MoveCamera;
+
+	void MoveCam();
+
 public:
 	uint randoms[27];
 	uint frame;

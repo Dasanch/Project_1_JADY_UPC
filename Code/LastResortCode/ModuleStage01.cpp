@@ -94,6 +94,18 @@ bool ModuleStage01::Start()
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 200, 0);
 
+	//define moveCamera struct values
+	MoveCamera.ymgPos = 32;
+	MoveCamera.yroadPos = 0;
+	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
+	MoveCamera.xbetween_mov = 91 * SCREEN_SIZE;
+	MoveCamera.last_positionCam = 0;
+	MoveCamera.vel_road = 0.30f;
+	MoveCamera.ymax_road = -20;
+	MoveCamera.ymin_road = 10;
+
+
+
 	return ret;
 }
 
@@ -243,9 +255,11 @@ update_status ModuleStage01::Update()
 		
 	}*/
 
+	MoveCam();
+
 	//Midground lights-------------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
-		App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
+		App->render->Blit(PurpleBuildings, 0, 32, &PBuildings, midgndSpeed);
 	
 		//- Loop 1
 		App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
@@ -305,7 +319,7 @@ update_status ModuleStage01::Update()
 
 	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
-		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
+		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed);
 	}
 
 	//Street Lights-----------------------------------------------------------------------------------------
@@ -314,12 +328,12 @@ update_status ModuleStage01::Update()
 		//1
 		App->render->Blit(streetLightsTx, 40, 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 27; ++i) {
-			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
+			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, MoveCamera.yroadPos + 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
 		}
 		//2
 		App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 14; ++i) {
-			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
+			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 		}
 	}
 	//Tunnel lights----------------------------------------------------------------------------------------
@@ -371,6 +385,46 @@ update_status ModuleStage01::Update()
 	
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleStage01::MoveCam(){
+	
+	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov)
+	{
+		
+		if (!MoveCamera.up)
+		{
+			if (MoveCamera.yroadPos >= MoveCamera.ymax_road)
+			{
+				MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
+				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+			}
+			else
+			{
+				MoveCamera.up = true;
+				MoveCamera.last_positionCam = -App->render->camera.x;
+			}
+		}
+		
+
+		if (MoveCamera.up)
+		{
+			if (MoveCamera.yroadPos <= MoveCamera.ymin_road)
+			{
+				MoveCamera.temporalSubstraction += MoveCamera.vel_road;
+				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+			}
+			else
+			{
+				MoveCamera.up = false;
+				MoveCamera.last_positionCam = -App->render->camera.x;
+			}
+		}
+		
+	}
+
+
+
 }
 
 void ModuleStage01::TakeTileMap()
