@@ -124,7 +124,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			AddParticle(general_explosion02, active[i]->position.x, active[i]->position.y, graphics); //basic shot xplosion
+			if (active[i]->collision_fx != nullptr)
+				AddParticle(*active[i]->collision_fx, active[i]->position.x, active[i]->position.y, active[i]->texture);
 			delete active[i];
 			active[i] = nullptr;
 			break;
@@ -142,7 +143,7 @@ Particle::Particle()
 
 Particle::Particle(const Particle& p) :
 	anim(p.anim), position(p.position), speed(p.speed),
-	fx(p.fx), born(p.born), life(p.life) , texture(p.texture) //struct texture added
+	collision_fx(p.collision_fx), born(p.born), life(p.life) , texture(p.texture) //struct texture added
 {}
 
 Particle::~Particle()

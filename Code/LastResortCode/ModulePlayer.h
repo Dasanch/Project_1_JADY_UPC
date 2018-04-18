@@ -38,6 +38,7 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	//Collision--------------------------------------------
 	Collider* playerCol = nullptr;
+	COLLIDER_TYPE colType = COLLIDER_PLAYER;
 	//Particles--------------------------------------------
 	Particle death_explosion; //Death explosion 
 	Particle basic_explosion; //Basic Shot Explosion
@@ -49,6 +50,8 @@ public:
 	//Time variables
 	Uint32 start_time;
 	Uint32 current_time;
+	//--------Debug Modes--------------------------
+	bool godMode;
 	//--------Shots--------------------------------
 	bool isShooting = false;
 	bool shoot = false;

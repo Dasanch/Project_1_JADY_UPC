@@ -18,7 +18,7 @@ struct Particle
 	Collider* collider = nullptr;
 	Animation anim;
 	SDL_Texture* texture = nullptr;
-	uint fx = 0;
+	Particle* collision_fx = nullptr;
 	iPoint position;
 	iPoint speed;
 	Uint32 born = 0;

@@ -34,15 +34,8 @@ ModulePlayer::ModulePlayer() //Constructor
 	initAnim.PushBack({ 128, 139, 64, 25 });
 	initAnim.PushBack({ 128, 164, 64, 25 });
 	initAnim.speed = 0.2f;
-	
 	//Death animation-------------------------------------------
 	//TODO Alejandro
-	//Basic Shot Particle---------------------------------------
-	basicShot.anim.PushBack({ 0,247, 15,7 });
-	basicShot.anim.speed = 0.0f;
-	basicShot.speed.x = 10;
-	basicShot.anim.loop = false;
-	basicShot.life = 3000;
 	//Shot Fire Particle----------------------------------------
 	shotFire.PushBack({ 125, 247, 10,9 });
 	shotFire.PushBack({ 137, 247, 10,9 });
@@ -52,7 +45,22 @@ ModulePlayer::ModulePlayer() //Constructor
 	//Death Explosion Particle----------------------------------
 	death_explosion.anim.PushBack({ 148,127, 10,7 });
 	//Basic Shot Explosion Particle-----------------------------
-	basic_explosion.anim.PushBack({ 148,127, 15,7 });
+    basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
+	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
+	basic_explosion.anim.PushBack({ 285,247, 13,13 }); //3
+	basic_explosion.anim.PushBack({ 271,263, 14,14 }); //4
+	basic_explosion.anim.PushBack({ 300,247, 14,14 }); //5
+	basic_explosion.anim.PushBack({ 316,247, 14,14 }); //6
+	basic_explosion.anim.PushBack({ 217,247, 12,12 }); //7
+	basic_explosion.anim.loop = false;
+	basic_explosion.anim.speed = 0.3f;
+	//Basic Shot Particle---------------------------------------
+	basicShot.anim.PushBack({ 0,247, 15,7 });
+	basicShot.anim.speed = 0.0f;
+	basicShot.speed.x = 10;
+	basicShot.anim.loop = false;
+	basicShot.life = 3000;
+	basicShot.collision_fx = &basic_explosion;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -65,6 +73,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	LOG("Loading player assets");
 	//variables-----------------------------------------------------------------------
+	godMode = false;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
@@ -72,16 +81,31 @@ bool ModulePlayer::Start()
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
-	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version
-																		 //audios-------------------------------------------------------------------------
+	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 //audios-------------------------------------------------------------------------
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	//colliders-------------------------------------------------------------------------
-	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_PLAYER, this);
+	//colliders----------------------------------------------------------------------
+	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
+	//particulas---------------------------------------------------------------------
+	basic_explosion.texture = PlayerTexture;
 	return ret;
 }
 
 update_status ModulePlayer::Update()
 {
+	//Debug Modes----------------------------------------------------------------------
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	{
+		if (godMode == true) {
+			colType = COLLIDER_PLAYER;
+			playerCol->type = COLLIDER_PLAYER;
+			godMode = false;
+		}
+		else {
+			colType = COLLIDER_NONE;
+			playerCol->type = COLLIDER_NONE;
+			godMode = true;
+		}
+	}
 	//Timer----------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Movement-------------------------------------------------------------------------
@@ -93,7 +117,6 @@ update_status ModulePlayer::Update()
 	}
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
-
 	//Ship Animation-------------------------------------------------------------------
 	switch (shipAnimations) {
 	case Initial:
