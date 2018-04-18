@@ -90,8 +90,6 @@ update_status ModuleNeoGeo::Update()
 	{
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
 	}
-	/*#include "ModuleGameOver.h"
-#include "ModuleStage1Clear.h"*/
 
 
 	//We change the scene if the player presses space
