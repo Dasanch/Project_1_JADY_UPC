@@ -45,6 +45,7 @@ public:
 		int ymgPos;
 
 		float temporalSubstraction;
+		float temporalSubstractionBuildings;
 	
 		bool up;
 

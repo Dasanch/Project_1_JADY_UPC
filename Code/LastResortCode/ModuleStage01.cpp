@@ -98,10 +98,10 @@ bool ModuleStage01::Start()
 	MoveCamera.ymgPos = 32;
 	MoveCamera.yroadPos = 0;
 	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
-	MoveCamera.xbetween_mov = 91 * SCREEN_SIZE;
+	MoveCamera.xbetween_mov = 140 * SCREEN_SIZE;//91 * SCREEN_SIZE;
 	MoveCamera.last_positionCam = 0;
 	MoveCamera.vel_road = 0.30f;
-	MoveCamera.ymax_road = -20;
+	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 
 
