@@ -37,6 +37,7 @@ public:
 		int ymax_buildings;
 		//int ymin_road;
 		int last_positionCam;
+		int loop; //13?
 
 		float vel_road;
 		float vel_buildings;

@@ -91,8 +91,8 @@ bool ModuleStage01::Start()
 	App->player2->initAnim_p.y = 144;
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
-	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
-	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 200, 0);
+	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
+	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 400, SCREEN_HEIGHT/2);
 
 	//define moveCamera struct values
 	MoveCamera.ymgPos = 32;
@@ -103,7 +103,7 @@ bool ModuleStage01::Start()
 	MoveCamera.vel_road = 0.30f;
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
-
+	MoveCamera.loop = 0;
 
 
 	return ret;
@@ -260,29 +260,29 @@ update_status ModuleStage01::Update()
 
 	//Midground lights-------------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
-		App->render->Blit(PurpleBuildings, 0, 32, &PBuildings, midgndSpeed);
+		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
 	
 		//- Loop 1
-		App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 40, MoveCamera.ymgPos + midgndOffset, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//- Loop 2
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//- Loop 3
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 		//Positions calculated from the png
 	}
 	//Blue Lasers-------------------------------------------------------------------------------------------
@@ -300,27 +300,11 @@ update_status ModuleStage01::Update()
 		App->render->Blit(LasersTx, 792, -8, &blueLaserAnim.GetFrame(), midgndSpeed);
 		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
-	//Ground and tunnel-----------------------------------------------------------------------------------
-
-	
-	//-----Move Up and Down---------------------------------------------------------------
-	
-	//MOVE UP DOWN 
-	/*if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		if (App->render->camera.x <= -324 && App->render->camera.x >= -663)
-		{
-			App->render->Blit(groundAndTunel, 0, -15, &ground, foregndSpeed);
-		}
-
-		else {
-			App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
-		}
-	}*/
+	//Ground and tunnel-----------------------------------------------------------------------------------	
 
 	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
-		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed);
+		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
 	}
 
 	//Street Lights-----------------------------------------------------------------------------------------
@@ -388,6 +372,8 @@ update_status ModuleStage01::Update()
 	return UPDATE_CONTINUE;
 }
 
+//move up down camera
+
 void ModuleStage01::MoveCam(){
 	
 	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov)
@@ -399,6 +385,9 @@ void ModuleStage01::MoveCam(){
 			{
 				MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
 				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
+				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
 			}
 			else
 			{
@@ -414,6 +403,9 @@ void ModuleStage01::MoveCam(){
 			{
 				MoveCamera.temporalSubstraction += MoveCamera.vel_road;
 				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+				MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
+				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
 			}
 			else
 			{
