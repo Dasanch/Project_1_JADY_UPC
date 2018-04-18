@@ -116,6 +116,7 @@ bool ModuleStage01::CleanUp()
 	//Modules-----------------------------------------------------------------------
 	App->player1->Disable(); //Disable the player module
 	App->player2->Disable();
+	App->unit->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->render->camera.x = 0;
