@@ -187,29 +187,30 @@ update_status ModuleStage01::Update()
 	{
 		if (App->render->camera.x <= -324 && App->render->camera.x >= -663)
 		{
-			App->render->Blit(PurpleBuildings, 0, 0, &PBuildings, midgndSpeed);
+			App->render->Blit(PurpleBuildings, 0, 15, &PBuildings, midgndSpeed);
 			//Midground lights
 			//- Loop 1
-			App->render->Blit(midgndLightsTx, 40, 0 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 184, 0 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 234, 0 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 329, 0 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 392, 0 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 471, 0 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+
 			//- Loop 2
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 40, 0 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 184, 0 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 234, 0 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 329, 0 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 392, 0 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 471, 0 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist + 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 			//- Loop 3
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, 0 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, 0 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, 0 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, 0 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, 0 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, 0 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 			//Positions calculated from the png
 		}
 
@@ -285,12 +286,8 @@ update_status ModuleStage01::Update()
 		App->render->Blit(LasersTx, 856, -56, &blueLaserAnim.GetFrame(), midgndSpeed);
 	}
 	//Ground and tunnel-----------------------------------------------------------------------------------
-	/*
-    if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
-	}*/
 
+	
 	//-----Move Up and Down---------------------------------------------------------------
 	
 	//MOVE UP DOWN 
@@ -310,6 +307,7 @@ update_status ModuleStage01::Update()
 
 		App->render->Blit(groundAndTunel, 0, 0, &ground, foregndSpeed);
 	}
+
 	//Street Lights-----------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
