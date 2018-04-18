@@ -52,7 +52,9 @@ public:
 	Uint32 current_time;
 	//--------Debug Modes--------------------------
 	bool godMode;
-	//--------Shots--------------------------------
+	//--------States--------------------------------
+	bool isAppearing;
+	bool isDying;
 	bool isShooting = false;
 	bool shoot = false;
 	//--------Movment------------------------------

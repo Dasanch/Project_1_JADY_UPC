@@ -429,6 +429,17 @@ bool ModuleGameTitle::CleanUp() {
 	O8.Reset();
 	//R9.Reset(); //2LASTCHAR
 	//T10.Reset();
+	//textures----------------------------------------------------------------------
+	App->textures->Unload(L1Texture);
+	App->textures->Unload(A2Texture);
+	App->textures->Unload(S3Texture);
+	App->textures->Unload(T4Texture);
+	App->textures->Unload(R5Texture);
+	App->textures->Unload(E6Texture);
+	App->textures->Unload(S7Texture);
+	App->textures->Unload(O8Texture);
+	//App->textures->Unload(R9Texture);
+	//App->textures->Unload(T10Texture);
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
 	App->audio->UnloadMUS(Titlemusic);

@@ -35,7 +35,12 @@ ModulePlayer::ModulePlayer() //Constructor
 	initAnim.PushBack({ 128, 164, 64, 25 });
 	initAnim.speed = 0.2f;
 	//Death animation-------------------------------------------
-	//TODO Alejandro
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 6; ++j) {
+			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
+		}
+	}
+	deathAnim.speed = 0.3f;
 	//Shot Fire Particle----------------------------------------
 	shotFire.PushBack({ 125, 247, 10,9 });
 	shotFire.PushBack({ 137, 247, 10,9 });
@@ -159,11 +164,18 @@ update_status ModulePlayer::Update()
 		}
 		//Draw ship--------------------------------------------------
 		current_animation = &shipPlayer1.frames[currentFrame]; //It set the animation frame 
-		App->render->Blit(PlayerTexture, position.x, position.y,  current_animation);
+		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
 		//-----------------------------------------------------------
 		break;
 	case Death:
-
+		if (deathAnim.finished == true) {
+			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
+			deathAnim.finished == false;
+		}
+		else {
+			current_animation = &deathAnim.GetFrameEx();
+			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
+		}
 		break;
 	}
 	return UPDATE_CONTINUE;
@@ -182,8 +194,9 @@ bool ModulePlayer::CleanUp()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	shipAnimations = ShipAnimations::Initial;
-	App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.5f);
+	isDying = true;
+
+	shipAnimations = ShipAnimations::Death;
 }
 
 void  ModulePlayer::ShotInput() {

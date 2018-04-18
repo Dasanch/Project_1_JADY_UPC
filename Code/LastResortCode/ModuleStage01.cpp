@@ -35,7 +35,7 @@
 #define orangeLaserSpeed 0.25f
 
 #define streetLightDist 64
-#define roadLightDist 121
+#define roadLightDist 128
 
 ModuleStage01::ModuleStage01()
 {
@@ -78,9 +78,9 @@ bool ModuleStage01::Start()
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 	//Enable------------------------------------------------------------------------
 	App->player1->Enable();
-	//App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
+	App->enemies->Enable();
 	App->unit->Enable();
 	//"Reset ship position when fadetoblackends"------------------------------------
 	App->player1->position.x = INIT_X_PLAYER_1;
@@ -131,6 +131,7 @@ bool ModuleStage01::CleanUp()
 	App->unit->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
+	App->enemies->Disable();
 	App->render->camera.x = 0;
 	//------------------------------------------------------------------------------
 	return true;
@@ -143,7 +144,7 @@ update_status ModuleStage01::Update()
 	// Move camera forward -------------------------------------------------------------------
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -= 1 * SCREEN_SIZE;
+	App->render->camera.x -=  SCREEN_SIZE;
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = initPosition.x;	
@@ -326,27 +327,27 @@ update_status ModuleStage01::Update()
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		//1
-		App->render->Blit(streetLightsTx, 40, 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
+		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos+ 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 27; ++i) {
 			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, MoveCamera.yroadPos + 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
 		}
 		//2
-		App->render->Blit(streetLightsTx, 0, 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
+		App->render->Blit(streetLightsTx, -7 , MoveCamera.yroadPos + 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
 		for (int i = 1; i < 14; ++i) {
-			App->render->Blit(streetLightsTx, 0 + roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
+			App->render->Blit(streetLightsTx, -7+  roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 		}
 	}
 	//Tunnel lights----------------------------------------------------------------------------------------
 	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, 0, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		//Could be implemented with a for, but probably all the frames would be the same
 		//2048 = distance from the start of the tilemap to the first light
 	}
