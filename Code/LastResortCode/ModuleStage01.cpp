@@ -259,7 +259,7 @@ update_status ModuleStage01::Update()
 
 	//Midground lights-------------------------------------------------------------------------------------------
 	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
-		App->render->Blit(PurpleBuildings, 0, 32, &PBuildings, midgndSpeed);
+		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos+32, &PBuildings, midgndSpeed); //Mod Y=32
 	
 		//- Loop 1
 		App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
@@ -319,7 +319,7 @@ update_status ModuleStage01::Update()
 
 	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
-		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed);
+		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
 	}
 
 	//Street Lights-----------------------------------------------------------------------------------------
@@ -387,6 +387,8 @@ update_status ModuleStage01::Update()
 	return UPDATE_CONTINUE;
 }
 
+//move up down camera
+
 void ModuleStage01::MoveCam(){
 	
 	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov)
@@ -398,6 +400,9 @@ void ModuleStage01::MoveCam(){
 			{
 				MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
 				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
+				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
 			}
 			else
 			{
@@ -413,6 +418,9 @@ void ModuleStage01::MoveCam(){
 			{
 				MoveCamera.temporalSubstraction += MoveCamera.vel_road;
 				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+				MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
+				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
 			}
 			else
 			{
