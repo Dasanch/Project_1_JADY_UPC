@@ -263,7 +263,7 @@ update_status ModuleStage01::Update()
 		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
 	
 		//- Loop 1
-		App->render->Blit(midgndLightsTx, 40, MoveCamera.ymgPos + midgndOffset, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+		App->render->Blit(midgndLightsTx, 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
 		App->render->Blit(midgndLightsTx, 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
 		App->render->Blit(midgndLightsTx, 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
 		App->render->Blit(midgndLightsTx, 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
