@@ -9,6 +9,8 @@
 #include "ModuleStage01.h"
 #include "ModuleAudio.h"
 #include "ModuleGameTitle.h"
+#include "ModuleGameOver.h"
+#include "ModuleStage1Clear.h"
 
 
 ModuleNeoGeo::ModuleNeoGeo()
@@ -77,6 +79,19 @@ bool ModuleNeoGeo::Start()
 }
 update_status ModuleNeoGeo::Update()
 {	
+
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	}
+
+
 	//We change the scene if the player presses space
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{

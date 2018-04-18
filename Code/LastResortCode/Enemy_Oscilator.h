@@ -6,15 +6,12 @@
 class Enemy_Oscilator : public Enemy
 {
 private:
-	//float wave = -1.0f;
-	bool going_up = true;
-	int original_y = 0;
-	Animation fly;
+	
+	Animation Oscilator;
 
 public:
 
 	Enemy_Oscilator(int x, int y);
-
 	void Move();
 };
 

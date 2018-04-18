@@ -10,6 +10,8 @@
 #include "Player1.h"
 #include "ModuleStage02.h"
 #include "ModuleAudio.h"
+#include "ModuleGameOver.h"
+#include "ModuleStage1Clear.h"
 
 ModuleStageReady::ModuleStageReady()
 {
@@ -78,7 +80,16 @@ update_status ModuleStageReady::Update()
 		App->fade->FadeToBlack(this, App->stage02, 0.5f); //this=readyScene
 	}
 
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
 
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	}
 
 	return UPDATE_CONTINUE;
 }

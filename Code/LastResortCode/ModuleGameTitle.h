@@ -42,6 +42,7 @@ public:
 	Animation E6;
 	Animation S7;
 	Animation O8;
+
 	//Animation R9; //2LASTCHAR
 	//Animation T10;
 

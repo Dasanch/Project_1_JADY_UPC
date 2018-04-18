@@ -8,6 +8,8 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"
 #include "ModuleAudio.h"
+#include "ModuleGameOver.h"
+#include "ModuleStage1Clear.h"
 
 
 ModuleGameTitle::ModuleGameTitle()
@@ -346,41 +348,8 @@ ModuleGameTitle::ModuleGameTitle()
 	O8.loop = false;
 	//R9------------------------------ //2LASTCHAR
 
-	//T10------------------------------  //Sprite T4=T10 //2LASTCHAR
-	/*T4.PushBack({ 0,0,46,70 });
-	T4.PushBack({ 46,0,46,73 });
-	T4.PushBack({ 92,0,46,79 });
-	T4.PushBack({ 138,0,46,84 });
-	T4.PushBack({ 184,0,48,92 });
-	T4.PushBack({ 232,0,48,93 });
-	T4.PushBack({ 280,0,48,97 });
-	T4.PushBack({ 328,0,48,103 });
-	T4.PushBack({ 376,0,48,103 });
-	T4.PushBack({ 424,0,48,109 });
-	T4.PushBack({ 472,0,48,97 });
-	T4.PushBack({ 0,109,48,114 });
-	T4.PushBack({ 48,109,48,116 });
-	T4.PushBack({ 96,109,48,118 });
-	T4.PushBack({ 144,109,48,119 });
-	T4.PushBack({ 192,109,48,120 });
-	T4.PushBack({ 240,109,48,121 });
-	T4.PushBack({ 288,109,48,117 });
-	T4.PushBack({ 336,109,48,123 });
-	T4.PushBack({ 384,109,48,123 });
-	T4.PushBack({ 432,109,48,127 });
-	T4.PushBack({ 480,109,48,128 });
-	T4.PushBack({ 0,237,48,119 });
-	T4.PushBack({ 48,237,48,108 });
-	T4.PushBack({ 96,237,48,101 });
-	T4.PushBack({ 144,237,46,90 });
-	T4.PushBack({ 190,237,46,81 });
-	T4.PushBack({ 236,237,46,73 });
-	T4.PushBack({ 282,237,46,66 });
-	T4.PushBack({ 328,237,46,62 });
-	T4.PushBack({ 374,237,46,61 });
-	T4.PushBack({ 420,237,46,59 });
-	T4.speed = speed;
-	T4.loop = false;*/
+	//T10------------------------------  //2LASTCHAR
+
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
@@ -399,12 +368,12 @@ bool ModuleGameTitle:: Start()
 	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
 	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
 	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png"); //¿?
 	//R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
 	//T10Texture = App->textures->Load("");
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
+	
 	return ret;
 }
 update_status ModuleGameTitle::Update() {
@@ -423,7 +392,7 @@ update_status ModuleGameTitle::Update() {
 	App->render->Blit(O8Texture, 140, 101, &O8.GetCurrentFrame(), 0.0f);
 	/* 2LASTCHAR
 	App->render->Blit(R9Texture, , , &R9.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T4Texture,  ,  , &T4.GetCurrentFrame(), 0.0f);
+	App->render->Blit(T4Texture,  ,  , &T10.GetCurrentFrame(), 0.0f);
 	*/
 
 	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
@@ -432,6 +401,19 @@ update_status ModuleGameTitle::Update() {
 	{
 		App->fade->FadeToBlack(this, App->stage01, 0.5f);
 	}
+	
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	}
+	
+
 	return UPDATE_CONTINUE;
 }
 bool ModuleGameTitle::CleanUp() {
