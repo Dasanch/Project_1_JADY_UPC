@@ -399,12 +399,12 @@ bool ModuleGameTitle:: Start()
 	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
 	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
 	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png"); //¿?
 	//R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
 	//T10Texture = App->textures->Load("");
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
+	
 	return ret;
 }
 update_status ModuleGameTitle::Update() {

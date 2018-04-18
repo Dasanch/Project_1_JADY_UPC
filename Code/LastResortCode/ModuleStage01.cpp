@@ -18,6 +18,7 @@
 #include "ModuleStage1Clear.h"
 #include "ModuleCollision.h"
 #include "ModuleUnit.h"
+#include "ModuleEnemies.h"
 
 #define INIT_X_PLAYER_1 40
 #define INIT_Y_PLAYER_1 74
@@ -61,6 +62,7 @@ bool ModuleStage01::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
+
 	//textures-----------------------------------------------------------------------
 	groundAndTunel = App->textures->Load("Assets/TileMaplvl1Ground&Tunel.png");
 	PurpleBuildings = App->textures->Load("Assets/midGroundBuildingsFull.png");
@@ -90,6 +92,7 @@ bool ModuleStage01::Start()
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
 	App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
+	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 0, 0);
 
 	return ret;
 }
@@ -127,7 +130,7 @@ update_status ModuleStage01::Update()
 	// Move camera forward -------------------------------------------------------------------
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -= App->render->cameraspeed;
+	App->render->camera.x -= 1 * SCREEN_SIZE;
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = initPosition.x;	
@@ -354,18 +357,19 @@ update_status ModuleStage01::Update()
 	//Enemies------------------------------------------------------
 
 	//Create the player 2
-	if(App->player2->IsEnabled() == false)
-	{
+	
 		if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_KP_2])
 		{
+			if (App->player2->IsEnabled() == false)
+			{
 			//We enable the other player
 			App->player2->Enable();
 			//We put it on the position we need it
 			App->player2->position.x = initPosition.x ;
 			App->player2->position.y = INIT_Y_PLAYER_2;
-			
+			}
 		}
-	}
+	
 
 	return UPDATE_CONTINUE;
 }

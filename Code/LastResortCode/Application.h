@@ -6,6 +6,7 @@
 #define NUM_MODULES 20
 
 class Module;
+
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
