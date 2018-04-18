@@ -13,6 +13,8 @@
 #include "ModuleStage02.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleGameOver.h"
+#include "ModuleStage1Clear.h"
 
 Module2lvlScene::Module2lvlScene()
 {
@@ -75,6 +77,17 @@ update_status Module2lvlScene::Update() {
 	{
 		//App->fade->FadeToBlack(this, App->GameTitle, 0.5f);
 		App->fade->FadeToBlack(this, App->continueScene, 0.2f);
+	}
+
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
 	}
 
 	return UPDATE_CONTINUE;

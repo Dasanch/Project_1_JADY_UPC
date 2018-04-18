@@ -9,6 +9,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
 #include "ModuleGameTitle.h"
+#include "ModuleStage1Clear.h"
 
 
 #define MAX_ALPHA 255
@@ -129,5 +130,12 @@ update_status ModuleGameOver::Update() {
 		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 	}
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 0.1f);// Defect RenderDraColor
+
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
+
 	return UPDATE_CONTINUE;
 }

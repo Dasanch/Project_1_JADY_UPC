@@ -343,7 +343,7 @@ update_status ModuleStage01::Update()
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_G])
+	if (App->input->keyboard[SDL_SCANCODE_G]) //lose
 	{
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.0); 
 	}
@@ -351,7 +351,7 @@ update_status ModuleStage01::Update()
 	{
 		App->fade->FadeToBlack(this, App->continueScene, 0.0);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_0])
+	if (App->input->keyboard[SDL_SCANCODE_0])  //win
 	{
 		App->fade->FadeToBlack(this, App->stageclearScene, 0.0);
 	}

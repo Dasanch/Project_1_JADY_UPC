@@ -12,6 +12,7 @@
 #include "ModuleReady.h"
 #include "Player1.h"
 #include "Player2.h"
+#include "ModuleGameOver.h"
 
 ModuleStage1Clear::ModuleStage1Clear()
 {
@@ -80,6 +81,13 @@ update_status ModuleStage1Clear::Update()
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
 	}
+
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	}
+
 
 	return UPDATE_CONTINUE;
 }
