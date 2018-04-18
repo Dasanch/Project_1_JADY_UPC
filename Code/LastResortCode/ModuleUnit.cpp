@@ -27,7 +27,9 @@ bool ModuleUnit::Start()
 void ModuleUnit::LimitAddMovement(float targetRotation)
 {
 	if (fabs(rotation - targetRotation) < rotateSpeed)
-	{ rotation = targetRotation; }
+	{
+		LOG("Moving up");
+		rotation = targetRotation; }
 	else
 	{ rotation += rotateSpeed; }
 }
@@ -46,7 +48,7 @@ update_status ModuleUnit::Update()
 	if(App->player1->MoveLeft() == true)
 	{
 		//The unit goes to the right (0 or 0)
-		if(position.y + yOffset <= App->player1->position.y)
+		if(fabs(rotation - angleRight) <= 180)
 		{ LimitAddMovement(angleRight); }
 		else
 		{ LimitSubMovement(angleRight); }
@@ -54,7 +56,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveRight() == true)
 	{
 		//The unit goes to the left (180 or PI)
-		if (position.y + yOffset >= App->player1->position.y)
+		if (fabs(rotation - angleLeft) >= 180)
 		{ LimitAddMovement(angleLeft); }
 		else
 		{ LimitSubMovement(angleLeft); }
@@ -62,7 +64,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveUp() == true)
 	{
 		//The unit goes down (270 or 3*PI/2)
-		if (position.x + xOffset >= App->player1->position.x)
+		if (fabs(rotation - angleDown) <=180)
 		{ LimitAddMovement(angleDown); }
 		else
 		{ LimitSubMovement(angleDown); }
@@ -70,7 +72,7 @@ update_status ModuleUnit::Update()
 	if (App->player1->MoveDown() == true)
 	{
 		//The unit goes up (90 or PI/2)
-		if (position.x +xOffset <= App->player1->position.x)
+		if (fabs(rotation - angleUp) >= 180)
 		{ LimitAddMovement(angleUp); }
 		else
 		{ LimitSubMovement(angleUp); }
@@ -86,10 +88,10 @@ update_status ModuleUnit::Update()
 		rotation -= 2*PI;
 	}
 	//Debug rotation
-	LOG("Rotation: %f", rotation);
+	//LOG("Rotation: %f", rotation);
 	//Set the position
-	position.x = radius * cosf(rotation) + App->player1->position.x + xOffset;
-	position.y = radius * sinf(rotation) + App->player1->position.y + yOffset;
+	position.x = radius * cosf(rotation) + App->player1->position.x;
+	position.y = radius * sinf(rotation) + App->player1->position.y;
 	//Render
 	App->render->Blit(unitTx, position.x, position.y, &unitAnim.GetCurrentFrame());
 	return UPDATE_CONTINUE;
