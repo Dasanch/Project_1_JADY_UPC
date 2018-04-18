@@ -44,6 +44,7 @@ Application::Application()
 	modules[i++] = stageclearScene = new ModuleStage1Clear();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = enemies = new ModuleEnemies();
+
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
 }
 
