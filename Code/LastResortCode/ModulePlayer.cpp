@@ -243,14 +243,15 @@ void ModulePlayer::MovementInput() {
 	if (MoveLeft() == true)	{
 		//---------Movment-----------------------------------------------------------
 		position.x -= movementSpeed;
-		/*if (position.x < -(App->render->camera.x / App->render->cameraspeed))
-			position.x = -App->render->camera.x / App->render->cameraspeed;*/
+	
+		if (position.x < (App->render->camera.x / App->render->cameraspeed))
+			position.x = App->render->camera.x / App->render->cameraspeed;
 	}
 	if (MoveRight() == true) {
 		//---------Movment-----------------------------------------------------------
 		position.x += movementSpeed;
-		/*if (position.x + playerwidth > -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
-			position.x = -(App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;*/
+		if (position.x + playerwidth > (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
+			position.x = (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;
 	}
 	if (MoveUp() == true) {
 		//---------Movment-----------------------------------------------------------
