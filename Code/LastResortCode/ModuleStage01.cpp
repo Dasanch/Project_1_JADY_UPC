@@ -156,12 +156,12 @@ update_status ModuleStage01::Update()
 	App->player2->initAnim_p.x = initPosition.x;	
 	
 	//Boss buildings----------------------------------------------------------------------------
-	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
+	if (App->render->camera.x > (3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 	//Background buildings-----------------------------------------------------------------------
-	if (App->render->camera.x > -((3800 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x < ((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
 	}
@@ -178,7 +178,7 @@ update_status ModuleStage01::Update()
 	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
 	
 	//Orange Laser-----------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= (-33)* SCREEN_SIZE* foregndSpeed)
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x >= (33)* SCREEN_SIZE* foregndSpeed)
 	{
 		orangeLaserAnim.LoopAnimation();
 		if (frame < 2 ) {
