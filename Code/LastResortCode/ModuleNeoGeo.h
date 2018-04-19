@@ -35,7 +35,7 @@ public:
 	//NEO GEO
 	SDL_Texture * neogeoTx = nullptr;
 	Animation neogeoAnim;
-	const float neogeoAnimSpeed = 0.5f;
+	const float neogeoAnimSpeed = 0.05f;
 
 	//Transition from white to black
 	int currentFade = 255;
