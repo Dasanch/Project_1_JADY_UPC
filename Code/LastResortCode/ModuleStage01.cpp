@@ -91,18 +91,18 @@ bool ModuleStage01::Start()
 	App->player2->initAnim_p.y = 144;
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
-	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
-//	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 500, SCREEN_HEIGHT/2);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 600, 100);
 
 	//define moveCamera struct values
 	
-	MoveCamera.ymgPos = 32;
+	MoveCamera.ymgPos = 0;
 	MoveCamera.yroadPos = 0;
 	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
 	MoveCamera.xbetween_mov = 140 * SCREEN_SIZE;//91 * SCREEN_SIZE;
 	MoveCamera.last_positionCam = 0;
-	MoveCamera.vel_road = 0.30f;
+	MoveCamera.vel_road = 0.5f;
+	MoveCamera.vel_buildings = 0.23f;
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 	MoveCamera.loop = 0;
@@ -156,12 +156,12 @@ update_status ModuleStage01::Update()
 	App->player2->initAnim_p.x = initPosition.x;	
 	
 	//Boss buildings----------------------------------------------------------------------------
-	if (App->render->camera.x < -(3800 * SCREEN_SIZE))
+	if (App->render->camera.x > (3800 * SCREEN_SIZE))
 	{
 		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 	}
 	//Background buildings-----------------------------------------------------------------------
-	if (App->render->camera.x > -((3800 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x < ((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
 	}
@@ -178,7 +178,7 @@ update_status ModuleStage01::Update()
 	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
 	
 	//Orange Laser-----------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x <= (-33)* SCREEN_SIZE* foregndSpeed)
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x >= (33)* SCREEN_SIZE* foregndSpeed)
 	{
 		orangeLaserAnim.LoopAnimation();
 		if (frame < 2 ) {
@@ -265,7 +265,7 @@ update_status ModuleStage01::Update()
 	MoveCam();
 
 	//Midground lights-------------------------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE)) {
 		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
 	
 		//- Loop 1
@@ -308,13 +308,13 @@ update_status ModuleStage01::Update()
 	}
 	//Ground and tunnel-----------------------------------------------------------------------------------	
 
-	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE)) {
+	if (App->render->camera.x < ((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
 		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
 	}
 
 	//Street Lights-----------------------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		//1
 		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos+ 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
@@ -328,7 +328,7 @@ update_status ModuleStage01::Update()
 		}
 	}
 	//Tunnel lights----------------------------------------------------------------------------------------
-	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x > ((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
@@ -382,7 +382,7 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov)
+	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop!=2)
 	{
 		
 		if (!MoveCamera.up)
@@ -394,6 +394,7 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+				
 			}
 			else
 			{
@@ -401,6 +402,7 @@ void ModuleStage01::MoveCam(){
 				MoveCamera.last_positionCam = -App->render->camera.x;
 			}
 		}
+		//MoveCamera.loop++;
 		
 
 		if (MoveCamera.up)
