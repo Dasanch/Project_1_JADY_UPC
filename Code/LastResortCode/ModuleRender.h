@@ -2,6 +2,7 @@
 #define __ModuleRenderer_H__
 
 #include "Module.h"
+#include "p2Point.h"
 
 struct SDL_Renderer;
 struct SDL_Texture;
@@ -28,6 +29,7 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
+	iPoint relative_camera = { 0,0 };
 	int const cameraspeed = SCREEN_SIZE;
 };
 

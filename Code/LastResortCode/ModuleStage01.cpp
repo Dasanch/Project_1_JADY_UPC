@@ -92,9 +92,11 @@ bool ModuleStage01::Start()
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
 	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
-	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 500, SCREEN_HEIGHT/2);
+//	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 500, SCREEN_HEIGHT/2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, SCREEN_HEIGHT / 2);
 
 	//define moveCamera struct values
+	
 	MoveCamera.ymgPos = 32;
 	MoveCamera.yroadPos = 0;
 	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
@@ -132,7 +134,9 @@ bool ModuleStage01::CleanUp()
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();
+	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
+	App->render->relative_camera.x = 0;
 	//------------------------------------------------------------------------------
 	return true;
 }
@@ -145,6 +149,8 @@ update_status ModuleStage01::Update()
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
 	App->render->camera.x -=  SCREEN_SIZE;
+	App->render->relative_camera.x += 1;
+
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = initPosition.x;	

@@ -48,7 +48,11 @@ ModulePlayer::ModulePlayer() //Constructor
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
 	//Death Explosion Particle----------------------------------
-	death_explosion.anim.PushBack({ 148,127, 10,7 });
+	for (int i = 0; i < 5; ++i) {
+			death_explosion.anim.PushBack({ 244+ 32*i ,288, 32,32 });
+	}
+	death_explosion.anim.speed = 0.2f;
+	death_explosion.anim.loop = false;
 	//Basic Shot Explosion Particle-----------------------------
     basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
 	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
@@ -62,9 +66,9 @@ ModulePlayer::ModulePlayer() //Constructor
 	//Basic Shot Particle---------------------------------------
 	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
-	basicShot.speed.x = 10;
+	basicShot.speed.x = 12;
 	basicShot.anim.loop = false;
-	basicShot.life = 3000;
+	
 	basicShot.collision_fx = &basic_explosion;
 }
 
@@ -83,22 +87,39 @@ bool ModulePlayer::Start()
 	shoot = false;
 	canMove = false;
 	canShoot = false;
+	isDying = false;
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
-	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 //audios-------------------------------------------------------------------------
-	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
+	//audios-------------------------------------------------------------------------
+	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav"); 
+	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//particulas---------------------------------------------------------------------
 	basic_explosion.texture = PlayerTexture;
+	//animations-----------------------------------------------------------------------
+	deathAnim.Reset();
 	return ret;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading player assets");
+	//textures------------------------------------------------------------------
+	App->textures->Unload(PlayerTexture);
+	//audios------------------------------------------------------------------
+	App->audio->UnloadSFX(basic_shot_sfx);
+	App->audio->UnloadSFX(death_sfx);
+
+	return true;
 }
 
 update_status ModulePlayer::Update()
 {
 	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !isDying)
 	{
 		if (godMode == true) {
 			colType = COLLIDER_PLAYER;
@@ -128,7 +149,7 @@ update_status ModulePlayer::Update()
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.finished == true) {
 			shipAnimations = ShipAnimations::Movment;
-			initAnim.finished = false;
+			initAnim.Reset();
 			canMove = true;
 			canShoot = true;
 			break;
@@ -170,9 +191,9 @@ update_status ModulePlayer::Update()
 	case Death:
 		if (deathAnim.finished == true) {
 			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
-			deathAnim.finished == false;
+	
 		}
-		else {
+		else if (isDying) {
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
 		}
@@ -181,21 +202,17 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-bool ModulePlayer::CleanUp()
-{
-	LOG("Unloading player assets");
-	//textures------------------------------------------------------------------
-	App->textures->Unload(PlayerTexture);
-	//audios------------------------------------------------------------------
-	App->audio->UnloadSFX(basic_shot_sfx);
-	return true;
-}
+
 
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
+	App->particles->AddParticle(death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
+	App->audio->ControlSFX(death_sfx, PLAY_AUDIO);
 	isDying = true;
-
+	canMove = false;
+	canShoot = false;
+	playerCol->type = COLLIDER_TYPE::COLLIDER_NONE;
 	shipAnimations = ShipAnimations::Death;
 }
 

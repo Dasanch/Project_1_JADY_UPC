@@ -136,7 +136,7 @@ update_status ModuleUnit::Update()
 bool ModuleUnit::CleanUp()
 {
 	LOG("Unloading unit assets");
-
+	App->textures->Unload(unitTx);
 	return true;
 }
 
