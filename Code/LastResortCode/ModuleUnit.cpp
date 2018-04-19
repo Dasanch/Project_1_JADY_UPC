@@ -25,20 +25,7 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
-void ModuleUnit::MoveCounterClock(float targetRotation)
-{
-	//If we've reached our target rotation
-	if (fabs(currentRotation - targetRotation) < rotateSpeed)
-	{
-		currentRotation = targetRotation;
-	}
-	else
-	{
-		currentRotation += rotateSpeed;
-	}
-}
-
-void ModuleUnit::MoveClockWise(float targetRotation)
+void ModuleUnit::Orbit(float targetRotation)
 {
 	//If we've reached our target rotation
 
@@ -111,7 +98,7 @@ update_status ModuleUnit::Update()
 	}
 
 	 if (targetRotation != lastTarget && moving == true)
-		MoveClockWise(targetRotation);
+		 Orbit(targetRotation);
 
 	//Limit the rotation to positive numbers (after modifing it)
 	if (currentRotation < 0)
@@ -134,6 +121,9 @@ update_status ModuleUnit::Update()
 //UCM (Uniform Circular Motion):
 //rotation = initial rotation + angular speed * time
 //angular speed = speed / radius
+
+//All the rotations are calculated in radians
+//The rotations are calculated upside down
 
 //Animations
 //if(rotation > 90-5 && rotation < 90+5)

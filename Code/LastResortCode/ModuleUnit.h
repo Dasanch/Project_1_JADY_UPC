@@ -7,6 +7,8 @@
 #include "p2Point.h"
 
 #define PI 3.14159265358979323846264338327950288
+#define radius 31
+#define rotateSpeed PI/20
 
 struct SDL_Texture;
 struct Collider;
@@ -21,29 +23,21 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
-	void MoveCounterClock(float);//Limit when adding rotation
-	void MoveClockWise(float);//Limit when substracting rotation
+	void Orbit(float);//Limit when substracting rotation
 
 public:
 	Animation unitAnim;
 	SDL_Texture* unitTx = nullptr;
 	iPoint position;
 
-	//We have an rotation (angular)
-	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
-	float currentRotation = 0;
-	float targetRotation;
+	float currentRotation = 0;//The rotation we currently are. We'll be incrementing it when we move to a direction and decrement it when we move to another direction
+	float targetRotation;//The rotation we want to be in
 	float lastTarget;
-	const float rotateSpeed = PI/20;
-	const float radius = 31;
 	bool moving = false;
-	
-	//const int xOffset = 6;
-	//const int yOffset = -2;
+	//Angles
 	const float angleLeft = PI;
 	const float angleRight = 0;
-	const float angleUp = PI/2;
-	const float angleDown = 3*PI/2;
+	const float angleUp = PI / 2;
+	const float angleDown = 3 * PI / 2;
 };
-
 #endif
