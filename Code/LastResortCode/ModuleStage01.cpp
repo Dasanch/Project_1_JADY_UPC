@@ -91,9 +91,8 @@ bool ModuleStage01::Start()
 	App->player2->initAnim_p.y = 144;
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
-	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
-//	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 500, SCREEN_HEIGHT/2);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, 200);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 600, 100);
 
 	//define moveCamera struct values
 	

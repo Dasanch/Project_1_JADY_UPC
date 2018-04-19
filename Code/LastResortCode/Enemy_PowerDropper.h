@@ -6,10 +6,10 @@
 class Enemy_PowerDropper : public Enemy
 {
 private:
-	//float wave = -1.0f;
+	float wave = -1.0f;
 	bool going_up = true;
 	int original_y = 0;
-	Animation fly;
+	Animation dropper;
 
 public:
 
