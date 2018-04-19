@@ -78,12 +78,13 @@ update_status ModuleParticles::Update()
 
 		if (p == nullptr)
 			continue;
-
+	
 		if (p->Update() == false)
 		{
 			delete p;
 			active[i] = nullptr;
 		}
+
 		else if (SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(p->texture, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
@@ -93,6 +94,7 @@ update_status ModuleParticles::Update()
 				//App->audio->PlayFx(p->fx);
 			}
 		}
+
 	}
 	return UPDATE_CONTINUE;
 }
@@ -168,9 +170,12 @@ bool Particle::Update()
 	position.x += speed.x;
 	position.y += speed.y;
 
-	if (collider != nullptr)
+	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
-
+		if (collider->type == COLLIDER_PLAYER_SHOT && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
+			ret = false;
+		}
+	}
 	return ret;
 }
 

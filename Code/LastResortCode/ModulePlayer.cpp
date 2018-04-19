@@ -62,9 +62,9 @@ ModulePlayer::ModulePlayer() //Constructor
 	//Basic Shot Particle---------------------------------------
 	basicShot.anim.PushBack({ 0,247, 15,7 });
 	basicShot.anim.speed = 0.0f;
-	basicShot.speed.x = 10;
+	basicShot.speed.x = 12;
 	basicShot.anim.loop = false;
-	basicShot.life = 3000;
+	
 	basicShot.collision_fx = &basic_explosion;
 }
 
@@ -83,22 +83,26 @@ bool ModulePlayer::Start()
 	shoot = false;
 	canMove = false;
 	canShoot = false;
+	isDying = false;
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
-	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 //audios-------------------------------------------------------------------------
+	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
+	//audios-------------------------------------------------------------------------
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//particulas---------------------------------------------------------------------
 	basic_explosion.texture = PlayerTexture;
+	//animations-----------------------------------------------------------------------
+	deathAnim.Reset();
 	return ret;
 }
 
 update_status ModulePlayer::Update()
 {
 	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !isDying)
 	{
 		if (godMode == true) {
 			colType = COLLIDER_PLAYER;
@@ -128,7 +132,7 @@ update_status ModulePlayer::Update()
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.finished == true) {
 			shipAnimations = ShipAnimations::Movment;
-			initAnim.finished = false;
+			initAnim.Reset();
 			canMove = true;
 			canShoot = true;
 			break;
@@ -170,9 +174,9 @@ update_status ModulePlayer::Update()
 	case Death:
 		if (deathAnim.finished == true) {
 			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
-			deathAnim.finished == false;
+	
 		}
-		else {
+		else if (isDying) {
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
 		}
@@ -195,7 +199,9 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
 	isDying = true;
-
+	canMove = false;
+	canShoot = false;
+	playerCol->type = COLLIDER_TYPE::COLLIDER_NONE;
 	shipAnimations = ShipAnimations::Death;
 }
 

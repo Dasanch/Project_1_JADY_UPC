@@ -85,6 +85,7 @@ public:
 
 	void Reset()
 	{
+		finished = false;
 		current_frame = 0;
 	}
 
