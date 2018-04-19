@@ -33,9 +33,11 @@ public:
 	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
 	float currentRotation = 0;
 	float targetRotation;
+	float lastTarget;
 	const float rotateSpeed = PI/20;
 	const float radius = 31;
 	bool moving = false;
+	
 	//const int xOffset = 6;
 	//const int yOffset = -2;
 	const float angleLeft = PI;
