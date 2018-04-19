@@ -6,15 +6,13 @@
 class Enemy_Basic : public Enemy
 {
 private:
-	//float wave = -1.0f;
+	
 	bool going_up = true;
-	int original_y = 0;
-	Animation fly;
+	Animation basicenemy;
 
 public:
 
 	Enemy_Basic(int x, int y);
-
 	void Move();
 };
 
