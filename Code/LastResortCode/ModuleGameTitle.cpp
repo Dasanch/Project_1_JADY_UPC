@@ -155,14 +155,6 @@ ModuleGameTitle::ModuleGameTitle()
 	S3.PushBack({ 32,240,32,61 });
 	S3.PushBack({ 64,240,32,59 });
 	S3.PushBack({ 96,240,32,58 });
-	/*for (int i = 128; i <=384 ; i += 32)
-	{
-		S3.PushBack({ i,240,32,58 });
-	}
-	for (int i = 0;i<=352;i+=32)
-	{
-		S3.PushBack({ i,304,32,58 });
-	}*/
 	S3.loop = false;
 	S3.speed = speed;
 

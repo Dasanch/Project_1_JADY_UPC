@@ -164,7 +164,6 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 
 	bool music_found = false;
 
-	for (uint i = 0; i < last_music; ++i) {
 		if (musics[i] == music) {
 			music_found = true;
 		}

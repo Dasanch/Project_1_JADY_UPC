@@ -92,7 +92,7 @@ bool ModuleStage01::Start()
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 600, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 
 	//define moveCamera struct values
 	
