@@ -36,7 +36,7 @@ bool ModuleNeoGeo::Start()
 	{
 		for(int j = 0; j < 40 * 25; j += 40)
 		{
-			if (i == 227 * 2 && j == 40 * 22) { break; }
+			if (i == 227 * 1 && j == 40 * 22) { break; }
 			neogeoAnim.PushBack({i,j,227,40});
 		}
 	}
