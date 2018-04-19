@@ -45,6 +45,7 @@ public:
 	Particle basicShot;
 	//Audios-----------------------------------------------
 	Mix_Chunk* basic_shot_sfx = nullptr;
+	Mix_Chunk* death_sfx = nullptr;
 	//Variables--------------------------------------------
 	//--------Time---------------------------------
 	//Time variables

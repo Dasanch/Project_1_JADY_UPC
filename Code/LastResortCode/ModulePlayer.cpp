@@ -48,7 +48,11 @@ ModulePlayer::ModulePlayer() //Constructor
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
 	//Death Explosion Particle----------------------------------
-	death_explosion.anim.PushBack({ 148,127, 10,7 });
+	for (int i = 0; i < 5; ++i) {
+			death_explosion.anim.PushBack({ 244+ 32*i ,288, 32,32 });
+	}
+	death_explosion.anim.speed = 0.2f;
+	death_explosion.anim.loop = false;
 	//Basic Shot Explosion Particle-----------------------------
     basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
 	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
@@ -89,7 +93,8 @@ bool ModulePlayer::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//audios-------------------------------------------------------------------------
-	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav"); 
+	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//particulas---------------------------------------------------------------------
@@ -97,6 +102,18 @@ bool ModulePlayer::Start()
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
 	return ret;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	LOG("Unloading player assets");
+	//textures------------------------------------------------------------------
+	App->textures->Unload(PlayerTexture);
+	//audios------------------------------------------------------------------
+	App->audio->UnloadSFX(basic_shot_sfx);
+	App->audio->UnloadSFX(death_sfx);
+
+	return true;
 }
 
 update_status ModulePlayer::Update()
@@ -185,19 +202,13 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-bool ModulePlayer::CleanUp()
-{
-	LOG("Unloading player assets");
-	//textures------------------------------------------------------------------
-	App->textures->Unload(PlayerTexture);
-	//audios------------------------------------------------------------------
-	App->audio->UnloadSFX(basic_shot_sfx);
-	return true;
-}
+
 
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
+	App->particles->AddParticle(death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
+	App->audio->ControlSFX(death_sfx, PLAY_AUDIO);
 	isDying = true;
 	canMove = false;
 	canShoot = false;

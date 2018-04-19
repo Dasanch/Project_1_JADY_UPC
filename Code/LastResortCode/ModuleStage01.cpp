@@ -149,7 +149,7 @@ update_status ModuleStage01::Update()
 	App->player2->position.x += 1;
 	App->render->camera.x -=  SCREEN_SIZE;
 	App->render->relative_camera.x += 1;
-	LOG("relative position %i", App->render->relative_camera.x);
+
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = initPosition.x;	

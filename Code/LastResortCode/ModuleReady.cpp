@@ -47,9 +47,6 @@ bool ModuleStageReady::Start()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	//App->player->Enable();
-	App->player1->Disable();
-
 	return ret;
 }
 
@@ -58,7 +55,6 @@ bool ModuleStageReady::CleanUp()
 	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player1->Disable(); //Disable the player module
 	App->textures->Unload(backgroundReady);
 	return true;
 }
@@ -74,11 +70,6 @@ update_status ModuleStageReady::Update()
 
 	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f); //MAGIC NUMBERS
 
-
-	// make so pressing SPACE other stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN) {
-		App->fade->FadeToBlack(this, App->stage02, 0.5f); //this=readyScene
-	}
 
 	// Win/Lose button
 	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
