@@ -265,7 +265,7 @@ update_status ModuleStage01::Update()
 	MoveCam();
 
 	//Midground lights-------------------------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE)) {
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE)) {
 		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
 	
 		//- Loop 1
@@ -308,13 +308,13 @@ update_status ModuleStage01::Update()
 	}
 	//Ground and tunnel-----------------------------------------------------------------------------------	
 
-	if (App->render->camera.x > -((5000 / foregndSpeed) * SCREEN_SIZE)) {
+	if (App->render->camera.x < ((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
 		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
 	}
 
 	//Street Lights-----------------------------------------------------------------------------------------
-	if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		//1
 		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos+ 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
@@ -328,7 +328,7 @@ update_status ModuleStage01::Update()
 		}
 	}
 	//Tunnel lights----------------------------------------------------------------------------------------
-	if (App->render->camera.x < -((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
+	if (App->render->camera.x > ((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
