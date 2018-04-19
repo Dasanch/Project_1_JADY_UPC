@@ -106,7 +106,7 @@ bool ModuleStage01::Start()
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 	MoveCamera.loop = 0;
-
+	MoveCamera.maxloop = 5; //¿?
 
 	return ret;
 }
@@ -382,7 +382,7 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop!=2)
+	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop <= MoveCamera.maxloop)
 	{
 		
 		if (!MoveCamera.up)
@@ -394,15 +394,19 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
-				
+			
 			}
+			
 			else
 			{
 				MoveCamera.up = true;
 				MoveCamera.last_positionCam = -App->render->camera.x;
+				
+				++MoveCamera.loop;//¿?
 			}
+			
+			
 		}
-		//MoveCamera.loop++;
 		
 
 		if (MoveCamera.up)
@@ -414,14 +418,16 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+				
 			}
 			else
 			{
 				MoveCamera.up = false;
 				MoveCamera.last_positionCam = -App->render->camera.x;
+				
 			}
 		}
-		
+
 	}
 
 
