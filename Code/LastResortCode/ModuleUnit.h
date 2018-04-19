@@ -31,12 +31,13 @@ public:
 
 	//We have an rotation (angular)
 	//We'll be incrementing it when we move to a direction and decrement it when we move to another direction
-	float rotation = 0;
+	float currentRotation = 0;
+	float targetRotation;
 	const float rotateSpeed = PI/20;
 	const float radius = 31;
 	float ToRadian(float);//TO DO: Put somewhere else
-	const int xOffset = 6;
-	const int yOffset = -2;
+	//const int xOffset = 6;
+	//const int yOffset = -2;
 	const float angleLeft = PI;
 	const float angleRight = 0;
 	const float angleUp = PI/2;

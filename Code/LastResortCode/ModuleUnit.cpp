@@ -26,18 +26,18 @@ bool ModuleUnit::Start()
 
 void ModuleUnit::LimitAddMovement(float targetRotation)
 {
-	if (fabs(rotation - targetRotation) < rotateSpeed)
-	{ rotation = targetRotation; }
+	if (fabs(currentRotation - targetRotation) < rotateSpeed)
+	{ currentRotation = targetRotation; }
 	else
-	{ rotation += rotateSpeed; }
+	{ currentRotation += rotateSpeed; }
 }
 
 void ModuleUnit::LimitSubMovement(float targetRotation)
 {
-	if (fabs(rotation - targetRotation) < rotateSpeed)
-	{ rotation = targetRotation; }
+	if (fabs(currentRotation - targetRotation) < rotateSpeed)
+	{ currentRotation = targetRotation; }
 	else
-	{ rotation -= rotateSpeed; }
+	{ currentRotation -= rotateSpeed; }
 }
 
 update_status ModuleUnit::Update()
@@ -46,50 +46,70 @@ update_status ModuleUnit::Update()
 	if(App->player1->MoveLeft() == true)
 	{
 		//The unit goes to the right (0 or 0)
-		if(position.y + yOffset <= App->player1->position.y)
-		{ LimitAddMovement(angleRight); }
-		else
-		{ LimitSubMovement(angleRight); }
+		//if(fabs(currentRotation - angleRight) <= PI)
+		//{ LimitAddMovement(angleRight); }
+		//else
+		//{ LimitSubMovement(angleRight); }
+		//LimitAddMovement(angleRight);
+		targetRotation = angleRight;
 	}
 	if (App->player1->MoveRight() == true)
 	{
 		//The unit goes to the left (180 or PI)
-		if (position.y + yOffset >= App->player1->position.y)
-		{ LimitAddMovement(angleLeft); }
-		else
-		{ LimitSubMovement(angleLeft); }
+		//if (fabs(currentRotation - angleLeft) >= PI)
+		//{ LimitAddMovement(angleLeft); }
+		//else
+		//{ LimitSubMovement(angleLeft); }
+		//LimitAddMovement(angleLeft);
+		targetRotation = angleLeft;
 	}
 	if (App->player1->MoveUp() == true)
 	{
 		//The unit goes down (270 or 3*PI/2)
-		if (position.x + xOffset >= App->player1->position.x)
-		{ LimitAddMovement(angleDown); }
-		else
-		{ LimitSubMovement(angleDown); }
+		//if (fabs(currentRotation - angleUp) >= PI)
+		//{ LimitAddMovement(angleUp); }
+		//else
+		//{ LimitSubMovement(angleUp); }
+		//LimitAddMovement(angleUp);
+		targetRotation = angleUp;
 	}
 	if (App->player1->MoveDown() == true)
 	{
 		//The unit goes up (90 or PI/2)
-		if (position.x +xOffset <= App->player1->position.x)
-		{ LimitAddMovement(angleUp); }
-		else
-		{ LimitSubMovement(angleUp); }
+		//if (fabs(currentRotation - angleDown) <= PI)
+		//{ LimitAddMovement(angleDown); }
+		//else
+		//{ LimitSubMovement(angleDown); }
+		//LimitAddMovement(angleDown);
+		targetRotation = angleDown;
 	}
+	//Move
+	LimitAddMovement(targetRotation);
+	//if(fabs(targetRotation - currentRotation) >= PI)
+	//{
+	//	//Move clockwise
+	//	LimitAddMovement(targetRotation);
+	//}
+	//else
+	//{
+	//	//Movecounterclock
+	//	LimitSubMovement(targetRotation);
+	//}
 	//Limit the rotation to positive numbers
-	if(rotation < 0)
+	if(currentRotation < 0)
 	{
-		rotation = 2 * PI + rotation;//We add the rotation because it's negative, so it will efectively substract it
+		currentRotation = 2 * PI + currentRotation;//We add the rotation because it's negative, so it will efectively substract it
 	}
 	//Limit the rotation to 2PI (not more than one full circle)
-	while(rotation >= 2*PI)
+	while(currentRotation >= 2*PI)
 	{
-		rotation -= 2*PI;
+		currentRotation -= 2*PI;
 	}
 	//Debug rotation
-	LOG("Rotation: %f", rotation);
+	LOG("Rotation: %f", currentRotation);
 	//Set the position
-	position.x = radius * cosf(rotation) + App->player1->position.x + xOffset;
-	position.y = radius * sinf(rotation) + App->player1->position.y + yOffset;
+	position.x = radius * cosf(currentRotation) + App->player1->position.x;
+	position.y = radius * sinf(currentRotation) + App->player1->position.y;
 	//Render
 	App->render->Blit(unitTx, position.x, position.y, &unitAnim.GetCurrentFrame());
 	return UPDATE_CONTINUE;
