@@ -5,10 +5,11 @@
 #include "ModuleRender.h"
 #include "Player1.h"
 #include <stdio.h>
+#include <math.h>
 
 ModuleUnit::ModuleUnit() //Constructor 
 {
-	unitAnim.PushBack({ 66, 0, 22 , 16});
+	unitAnim.PushBack({ 66, 0, 22 , 16 });
 }
 
 ModuleUnit::~ModuleUnit()
@@ -24,89 +25,98 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
-void ModuleUnit::LimitAddMovement(float targetRotation)
+void ModuleUnit::MoveCounterClock(float targetRotation)
 {
+	//If we've reached our target rotation
 	if (fabs(currentRotation - targetRotation) < rotateSpeed)
-	{ currentRotation = targetRotation; }
+	{
+		currentRotation = targetRotation;
+	}
 	else
-	{ currentRotation += rotateSpeed; }
+	{
+		currentRotation += rotateSpeed;
+	}
 }
 
-void ModuleUnit::LimitSubMovement(float targetRotation)
+void ModuleUnit::MoveClockWise(float targetRotation)
 {
+	//If we've reached our target rotation
 	if (fabs(currentRotation - targetRotation) < rotateSpeed)
-	{ currentRotation = targetRotation; }
+	{
+		currentRotation = targetRotation;
+	}
 	else
-	{ currentRotation -= rotateSpeed; }
+	{
+		currentRotation -= rotateSpeed;
+	}
 }
 
 update_status ModuleUnit::Update()
 {
+	moving = false;
 	//Conditions
-	if(App->player1->MoveLeft() == true)
+	if (App->player1->MoveLeft() == true)
 	{
-		//The unit goes to the right (0 or 0)
-		//if(fabs(currentRotation - angleRight) <= PI)
-		//{ LimitAddMovement(angleRight); }
+		////The unit goes to the right
+		//if (currentRotation > PI)
+		//{
+		//	MoveCounterClock(angleRight);
+		//}
 		//else
-		//{ LimitSubMovement(angleRight); }
-		//LimitAddMovement(angleRight);
-		targetRotation = angleRight;
+		//{
+			MoveClockWise(angleRight);
+		//}
 	}
 	if (App->player1->MoveRight() == true)
 	{
-		//The unit goes to the left (180 or PI)
-		//if (fabs(currentRotation - angleLeft) >= PI)
-		//{ LimitAddMovement(angleLeft); }
+		//LOG("Move right");
+		//LOG("Current rotation; %f:", currentRotation);
+		////The unit goes to the left
+		//if (currentRotation < PI)
+		//{
+		//	MoveCounterClock(angleLeft);
+		//}
 		//else
-		//{ LimitSubMovement(angleLeft); }
-		//LimitAddMovement(angleLeft);
-		targetRotation = angleLeft;
+		//{
+			MoveClockWise(angleLeft);
+		//}
 	}
 	if (App->player1->MoveUp() == true)
 	{
-		//The unit goes down (270 or 3*PI/2)
-		//if (fabs(currentRotation - angleUp) >= PI)
-		//{ LimitAddMovement(angleUp); }
+		//LOG("Move up");
+		//LOG("Current rotation; %f:", currentRotation);
+		//if (currentRotation > 3 * PI / 2 || currentRotation < PI)
+		//{
+		//	MoveCounterClock(angleUp);
+		//}
 		//else
-		//{ LimitSubMovement(angleUp); }
-		//LimitAddMovement(angleUp);
-		targetRotation = angleUp;
+		//{
+			MoveClockWise(angleUp);
+		//}
 	}
 	if (App->player1->MoveDown() == true)
 	{
-		//The unit goes up (90 or PI/2)
-		//if (fabs(currentRotation - angleDown) <= PI)
-		//{ LimitAddMovement(angleDown); }
+		//LOG("Move down");
+		//LOG("Current rotation; %f:", currentRotation);
+		//if (currentRotation < 3 * PI / 2 && currentRotation > PI)
+		//{
+		//	MoveCounterClock(angleDown);
+		//}
 		//else
-		//{ LimitSubMovement(angleDown); }
-		//LimitAddMovement(angleDown);
-		targetRotation = angleDown;
+		//{
+			MoveClockWise(angleDown);
+		//}
 	}
-	//Move
-	LimitAddMovement(targetRotation);
-	//if(fabs(targetRotation - currentRotation) >= PI)
-	//{
-	//	//Move clockwise
-	//	LimitAddMovement(targetRotation);
-	//}
-	//else
-	//{
-	//	//Movecounterclock
-	//	LimitSubMovement(targetRotation);
-	//}
-	//Limit the rotation to positive numbers
-	if(currentRotation < 0)
+	//Limit the rotation to positive numbers (after modifing it)
+	if (currentRotation < 0)
 	{
 		currentRotation = 2 * PI + currentRotation;//We add the rotation because it's negative, so it will efectively substract it
 	}
-	//Limit the rotation to 2PI (not more than one full circle)
-	while(currentRotation >= 2*PI)
+	//We limit the rotation to one circle
+	while (currentRotation >= 2 * PI)
 	{
-		currentRotation -= 2*PI;
+		currentRotation -= 2 * PI;
 	}
-	//Debug rotation
-	LOG("Rotation: %f", currentRotation);
 	//Set the position
 	position.x = radius * cosf(currentRotation) + App->player1->position.x;
 	position.y = radius * sinf(currentRotation) + App->player1->position.y;
@@ -133,9 +143,4 @@ bool ModuleUnit::CleanUp()
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
 
-}
-
-float ModuleUnit::ToRadian(float degreeRotation)
-{
-	return degreeRotation * 180 / (2 * PI);
 }

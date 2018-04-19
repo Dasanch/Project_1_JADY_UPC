@@ -21,8 +21,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
-	void LimitAddMovement(float);//Limit when adding rotation
-	void LimitSubMovement(float);//Limit when substracting rotation
+	void MoveCounterClock(float);//Limit when adding rotation
+	void MoveClockWise(float);//Limit when substracting rotation
 
 public:
 	Animation unitAnim;
@@ -35,7 +35,7 @@ public:
 	float targetRotation;
 	const float rotateSpeed = PI/20;
 	const float radius = 31;
-	float ToRadian(float);//TO DO: Put somewhere else
+	bool moving = false;
 	//const int xOffset = 6;
 	//const int yOffset = -2;
 	const float angleLeft = PI;
