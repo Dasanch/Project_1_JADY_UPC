@@ -97,7 +97,7 @@ bool ModuleStage01::Start()
 
 	//define moveCamera struct values
 	
-	MoveCamera.ymgPos = 32;
+	MoveCamera.ymgPos = 0;
 	MoveCamera.yroadPos = 0;
 	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
 	MoveCamera.xbetween_mov = 140 * SCREEN_SIZE;//91 * SCREEN_SIZE;
@@ -382,7 +382,7 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov)
+	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov && MoveCamera.loop!=2)
 	{
 		
 		if (!MoveCamera.up)
@@ -394,6 +394,7 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+				
 			}
 			else
 			{
@@ -401,6 +402,7 @@ void ModuleStage01::MoveCam(){
 				MoveCamera.last_positionCam = -App->render->camera.x;
 			}
 		}
+		//MoveCamera.loop++;
 		
 
 		if (MoveCamera.up)
