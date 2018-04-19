@@ -54,16 +54,16 @@ update_status ModuleRender::Update()
 	int speed = 20;
 
 	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
-		camera.y += speed;
-
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 		camera.y -= speed;
 
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+		camera.y += speed;
+
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
-		camera.x += speed;
+		camera.x -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
-		camera.x -= speed;
+		camera.x += speed;
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -88,13 +88,20 @@ bool ModuleRender::CleanUp()
 	return true;
 }
 
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool use_camera)
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * SCREEN_SIZE;
-	rect.y = (int)(camera.y * speed) + y * SCREEN_SIZE;
-
+	if (use_camera)
+	{
+		rect.x = (int)(-camera.x * speed) + x * SCREEN_SIZE;
+		rect.y = (int)(-camera.y * speed) + y * SCREEN_SIZE;
+	}
+	else
+	{
+		rect.x = x * SCREEN_SIZE;
+		rect.y = y * SCREEN_SIZE;
+	}
 	if (section != NULL)
 	{
 		rect.w = section->w;
@@ -127,12 +134,18 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_Rect rec(rect);
 	if (use_camera)
 	{
-		rec.x = (int)(camera.x + rect.x * SCREEN_SIZE);
-		rec.y = (int)(camera.y + rect.y * SCREEN_SIZE);
-		rec.w *= SCREEN_SIZE;
-		rec.h *= SCREEN_SIZE;
+		rec.x = (int)(-camera.x + rect.x * SCREEN_SIZE);
+		rec.y = (int)(-camera.y + rect.y * SCREEN_SIZE);
+		
+	}
+	else
+	{
+		rec.x *=   SCREEN_SIZE;
+		rec.y *=  SCREEN_SIZE;
 	}
 
+	rec.w *= SCREEN_SIZE;
+	rec.h *= SCREEN_SIZE;
 	if (SDL_RenderFillRect(renderer, &rec) != 0)
 	{
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
