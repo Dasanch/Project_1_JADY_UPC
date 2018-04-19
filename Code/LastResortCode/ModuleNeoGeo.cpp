@@ -32,12 +32,14 @@ bool ModuleNeoGeo::Start()
 	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
 	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
 
-	for(int i = 0; i < 227 * 2; i += 227)
+	int spriteWidth = 228;
+	int spriteHeight = 40;
+	for(int i = 0; i < spriteWidth * 2; i += spriteWidth)
 	{
-		for(int j = 0; j < 40 * 25; j += 40)
+		for(int j = 0; j < spriteHeight * 25; j += spriteHeight)
 		{
-			if (i == 227 * 1 && j == 40 * 22) { break; }
-			neogeoAnim.PushBack({i,j,227,40});
+			if (i == spriteWidth * 1 && j == spriteHeight * 22) { break; }
+			neogeoAnim.PushBack({i,j,spriteWidth,spriteHeight });
 		}
 	}
 	//227 = width of each sprite
