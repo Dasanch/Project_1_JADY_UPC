@@ -137,6 +137,7 @@ update_status ModuleNeoGeo::Update()
 			}
 		}
 		SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
+		SDL_RenderFillRect(App->render->renderer, NULL);
 		//Animate the logo
 		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
 		break;
