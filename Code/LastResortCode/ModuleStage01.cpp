@@ -93,7 +93,7 @@ bool ModuleStage01::Start()
 	//Enemies----------------------------------------------------------------
 	//App->collision->AddCollider({ 500, 100, 128, 128 }, COLLIDER_ENEMY, this);//delete after testing: Alejandro
 //	App->enemies->AddEnemy(ENEMY_TYPES::OSCILATOR, 500, SCREEN_HEIGHT/2);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, SCREEN_HEIGHT / 2);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, 200);
 
 	//define moveCamera struct values
 	
@@ -148,7 +148,7 @@ update_status ModuleStage01::Update()
 	// Move camera forward -------------------------------------------------------------------
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -=  SCREEN_SIZE;
+	App->render->camera.x +=  SCREEN_SIZE;
 	App->render->relative_camera.x += 1;
 
 	//Initial Position-------------------------------------------------------------------------
