@@ -101,7 +101,8 @@ bool ModuleStage01::Start()
 	MoveCamera.temporalSubstraction = MoveCamera.yroadPos;
 	MoveCamera.xbetween_mov = 140 * SCREEN_SIZE;//91 * SCREEN_SIZE;
 	MoveCamera.last_positionCam = 0;
-	MoveCamera.vel_road = 0.30f;
+	MoveCamera.vel_road = 0.5f;
+	MoveCamera.vel_buildings = 0.23f;
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 	MoveCamera.loop = 0;
@@ -381,7 +382,7 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - MoveCamera.last_positionCam > MoveCamera.xbetween_mov && MoveCamera.loop!=2)
+	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop!=2)
 	{
 		
 		if (!MoveCamera.up)
