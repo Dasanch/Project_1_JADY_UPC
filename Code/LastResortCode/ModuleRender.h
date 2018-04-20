@@ -24,7 +24,7 @@ public:
 	bool FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed = 1.0f,bool use_camera = true);
 	bool DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera = true);
 	float getCameraPosition(int position,float speed);
-	bool ModuleRender::FlippedBlit2_0(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed,int Flip_horizontal,int Flip_Vertical);
+	bool ModuleRender::Blit_x_o_y(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool use_camera_x = true, bool use_camera_y = true);
 
 public:
 	SDL_Renderer* renderer = nullptr;
