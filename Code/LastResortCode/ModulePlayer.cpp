@@ -141,6 +141,12 @@ update_status ModulePlayer::Update()
 	if (canShoot == true) {
 		ShotInput();
 	}
+	//Lock the unit--------------------------------------------------------------------
+	if (Lock())
+	{
+		if (locked == true) { locked = false; }
+		else { locked = true; }
+	}
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
 	//Ship Animation-------------------------------------------------------------------

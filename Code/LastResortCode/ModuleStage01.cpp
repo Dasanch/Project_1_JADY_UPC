@@ -341,7 +341,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		//Could be implemented with a for, but probably all the frames would be the same
 		//2048 = distance from the start of the tilemap to the first light
 	}
 	//Change scenes on button press-------------------------------------------------------------

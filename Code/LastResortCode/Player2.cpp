@@ -27,3 +27,8 @@ bool Player2::Shoot()
 {
 	return (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN);
 }
+
+bool Player2::Lock()
+{
+	return (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN);
+}

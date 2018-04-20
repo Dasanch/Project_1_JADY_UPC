@@ -72,6 +72,8 @@ public:
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
 	int Lives;
+	bool locked = false;
+
 	enum ShipFrames
 	{
 		MaxUp,
@@ -95,6 +97,7 @@ public:
 	virtual bool MoveLeft() = 0;
 	virtual bool MoveRight() = 0;
 	virtual bool Shoot() = 0;
+	virtual bool Lock() = 0;
 };
 
 #endif

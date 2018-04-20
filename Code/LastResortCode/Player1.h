@@ -13,5 +13,6 @@ public:
 	bool MoveLeft();
 	bool MoveRight();
 	bool Shoot();
+	bool Lock();
 };
 #endif

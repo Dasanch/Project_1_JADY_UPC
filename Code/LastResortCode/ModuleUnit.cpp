@@ -39,53 +39,57 @@ update_status ModuleUnit::Update()
 	//- We update our moving bool to false, if any key is pressed, it will go to true
 	moving = false;
 
-	//Conditions for movement-----------------------------------------------------------------------------
-	if (App->player1->MoveLeft() == true)
+	//- Check if the ball is locked
+	if(App->player1->locked == false)
 	{
-		moving = true;
-		//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
-		targetRotation = angleRight;
-	}
-	if (App->player1->MoveRight() == true)
-	{
-		moving = true;
-		//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
-		targetRotation = angleLeft;
-	}
-	if (App->player1->MoveUp() == true)
-	{
-		moving = true;
-		//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
-		targetRotation = angleDown;
-		//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
-		if (App->player1->MoveLeft() == true) { targetRotation -= PI / 4; }
-		if (App->player1->MoveRight() == true) { targetRotation += PI / 4; }
-	}
-	if (App->player1->MoveDown() == true)
-	{
-		moving = true;
-		//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
-		targetRotation = angleUp;
-		//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
-		if (App->player1->MoveLeft() == true) { targetRotation += PI / 4; }
-		if (App->player1->MoveRight() == true) { targetRotation -= PI / 4; }
-	}
+		//Conditions for movement-----------------------------------------------------------------------------
+		if (App->player1->MoveLeft() == true)
+		{
+			moving = true;
+			//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
+			targetRotation = angleRight;
+		}
+		if (App->player1->MoveRight() == true)
+		{
+			moving = true;
+			//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
+			targetRotation = angleLeft;
+		}
+		if (App->player1->MoveUp() == true)
+		{
+			moving = true;
+			//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
+			targetRotation = angleDown;
+			//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
+			if (App->player1->MoveLeft() == true) { targetRotation -= PI / 4; }
+			if (App->player1->MoveRight() == true) { targetRotation += PI / 4; }
+		}
+		if (App->player1->MoveDown() == true)
+		{
+			moving = true;
+			//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
+			targetRotation = angleUp;
+			//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
+			if (App->player1->MoveLeft() == true) { targetRotation += PI / 4; }
+			if (App->player1->MoveRight() == true) { targetRotation -= PI / 4; }
+		}
 
-	//Move the orbit to the target rotation---------------------------------------------------------------
-	//- Orbit around the player
-	if (moving == true) { Orbit(targetRotation); }
-	//- Rotation of the unit itself
+		//Move the orbit to the target rotation---------------------------------------------------------------
+		//- Orbit around the player
+		if (moving == true) { Orbit(targetRotation); }
+		//- Rotation of the unit itself
 
-	//Limit the rotation----------------------------------------------------------------------------------
-	//- Limit the rotation to positive numbers (after modifing it)
-	if (currentRotation < 0)
-	{
-		currentRotation = angleRight + currentRotation;//We add the rotation because it's negative, so it will efectively substract it
-	}
-	//- Limit the rotation to one circle
-	while (currentRotation > angleRight)
-	{
-		currentRotation -= angleRight;
+		//Limit the rotation----------------------------------------------------------------------------------
+		//- Limit the rotation to positive numbers (after modifing it)
+		if (currentRotation < 0)
+		{
+			currentRotation = angleRight + currentRotation;//We add the rotation because it's negative, so it will efectively substract it
+		}
+		//- Limit the rotation to one circle
+		while (currentRotation > angleRight)
+		{
+			currentRotation -= angleRight;
+		}
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
