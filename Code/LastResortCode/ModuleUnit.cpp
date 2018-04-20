@@ -26,6 +26,13 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
+bool ModuleUnit::CleanUp()
+{
+	LOG("Unloading unit assets");
+	App->textures->Unload(unitTx);
+	return true;
+}
+
 update_status ModuleUnit::Update()
 {
 	//Initial set up--------------------------------------------------------------------------------------
@@ -186,13 +193,6 @@ void ModuleUnit::Orbit(float targetRotation)
 
 void ModuleUnit::MoveClockwise() { currentRotation -= rotateSpeed; }
 void ModuleUnit::MoveCounterclock() { currentRotation += rotateSpeed; }
-
-bool ModuleUnit::CleanUp()
-{
-	LOG("Unloading unit assets");
-
-	return true;
-}
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
