@@ -282,8 +282,7 @@ void ModulePlayer::MovementInput() {
 	if (MoveDown() == true)	{
 		//---------Movment-----------------------------------------------------------
 		position.y += movementSpeed;
-		if (position.y > (App->render->camera.y+ App->render->camera.h ))
-			position.y = (App->render->camera.y + App->render->camera.h );
+		
 		
 		//---------Animation---------------------------------------------------------
 		yAxis += keyPressSpeed;
