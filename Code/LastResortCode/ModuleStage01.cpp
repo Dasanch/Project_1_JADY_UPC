@@ -93,6 +93,8 @@ bool ModuleStage01::Start()
 	//Enemies----------------------------------------------------------------
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78);
 	
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 
