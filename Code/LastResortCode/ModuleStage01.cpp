@@ -118,12 +118,13 @@ bool ModuleStage01::CleanUp()
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);
 	App->textures->Unload(BackgroundBuildings);
-	App->textures->Unload(LasersTx);
 	App->textures->Unload(Boss1Background);
-	App->textures->Unload(bckgndLightsTx);
-	App->textures->Unload(midgndLightsTx);
-	App->textures->Unload(tunnelLightsTx);
+	App->textures->Unload(LasersTx);
 	App->textures->Unload(streetLightsTx);
+	App->textures->Unload(midgndLightsTx);
+	App->textures->Unload(bckgndLightsTx);
+	App->textures->Unload(tunnelLightsTx);
+
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);

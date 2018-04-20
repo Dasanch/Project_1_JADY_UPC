@@ -24,7 +24,12 @@ bool ModuleUnit::Start()
 	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
 	return ret;
 }
-
+bool ModuleUnit::CleanUp()
+{
+	LOG("Unloading unit assets");
+	App->textures->Unload(unitTx);
+	return true;
+}
 void ModuleUnit::Orbit(float targetRotation)
 {
 	//If we've reached our target rotation
@@ -130,12 +135,7 @@ update_status ModuleUnit::Update()
 //animation = that
 //Possible fer una funcio que faci els intervals directament
 
-bool ModuleUnit::CleanUp()
-{
-	LOG("Unloading unit assets");
-	App->textures->Unload(unitTx);
-	return true;
-}
+
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {

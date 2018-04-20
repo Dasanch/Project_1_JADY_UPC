@@ -347,11 +347,10 @@ ModuleGameTitle::~ModuleGameTitle()
 {}
 bool ModuleGameTitle:: Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading title assets");
 	bool ret = true;
 	start_time = SDL_GetTicks(); //fix the real time that we start this module
 	//textures--------------------------------------------------------------------------------
-	TitleTexture = App->textures->Load("Assets/UI-TitleScreen.png");
 	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
 	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
 	S3Texture = App->textures->Load("Assets/LastResortTitle/S3.png");
@@ -367,6 +366,36 @@ bool ModuleGameTitle:: Start()
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
 	
 	return ret;
+}
+bool ModuleGameTitle::CleanUp() {
+	LOG("Unloading Title scene");
+	App->player1->Disable();
+	L1.Reset();
+	A2.Reset();
+	S3.Reset();
+	T4.Reset();
+	R5.Reset();
+	E6.Reset();
+	S7.Reset();
+	O8.Reset();
+	//R9.Reset(); //2LASTCHAR
+	//T10.Reset();
+	//textures----------------------------------------------------------------------
+	
+	App->textures->Unload(L1Texture);
+	App->textures->Unload(A2Texture);
+	App->textures->Unload(S3Texture);
+	App->textures->Unload(T4Texture);
+	App->textures->Unload(R5Texture);
+	App->textures->Unload(E6Texture);
+	App->textures->Unload(S7Texture);
+	App->textures->Unload(O8Texture);
+	//App->textures->Unload(R9Texture);
+	//App->textures->Unload(T10Texture);
+	//audios------------------------------------------------------------------------
+	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+	App->audio->UnloadMUS(Titlemusic);
+	return true;
 }
 update_status ModuleGameTitle::Update() {
 	//timer------------------------------------------------------------------------
@@ -407,33 +436,4 @@ update_status ModuleGameTitle::Update() {
 	
 
 	return UPDATE_CONTINUE;
-}
-bool ModuleGameTitle::CleanUp() {
-	LOG("Unloading Title scene");
-	App->player1->Disable();
-	L1.Reset();
-	A2.Reset();
-	S3.Reset();
-	T4.Reset();
-	R5.Reset();
-	E6.Reset();
-	S7.Reset();
-	O8.Reset();
-	//R9.Reset(); //2LASTCHAR
-	//T10.Reset();
-	//textures----------------------------------------------------------------------
-	App->textures->Unload(L1Texture);
-	App->textures->Unload(A2Texture);
-	App->textures->Unload(S3Texture);
-	App->textures->Unload(T4Texture);
-	App->textures->Unload(R5Texture);
-	App->textures->Unload(E6Texture);
-	App->textures->Unload(S7Texture);
-	App->textures->Unload(O8Texture);
-	//App->textures->Unload(R9Texture);
-	//App->textures->Unload(T10Texture);
-	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
-	App->audio->UnloadMUS(Titlemusic);
-	return true;
 }
