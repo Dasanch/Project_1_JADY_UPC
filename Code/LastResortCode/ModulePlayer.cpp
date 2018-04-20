@@ -268,8 +268,8 @@ void ModulePlayer::MovementInput() {
 	if (MoveUp() == true) {
 		//---------Movment-----------------------------------------------------------
 		position.y -= movementSpeed;
-		if (position.y < 0)
-			position.y = 0;
+		/*if (position.y < 0)
+			position.y = 0;*/
 		//---------Animation---------------------------------------------------------
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -280,8 +280,8 @@ void ModulePlayer::MovementInput() {
 	if (MoveDown() == true)	{
 		//---------Movment-----------------------------------------------------------
 		position.y += movementSpeed;
-		if (position.y > SCREEN_HEIGHT - 12)
-			position.y = SCREEN_HEIGHT - 12;
+		/*if (position.y > SCREEN_HEIGHT - 12)
+			position.y = SCREEN_HEIGHT - 12;*/
 		//---------Animation---------------------------------------------------------
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1

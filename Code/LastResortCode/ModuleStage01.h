@@ -104,7 +104,24 @@ public:
 	//Lasers animation
 	Animation orangeLaserAnim;
 	Animation blueLaserAnim;
+	Uint32 Start_time;
+	Uint32 Current_time;
 
+	//Move Camera
+	Uint32 Start_time_y;
+	Uint32 Current_time_y;
+	bool stop_time;
+	enum stateCam
+	{
+		CameraDown,
+		CameraUp,
+		SetZero,
+	};
+	stateCam StatetCamY = CameraDown;
+		bool up=false;
+	bool down=false;
+	bool cameraUp;
+	bool cameraDown;
 };
 
 #endif

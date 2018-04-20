@@ -7,9 +7,21 @@
 #include "p2Point.h"
 
 #define frames 8
+#define axis 16
 
 struct SDL_Texture;
 struct Collider;
+
+enum Angles
+{
+	//S (south), N (north), E (east), W (west)
+	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
+};
+
+struct InternalRotationAnimations
+{
+	SDL_Rect frame [frames];
+};
 
 class ModuleUnit : public Module
 {
@@ -23,6 +35,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 	void RotateTo(float, float&, float);//This function calculates the rotation of the orbit and the internal rotation of the unit
 	void LimitRotation(float &);
+	int SpintToRender();
 
 public:
 	iPoint position;
@@ -42,45 +55,12 @@ private:
 	const float internalRotationSpeed = 0.2f;
 	bool moving;//A bool that indicates if the player is moving (pressing any keys)
 	const float radius = 31;
-
-	const float angleW = PI;//The angle in which the player will be at the west of the ship
-	const float angleE = 2 * PI;
-	const float angleN = 3 * PI / 2;
-	const float angleS = PI / 2;
-	const float angleNE = 7 * PI / 4;
-	const float angleSE = PI / 4;
-	const float angleSO = 3 * PI / 4;
-	const float angleNO = 5 * PI / 4;
-	const float angleNNE = 5 * PI / 3;
-	const float angleENE = 11 * PI / 6;
-	const float agnleESE = PI / 6;
-	const float angleSSE = PI / 3;
-	const float angleSSO = 2 * PI / 3;
-	const float angleOSO = 5 * PI / 6;
-	const float angleONO = 7 * PI / 6;
-	const float angleNNO = 4 * PI / 3;
+	float angleValue[axis];//The value of each angle
+	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 
 	//Animations
-	//There is an aniumation for each direciton of the ball. s (south), n (north), e (east), w (west)
+	//There is an animation for each direciton of the ball
 	SDL_Texture* unitTx = nullptr;
-	//Straight
-	SDL_Rect nAnim[frames];
-	SDL_Rect wAnim[frames];
-	SDL_Rect eAnim[frames];
-	SDL_Rect sAnim[frames];
-	//Diagonals
-	SDL_Rect neAnim[frames];
-	SDL_Rect nwAnim[frames];
-	SDL_Rect seAnim[frames];
-	SDL_Rect swAnim[frames];
-	//Transition diagonals
-	SDL_Rect nneAnim[frames];
-	SDL_Rect neeAnim[frames];
-	SDL_Rect seeAnim[frames];
-	SDL_Rect sseAnim[frames];
-	SDL_Rect sswAnim[frames];
-	SDL_Rect swwAnim[frames];
-	SDL_Rect nwwAnim[frames];
-	SDL_Rect nnwAnim[frames];
+	InternalRotationAnimations internalRotationAnim[axis];
 };
 #endif

@@ -114,6 +114,16 @@ bool ModuleStage01::Start()
 	MoveCamera.loop = 0;
 	MoveCamera.maxloop = 5; //¿?
 
+
+	//Moving camera funtions variables;
+	App->render->camera.y = -20;
+	Start_time_y = SDL_GetTicks();
+	stop_time = false;
+	StatetCamY = CameraDown;
+ 	up = false;
+    down = false;
+	cameraDown = false;
+	cameraUp = false;
 	return ret;
 }
 
@@ -145,6 +155,7 @@ bool ModuleStage01::CleanUp()
 	App->render->camera.x = 0;
 	App->render->relative_camera.x = 0;
 	//------------------------------------------------------------------------------
+	Start_time = SDL_GetTicks();
 	return true;
 }
 
@@ -170,19 +181,19 @@ update_status ModuleStage01::Update()
 	//Background buildings-----------------------------------------------------------------------
 	if (App->render->camera.x < ((3800 / foregndSpeed) * SCREEN_SIZE))
 	{
-		App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed);
+		App->render->Blit_x_o_y(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed,true,false);
 	}
 	//Background lights-----------------------------------------------------------------------------
-	App->render->Blit(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx,634,10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx, 122, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx,88,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx, 600,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx,321,0 , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx, 167 ,0 , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
-	App->render->Blit(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
+	App->render->Blit_x_o_y(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed,true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed,true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx,634,10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx, 122, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx,88,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx, 600,50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx,321,0 , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx, 167 ,0 , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit_x_o_y(bckgndLightsTx,240,32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed, true, false);
 	
 	//Orange Laser-----------------------------------------------------------------------------
 	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x >= (33)* SCREEN_SIZE* foregndSpeed)
@@ -198,78 +209,9 @@ update_status ModuleStage01::Update()
 		else
 			frame = 0;
 	}
-	//Background lights
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed);
-	//App->render->Blit(bckgndLightsTx, , , &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed);
-
-	//Midground buildings-------------------------------------------------------------------------------------------------------
 	
-	//MOVE UP DOWN 
-	/*if (App->render->camera.x > -((2000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		if (App->render->camera.x <= -324 && App->render->camera.x >= -663)
-		{
-			App->render->Blit(PurpleBuildings, 0, 15, &PBuildings, midgndSpeed);
-			//Midground lights
-			//- Loop 1
-			App->render->Blit(midgndLightsTx, 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
 
-			//- Loop 2
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-			//- Loop 3
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, 15 + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, 15 + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, 15 + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, 15 + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, 15 + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, 15 + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-			//Positions calculated from the png
-		}
 
-		else {
-			App->render->Blit(PurpleBuildings, 0, midgndOffset, &PBuildings, midgndSpeed);
-			//Midground lights
-			//- Loop 1
-			App->render->Blit(midgndLightsTx, 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-			//- Loop 2
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-			//- Loop 3
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-			App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-			//Positions calculated from the png
-		}
-		
-	}*/
-
-	MoveCam();
 
 	//Midground lights-------------------------------------------------------------------------------------------
 	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE)) {
@@ -379,8 +321,9 @@ update_status ModuleStage01::Update()
 			App->player2->position.y = INIT_Y_PLAYER_2;
 			}
 		}
-	
-
+		/*if (App->render->camera.x < 1500/foregndSpeed*SCREEN_SIZE)*/
+		
+		MoveCam();
 	return UPDATE_CONTINUE;
 }
 
@@ -388,56 +331,130 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop <= MoveCamera.maxloop)
+	//if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop <= MoveCamera.maxloop)
+	//{
+	//	
+	//	if (MoveCamera.up)
+	//	{
+	//		if (MoveCamera.yroadPos >= MoveCamera.ymax_road)
+	//		{
+	//			MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
+	//			MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+	//			MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
+	//			MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+	//		
+	//		}
+	//		
+	//		else
+	//		{
+	//			MoveCamera.up = false;
+	//			MoveCamera.last_positionCam = -App->render->camera.x;
+	//			
+	//			++MoveCamera.loop;//¿?
+	//		}
+	//		
+	//		
+	//	}
+	//	
+
+	//	if (!MoveCamera.up)
+	//	{
+	//		if (MoveCamera.yroadPos <= MoveCamera.ymin_road)
+	//		{
+	//			MoveCamera.temporalSubstraction += MoveCamera.vel_road;
+	//			MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
+
+	//			MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
+	//			MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+	//			
+	//		}
+	//		else
+	//		{
+	//			MoveCamera.up = true;
+	//			MoveCamera.last_positionCam = -App->render->camera.x;
+	//			
+	//		}
+	//	}
+
+	//}
+	
+	if ( stop_time == false)
 	{
-		
-		if (MoveCamera.up)
-		{
-			if (MoveCamera.yroadPos >= MoveCamera.ymax_road)
+		Current_time_y = SDL_GetTicks();
+		if(Current_time_y - Start_time_y > 5000)
+			switch (StatetCamY)
 			{
-				MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
-				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
-
-				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
-				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+			case CameraDown:
+				StatetCamY = CameraUp;
+				down = true;
+				stop_time = true;
+				break;
+			case CameraUp:
+				StatetCamY = CameraDown;
+				up = true;
+				stop_time = true;
+				break;
 			
 			}
-			
-			else
-			{
-				MoveCamera.up = false;
-				MoveCamera.last_positionCam = -App->render->camera.x;
-				
-				++MoveCamera.loop;//¿?
-			}
-			
-			
-		}
-		
-
-		if (!MoveCamera.up)
-		{
-			if (MoveCamera.yroadPos <= MoveCamera.ymin_road)
-			{
-				MoveCamera.temporalSubstraction += MoveCamera.vel_road;
-				MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
-
-				MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
-				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
-				
-			}
-			else
-			{
-				MoveCamera.up = true;
-				MoveCamera.last_positionCam = -App->render->camera.x;
-				
-			}
-		}
 
 	}
-
-
-
+	if(down)
+	{
+		if (App->render->camera.y < 80)
+		{
+			App->render->camera.y += SCREEN_SIZE;
+		}
+		
+		else {
+			if (App->render->camera.x < (1528 / foregndSpeed) * SCREEN_SIZE)
+			{
+				stop_time = false;
+			}
+			else
+			{
+				cameraDown = true;
+			}
+			down =false;
+			Start_time_y = SDL_GetTicks();
+		}
+	}
+	if (up)
+	{
+		if (App->render->camera.y > -100)
+		{
+			App->render->camera.y -= SCREEN_SIZE;
+		}
+			
+		else {
+			if (App->render->relative_camera.x < 2000 )
+			{
+				stop_time = false;
+			
+			}
+			else
+			{
+				cameraUp = true;
+			}
+			
+			up = false;
+			Start_time_y = SDL_GetTicks();
+		}
+	}
+	if(cameraUp)
+	{
+		if (App->render->camera.y < 0)
+		{
+			App->render->camera.y += SCREEN_SIZE;
+		}
+	}
+	if (cameraDown)
+	{
+		if (App->render->camera.y > 0)
+		{
+			App->render->camera.y -= SCREEN_SIZE;
+		}
+	}
 }
 
 void ModuleStage01::TakeTileMap()
