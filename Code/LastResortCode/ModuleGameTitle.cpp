@@ -396,7 +396,7 @@ bool ModuleGameTitle:: Start()
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
-	App->player1->Lives = 3;
+	App->player1->Lives = 2;
 	
 	return ret;
 }
