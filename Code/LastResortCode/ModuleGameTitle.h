@@ -29,8 +29,8 @@ public:
 	SDL_Texture *E6Texture;
 	SDL_Texture *S7Texture;
 	SDL_Texture *O8Texture;
-	//SDL_Texture *R9Texture; //2LASTCHAR
-	//SDL_Texture *T10Texture;
+	SDL_Texture *R9Texture; //2LASTCHAR
+	SDL_Texture *T10Texture;
 
 	//SDL_Rect LastResortRect;
 
@@ -42,9 +42,8 @@ public:
 	Animation E6;
 	Animation S7;
 	Animation O8;
-
-	//Animation R9; //2LASTCHAR
-	//Animation T10;
+	Animation R9;
+	Animation T10;
 
 	//Time variables
 	Uint32 start_time; 
