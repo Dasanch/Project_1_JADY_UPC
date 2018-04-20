@@ -26,58 +26,6 @@ bool ModuleUnit::Start()
 	return ret;
 }
 
-bool ModuleUnit::CleanUp()
-{
-	LOG("Unloading unit assets");
-	App->textures->Unload(unitTx);
-	return true;
-}
-
-void ModuleUnit::Orbit(float targetRotation)
-{
-	//If we've reached our target rotation
-
-	if (targetRotation == angleRight) {
-		{
-			if(currentRotation < PI)
-				currentRotation -= rotateSpeed;
-			else
-				currentRotation += rotateSpeed;
-		}
-	}
-	else if (targetRotation == angleLeft) {
-		{
-			if (currentRotation <= PI)
-				currentRotation += rotateSpeed;
-			else
-				currentRotation -= rotateSpeed;
-		}
-	}
-	else if (targetRotation == angleDown) {
-		{
-			if (currentRotation > PI/2 && currentRotation < 3*PI/2)
-				currentRotation += rotateSpeed;
-			else
-				currentRotation -= rotateSpeed;
-		}
-	}
-	else if (targetRotation == angleUp) {
-		{
-			if (currentRotation >= PI / 2 && currentRotation < 3 * PI / 2)
-				currentRotation -= rotateSpeed;
-			else
-				currentRotation += rotateSpeed;
-		}
-	}
-	
-
-	if (currentRotation  > targetRotation - rotateSpeed &&  currentRotation < targetRotation + rotateSpeed )
-	{
-		lastTarget = targetRotation;
-		currentRotation = targetRotation;
-	}
-}
-
 update_status ModuleUnit::Update()
 {
 	//Initial set up--------------------------------------------------------------------------------------
@@ -147,13 +95,13 @@ update_status ModuleUnit::Update()
 //First if  --> Finds the rotation we want to go to
 //Second if --> Determines which distance from the currentRotation to the targetRotation is shorter
 //Third if  --> Go to that direction, until we get at it
-void ModuleUnit::Orbit (float targetRotation)
+void ModuleUnit::Orbit(float targetRotation)
 {
 	//We create a variable that's going to store the opposite rotation from the targetRotation
 	float oppositeRotation;
 
 	//Check if the target rotation is down or one of the lower diagonals
-	if(targetRotation == angleDown || targetRotation == angleDown + PI / 4 || targetRotation == angleDown - PI / 4)
+	if (targetRotation == angleDown || targetRotation == angleDown + PI / 4 || targetRotation == angleDown - PI / 4)
 	{
 		oppositeRotation = targetRotation + PI;
 		//Check which way is shorter
@@ -238,6 +186,13 @@ void ModuleUnit::Orbit (float targetRotation)
 
 void ModuleUnit::MoveClockwise() { currentRotation -= rotateSpeed; }
 void ModuleUnit::MoveCounterclock() { currentRotation += rotateSpeed; }
+
+bool ModuleUnit::CleanUp()
+{
+	LOG("Unloading unit assets");
+
+	return true;
+}
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {
