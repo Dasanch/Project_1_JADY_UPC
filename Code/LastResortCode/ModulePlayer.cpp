@@ -11,7 +11,8 @@
 
 ModulePlayer::ModulePlayer() //Constructor 
 {
-	//Movement animation-----------------------------------------
+	//PLAYER 1---------------------------------------------------------------------------------//
+	//Movement animation----------------------------------------
 	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
 	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
 	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
@@ -22,7 +23,7 @@ ModulePlayer::ModulePlayer() //Constructor
 	initAnim.PushBack({ 0, 124, 117, 3 });
 	initAnim.PushBack({ 0, 127, 88, 4 });
 	initAnim.PushBack({ 0, 131, 86, 8 });
-	//-----------------------------------------
+	//---------------------------------------------------------
 	initAnim.PushBack({ 0, 139, 64, 25 });
 	initAnim.PushBack({ 0, 164, 64, 25 });
 	initAnim.PushBack({ 0, 189, 64, 25 });
@@ -40,13 +41,26 @@ ModulePlayer::ModulePlayer() //Constructor
 			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
 		}
 	}
-	deathAnim.speed = 0.3f;
-	//Shot Fire Particle----------------------------------------
+	//Shot Fire Animation----------------------------------------
 	shotFire.PushBack({ 125, 247, 10,9 });
 	shotFire.PushBack({ 137, 247, 10,9 });
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
+	deathAnim.speed = 0.3f;
+
+	//PLAYER 2---------------------------------------------------------------------------------//
+	//Movement animation----------------------------------------
+	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
+	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
+	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
+	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
+	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
+	//Initial animation-----------------------------------------
+
+	//Death animation-------------------------------------------
+
+	//PARTICLES--------------------------------------------------------------------------------//
 	//Death Explosion Particle----------------------------------
 	for (int i = 0; i < 5; ++i) {
 			death_explosion.anim.PushBack({ 244+ 32*i ,288, 32,32 });
@@ -68,7 +82,6 @@ ModulePlayer::ModulePlayer() //Constructor
 	basicShot.anim.speed = 0.0f;
 	basicShot.speed.x = 12;
 	basicShot.anim.loop = false;
-	
 	basicShot.collision_fx = &basic_explosion;
 }
 
@@ -150,71 +163,10 @@ update_status ModulePlayer::Update()
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
 	//Ship Animation-------------------------------------------------------------------
-	switch (shipAnimations) {
-	case Initial:
-		current_animation = &initAnim.GetFrameEx();
-		if (initAnim.finished == true) {
-			shipAnimations = ShipAnimations::Movment;
-			initAnim.Reset();
-			canMove = true;
-			canShoot = true;
-			break;
-		}
-		//Draw ship---------------------------------------------------
-		if (initAnim.current_frame > 4) {
-			App->render->Blit(PlayerTexture, initAnim_p.x - (current_animation->w / 2), initAnim_p.y - (current_animation->h / 2), current_animation);
-		}
-		else {
-			App->render->Blit(PlayerTexture, position.x - 40, initAnim_p.y - (current_animation->h / 2), current_animation);
-		}
-		//initAnim_p.x += 1; //Increment pivot for follow position.x
-		//------------------------------------------------------------
-		break;
-	case Movment: //Check what is the value of the yAxis variable
-		//Idle--------------------------------------------------------
-		if (yAxis > -transitionLimit && yAxis < transitionLimit) {
-			currentFrame = Idle;
-		}
-		//Transitions-------------------------------------------------
-		if (yAxis >= transitionLimit && yAxis < MaxLimit) {
-			currentFrame = TransitionDown;
-		}
-		if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
-			currentFrame = TransitionUp;
-		}
-		//Maximums---------------------------------------------------
-		if (yAxis >= MaxLimit) {
-			currentFrame = MaxDown;
-		}
-		if (yAxis <= -MaxLimit) {
-			currentFrame = MaxUp;
-		}
-		//Draw ship--------------------------------------------------
-		current_animation = &shipPlayer1.frames[currentFrame]; //It set the animation frame 
-		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
-		//-----------------------------------------------------------
-		break;
-	case Death:
-		
-		if (deathAnim.finished == true && Lives>0) {
-			--Lives;
-			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f);
-	
-		}
-		if (deathAnim.finished == true && Lives<=0) {
-			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
+	ShipAnimation();
 
-		}
-		else if (isDying) {
-			current_animation = &deathAnim.GetFrameEx();
-			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
-		}
-		break;
-	}
 	return UPDATE_CONTINUE;
 }
-
-
 
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)

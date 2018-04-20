@@ -14,5 +14,8 @@ public:
 	bool MoveRight();
 	bool Shoot();
 	bool Lock();
+	void ShipAnimation();
+public:
+
 };
 #endif

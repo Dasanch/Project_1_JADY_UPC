@@ -98,6 +98,7 @@ public:
 	virtual bool MoveRight() = 0;
 	virtual bool Shoot() = 0;
 	virtual bool Lock() = 0;
+	virtual void ShipAnimation() = 0;
 };
 
 #endif
