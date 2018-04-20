@@ -44,8 +44,10 @@ bool ModuleParticles::Start()
 	//textures-------------------------------------------------
 	graphics = App->textures->Load("Assets/General/Explosion_2.png");
 	//audios--------------------------------------------------
-
+	//particles-----------------------------------------------
+	general_explosion02.texture = graphics;
 	//--------------------------------------------------------
+
 	return true;
 }
 
