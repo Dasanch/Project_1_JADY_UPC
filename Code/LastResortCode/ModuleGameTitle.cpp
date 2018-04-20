@@ -472,17 +472,17 @@ update_status ModuleGameTitle::Update() {
 
 	//title letters---------------------------------------------------------------------
 	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
-	App->render->Blit(L1Texture, 20, 30, &L1.GetCurrentFrame(), 0.0f);
-	App->render->Blit(A2Texture, 60, 30, &A2.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S3Texture, 120, 30, &S3.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T4Texture, 160, 30, &T4.GetCurrentFrame(), 0.0f);
-	App->render->Blit(R5Texture, 10, 100, &R5.GetCurrentFrame(), 0.0f);
-	App->render->Blit(E6Texture, 60, 101, &E6.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S7Texture, 105, 101, &S7.GetCurrentFrame(), 0.0f);
-	App->render->Blit(O8Texture, 140, 101, &O8.GetCurrentFrame(), 0.0f);
-	//2LASTCHAR
-	App->render->Blit(R9Texture, 180, 101, &R9.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T10Texture,  210,  101, &T10.GetCurrentFrame(), 0.0f);
+	App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame(), 0.0f);
+	App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame(), 0.0f);
+	App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame(), 0.0f);
+	App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame(), 0.0f);
+
+	App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame(), 0.0f);
+	App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame(), 0.0f);
+	App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame(), 0.0f);
+	App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame(), 0.0f);
+	App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame(), 0.0f);
+	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame(), 0.0f);
 	
 
 	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
