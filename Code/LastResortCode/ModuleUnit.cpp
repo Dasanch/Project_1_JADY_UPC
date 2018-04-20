@@ -166,7 +166,7 @@ bool ModuleUnit::Start()
 	bool ret = true;
 	LOG("Loading unit assets");
 	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
-	currentOrbit = angleLeft;
+	currentOrbit = currentSpin = angleW;
 	return ret;
 }
 
@@ -191,19 +191,19 @@ update_status ModuleUnit::Update()
 		{
 			moving = true;
 			//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleRight;
+			targetOrbit = angleE;
 		}
 		if (App->player1->MoveRight() == true)
 		{
 			moving = true;
 			//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleLeft;
+			targetOrbit = angleW;
 		}
 		if (App->player1->MoveUp() == true)
 		{
 			moving = true;
 			//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleDown;
+			targetOrbit = angleS;
 			//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
 			if (App->player1->MoveLeft() == true) { targetOrbit -= PI / 4; }
 			if (App->player1->MoveRight() == true) { targetOrbit += PI / 4; }
@@ -212,7 +212,7 @@ update_status ModuleUnit::Update()
 		{
 			moving = true;
 			//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleUp;
+			targetOrbit = angleN;
 			//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
 			if (App->player1->MoveLeft() == true) { targetOrbit += PI / 4; }
 			if (App->player1->MoveRight() == true) { targetOrbit -= PI / 4; }
@@ -220,31 +220,42 @@ update_status ModuleUnit::Update()
 
 		//Move the orbit to the target rotation---------------------------------------------------------------
 		//- Orbit around the player
-		if (moving == true) { Orbit(targetOrbit); }
+		if (moving == true) { RotateTo(targetOrbit, currentOrbit, orbitSpeed); }
 		//- Rotation of the unit itself
+		if (moving == true) { RotateTo(targetOrbit, currentSpin, spinSpeed); }
 
 		//Limit the rotation----------------------------------------------------------------------------------
-		//- Limit the rotation to positive numbers (after modifing it)
-		if (currentOrbit < 0)
-		{
-			currentOrbit = angleRight + currentOrbit;//We add the rotation because it's negative, so it will efectively substract it
-		}
-		//- Limit the rotation to one circle
-		while (currentOrbit > angleRight)
-		{
-			currentOrbit -= angleRight;
-		}
+		//- On the orbit
+		LimitRotation(currentOrbit);
+		//- On the spin
+		LimitRotation(currentSpin);
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
 	position.x = radius * cosf(currentOrbit) + App->player1->position.x + 5;
 	position.y = radius * sinf(currentOrbit) + App->player1->position.y - 1;
+	//Increase the internal rotation-----------------------------------------------------------------------
+	currentInternalRotation += internalRotationSpeed;
+	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 	//Set the rotation and render--------------------------------------------------------------------------
-	//if()
-	//{
+	//if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
+	//else if (currentSpin) {}
 
-	//}
-	App->render->Blit(unitTx, position.x, position.y, &eAnim[1]);
+	App->render->Blit(unitTx, position.x, position.y, &eAnim[(int)currentInternalRotation]);
 
 	return UPDATE_CONTINUE;
 }
@@ -253,97 +264,118 @@ update_status ModuleUnit::Update()
 //First if  --> Finds the rotation we want to go to
 //Second if --> Determines which distance from the currentRotation to the targetRotation is shorter
 //Third if  --> Go to that direction, until we get at it
-void ModuleUnit::Orbit(float targetRotation)
+void ModuleUnit::RotateTo(float targetRotation, float &currentRotation, float speed)
 {
 	//We create a variable that's going to store the opposite rotation from the targetRotation
 	float oppositeRotation;
 
 	//Check if the target rotation is down or one of the lower diagonals
-	if (targetRotation == angleDown || targetRotation == angleDown + PI / 4 || targetRotation == angleDown - PI / 4)
+	if (targetRotation == angleS || targetRotation == angleS + PI / 4 || targetRotation == angleS - PI / 4)
 	{
 		oppositeRotation = targetRotation + PI;
 		//Check which way is shorter
-		if (currentOrbit <= oppositeRotation && currentOrbit > targetRotation)
+		if (currentRotation <= oppositeRotation && currentRotation > targetRotation)
 		{
+			//Move clockwise
 			//Only add if it hasn't reached its limit
-			if (currentOrbit > targetRotation + rotateSpeed) { MoveClockwise(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation > targetRotation + speed) { currentRotation -= speed; }
+			else { currentRotation = targetRotation; }
 		}
-		else if (currentOrbit < targetRotation)
+		else if (currentRotation < targetRotation)
 		{
+			//Move counterclock
 			//Only add if it hasn't reached its limit
-			if (currentOrbit < targetRotation - rotateSpeed) { MoveCounterclock(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation < targetRotation - speed) { currentRotation += speed; }
+			else { currentRotation = targetRotation; }
 		}
-		else if (currentOrbit > oppositeRotation)
+		else if (currentRotation > oppositeRotation)
 		{
-			MoveCounterclock();
+			//Move counterclock
+			currentRotation += speed;
 		}
 	}
 
 	//Check if the target rotation is up or one ofthe upper diagonals
-	else if (targetRotation == angleUp || targetRotation == angleUp - PI / 4 || targetRotation == angleUp + PI / 4)
+	else if (targetRotation == angleN || targetRotation == angleN - PI / 4 || targetRotation == angleN + PI / 4)
 	{
 		oppositeRotation = targetRotation - PI;
 		//Check which way is shorter
-		if (currentOrbit > targetRotation)
+		if (currentRotation > targetRotation)
 		{
+			//Move clockwise
 			//Only add if it hasn't reached its limit
-			if (currentOrbit > targetRotation + rotateSpeed) { MoveClockwise(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation > targetRotation + speed) { currentRotation -= speed; }
+			else { currentRotation = targetRotation; }
 		}
-		else if (currentOrbit <= oppositeRotation)
+		else if (currentRotation <= oppositeRotation)
 		{
-			MoveClockwise();
+			//Move clockwise
+			currentRotation -= speed;
 		}
-		else if (currentOrbit < targetRotation && currentOrbit > oppositeRotation)
+		else if (currentRotation < targetRotation && currentRotation > oppositeRotation)
 		{
+			//Move counterclock
 			//Only add if it hasn't reached its limit
-			if (currentOrbit < targetRotation - rotateSpeed) { MoveCounterclock(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation < targetRotation - speed) { currentRotation += speed; }
+			else { currentRotation = targetRotation; }
 		}
 	}
 
 	//Check if the target rotation is left
-	else if (targetRotation == angleLeft)
+	else if (targetRotation == angleW)
 	{
 		//Check which way is shorter
-		if (currentOrbit == 0 || currentOrbit > targetRotation)
+		if (currentRotation == 0 || currentRotation > targetRotation)
 		{
+			//Move clockwise
 			//Only add if it hasn't reached its limit
-			if (currentOrbit > targetRotation + rotateSpeed) { MoveClockwise(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation > targetRotation + speed) { currentRotation -= speed; }
+			else { currentRotation = targetRotation; }
 		}
-		else if (currentOrbit < targetRotation)
+		else if (currentRotation < targetRotation)
 		{
+			//Move counterclock
 			//Only add if it hasn't reached its limit
-			if (currentOrbit < targetRotation - rotateSpeed) { MoveCounterclock(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation < targetRotation - speed) { currentRotation += speed; }
+			else { currentRotation = targetRotation; }
 		}
 	}
 
 	//Check if the target rotation is right
-	else if (targetRotation == angleRight)
+	else if (targetRotation == angleE)
 	{
-		oppositeRotation = angleLeft;
+		oppositeRotation = angleW;
 		//Check which way is shorter
-		if (currentOrbit <= oppositeRotation)
+		if (currentRotation <= oppositeRotation)
 		{
+			//Move clockwise
 			//Only add if it hasn't reached its limit
-			if (currentOrbit > rotateSpeed) { MoveClockwise(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation > speed) { currentRotation -= speed; }
+			else { currentRotation = targetRotation; }
 		}
-		else if (currentOrbit > angleLeft)
+		else if (currentRotation > oppositeRotation)
 		{
+			//Move counterclock
 			//Only add if it hasn't reached its limit
-			if (currentOrbit < targetRotation - rotateSpeed) { MoveCounterclock(); }
-			else { currentOrbit = targetRotation; }
+			if (currentRotation < targetRotation - speed) { currentRotation += speed; }
+			else { currentRotation = targetRotation; }
 		}
 	}
 }
 
-void ModuleUnit::MoveClockwise() { currentOrbit -= rotateSpeed; }
-void ModuleUnit::MoveCounterclock() { currentOrbit += rotateSpeed; }
+void ModuleUnit::LimitRotation(float &rotation)
+{
+	//- Limit the rotation to positive numbers (after modifing it)
+	if (rotation < 0)
+	{
+		rotation = 2 * PI + rotation;//We add the rotation because it's negative, so it will efectively substract it
+	}
+	//- Limit the rotation to one circle
+	while (rotation > 2 * PI)
+	{
+		rotation -= 2 * PI;
+	}
+}
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
 {

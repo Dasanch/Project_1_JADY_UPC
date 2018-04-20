@@ -21,26 +21,44 @@ public:
 	update_status Update();//Here we'll check for input, calculate the position of the unit (by calling the Orbit function) and rendering the unit
 	bool CleanUp();
 	void OnCollision(Collider*, Collider*);
-	void Orbit(float);//This function calculates the position of the unit around the ship
-	void MoveClockwise();
-	void MoveCounterclock();
-	void Rotate(float);//This function calculates the rotatio of the unit
+	void RotateTo(float, float&, float);//This function calculates the rotation of the orbit and the internal rotation of the unit
+	void LimitRotation(float &);
 
 public:
 	iPoint position;
 
 private:
 	//Rotation
-	float currentOrbit;//The current rotation of the unit. We'll be incrementing it when we move counterclock and decrementing it when we move clockwise
+	const float PI = 3.141592;
+	//- Orbit refers to the rotation of the unit around the player's ship
+	//- Spin refers to the rotation of the unit to aim at different directions
+	//- InternalRotation refers to the rotation of the unit on its own axis
 	float targetOrbit;//The rotation we want the unit to be in
+	float currentOrbit;//We'll be incrementing it when we move counterclock and decrementing it when we move clockwise
+	const float orbitSpeed = 3.141592 / 27;//The speed at which the orbit rotates around the player ship
+	float currentSpin;
+	const float spinSpeed = orbitSpeed * 2;
+	float currentInternalRotation;
+	const float internalRotationSpeed = 0.2f;
 	bool moving;//A bool that indicates if the player is moving (pressing any keys)
 	const float radius = 31;
-	const float rotateSpeed = 3.141592 / 27;//The speed at which the orbit rotates around the player ship
-	const float PI = 3.141592;
-	const float angleLeft = PI;//The rotation (in radians) in which the unit will be at the left of the ship
-	const float angleRight = 2 * PI;//The rotation (in radians) in which the unit will be at the right of the ship
-	const float angleUp = 3 * PI / 2;//The rotation (in radians) in which the unit will be above the ship
-	const float angleDown = PI / 2;//The rotation (in radians) in which the unit will be bellow the ship
+
+	const float angleW = PI;//The angle in which the player will be at the west of the ship
+	const float angleE = 2 * PI;
+	const float angleN = 3 * PI / 2;
+	const float angleS = PI / 2;
+	const float angleNE = 7 * PI / 4;
+	const float angleSE = PI / 4;
+	const float angleSO = 3 * PI / 4;
+	const float angleNO = 5 * PI / 4;
+	const float angleNNE = 5 * PI / 3;
+	const float angleENE = 11 * PI / 6;
+	const float agnleESE = PI / 6;
+	const float angleSSE = PI / 3;
+	const float angleSSO = 2 * PI / 3;
+	const float angleOSO = 5 * PI / 6;
+	const float angleONO = 7 * PI / 6;
+	const float angleNNO = 4 * PI / 3;
 
 	//Animations
 	//There is an aniumation for each direciton of the ball. s (south), n (north), e (east), w (west)
