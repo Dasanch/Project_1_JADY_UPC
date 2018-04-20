@@ -27,10 +27,10 @@
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
-#define midgndSpeed 0.4f
-#define backgroundspeed 0.2f
-#define bckgndSpeed 0.25f
-#define foregndSpeed 1.0f
+#define midgndSpeed 0.25f
+#define backgroundspeed 0.25f
+#define bckgndSpeed 0.12f
+#define foregndSpeed 0.5f
 #define tunnelLightDist 256
 #define orangeLaserSpeed 0.25f
 
@@ -91,8 +91,10 @@ bool ModuleStage01::Start()
 	App->player2->initAnim_p.y = 144;
 	initPosition = { 40, 78 };
 	//Enemies----------------------------------------------------------------
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 600, 200);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 600, 100);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
+	
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 
 	//define moveCamera struct values
 	
@@ -106,7 +108,7 @@ bool ModuleStage01::Start()
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 	MoveCamera.loop = 0;
-
+	MoveCamera.maxloop = 5; //¿?
 
 	return ret;
 }
@@ -118,12 +120,13 @@ bool ModuleStage01::CleanUp()
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);
 	App->textures->Unload(BackgroundBuildings);
-	App->textures->Unload(LasersTx);
 	App->textures->Unload(Boss1Background);
-	App->textures->Unload(bckgndLightsTx);
-	App->textures->Unload(midgndLightsTx);
-	App->textures->Unload(tunnelLightsTx);
+	App->textures->Unload(LasersTx);
 	App->textures->Unload(streetLightsTx);
+	App->textures->Unload(midgndLightsTx);
+	App->textures->Unload(bckgndLightsTx);
+	App->textures->Unload(tunnelLightsTx);
+
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
@@ -382,10 +385,10 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop!=2)
+	if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop <= MoveCamera.maxloop)
 	{
 		
-		if (!MoveCamera.up)
+		if (MoveCamera.up)
 		{
 			if (MoveCamera.yroadPos >= MoveCamera.ymax_road)
 			{
@@ -394,18 +397,22 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
-				
+			
 			}
+			
 			else
 			{
-				MoveCamera.up = true;
+				MoveCamera.up = false;
 				MoveCamera.last_positionCam = -App->render->camera.x;
+				
+				++MoveCamera.loop;//¿?
 			}
+			
+			
 		}
-		//MoveCamera.loop++;
 		
 
-		if (MoveCamera.up)
+		if (!MoveCamera.up)
 		{
 			if (MoveCamera.yroadPos <= MoveCamera.ymin_road)
 			{
@@ -414,14 +421,16 @@ void ModuleStage01::MoveCam(){
 
 				MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
 				MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
+				
 			}
 			else
 			{
-				MoveCamera.up = false;
+				MoveCamera.up = true;
 				MoveCamera.last_positionCam = -App->render->camera.x;
+				
 			}
 		}
-		
+
 	}
 
 

@@ -13,22 +13,7 @@
 
 
 ModuleGameTitle::ModuleGameTitle()
-{/*
-	LastResortRect.x = 0;
-	LastResortRect.y = 0;
-	LastResortRect.w = 240;
-	LastResortRect.h = 31;
-*/
-	/*for (int i = 0; i <= 460; i += 48)
-	{
-		L1.PushBack({ i,0,46,57 });
-
-	}
-	for (int i = 0; i <= 432; i += 48)
-	{
-		L1.PushBack({ i,59,46,57 });
-
-	}*/
+{
 	L1.PushBack({ 144,398,13,25 }); //64
 	L1.PushBack({ 128,398,14,37 });
 	L1.PushBack({ 111,398,15,58 });
@@ -60,11 +45,6 @@ ModuleGameTitle::ModuleGameTitle()
 	L1.PushBack({ 144,177,47,63 });
 	L1.PushBack({ 96,177,46,60 });
 	L1.PushBack({ 48,177,46,57 });
-
-	/*L1.PushBack({ 0,177,46,57 });*/
-	//L1.PushBack({ 432,118,46,57 });//32 
-	//L1.PushBack({ 384,118,46,57 });//32 
-	//L1.PushBack({ 336,118,46,57 });//32 
 	L1.speed = speed;
 	L1.loop = false;
 
@@ -100,22 +80,6 @@ ModuleGameTitle::ModuleGameTitle()
 	A2.PushBack({ 400,122,50,61 });
 	A2.PushBack({ 0,241,50,60 });
 	A2.PushBack({ 50,241,50,57 });
-	/*A2.PushBack({ 100,241,50,57 });
-	for (int i = 150; i <= 400;i+=50) {
-
-		A2.PushBack({ i,241,50,57 });
-	}
-	for (int j=301;j<=358;j+=57)
-	{
-		for (int i = 0; i <= 400; i += 50) {
-
-			A2.PushBack({ i,j,50,57 });
-		}
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		A2.PushBack({ 50*i,415,50,57 });
-	}*/
 	A2.speed = speed;
 	A2.loop=false;
 
@@ -155,14 +119,6 @@ ModuleGameTitle::ModuleGameTitle()
 	S3.PushBack({ 32,240,32,61 });
 	S3.PushBack({ 64,240,32,59 });
 	S3.PushBack({ 96,240,32,58 });
-	/*for (int i = 128; i <=384 ; i += 32)
-	{
-		S3.PushBack({ i,240,32,58 });
-	}
-	for (int i = 0;i<=352;i+=32)
-	{
-		S3.PushBack({ i,304,32,58 });
-	}*/
 	S3.loop = false;
 	S3.speed = speed;
 
@@ -234,7 +190,6 @@ ModuleGameTitle::ModuleGameTitle()
 	R5.PushBack({ 278,237,47,60 });
 	R5.PushBack({ 325,237,48,59 });
 	R5.PushBack({ 373,237,48,58 });
-	/*R5.PushBack({ 421,237,48,58 });*/
 	R5.speed = speed;
 	R5.loop = false;
 	//E6------------------------------------------------
@@ -347,19 +302,87 @@ ModuleGameTitle::ModuleGameTitle()
 	O8.speed = speed;
 	O8.loop = false;
 	//R9------------------------------ //2LASTCHAR
+	R9.PushBack({ 186,902,31,61 });
+	R9.PushBack({ 155,902,31,69 });
+	R9.PushBack({ 117,902,38,76 });
+	R9.PushBack({ 78,902,39,81 });
+	R9.PushBack({ 39,902,39,87 });
+	R9.PushBack({ 0,902,39,89 });
+	R9.PushBack({ 180,790,43,92 });
+	R9.PushBack({ 135,790,45,100 });
+	R9.PushBack({ 90,790,45,103 });
+	R9.PushBack({ 45,790,45,106 });
+	R9.PushBack({ 0,790,45,112 });
+	R9.PushBack({ 180,671,45,112 });
+	R9.PushBack({ 135,671,45,114 });
+	R9.PushBack({ 90,671,45,118 });
+	R9.PushBack({ 45,671,45,118 });
+	R9.PushBack({ 0,671,45,119 });
+	R9.PushBack({ 180,546,45,116 });
+	R9.PushBack({ 135,546,45,122 });
+	R9.PushBack({ 90,546,45,123 });
+	R9.PushBack({ 45,546,45,122 });
+	R9.PushBack({ 0,546,45,125 });
+	R9.PushBack({ 182,423,45,123 });
+	R9.PushBack({ 137,423,45,114 });
+	R9.PushBack({ 92,423,45,102 });
+	R9.PushBack({ 46,423,46,91 });
+	R9.PushBack({ 0,423,46,83 });
+	R9.PushBack({ 189,348,47,75 });
+	R9.PushBack({ 142,348,47,68 });
+	R9.PushBack({ 95,348,47,63 });
+	R9.PushBack({ 48,348,47,60 });
+	R9.PushBack({ 0,348,48,59 });
+	R9.PushBack({ 192,290,48,58 });
+	R9.speed = speed;
+	R9.loop = false;
 
 	//T10------------------------------  //2LASTCHAR
+	T10.PushBack({ 330,374,46,70 });
+	T10.PushBack({ 284,374,46,73 });
+	T10.PushBack({ 238,374,46,79 });
+	T10.PushBack({ 192,374,46,84 });
+	T10.PushBack({ 144,374,48,92 });
+	T10.PushBack({ 96,374,48,93 });
+	T10.PushBack({ 48,374,48,97 });
+	T10.PushBack({ 0,374,48,103 });
+	T10.PushBack({ 432,253,48,103 });
+	T10.PushBack({ 384,253,48,109 });
+	T10.PushBack({ 336,253,48,97 });
+	T10.PushBack({ 288,253,48,114 });
+	T10.PushBack({ 240,253,48,116 });
+	T10.PushBack({ 192,253,48,118 });
+	T10.PushBack({ 144,253,48,119 });
+	T10.PushBack({ 96,253,48,120 });
+	T10.PushBack({ 48,253,48,121 });
+	T10.PushBack({ 0,253,48,117 });
+	T10.PushBack({ 426,125,48,123 });
+	T10.PushBack({ 378,125,48,123 });
+	T10.PushBack({ 330,125,48,127 });
+	T10.PushBack({ 282,125,48,128 });
+	T10.PushBack({ 234,125,48,119 });
+	T10.PushBack({ 186,125,48,108 });
+	T10.PushBack({ 138,125,48,101 });
+	T10.PushBack({ 92,125,46,90 });
+	T10.PushBack({ 46,125,46,81 });
+	T10.PushBack({ 0,125,46,73 });
+	T10.PushBack({ 460,59,46,66 });
+	T10.PushBack({ 414,59,46,62 });
+	T10.PushBack({ 368,59,46,61 });
+	T10.PushBack({ 322,59,46,61 });
+	T10.PushBack({ 276,59,46,59 });
+	T10.speed = speed;
+	T10.loop = false;
 
 }
 ModuleGameTitle::~ModuleGameTitle()
 {}
 bool ModuleGameTitle:: Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading title assets");
 	bool ret = true;
-	start_time = SDL_GetTicks(); //fix the real time that we start this module
+	start_time = SDL_GetTicks(); //fixed the real time that we start this module
 	//textures--------------------------------------------------------------------------------
-	TitleTexture = App->textures->Load("Assets/UI-TitleScreen.png");
 	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
 	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
 	S3Texture = App->textures->Load("Assets/LastResortTitle/S3.png");
@@ -368,13 +391,44 @@ bool ModuleGameTitle:: Start()
 	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
 	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
 	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-	//R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
-	//T10Texture = App->textures->Load("");
+	R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
+	T10Texture = App->textures->Load("Assets/LastResortTitle/T10.png");
 	//audios--------------------------------------------------------------------------------
 	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
 	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
+	App->player1->Lives = 3;
 	
 	return ret;
+}
+bool ModuleGameTitle::CleanUp() {
+	LOG("Unloading Title scene");
+	App->player1->Disable();
+	L1.Reset();
+	A2.Reset();
+	S3.Reset();
+	T4.Reset();
+	R5.Reset();
+	E6.Reset();
+	S7.Reset();
+	O8.Reset();
+	R9.Reset(); //2LASTCHAR
+	T10.Reset();
+	//textures----------------------------------------------------------------------
+	
+	App->textures->Unload(L1Texture);
+	App->textures->Unload(A2Texture);
+	App->textures->Unload(S3Texture);
+	App->textures->Unload(T4Texture);
+	App->textures->Unload(R5Texture);
+	App->textures->Unload(E6Texture);
+	App->textures->Unload(S7Texture);
+	App->textures->Unload(O8Texture);
+	App->textures->Unload(R9Texture);
+	App->textures->Unload(T10Texture);
+	//audios------------------------------------------------------------------------
+	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+	App->audio->UnloadMUS(Titlemusic);
+	return true;
 }
 update_status ModuleGameTitle::Update() {
 	//timer------------------------------------------------------------------------
@@ -382,18 +436,18 @@ update_status ModuleGameTitle::Update() {
 
 	//title letters---------------------------------------------------------------------
 	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
-	App->render->Blit(L1Texture, 20, 30, &L1.GetCurrentFrame(), 0.0f);
-	App->render->Blit(A2Texture, 60, 30, &A2.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S3Texture, 120, 30, &S3.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T4Texture, 160, 30, &T4.GetCurrentFrame(), 0.0f);
-	App->render->Blit(R5Texture, 10, 100, &R5.GetCurrentFrame(), 0.0f);
-	App->render->Blit(E6Texture, 60, 101, &E6.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S7Texture, 105, 101, &S7.GetCurrentFrame(), 0.0f);
-	App->render->Blit(O8Texture, 140, 101, &O8.GetCurrentFrame(), 0.0f);
-	/* 2LASTCHAR
-	App->render->Blit(R9Texture, , , &R9.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T4Texture,  ,  , &T10.GetCurrentFrame(), 0.0f);
-	*/
+	App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame(), 0.0f);
+	App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame(), 0.0f);
+	App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame(), 0.0f);
+	App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame(), 0.0f);
+
+	App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame(), 0.0f);
+	App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame(), 0.0f);
+	App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame(), 0.0f);
+	App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame(), 0.0f);
+	App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame(), 0.0f);
+	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame(), 0.0f);
+	
 
 	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
 
@@ -415,33 +469,4 @@ update_status ModuleGameTitle::Update() {
 	
 
 	return UPDATE_CONTINUE;
-}
-bool ModuleGameTitle::CleanUp() {
-	LOG("Unloading Title scene");
-	App->player1->Disable();
-	L1.Reset();
-	A2.Reset();
-	S3.Reset();
-	T4.Reset();
-	R5.Reset();
-	E6.Reset();
-	S7.Reset();
-	O8.Reset();
-	//R9.Reset(); //2LASTCHAR
-	//T10.Reset();
-	//textures----------------------------------------------------------------------
-	App->textures->Unload(L1Texture);
-	App->textures->Unload(A2Texture);
-	App->textures->Unload(S3Texture);
-	App->textures->Unload(T4Texture);
-	App->textures->Unload(R5Texture);
-	App->textures->Unload(E6Texture);
-	App->textures->Unload(S7Texture);
-	App->textures->Unload(O8Texture);
-	//App->textures->Unload(R9Texture);
-	//App->textures->Unload(T10Texture);
-	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
-	App->audio->UnloadMUS(Titlemusic);
-	return true;
 }

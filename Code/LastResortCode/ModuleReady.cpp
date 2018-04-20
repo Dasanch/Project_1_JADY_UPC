@@ -13,6 +13,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleStage1Clear.h"
 
+
 ModuleStageReady::ModuleStageReady()
 {
 
@@ -46,7 +47,7 @@ bool ModuleStageReady::Start()
 
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
-
+	start_time = SDL_GetTicks();
 	return ret;
 }
 
@@ -67,7 +68,11 @@ update_status ModuleStageReady::Update()
 	// Draw everything
 
 	//App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
-
+	current_time = (SDL_GetTicks() - start_time);
+	if (current_time > 1000)
+	{
+		App->fade->FadeToBlack(this, App->stage01, 0.5f);
+	}
 	App->render->Blit(backgroundReady, 110 /*SCREEN_WIDTH/2*/, 100 /*SCREEN_HEIGHT/2*/, &BGroundReady, 0.0f); //MAGIC NUMBERS
 
 
