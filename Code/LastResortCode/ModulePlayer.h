@@ -71,6 +71,7 @@ public:
 	int currentFrame;//The frame we'll render. It will take a value from the ShipFrames enumerator
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
+	int Lives;
 	enum ShipFrames
 	{
 		MaxUp,

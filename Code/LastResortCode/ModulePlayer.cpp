@@ -189,9 +189,15 @@ update_status ModulePlayer::Update()
 		//-----------------------------------------------------------
 		break;
 	case Death:
-		if (deathAnim.finished == true) {
-			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
+		
+		if (deathAnim.finished == true && Lives>0) {
+			--Lives;
+			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f);
 	
+		}
+		if (deathAnim.finished == true && Lives<=0) {
+			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
+
 		}
 		else if (isDying) {
 			current_animation = &deathAnim.GetFrameEx();
