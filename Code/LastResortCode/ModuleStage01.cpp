@@ -331,53 +331,6 @@ update_status ModuleStage01::Update()
 
 void ModuleStage01::MoveCam(){
 	
-	//if(abs(App->render->camera.x) - abs(MoveCamera.last_positionCam) >= (MoveCamera.xbetween_mov) && MoveCamera.loop <= MoveCamera.maxloop)
-	//{
-	//	
-	//	if (MoveCamera.up)
-	//	{
-	//		if (MoveCamera.yroadPos >= MoveCamera.ymax_road)
-	//		{
-	//			MoveCamera.temporalSubstraction -= MoveCamera.vel_road;
-	//			MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
-
-	//			MoveCamera.temporalSubstractionBuildings -= MoveCamera.vel_buildings;
-	//			MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
-	//		
-	//		}
-	//		
-	//		else
-	//		{
-	//			MoveCamera.up = false;
-	//			MoveCamera.last_positionCam = -App->render->camera.x;
-	//			
-	//			++MoveCamera.loop;//¿?
-	//		}
-	//		
-	//		
-	//	}
-	//	
-
-	//	if (!MoveCamera.up)
-	//	{
-	//		if (MoveCamera.yroadPos <= MoveCamera.ymin_road)
-	//		{
-	//			MoveCamera.temporalSubstraction += MoveCamera.vel_road;
-	//			MoveCamera.yroadPos = MoveCamera.temporalSubstraction;
-
-	//			MoveCamera.temporalSubstractionBuildings += MoveCamera.vel_buildings;
-	//			MoveCamera.ymgPos = MoveCamera.temporalSubstraction;
-	//			
-	//		}
-	//		else
-	//		{
-	//			MoveCamera.up = true;
-	//			MoveCamera.last_positionCam = -App->render->camera.x;
-	//			
-	//		}
-	//	}
-
-	//}
 	
 	if ( stop_time == false)
 	{
