@@ -163,8 +163,8 @@ update_status ModuleUnit::Update()
 		currentRotation -= angleRight;
 	}
 	//Set the position
-	position.x = radius * cosf(currentRotation) + App->player1->position.x;
-	position.y = radius * sinf(currentRotation) + App->player1->position.y;
+	position.x = radius * cosf(currentRotation) + App->player1->position.x + 5;
+	position.y = radius * sinf(currentRotation) + App->player1->position.y - 1;
 	//Render
 	App->render->Blit(unitTx, position.x, position.y, &unitAnim.GetCurrentFrame());
 	return UPDATE_CONTINUE;

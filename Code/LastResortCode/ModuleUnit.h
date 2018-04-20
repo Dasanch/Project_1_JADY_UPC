@@ -32,7 +32,7 @@ private:
 	bool moving;//A bool that indicates if the player is moving (pressing any keys)
 
 	const float radius = 31;
-	const float rotateSpeed = 3.141592 / 20;
+	const float rotateSpeed = 3.141592 / 27;
 	const float PI = 3.141592;
 	const float angleLeft = PI;
 	const float angleRight = 2 * PI;
