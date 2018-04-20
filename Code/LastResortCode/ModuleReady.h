@@ -24,7 +24,8 @@ public:
 	//Rectangles
 	SDL_Rect BGroundReady;
 	SDL_Rect backgroundBlack;
-
+	Uint32 start_time;
+	Uint32 current_time;
 
 };
 

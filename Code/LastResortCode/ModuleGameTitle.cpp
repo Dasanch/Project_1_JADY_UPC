@@ -13,22 +13,7 @@
 
 
 ModuleGameTitle::ModuleGameTitle()
-{/*
-	LastResortRect.x = 0;
-	LastResortRect.y = 0;
-	LastResortRect.w = 240;
-	LastResortRect.h = 31;
-*/
-	/*for (int i = 0; i <= 460; i += 48)
-	{
-		L1.PushBack({ i,0,46,57 });
-
-	}
-	for (int i = 0; i <= 432; i += 48)
-	{
-		L1.PushBack({ i,59,46,57 });
-
-	}*/
+{
 	L1.PushBack({ 144,398,13,25 }); //64
 	L1.PushBack({ 128,398,14,37 });
 	L1.PushBack({ 111,398,15,58 });
@@ -60,11 +45,6 @@ ModuleGameTitle::ModuleGameTitle()
 	L1.PushBack({ 144,177,47,63 });
 	L1.PushBack({ 96,177,46,60 });
 	L1.PushBack({ 48,177,46,57 });
-
-	/*L1.PushBack({ 0,177,46,57 });*/
-	//L1.PushBack({ 432,118,46,57 });//32 
-	//L1.PushBack({ 384,118,46,57 });//32 
-	//L1.PushBack({ 336,118,46,57 });//32 
 	L1.speed = speed;
 	L1.loop = false;
 
@@ -100,22 +80,6 @@ ModuleGameTitle::ModuleGameTitle()
 	A2.PushBack({ 400,122,50,61 });
 	A2.PushBack({ 0,241,50,60 });
 	A2.PushBack({ 50,241,50,57 });
-	/*A2.PushBack({ 100,241,50,57 });
-	for (int i = 150; i <= 400;i+=50) {
-
-		A2.PushBack({ i,241,50,57 });
-	}
-	for (int j=301;j<=358;j+=57)
-	{
-		for (int i = 0; i <= 400; i += 50) {
-
-			A2.PushBack({ i,j,50,57 });
-		}
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		A2.PushBack({ 50*i,415,50,57 });
-	}*/
 	A2.speed = speed;
 	A2.loop=false;
 
@@ -226,7 +190,6 @@ ModuleGameTitle::ModuleGameTitle()
 	R5.PushBack({ 278,237,47,60 });
 	R5.PushBack({ 325,237,48,59 });
 	R5.PushBack({ 373,237,48,58 });
-	/*R5.PushBack({ 421,237,48,58 });*/
 	R5.speed = speed;
 	R5.loop = false;
 	//E6------------------------------------------------
@@ -418,7 +381,7 @@ bool ModuleGameTitle:: Start()
 {
 	LOG("Loading title assets");
 	bool ret = true;
-	start_time = SDL_GetTicks(); //fix the real time that we start this module
+	start_time = SDL_GetTicks(); //fixed the real time that we start this module
 	//textures--------------------------------------------------------------------------------
 	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
 	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
