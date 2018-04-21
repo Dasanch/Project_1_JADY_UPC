@@ -10,7 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleGameTitle.h"
 #include "ModuleGameOver.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 
 
 ModuleNeoGeo::ModuleNeoGeo()

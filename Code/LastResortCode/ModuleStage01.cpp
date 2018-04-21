@@ -15,7 +15,7 @@
 #include "ModuleGameOver.h"//delete (provitional)
 #include "ModuleContinue.h" 
 #include "ModuleParticles.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 #include "ModuleCollision.h"
 #include "ModuleUnit.h"
 #include "ModuleEnemies.h"
@@ -78,13 +78,20 @@ bool ModuleStage01::Start()
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 	//Enable------------------------------------------------------------------------
 	App->player1->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->unit->Enable();
-	//"Reset ship position when fadetoblackends"------------------------------------
+
+	//Player variable reset--------------------------------------------------------
+	App->player1->winlvl = false;
+	App->player2->winlvl = false;
+	//"Reset ship position when fadetoblackends"
 	App->player1->position.x = INIT_X_PLAYER_1;
 	App->player1->position.y = INIT_Y_PLAYER_1;
+	App->player2->position.x= INIT_X_PLAYER_2;
+	App->player2->position.y = INIT_Y_PLAYER_2;
 	App->player1->initAnim_p.x = 0; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = 0;
 	App->player1->initAnim_p.y = 79;
@@ -157,6 +164,7 @@ bool ModuleStage01::CleanUp()
 	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
 	App->render->relative_camera.x = 0;
+	App->render->relative_camera.y = 0;
 	//------------------------------------------------------------------------------
 	
 	return true;
@@ -170,13 +178,17 @@ update_status ModuleStage01::Update()
 	Current_time= SDL_GetTicks();
 
 	// Move camera forward -------------------------------------------------------------------
-	App->player1->position.x += 1;
-	App->player2->position.x += 1;
+	
 	if (App->render->camera.x <= ((4408 / foregndSpeed)*SCREEN_SIZE))
 	{
 		App->render->camera.x += SCREEN_SIZE;
+		App->player1->position.x += 1;
+		App->player2->position.x += 1;
 	}
-	
+	else
+	{
+
+	}
 	App->render->relative_camera.x += 1;
 
 	//Initial Position-------------------------------------------------------------------------
@@ -314,7 +326,15 @@ update_status ModuleStage01::Update()
 	}
 	if (App->input->keyboard[SDL_SCANCODE_0])  //win
 	{
-		App->fade->FadeToBlack(this, App->stageclearScene, 0.0);
+		if (App->player1->winlvl == false && App->player2->winlvl == false)
+		{
+			App->player1->winlvl = true;
+			App->player2->winlvl = true;
+		}
+		
+
+		
+
 	}
 	//Enemies------------------------------------------------------
 
@@ -367,7 +387,9 @@ void ModuleStage01::MoveCam(){
 		if (App->render->camera.y < 26*SCREEN_SIZE)
 		{
 			App->player1->position.y += 1;
+			App->player2->position.y += 1;
 			App->render->camera.y += SCREEN_SIZE;
+			App->render->relative_camera.y += 1;
 		}
 		
 		else {
@@ -389,7 +411,9 @@ void ModuleStage01::MoveCam(){
 		if (App->render->camera.y > -33*SCREEN_SIZE)
 		{
 			App->player1->position.y -= 1;
+			App->player2->position.y -= 1;
 			App->render->camera.y -= SCREEN_SIZE;
+			App->render->relative_camera.y -= 1;
 		}
 			
 		else {

@@ -115,13 +115,15 @@ public:
 	{
 		CameraDown,
 		CameraUp,
-		SetZero,
 	};
 	stateCam StatetCamY = CameraDown;
 		bool up=false;
 	bool down=false;
 	bool cameraUp;
 	bool cameraDown;
+
+	//Win variables
+	bool win;
 };
 
 #endif

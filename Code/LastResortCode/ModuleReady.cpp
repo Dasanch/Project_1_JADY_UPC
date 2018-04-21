@@ -11,7 +11,7 @@
 #include "ModuleStage02.h"
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 
 
 ModuleStageReady::ModuleStageReady()

@@ -25,7 +25,7 @@ class ModuleNeoGeo;
 class ModuleParticles;
 class ModuleCollision;
 class ModuleEnemies;
-class ModuleStage1Clear;
+class ModuleStageClear;
 class ModuleUnit;
 class ModuleFonts;
 
@@ -53,7 +53,7 @@ public:
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModuleCollision* collision = nullptr;
-	ModuleStage1Clear * stageclearScene = nullptr;
+	ModuleStageClear * stageclearScene = nullptr;
 	ModuleUnit * unit = nullptr;
 	ModuleFonts* fonts;
 
