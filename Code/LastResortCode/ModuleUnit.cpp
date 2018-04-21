@@ -184,9 +184,16 @@ bool ModuleUnit::Start()
 	LOG("Loading unit assets");
 	//Change the player to follow depending on which player has gotten the powerup
 	playerToFollow = App->player1;
-
+	type = blue;
 	//Load assets
-	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	if(type == orange)
+	{
+		unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	}
+	else
+	{
+		unitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
+	}
 	currentOrbit = currentSpin = angleValue[W];
 	return ret;
 }

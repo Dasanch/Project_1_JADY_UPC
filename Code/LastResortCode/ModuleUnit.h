@@ -19,6 +19,12 @@ enum Angles
 	E = 0, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW, N, NNE, NE, ENE
 };
 
+enum UnitType
+{
+	orange,
+	blue
+};
+
 struct InternalRotationAnimations
 {
 	SDL_Rect frame [frames];
@@ -42,8 +48,9 @@ public:
 	iPoint position;
 
 private:
-	//Ship it has to follow
-	ModulePlayer* playerToFollow = nullptr;
+	
+	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
+	UnitType type;
 	//Rotation
 	const float PI = 3.141592;
 	//- Orbit refers to the rotation of the unit around the player's ship
