@@ -253,8 +253,8 @@ update_status ModuleUnit::Update()
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 5;
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 1;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 9;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 7;
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
@@ -263,7 +263,7 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x, position.y, &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
+	App->render->Blit(unitTx, position.x - spriteXDifferences[(int)currentSpin], position.y + spriteYDifferences[(int)currentSpin], &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
 
 
 	//Shoot------------------------------------------------------------------------------------------------
