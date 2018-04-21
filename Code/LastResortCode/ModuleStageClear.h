@@ -1,5 +1,5 @@
-#ifndef __ModuleStage1Clear_H__
-#define __ModuleStage1Clear_H__
+#ifndef __ModuleStageClear_H__
+#define __ModuleStageClear_H__
 
 #include "Module.h"
 #include "Animation.h"

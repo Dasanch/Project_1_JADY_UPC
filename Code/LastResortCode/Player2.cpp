@@ -60,32 +60,32 @@ Player2::Player2() {
 
 bool Player2::MoveLeft()
 {
-	return (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::MoveRight()
 {
-	return (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::MoveDown()
 {
-	return (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::MoveUp()
 {
-	return (App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT);
 }
 
 bool Player2::Shoot()
 {
-	return (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_KP_0] == KEY_STATE::KEY_DOWN);
 }
 
 bool Player2::Lock()
 {
-	return (App->input->keyboard[SDL_SCANCODE_RSHIFT] == KEY_STATE::KEY_DOWN);
+	return (App->input->keyboard[SDL_SCANCODE_KP_1] == KEY_STATE::KEY_DOWN);
 }
 
 void Player2::ShipAnimation() {
