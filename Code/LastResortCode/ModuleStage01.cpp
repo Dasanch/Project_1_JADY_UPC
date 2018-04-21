@@ -60,7 +60,7 @@ ModuleStage01::~ModuleStage01()
 // Load assets
 bool ModuleStage01::Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading stage01 assets");
 	bool ret = true;
 
 	//textures-----------------------------------------------------------------------
@@ -132,7 +132,7 @@ bool ModuleStage01::Start()
 
 bool ModuleStage01::CleanUp()
 {
-	LOG("Unloading background assets");
+	LOG("Unloading stage01 assets");
 	//textures-----------------------------------------------------------------------
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);

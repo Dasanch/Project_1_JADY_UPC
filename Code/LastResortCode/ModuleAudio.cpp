@@ -163,7 +163,7 @@ Mix_Chunk* const ModuleAudio::LoadSFX(const char* path) {
 bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 
 	bool music_found = false;
-	for (uint i = 0; i < last_music; ++i) {
+	for (uint i = 0; i <MAX_MUSICS ; ++i) {
 		if (musics[i] == music) {
 			music_found = true;
 		}
@@ -198,7 +198,7 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 	
 	bool sfx_found = false;
-	for (uint i = 0; i <= last_music; ++i) {
+	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] == chunk) {
 			sfx_found = true;
 		}

@@ -24,7 +24,7 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
-	Mix_Chunk *fx_played = nullptr;
+	Mix_Chunk *sfx = nullptr;
 
 	Particle();
 	Particle(const Particle& p);

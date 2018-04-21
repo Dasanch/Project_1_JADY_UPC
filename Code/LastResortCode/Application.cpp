@@ -69,7 +69,9 @@ bool Application::Init()
 	continueScene->Disable();
 	stageclearScene->Disable();
 	unit->Disable();
-	enemies->Enable();
+	enemies->Disable();
+	particles->Disable();
+	collision->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

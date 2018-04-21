@@ -98,9 +98,9 @@ bool ModuleParticles::Start()
 	g_explosion02.texture = graphics;
 	//audios--------------------------------------------------
 	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
-	basicShot.fx_played = basic_shot_sfx;
+	basicShot.sfx = basic_shot_sfx;
 	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
-	death_explosion.fx_played = death_sfx;
+	death_explosion.sfx = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
 	//--------------------------------------------------------
@@ -168,9 +168,9 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Te
 			{
 				p->collision_fx = particle.collision_fx;
 			}
-			if (particle.fx_played != nullptr)
+			if (particle.sfx != nullptr)
 			{
-				App->audio->ControlSFX(particle.fx_played, PLAY_AUDIO);
+				App->audio->ControlSFX(particle.sfx, PLAY_AUDIO);
 			}
 
 			if (collider_type != COLLIDER_NONE)
