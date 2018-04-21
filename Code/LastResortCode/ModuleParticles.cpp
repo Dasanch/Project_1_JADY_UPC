@@ -41,6 +41,7 @@ ModuleParticles::ModuleParticles()
 	unitShot.anim.PushBack({ 170, 333, 13, 13 });
 	unitShot.anim.loop = true;
 	unitShot.anim.speed = 0.3f;
+	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
 	//unitShot.speed.x = 5;
 	//unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
