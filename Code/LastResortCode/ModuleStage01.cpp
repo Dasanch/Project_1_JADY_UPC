@@ -124,6 +124,9 @@ bool ModuleStage01::Start()
     down = false;
 	cameraDown = false;
 	cameraUp = false;
+
+	//Time variables
+	Start_time = SDL_GetTicks();
 	return ret;
 }
 
@@ -155,7 +158,7 @@ bool ModuleStage01::CleanUp()
 	App->render->camera.x = 0;
 	App->render->relative_camera.x = 0;
 	//------------------------------------------------------------------------------
-	Start_time = SDL_GetTicks();
+	
 	return true;
 }
 
@@ -163,10 +166,17 @@ bool ModuleStage01::CleanUp()
 // Update: draw background
 update_status ModuleStage01::Update()
 {
+	//Time 
+	Current_time= SDL_GetTicks();
+
 	// Move camera forward -------------------------------------------------------------------
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x +=  SCREEN_SIZE;
+	if (App->render->camera.x <= ((4408 / foregndSpeed)*SCREEN_SIZE))
+	{
+		App->render->camera.x += SCREEN_SIZE;
+	}
+	
 	App->render->relative_camera.x += 1;
 
 	//Initial Position-------------------------------------------------------------------------
@@ -354,46 +364,45 @@ void ModuleStage01::MoveCam(){
 	}
 	if(down)
 	{
-		if (App->render->camera.y < 80)
+		if (App->render->camera.y < 26*SCREEN_SIZE)
 		{
 			App->player1->position.y += 1;
 			App->render->camera.y += SCREEN_SIZE;
 		}
 		
 		else {
-			if (App->render->camera.x < (1528 / foregndSpeed) * SCREEN_SIZE)
-			{
-				stop_time = false;
-			}
-			else
-			{
-				cameraDown = true;
-			}
-			down =false;
+			stop_time = false;
+			down = false;
 			Start_time_y = SDL_GetTicks();
+			if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
+			{
+				stop_time = true;
+				cameraDown = true;
+				
+			}
+			
+			
 		}
 	}
 	if (up)
 	{
-		if (App->render->camera.y > -100)
+		if (App->render->camera.y > -33*SCREEN_SIZE)
 		{
 			App->player1->position.y -= 1;
 			App->render->camera.y -= SCREEN_SIZE;
 		}
 			
 		else {
-			if (App->render->relative_camera.x < 2000 )
+			stop_time = false;
+			up = false;
+			Start_time_y = SDL_GetTicks();
+			if (App->render->camera.x >= (1400 / foregndSpeed) * SCREEN_SIZE)
 			{
-				stop_time = false;
-			
-			}
-			else
-			{
+				stop_time = true;
 				cameraUp = true;
 			}
 			
-			up = false;
-			Start_time_y = SDL_GetTicks();
+			
 		}
 	}
 	if(cameraUp)
