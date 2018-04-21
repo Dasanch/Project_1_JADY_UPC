@@ -254,7 +254,7 @@ update_status ModuleUnit::Update()
 
 	//Set the position-------------------------------------------------------------------------------------
 	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 9;
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 7;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 2;
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
