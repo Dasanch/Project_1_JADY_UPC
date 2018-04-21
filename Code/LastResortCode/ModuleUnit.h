@@ -59,7 +59,7 @@ private:
 	bool moving;//A bool that indicates if the player is moving (pressing any keys)
 	const float radius = 31;
 	float angleValue[axis];//The value of each angle
-	const float angleSeparation = PI / 16 + 0.30365;//The separation between the angles (helps us calculate which animation we have to play)
+	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 	//Animations
 	//There is an animation for each direciton of the ball
 	SDL_Texture* unitTx = nullptr;
