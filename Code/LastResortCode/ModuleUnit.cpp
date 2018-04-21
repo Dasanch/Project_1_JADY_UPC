@@ -182,6 +182,10 @@ bool ModuleUnit::Start()
 {
 	bool ret = true;
 	LOG("Loading unit assets");
+	//Change the player to follow depending on which player has gotten the powerup
+	playerToFollow = App->player1;
+
+	//Load assets
 	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
 	currentOrbit = currentSpin = angleValue[W];
 	return ret;
@@ -201,38 +205,38 @@ update_status ModuleUnit::Update()
 	moving = false;
 
 	//- Check if the ball is locked
-	if(App->player1->locked == false)
+	if(playerToFollow->locked == false)
 	{
 		//Conditions for movement-----------------------------------------------------------------------------
-		if (App->player1->MoveLeft() == true)
+		if (playerToFollow->MoveLeft() == true)
 		{
 			moving = true;
 			//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
 			targetOrbit = angleValue[E];
 		}
-		if (App->player1->MoveRight() == true)
+		if (playerToFollow->MoveRight() == true)
 		{
 			moving = true;
 			//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
 			targetOrbit = angleValue[W];
 		}
-		if (App->player1->MoveUp() == true)
+		if (playerToFollow->MoveUp() == true)
 		{
 			moving = true;
 			//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
 			targetOrbit = angleValue[S];
 			//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
-			if (App->player1->MoveLeft() == true) { targetOrbit -= PI / 4; }
-			if (App->player1->MoveRight() == true) { targetOrbit += PI / 4; }
+			if (playerToFollow->MoveLeft() == true) { targetOrbit -= PI / 4; }
+			if (playerToFollow->MoveRight() == true) { targetOrbit += PI / 4; }
 		}
-		if (App->player1->MoveDown() == true)
+		if (playerToFollow->MoveDown() == true)
 		{
 			moving = true;
 			//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
 			targetOrbit = angleValue[N];
 			//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
-			if (App->player1->MoveLeft() == true) { targetOrbit += PI / 4; }
-			if (App->player1->MoveRight() == true) { targetOrbit -= PI / 4; }
+			if (playerToFollow->MoveLeft() == true) { targetOrbit += PI / 4; }
+			if (playerToFollow->MoveRight() == true) { targetOrbit -= PI / 4; }
 		}
 
 		//Move the orbit to the target rotation---------------------------------------------------------------
@@ -249,8 +253,8 @@ update_status ModuleUnit::Update()
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + App->player1->position.x + 5;
-	position.y = radius * sinf(currentOrbit) + App->player1->position.y - 1;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 5;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 1;
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
@@ -265,9 +269,9 @@ update_status ModuleUnit::Update()
 	//Shoot------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = 5 * cosf(currentSpin);
 	App->particles->unitShot.speed.y = 5 * sinf(currentSpin);
-	if(App->player1->Shoot() == true)
+	if(playerToFollow->Shoot() == true)
 	{
-		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, App->player1->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, playerToFollow->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
 	return UPDATE_CONTINUE;
 }
