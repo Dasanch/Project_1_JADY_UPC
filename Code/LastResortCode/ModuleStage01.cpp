@@ -356,6 +356,7 @@ void ModuleStage01::MoveCam(){
 	{
 		if (App->render->camera.y < 80)
 		{
+			App->player1->position.y += 1;
 			App->render->camera.y += SCREEN_SIZE;
 		}
 		
@@ -376,6 +377,7 @@ void ModuleStage01::MoveCam(){
 	{
 		if (App->render->camera.y > -100)
 		{
+			App->player1->position.y -= 1;
 			App->render->camera.y -= SCREEN_SIZE;
 		}
 			
