@@ -266,12 +266,12 @@ update_status ModuleStage01::Update()
 	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE))
 	{
 		//1
-		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos+ 136, &streetLightsAnim01.GetCurrentFrame(), 1.0f);
+		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos+ 136, &streetLightsAnim01.GetCurrentFrame(), foregndSpeed);
 		for (int i = 1; i < 27; ++i) {
 			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, MoveCamera.yroadPos + 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
 		}
 		//2
-		App->render->Blit(streetLightsTx, -7 , MoveCamera.yroadPos + 217, &streetLightsAnim02.GetCurrentFrame(), 1.0f);
+		App->render->Blit(streetLightsTx, -7 , MoveCamera.yroadPos + 217, &streetLightsAnim02.GetCurrentFrame(), foregndSpeed);
 		for (int i = 1; i < 14; ++i) {
 			App->render->Blit(streetLightsTx, -7+  roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 		}

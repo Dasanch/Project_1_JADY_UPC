@@ -12,6 +12,7 @@
 struct SDL_Texture;
 struct Collider;
 enum COLLIDER_TYPE;
+struct Mix_Chunk;
 
 struct Particle
 {
@@ -54,7 +55,14 @@ public:
 	Particle basic_explosion; //Basic Shot Explosion
 	Particle basicShot;
 	//GENERAL-----------------------------------------------
-	Particle general_explosion02;
+	Particle g_explosion01;
+	Particle g_explosion02;
+	Mix_Chunk* g_explosion01_1sfx = nullptr;
+	//Mix_Chunk* g_explosion01_2sfx = nullptr;
+	//Mix_Chunk* g_explosion01_3sfx = nullptr;
+	Mix_Chunk* g_explosion02_1sfx = nullptr;
+	//Mix_Chunk* g_explosion02_2sfx = nullptr;
+	//Mix_Chunk* g_explosion02_3sfx = nullptr;
 };
 
 #endif // __MODULEPARTICLES_H__

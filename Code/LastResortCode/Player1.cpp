@@ -1,6 +1,5 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModulePlayer.h"
 #include "Player1.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
@@ -129,16 +128,22 @@ void Player1::ShipAnimation() {
 		break;
 	case Death:
 
-		if (deathAnim.finished == true && Lives > 0) {
-			--Lives;
-			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f);
+		if (deathAnim.finished == true) {
+			colType = COLLIDER_PLAYER;
+			playerCol->type = COLLIDER_PLAYER;
 
+			if (Lives > 0) {
+				--Lives;
+				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f); //change to restart player
+			}
+			else {
+				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
+			}
 		}
-		if (deathAnim.finished == true && Lives <= 0) {
-			App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
 
-		}
 		else if (isDying) {
+			colType = COLLIDER_NONE;
+			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
 		}

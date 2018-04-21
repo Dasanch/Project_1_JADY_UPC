@@ -3,6 +3,9 @@
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleRender.h"
+#include "SDL/include/SDL_timer.h"
+#include "ModuleAudio.h"
+
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {}
@@ -29,5 +32,9 @@ void Enemy::Draw(SDL_Texture* sprites)
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->general_explosion02, position.x, position.y, App->particles->general_explosion02.texture, COLLIDER_NONE, 0); //WHAT?
+	App->particles->AddParticle(App->particles->g_explosion02, position.x, position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0); 
+	if (SDL_GetTicks() % 2)
+		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
+	else
+		App->audio->ControlSFX(App->particles->g_explosion02_1sfx, PLAY_AUDIO);
 }

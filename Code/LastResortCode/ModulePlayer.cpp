@@ -100,7 +100,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	isDying = true;
 	canMove = false;
 	canShoot = false;
-	playerCol->type = COLLIDER_TYPE::COLLIDER_NONE;
 	shipAnimations = ShipAnimations::Death;
 }
 

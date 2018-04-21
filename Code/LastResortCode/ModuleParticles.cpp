@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -38,26 +39,25 @@ ModuleParticles::ModuleParticles()
 	death_explosion.anim.loop = false;
 
 	//GENERAL---------------------------------------------------------------//
-
 	//General explosion 02 particle-----------------------------
-	general_explosion02.anim.PushBack({ 0,0,32,32 });
-	general_explosion02.anim.PushBack({ 32,0,32,32 });
-	general_explosion02.anim.PushBack({ 64,0,16,16 });
-	general_explosion02.anim.PushBack({ 80,0,20,20 });
-	general_explosion02.anim.PushBack({ 100,0,25,25 });
-	general_explosion02.anim.PushBack({ 0,32,26,26 });
-	general_explosion02.anim.PushBack({ 26,32,32,32 });
-	general_explosion02.anim.PushBack({ 58,32,32,32 });
-	general_explosion02.anim.PushBack({ 90,32,32,32 });
-	general_explosion02.anim.PushBack({ 0,64,32,32 });
-	general_explosion02.anim.PushBack({ 32,64,32,32 });
-	general_explosion02.anim.PushBack({ 64,64,32,32 });
-	general_explosion02.anim.PushBack({ 96,64,32,32 });
-	general_explosion02.anim.PushBack({ 0,96,31,32 });
-	general_explosion02.anim.PushBack({ 31,96,30,32 });
-	general_explosion02.anim.PushBack({ 61,96,30,32 });
-	general_explosion02.anim.loop = false;
-	general_explosion02.anim.speed = 0.3f;
+	g_explosion02.anim.PushBack({ 0,0,32,32 });
+	g_explosion02.anim.PushBack({ 32,0,32,32 });
+	g_explosion02.anim.PushBack({ 64,0,16,16 });
+	g_explosion02.anim.PushBack({ 80,0,20,20 });
+	g_explosion02.anim.PushBack({ 100,0,25,25 });
+	g_explosion02.anim.PushBack({ 0,32,26,26 });
+	g_explosion02.anim.PushBack({ 26,32,32,32 });
+	g_explosion02.anim.PushBack({ 58,32,32,32 });
+	g_explosion02.anim.PushBack({ 90,32,32,32 });
+	g_explosion02.anim.PushBack({ 0,64,32,32 });
+	g_explosion02.anim.PushBack({ 32,64,32,32 });
+	g_explosion02.anim.PushBack({ 64,64,32,32 });
+	g_explosion02.anim.PushBack({ 96,64,32,32 });
+	g_explosion02.anim.PushBack({ 0,96,31,32 });
+	g_explosion02.anim.PushBack({ 31,96,30,32 });
+	g_explosion02.anim.PushBack({ 61,96,30,32 });
+	g_explosion02.anim.loop = false;
+	g_explosion02.anim.speed = 0.3f;
 }
 
 ModuleParticles::~ModuleParticles()
@@ -68,12 +68,14 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading ModuleParticles assets ");
 	//textures-------------------------------------------------
-	graphics = App->textures->Load("Assets/General/Explosion_2.png");
-	//audios--------------------------------------------------
+	graphics = App->textures->Load("Assets/General/Fx/Explosion_2.png");
 	//particles-----------------------------------------------
-	general_explosion02.texture = graphics;
-	//--------------------------------------------------------
+	g_explosion02.texture = graphics;
+	//audios--------------------------------------------------
+	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
+	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
 
+	//--------------------------------------------------------
 	return true;
 }
 
@@ -167,8 +169,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 
 Particle::Particle()
 {
-	//position.SetToZero();
-	//speed.SetToZero();
+	position.SetToZero();
+	speed.SetToZero();
 }
 
 Particle::Particle(const Particle& p) :
