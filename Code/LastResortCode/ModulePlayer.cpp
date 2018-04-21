@@ -8,7 +8,8 @@
 #include "ModuleParticles.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
-
+#include "ModuleStageClear.h"
+#include "ModuleStage01.h"
 ModulePlayer::ModulePlayer() //Constructor 
 {}
 
@@ -38,6 +39,7 @@ bool ModulePlayer::Start()
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
+	FadeToBlackAlfa = 0;
 	return ret;
 }
 
@@ -100,7 +102,23 @@ update_status ModulePlayer::Update()
 	if (winlvl)
 	{
 		Winlvl();
+		/*if (start_timer)
+		{
+
+
+			FadeToBlackAlfa += 1;
+			SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
+			SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, FadeToBlackAlfa);
+			SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
+
+
+		}*/
+		/*if (FadeToBlackAlfa > 255)
+		{*/
+			
+		/*}*/
 	}
+
 	
 	return UPDATE_CONTINUE;
 }

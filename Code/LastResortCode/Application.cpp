@@ -37,18 +37,24 @@ Application::Application()
 	modules[i++] = stage02 = new Module2lvlScene();
 	modules[i++] = unit = new ModuleUnit();
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
-	modules[i++] = player1 = new Player1();
-	modules[i++] = player2 = new Player2();
+	
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = titleScene = new ModuleGameTitle();
 	modules[i++] = readyScene = new ModuleStageReady();
 	modules[i++] = gameoverScene = new ModuleGameOver();
 	modules[i++] = continueScene = new ModuleContinue();
 	modules[i++] = stageclearScene = new ModuleStageClear();
-	modules[i++] = collision = new ModuleCollision();
+	
 	modules[i++] = enemies = new ModuleEnemies();
+<<<<<<< HEAD
+	modules[i++] = player1 = new Player1();
+	modules[i++] = player2 = new Player2();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
+=======
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
 	modules[i++] = ui = new ModuleUI();
+>>>>>>> origin/master
 }
 
 Application::~Application()
