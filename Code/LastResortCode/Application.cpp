@@ -49,6 +49,7 @@ Application::Application()
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
 	modules[i++] = ui = new ModuleUI();
+
 }
 
 Application::~Application()

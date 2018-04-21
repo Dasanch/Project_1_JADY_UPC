@@ -184,9 +184,16 @@ bool ModuleUnit::Start()
 	LOG("Loading unit assets");
 	//Change the player to follow depending on which player has gotten the powerup
 	playerToFollow = App->player1;
-
+	type = blue;
 	//Load assets
-	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	if(type == orange)
+	{
+		unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
+	}
+	else
+	{
+		unitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
+	}
 	currentOrbit = currentSpin = angleValue[W];
 	return ret;
 }
@@ -253,8 +260,8 @@ update_status ModuleUnit::Update()
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 5;
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 1;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 9;
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 2;
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
@@ -263,7 +270,7 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x, position.y, &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
+	App->render->Blit(unitTx, position.x - spriteXDifferences[(int)currentSpin], position.y + spriteYDifferences[(int)currentSpin], &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
 
 
 	//Shoot------------------------------------------------------------------------------------------------

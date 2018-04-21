@@ -49,9 +49,12 @@ bool ModuleStageClear::Start()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	
+	lvlComplitedMusic = App->audio->LoadMUS("Assets/General/Fx/Stage clear.ogg");
+	App->audio->ControlMUS(lvlComplitedMusic, PLAY_AUDIO);
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
+	start_time = SDL_GetTicks();
 
 	return ret;
 }
@@ -59,6 +62,8 @@ bool ModuleStageClear::Start()
 bool ModuleStageClear::CleanUp()
 {
 	//Remove all memory leaks
+	App->audio->ControlMUS(lvlComplitedMusic, STOP_AUDIO);
+	App->audio->UnloadMUS(lvlComplitedMusic);
 
 	LOG("Unloading ready scene");
 	App->textures->Unload(backgroundStageClear1);
@@ -72,8 +77,7 @@ bool ModuleStageClear::CleanUp()
 update_status ModuleStageClear::Update()
 {
 	// Draw everything
-	//SDL_Rect PLAYER1 = { 64, 3, 32, 12 };
-	//App->render->Blit(App->player1->PlayerTexture, 70 , 120 , &PLAYER1 ,0.0f); //MAGIC NUMBERS
+	current_time = SDL_GetTicks() - start_time;
 	App->render->Blit(Players_Texture, 70, 120, &Player1, 0.0f); 
 	App->render->Blit(Players_Texture, 200, 120, &Player2, 0.0f);
 	if(App->player1->numLvlwin == App->player2->numLvlwin == 1)
@@ -83,7 +87,10 @@ update_status ModuleStageClear::Update()
 		
 
 	}
-
+	if (current_time > 6000)
+	{
+		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
+	}
 	// Make that pressing SPACE loads another stage
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
