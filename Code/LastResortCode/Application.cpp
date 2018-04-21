@@ -20,6 +20,8 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleFonts.h"
+#include "ModuleUI.h"
+
 Application::Application()
 {
 	int i = 0;
@@ -45,8 +47,8 @@ Application::Application()
 	modules[i++] = stageclearScene = new ModuleStageClear();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = enemies = new ModuleEnemies();
-
-	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
+	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
+	modules[i++] = ui = new ModuleUI();
 }
 
 Application::~Application()
