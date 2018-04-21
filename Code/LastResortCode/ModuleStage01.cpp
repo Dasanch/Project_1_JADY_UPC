@@ -163,6 +163,7 @@ bool ModuleStage01::CleanUp()
 	App->enemies->Disable();
 	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	App->render->relative_camera.x = 0;
 	App->render->relative_camera.y = 0;
 	//------------------------------------------------------------------------------
@@ -178,7 +179,6 @@ update_status ModuleStage01::Update()
 	Current_time= SDL_GetTicks();
 
 	// Move camera forward -------------------------------------------------------------------
-	
 	if (App->render->camera.x <= ((4408 / foregndSpeed)*SCREEN_SIZE))
 	{
 		App->render->camera.x += SCREEN_SIZE;
