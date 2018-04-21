@@ -259,6 +259,10 @@ update_status ModuleUnit::Update()
 		LimitRotation(currentOrbit);
 		//-- On the spin
 		LimitRotation(currentSpin);
+
+		//- We grab the spin we need to render (here because it won't change if the unit doesn't move)
+		spinToRender = SpinToRender();
+		LOG("Spin to render: %i", spinToRender);
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
@@ -266,7 +270,7 @@ update_status ModuleUnit::Update()
 	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 2;
 
 	//Update the collider position (after having set its position)--------------------------------------------
-	unitCol->SetPos(position.x - colXDifferences[(int)currentSpin], position.y + colYDifferences[(int)currentSpin]);
+	unitCol->SetPos(position.x - colXDifferences[spinToRender], position.y + colYDifferences[spinToRender]);
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
@@ -275,7 +279,7 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x - spriteXDifferences[(int)currentSpin], position.y + spriteYDifferences[(int)currentSpin], &internalRotationAnim[SpinToRender()].frame[(int)currentInternalRotation]);
+	App->render->Blit(unitTx, position.x /*- spriteXDifferences[spinToRender]*/, position.y /*+ spriteYDifferences[spinToRender]*/, &internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
 
 	//Shoot------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(currentSpin);

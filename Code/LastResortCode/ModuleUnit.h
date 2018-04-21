@@ -62,6 +62,7 @@ private:
 	const float orbitSpeed = 3.141592 / 27;//The speed at which the orbit rotates around the player ship
 	float currentSpin;
 	const float spinSpeed = orbitSpeed * 2;
+	int spinToRender;
 	float currentInternalRotation;
 	const float internalRotationSpeed = 0.2f;
 	bool moving;//A bool that indicates if the player is moving (pressing any keys)
@@ -70,9 +71,8 @@ private:
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 	int spriteXDifferences[axis] = { 1, 1, 1, 1, 1, 2, 6, 7, 7, 7, 6, 2, 1, 1, 1, 1 };//Sprite differences in x
 	int spriteYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 8, 7, 8, 6, 2 };//Sprite differences in y
-								//SE, S, SW, 
-	int colXDifferences[axis] = { 1, 1, 100, 1, 1, 1, 6, 7, 7, 7, 6, 2, 1, 1, 1, 1 };
-	int colYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 8, 7, 8, 6, 2 };
+	int colXDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+	int colYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 11, 10, 10, 1, 10, 3 };
 	const float unitProjectileSpeed = 5;
 	//Animations
 	//There is an animation for each direciton of the ball
