@@ -11,21 +11,21 @@ ModuleUnit::ModuleUnit() //Constructor
 {
 	//Define the angle values
 	angleValue[E] = 2 * PI;
-	angleValue[W] = PI;
-	angleValue[N] = 3 * PI / 2;
-	angleValue[S] = PI / 2;
-	angleValue[NE] = 7 * PI / 4;
+	angleValue[ESE] = PI / 8;
 	angleValue[SE] = PI / 4;
+	angleValue[SSE] = angleValue[SE] + PI / 8;
+	angleValue[S] = PI / 2;
+	angleValue[SSW] = angleValue[S] + PI / 8;
 	angleValue[SW] = 3 * PI / 4;
+	angleValue[WSW] = angleValue[SW] + PI / 8;
+	angleValue[W] = PI;
+	angleValue[WNW] = angleValue[W] + PI / 8;
 	angleValue[NW] = 5 * PI / 4;
-	angleValue[NNE] = 5 * PI / 3;
-	angleValue[ENE] = 11 * PI / 6;
-	angleValue[ESE] = PI / 6;
-	angleValue[SSE] = PI / 3;
-	angleValue[SSW] = 2 * PI / 3;
-	angleValue[WSW] = 5 * PI / 6;
-	angleValue[WNW] = 7 * PI / 6;
-	angleValue[NNW] = 4 * PI / 3;
+	angleValue[NNW] = angleValue[NW] + PI / 8;
+	angleValue[N] = 3 * PI / 2;
+	angleValue[NNE] = angleValue[N] + PI / 8;
+	angleValue[NE] = 7 * PI / 4;
+	angleValue[ENE] = angleValue[NE] + PI / 8;
 	//Push backs
 	//- North
 	internalRotationAnim[N].frame[0] = {  48, 61, 16, 22 };
@@ -395,6 +395,10 @@ void ModuleUnit::LimitRotation(float &rotation)
 
 int ModuleUnit::SpintToRender()
 {
+	//LOG("ESE: %f", angleValue[ESE]);
+	//LOG("SE: %f", angleValue[SE]);
+	//LOG("SSE: %f", angleValue[SSE]);
+	//LOG("S: %f", angleValue[S]);
 	//Start with the exception (E)
 	if(currentSpin > angleValue[E] - angleSeparation || currentSpin <= 0 + angleSeparation) { return E; }
 	//Then go through all the other cases
