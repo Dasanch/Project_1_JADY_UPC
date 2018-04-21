@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "ModulePlayer.h"
 
 #define frames 8
 #define axis 16
@@ -41,6 +42,8 @@ public:
 	iPoint position;
 
 private:
+	//Ship it has to follow
+	ModulePlayer* playerToFollow = nullptr;
 	//Rotation
 	const float PI = 3.141592;
 	//- Orbit refers to the rotation of the unit around the player's ship
@@ -57,7 +60,6 @@ private:
 	const float radius = 31;
 	float angleValue[axis];//The value of each angle
 	const float angleSeparation = PI / 16 + 0.30365;//The separation between the angles (helps us calculate which animation we have to play)
-
 	//Animations
 	//There is an animation for each direciton of the ball
 	SDL_Texture* unitTx = nullptr;
