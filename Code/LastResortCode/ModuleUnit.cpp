@@ -261,6 +261,13 @@ update_status ModuleUnit::Update()
 	//Set the rotation and render (all in the same place)--------------------------------------------------
 	App->render->Blit(unitTx, position.x, position.y, &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
 
+
+	//Shoot------------------------------------------------------------------------------------------------
+	if(App->player1->Shoot() == true)
+	{
+		App->particles->AddParticle(App->particles->basicShot, position.x, position.y, App->player1->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -384,16 +391,13 @@ void ModuleUnit::LimitRotation(float &rotation)
 int ModuleUnit::SpintToRender()
 {
 	//Start with the exception (E)
-	if(currentSpin >= angleValue[E] - angleSeparation || currentSpin < 0 + angleSeparation)
+	if(currentSpin > angleValue[E] - angleSeparation || currentSpin <= 0 + angleSeparation)
 	{
 		return E;
 	}
 	//Then go through all the other cases with a loop
 	for(int i = E+1; i < axis; ++i)
 	{
-		//LOG("Angle value min: %f", WSW - angleSeparation);
-		//LOG("Angle value max: %f", WSW + angleSeparation);
-		//LOG("Current spin: %f", currentSpin);
 		if (currentSpin >= angleValue[i] - angleSeparation && currentSpin < angleValue[i] + angleSeparation)
 		{
 			return i;
