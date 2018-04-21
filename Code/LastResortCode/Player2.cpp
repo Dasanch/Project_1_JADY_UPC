@@ -147,5 +147,20 @@ void Player2::ShipAnimation() {
 }
 void Player2::Winposition()
 {
-
+	if (position.x < App->render->relative_camera.x + 200)
+	{
+		position.x += SCREEN_SIZE;
+	}
+	if (position.x > App->render->relative_camera.x + 200)
+	{
+		position.x -= SCREEN_SIZE;
+	}
+	if (position.y < App->render->relative_camera.y + 140)
+	{
+		position.y += SCREEN_SIZE;
+	}
+	if (position.y > App->render->relative_camera.y + 140)
+	{
+		position.y -= SCREEN_SIZE;
+	}
 }

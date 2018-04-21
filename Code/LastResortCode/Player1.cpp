@@ -160,4 +160,13 @@ void Player1::Winposition()
 	{
 		position.x -= SCREEN_SIZE;
 	}
+	if (position.y < App->render->relative_camera.y+140)
+	{
+		position.y += SCREEN_SIZE;
+	}
+	if (position.y > App->render->relative_camera.y + 140)
+	{
+		position.y -= SCREEN_SIZE;
+	}
+
 }

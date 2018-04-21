@@ -164,6 +164,7 @@ bool ModuleStage01::CleanUp()
 	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
 	App->render->relative_camera.x = 0;
+	App->render->relative_camera.y = 0;
 	//------------------------------------------------------------------------------
 	
 	return true;
@@ -330,7 +331,7 @@ update_status ModuleStage01::Update()
 			App->player1->winlvl = true;
 			App->player2->winlvl = true;
 		}
-		App->player1->Winposition();
+		
 
 		
 
@@ -388,6 +389,7 @@ void ModuleStage01::MoveCam(){
 			App->player1->position.y += 1;
 			App->player2->position.y += 1;
 			App->render->camera.y += SCREEN_SIZE;
+			App->render->relative_camera.y += 1;
 		}
 		
 		else {
@@ -411,6 +413,7 @@ void ModuleStage01::MoveCam(){
 			App->player1->position.y -= 1;
 			App->player2->position.y -= 1;
 			App->render->camera.y -= SCREEN_SIZE;
+			App->render->relative_camera.y -= 1;
 		}
 			
 		else {

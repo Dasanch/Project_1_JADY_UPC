@@ -193,11 +193,15 @@ void ModulePlayer::MovementInput() {
 }
 void ModulePlayer::Winlvl()
 {
+	if (godMode == false)
+	{
+		colType = COLLIDER_NONE;
+		playerCol->type = COLLIDER_NONE;
+		godMode = true;
+	}
 	
-	colType = COLLIDER_NONE;
-	playerCol->type = COLLIDER_NONE;
 	canShoot = false;
 	canMove = false;
 	canMove = false;
-	
+	Winposition();
 }
