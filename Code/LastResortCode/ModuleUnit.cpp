@@ -307,7 +307,7 @@ void ModuleUnit::RotateTo(float targetRotation, float &currentRotation, float sp
 		}
 	}
 
-	//Check if the target rotation is up or one ofthe upper diagonals
+	//Check if the target rotation is up or one of the upper diagonals
 	else if (targetRotation == angleValue[N] || targetRotation == angleValue[NE] || targetRotation == angleValue[NW])
 	{
 		oppositeRotation = targetRotation - PI;
@@ -392,18 +392,26 @@ void ModuleUnit::LimitRotation(float &rotation)
 int ModuleUnit::SpintToRender()
 {
 	//Start with the exception (E)
-	if(currentSpin > angleValue[E] - angleSeparation || currentSpin <= 0 + angleSeparation)
-	{
-		return E;
-	}
-	//Then go through all the other cases with a loop
-	for(int i = E+1; i < axis; ++i)
-	{
-		if (currentSpin >= angleValue[i] - angleSeparation && currentSpin < angleValue[i] + angleSeparation)
-		{
-			return i;
-		}
-	}
+	if(currentSpin > angleValue[E] - angleSeparation || currentSpin <= 0 + angleSeparation) { return E; }
+	//Then go through all the other cases
+	else if (currentSpin >= angleValue[ESE] - angleSeparation && currentSpin < angleValue[ESE] + angleSeparation) { return ESE; }
+	else if (currentSpin >= angleValue[SE] - angleSeparation && currentSpin < angleValue[SE] + angleSeparation) { return SE; }
+	else if (currentSpin >= angleValue[SSE] - angleSeparation && currentSpin < angleValue[SSE] + angleSeparation) { return SSE; }
+	else if (currentSpin >= angleValue[S] - angleSeparation && currentSpin < angleValue[S] + angleSeparation) { return S; }
+	else if (currentSpin >= angleValue[SSW] - angleSeparation && currentSpin < angleValue[SSW] + angleSeparation) { return SSW; }
+	else if (currentSpin >= angleValue[SW] - angleSeparation && currentSpin < angleValue[SW] + angleSeparation) { return SW; }
+	else if (currentSpin >= angleValue[WSW] - angleSeparation && currentSpin < angleValue[WSW] + angleSeparation) { return WSW; }
+	else if (currentSpin >= angleValue[W] - angleSeparation && currentSpin < angleValue[W] + angleSeparation) { return W; }
+	else if (currentSpin >= angleValue[WNW] - angleSeparation && currentSpin < angleValue[WNW] + angleSeparation) { return WNW; }
+	else if (currentSpin >= angleValue[NW] - angleSeparation && currentSpin < angleValue[NW] + angleSeparation) { return NW; }
+	else if (currentSpin >= angleValue[NNW] - angleSeparation && currentSpin < angleValue[NNW] + angleSeparation) { return NNW; }
+	else if (currentSpin >= angleValue[N] - angleSeparation && currentSpin < angleValue[N] + angleSeparation) { return N; }
+	else if (currentSpin >= angleValue[NNE] - angleSeparation && currentSpin < angleValue[NNE] + angleSeparation) { return NNE; }
+	else if (currentSpin >= angleValue[NE] - angleSeparation && currentSpin < angleValue[NE] + angleSeparation) { return NE; }
+	else if (currentSpin >= angleValue[ENE] - angleSeparation && currentSpin < angleValue[ENE] + angleSeparation) { return ENE; }
+	//In case that it didn't return anything before, we'll return the E position, just so that we don't get an errror (this should never execute)
+	LOG("Unit spin not found, returning east direction");
+	return E;
 }
 
 void ModuleUnit::OnCollision(Collider* collider1, Collider* collider2)
