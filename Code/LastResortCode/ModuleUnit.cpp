@@ -391,6 +391,9 @@ int ModuleUnit::SpintToRender()
 	//Then go through all the other cases with a loop
 	for(int i = E+1; i < axis; ++i)
 	{
+		//LOG("Angle value min: %f", WSW - angleSeparation);
+		//LOG("Angle value max: %f", WSW + angleSeparation);
+		//LOG("Current spin: %f", currentSpin);
 		if (currentSpin >= angleValue[i] - angleSeparation && currentSpin < angleValue[i] + angleSeparation)
 		{
 			return i;
