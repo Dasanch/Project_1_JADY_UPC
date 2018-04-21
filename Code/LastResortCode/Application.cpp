@@ -74,6 +74,7 @@ bool Application::Init()
 	enemies->Disable();
 	particles->Disable();
 	collision->Disable();
+	ui->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
