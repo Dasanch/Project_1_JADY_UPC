@@ -365,15 +365,15 @@ update_status ModuleStage01::Update()
 			}
 
 		}
-		if (FadeToBlackAlfa == 255)
+		if (FadeToBlackAlfa == 50)
 		{
-			App->fade->FadeToBlack(this, App->stageclearScene, 0.0f);
+			App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
 		}
 
 		if (start_timer == true) 
 		{
-			backgroundBlack.x = App->player1->position.x;
-			backgroundBlack.y = App->player1->position.y;
+			backgroundBlack.x = App->render->relative_camera.x*SCREEN_SIZE;
+			backgroundBlack.y = App->render->relative_camera.x*SCREEN_SIZE;
 
 			FadeToBlackAlfa += 1;
 			SDL_SetRenderDrawColor(App->render->renderer, 255, 0, 0, FadeToBlackAlfa);
