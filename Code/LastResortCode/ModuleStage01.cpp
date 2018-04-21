@@ -328,11 +328,11 @@ update_status ModuleStage01::Update()
 	{
 		if (App->player1->winlvl == false && App->player2->winlvl == false)
 		{
-			App->player1->winlvl = true;
-			App->player2->winlvl = true;
+			App->player1->winlvl = App->player2->winlvl = true;
+			App->player1->numLvlwin = App->player2->numLvlwin = 1;
 		}
 		
-
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
 		
 
 	}

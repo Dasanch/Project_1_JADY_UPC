@@ -48,9 +48,8 @@ bool ModuleStageClear::Start()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	//App->player->Enable();
-	App->player1->Disable();
-
+	
+	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -62,7 +61,8 @@ bool ModuleStageClear::CleanUp()
 	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player1->Disable(); //Disable the player module
+	App->player1->Disable();
+	App->player2->Disable();
 	App->textures->Unload(backgroundStageClear1);
 	return true;
 }
@@ -73,11 +73,14 @@ bool ModuleStageClear::CleanUp()
 update_status ModuleStageClear::Update()
 {
 	// Draw everything
+	//SDL_Rect PLAYER1 = { 64, 3, 32, 12 };
+	//App->render->Blit(App->player1->PlayerTexture, 70 , 120 , &PLAYER1 ,0.0f); //MAGIC NUMBERS
+	if(App->player1->numLvlwin == App->player2->numLvlwin == 1)
+	{
 
-	//App->render->Blit(backgroundReady, 0, 0, NULL, 0.0f);
+		App->render->Blit(backgroundStageClear1, 40 , 60 , &BGroundStageClear1, 0.0f); //MAGIC NUMBERS
 
-	App->render->Blit(backgroundStageClear1, 40 /*SCREEN_WIDTH/2*/, 60 /*SCREEN_HEIGHT/2*/, &BGroundStageClear1, 0.0f); //MAGIC NUMBERS
-
+	}
 
 	// Make that pressing SPACE loads another stage
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
