@@ -78,6 +78,7 @@ bool ModuleStage01::Start()
 	App->audio->ControlMUS(music_01, PLAY_AUDIO);
 	//Enable------------------------------------------------------------------------
 	App->player1->Enable();
+	App->player2->Enable();
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
@@ -89,6 +90,8 @@ bool ModuleStage01::Start()
 	//"Reset ship position when fadetoblackends"
 	App->player1->position.x = INIT_X_PLAYER_1;
 	App->player1->position.y = INIT_Y_PLAYER_1;
+	App->player2->position.x= INIT_X_PLAYER_2;
+	App->player2->position.y = INIT_Y_PLAYER_2;
 	App->player1->initAnim_p.x = 0; //Fix the initial animation pivot 
 	App->player2->initAnim_p.x = 0;
 	App->player1->initAnim_p.y = 79;
