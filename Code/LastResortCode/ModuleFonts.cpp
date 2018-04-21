@@ -101,7 +101,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 				//We blit the letter
 				rect.x = j * font->char_w;
 				rect.y = 0;
-				App->render->Blit(font->graphic, x, y, &rect);
+				App->render->Blit(font->graphic, x, y, &rect, 1.0f);
 				//And we go to the next one
 				break;
 			}

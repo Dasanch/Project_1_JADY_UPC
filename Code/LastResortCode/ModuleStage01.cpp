@@ -18,6 +18,7 @@
 #include "ModuleStageClear.h"
 #include "ModuleCollision.h"
 #include "ModuleUnit.h"
+#include "ModuleUI.h"
 #include "ModuleEnemies.h"
 
 #define INIT_X_PLAYER_1 40
@@ -83,6 +84,7 @@ bool ModuleStage01::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->unit->Enable();
+	App->ui->Enable();
 
 	//Player variable reset--------------------------------------------------------
 	App->player1->winlvl = false;

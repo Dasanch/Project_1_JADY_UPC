@@ -23,6 +23,7 @@ const Collider* Enemy::GetCollider() const
 
 void Enemy::Draw(SDL_Texture* sprites)
 {
+
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y + App->render->relative_camera.y);
 
@@ -32,7 +33,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->g_explosion02, position.x, position.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0); 
+	App->particles->AddParticle(App->particles->g_explosion02, position.x, position.y + App->render->relative_camera.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);
 	if (SDL_GetTicks() % 2)
 		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else
