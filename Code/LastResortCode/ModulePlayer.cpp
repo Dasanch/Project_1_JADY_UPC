@@ -220,6 +220,5 @@ void ModulePlayer::Winlvl()
 	
 	canShoot = false;
 	canMove = false;
-	canMove = false;
 	Winposition();
 }

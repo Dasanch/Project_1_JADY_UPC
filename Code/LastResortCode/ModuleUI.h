@@ -2,6 +2,9 @@
 #define _MODULEUI_H_
 #include "Module.h"
 #include "Globals.h"
+
+#define MAX_NUMBERS_SCORE 6
+
 struct SDL_Texture;
 struct SDL_Rect;
 class ModuleUI : public Module
@@ -11,10 +14,23 @@ public:
 	~ModuleUI();
 
 	bool Start();
+	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 
+	void hideUi();
+	void showUi();
+
+
 public:
+	char str_score_p1[MAX_NUMBERS_SCORE];
+	char str_score_p2[MAX_NUMBERS_SCORE];
+	int score_p1;
+	int score_p2; 
+	int lives_p1;
+	int lives_p2;
+
+
 	SDL_Texture *uiTex = nullptr;
 	SDL_Rect lives_score_p1;
 	SDL_Rect live_score_p2;
