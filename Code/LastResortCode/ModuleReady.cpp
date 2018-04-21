@@ -40,7 +40,7 @@ ModuleStageReady::~ModuleStageReady()
 // Load assets
 bool ModuleStageReady::Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading Ready Scene assets");
 	bool ret = true;
 
 	backgroundReady = App->textures->Load("Assets/UI.png");
@@ -59,7 +59,7 @@ bool ModuleStageReady::CleanUp()
 {
 	//Remove all memory leaks
 
-	LOG("Unloading ready scene");
+	LOG("Unloading Ready Scene assets");
 	App->textures->Unload(backgroundReady);
 	return true;
 }

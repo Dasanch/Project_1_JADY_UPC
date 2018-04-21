@@ -14,35 +14,47 @@ Player2::Player2() {
 	shipAnim.PushBack({ 294, 3, 32, 12 });	//3 = MiddleDownShip
 	shipAnim.PushBack({ 326, 3, 32, 12 });	//4 = DownShip
 	//Initial animation-----------------------------------------
-	initAnim.PushBack({ 0, 122, 111, 2 });
-	initAnim.PushBack({ 0, 124, 117, 3 });
-	initAnim.PushBack({ 0, 127, 88, 4 });
-	initAnim.PushBack({ 0, 131, 86, 8 });
-	//---------------------------------------------------------
-	initAnim.PushBack({ 0, 139, 64, 25 });
-	initAnim.PushBack({ 0, 164, 64, 25 });
-	initAnim.PushBack({ 0, 189, 64, 25 });
-	initAnim.PushBack({ 0, 214, 64, 25 });
-	initAnim.PushBack({ 64, 139, 64, 25 });
-	initAnim.PushBack({ 64, 164, 64, 25 });
-	initAnim.PushBack({ 64, 189, 64, 25 });
-	initAnim.PushBack({ 64, 214, 64, 25 });
-	initAnim.PushBack({ 128, 139, 64, 25 });
-	initAnim.PushBack({ 128, 164, 64, 25 });
-	initAnim.speed = 0.2f;
-	//Death animation-------------------------------------------
-	for (int i = 0; i < 3; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
+	initAnim.PushBack({ 212, 223, 111, 1 });
+	initAnim.PushBack({ 212, 226, 117, 3 });
+	initAnim.PushBack({ 212, 228, 66, 4 });
+	initAnim.PushBack({ 212, 233, 58, 8 });
+	for (int i = 0; i < 4; ++i) {
+		for (int j = 0; j < 2; ++j) {
+			initAnim.PushBack({ 212 + 64 * i, 159 + 25 * j ,64,25 });
 		}
 	}
+	initAnim.speed = 0.15f;
+	//Death animation-------------------------------------------
+	deathAnim.PushBack({ 221 ,27,32,12 });
+	deathAnim.PushBack({ 218 ,43,35,15 });
+	deathAnim.PushBack({ 213,61,40,18 });
+	deathAnim.PushBack({ 208 ,83 ,45,19 });
+	deathAnim.PushBack({ 202 ,104,51,20 });
+	//--------------------------------------
+	deathAnim.PushBack({ 253 ,19,63,21 });
+	deathAnim.PushBack({ 253 ,40,63,22 });
+	deathAnim.PushBack({ 253 ,62,63,24 });
+	deathAnim.PushBack({ 253 ,86,63,23 });
+	deathAnim.PushBack({ 253 ,109,63,23 });
+	//-------------------------------------
+	deathAnim.PushBack({ 253 ,132,63,24 });
+	deathAnim.PushBack({ 316 ,19,60,25 });
+	deathAnim.PushBack({ 316 ,44,60,26 });
+	deathAnim.PushBack({ 316 ,71,60,25 });
+	deathAnim.PushBack({ 316 ,97,60,28 });
+	//------------------------------------
+	deathAnim.PushBack({ 316 ,125,60,28 });
+	deathAnim.PushBack({ 376 ,19,55,17 });
+	deathAnim.PushBack({ 376 ,47,55,28 });
+	deathAnim.PushBack({ 376 ,75,55,20 });
+	deathAnim.speed = 0.35f;
 	//Shot Fire Animation----------------------------------------
 	shotFire.PushBack({ 125, 247, 10,9 });
 	shotFire.PushBack({ 137, 247, 10,9 });
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
-	deathAnim.speed = 0.3f;
+	
 }
 
 
@@ -140,7 +152,7 @@ void Player2::ShipAnimation() {
 			colType = COLLIDER_NONE;
 			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
-			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
+			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w , position.y + 6 - current_animation->h/2, current_animation);
 		}
 		break;
 	}

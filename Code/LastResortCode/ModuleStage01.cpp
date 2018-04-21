@@ -32,7 +32,7 @@
 #define bckgndSpeed 0.12f
 #define foregndSpeed 0.5f
 #define tunnelLightDist 256
-#define orangeLaserSpeed 0.25f
+#define orangeLaserSpeed 0.12f
 
 #define streetLightDist 64
 #define roadLightDist 128
@@ -224,9 +224,9 @@ update_status ModuleStage01::Update()
 		if (frame < 2 ) {
 			frame++;
 			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame/ 2)
-				App->render->FlippedBlit(LasersTx, 359- orangeLaserAnim.GetFrame().w, -10, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
+				App->render->FlippedBlit(LasersTx, 359- orangeLaserAnim.GetFrame().w, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
 			else
-				App->render->Blit(LasersTx, 358, -10, &orangeLaserAnim.GetFrame(), orangeLaserSpeed,true);
+				App->render->Blit(LasersTx, 358, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed,true);
 		}
 		else
 			frame = 0;

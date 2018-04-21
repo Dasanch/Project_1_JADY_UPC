@@ -36,13 +36,14 @@ Player1::Player1() {
 			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
 		}
 	}
+	deathAnim.speed = 0.3f;
 	//Shot Fire Animation----------------------------------------
 	shotFire.PushBack({ 125, 247, 10,9 });
 	shotFire.PushBack({ 137, 247, 10,9 });
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
-	deathAnim.speed = 0.3f;
+	
 }
 
 
