@@ -9,7 +9,7 @@
 #include "ModuleGameOver.h"
 #include "ModuleContinue.h"
 #include "ModuleGameTitle.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 
 
 #define MAX_ALPHA 255

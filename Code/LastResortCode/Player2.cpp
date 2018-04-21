@@ -145,3 +145,7 @@ void Player2::ShipAnimation() {
 		break;
 	}
 }
+void Player2::Winposition()
+{
+
+}

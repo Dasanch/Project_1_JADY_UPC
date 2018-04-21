@@ -3,7 +3,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "SDL_image\include\SDL_image.h"
-#include "ModuleStage1Clear.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleStage01.h"
@@ -13,8 +12,9 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "ModuleGameOver.h"
+#include "ModuleStageClear.h"
 
-ModuleStage1Clear::ModuleStage1Clear()
+ModuleStageClear::ModuleStageClear()
 {
 
 	// BackgroundsRect  
@@ -34,11 +34,11 @@ ModuleStage1Clear::ModuleStage1Clear()
 
 }
 
-ModuleStage1Clear::~ModuleStage1Clear()
+ModuleStageClear::~ModuleStageClear()
 {}
 
 // Load assets
-bool ModuleStage1Clear::Start()
+bool ModuleStageClear::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
@@ -57,7 +57,7 @@ bool ModuleStage1Clear::Start()
 	return ret;
 }
 
-bool ModuleStage1Clear::CleanUp()
+bool ModuleStageClear::CleanUp()
 {
 	//Remove all memory leaks
 
@@ -70,7 +70,7 @@ bool ModuleStage1Clear::CleanUp()
 
 // Update: draw background
 
-update_status ModuleStage1Clear::Update()
+update_status ModuleStageClear::Update()
 {
 	// Draw everything
 

@@ -14,7 +14,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleGameOver.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 
 Module2lvlScene::Module2lvlScene()
 {

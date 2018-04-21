@@ -36,6 +36,8 @@ public:
 	virtual void ShipAnimation() = 0;
 
 
+
+
 public:
 	//Animations--------------------------------------------
 	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
@@ -93,6 +95,14 @@ public:
 		Movment,
 		Death
 	} shipAnimations;
+
+
+	//Win variables
+	bool winlvl;
+	int numLvlwin;
+	void Winlvl();
+	virtual void Winposition()=0; 
+
 };
 
 #endif

@@ -15,7 +15,9 @@ public:
 	bool Shoot();
 	bool Lock();
 	void ShipAnimation();
-public:
+
+	void Winposition() override;
+
 
 };
 #endif

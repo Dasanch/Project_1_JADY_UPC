@@ -15,7 +15,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleEnemies.h"
-#include "ModuleStage1Clear.h"
+#include "ModuleStageClear.h"
 #include "ModuleUnit.h"
 #include "Player1.h"
 #include "Player2.h"
@@ -42,7 +42,7 @@ Application::Application()
 	modules[i++] = readyScene = new ModuleStageReady();
 	modules[i++] = gameoverScene = new ModuleGameOver();
 	modules[i++] = continueScene = new ModuleContinue();
-	modules[i++] = stageclearScene = new ModuleStage1Clear();
+	modules[i++] = stageclearScene = new ModuleStageClear();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = enemies = new ModuleEnemies();
 

@@ -26,6 +26,8 @@ bool ModulePlayer::Start()
 	canMove = false;
 	canShoot = false;
 	isDying = false;
+
+	
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
@@ -94,6 +96,12 @@ update_status ModulePlayer::Update()
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
 
+	//Winlvl
+	if (winlvl)
+	{
+		Winlvl();
+	}
+	
 	return UPDATE_CONTINUE;
 }
 
@@ -182,4 +190,14 @@ void ModulePlayer::MovementInput() {
 			yAxis += keyReleaseSpeed;
 		}
 	}
+}
+void ModulePlayer::Winlvl()
+{
+	
+	colType = COLLIDER_NONE;
+	playerCol->type = COLLIDER_NONE;
+	canShoot = false;
+	canMove = false;
+	canMove = false;
+	
 }

@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleStage1Clear : public Module
+class ModuleStageClear : public Module
 {
 public:
-	ModuleStage1Clear();
-	~ModuleStage1Clear();
+	ModuleStageClear();
+	~ModuleStageClear();
 
 	bool Start();
 	update_status Update();
