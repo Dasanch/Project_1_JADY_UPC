@@ -51,6 +51,9 @@ bool ModuleStage1Clear::Start()
 	//App->player->Enable();
 	App->player1->Disable();
 
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	return ret;
 }
 

@@ -59,7 +59,9 @@ bool ModuleGameOver::Start() {
 	//textures-----------------------------------------------------------------------
 	goTex = App->textures->Load("Assets/GameOver.png");
 	//------------------------------------------------------------------------------
-	
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	return ret;
 }
 

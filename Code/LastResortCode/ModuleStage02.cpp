@@ -50,6 +50,10 @@ bool Module2lvlScene::Start()
 	//audios------------------------------------------------------------------------
 	lvl2Music = App->audio->LoadMUS("Assets/lvl2/04-THE-RUINS-OF-METRO-STAGE-2-_-TYRANNICAL-BOSS-2-.ogg");
 	App->audio->ControlMUS(lvl2Music, PLAY_AUDIO);
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	return ret;
 }
 update_status Module2lvlScene::Update() {

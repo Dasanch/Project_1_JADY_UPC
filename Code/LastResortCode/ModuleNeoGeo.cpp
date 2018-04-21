@@ -77,6 +77,9 @@ bool ModuleNeoGeo::Start()
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
 	App->audio->ControlMUS(neogeoMusic, PLAY_AUDIO);
 
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	return ret;
 }
 update_status ModuleNeoGeo::Update()
