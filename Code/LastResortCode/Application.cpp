@@ -46,15 +46,12 @@ Application::Application()
 	modules[i++] = stageclearScene = new ModuleStageClear();
 	
 	modules[i++] = enemies = new ModuleEnemies();
-<<<<<<< HEAD
 	modules[i++] = player1 = new Player1();
 	modules[i++] = player2 = new Player2();
 	modules[i++] = collision = new ModuleCollision();
-	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be the last one module 
-=======
 	modules[i++] = fade = new ModuleFadeToBlack();// !IMPORTANT! Remmember: fade always needs to be before module ui
 	modules[i++] = ui = new ModuleUI();
->>>>>>> origin/master
+
 }
 
 Application::~Application()
