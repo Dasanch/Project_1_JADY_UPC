@@ -5,9 +5,11 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
-#include "ModulePlayer.h"
+#include "Player1.h"
+#include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
+#include "string.h"
 
 ModuleUI::ModuleUI() {
 	lives_score_p1 = { 0,0,24,16};
@@ -28,7 +30,6 @@ bool ModuleUI::Start() {
 	uiTex = App->textures->Load("Assets/UI.png");
 	//audios------------------------------------------------------------------------
 
-
 	//------------------------------------------------------------------------------
 	return ret;
 }
@@ -45,7 +46,15 @@ bool ModuleUI::CleanUp() {
 	return true;
 }
 
+update_status  ModuleUI::PreUpdate() { 
+	
+
+	return update_status::UPDATE_CONTINUE;
+}
+
 update_status ModuleUI::Update() {
+
+
 
 	App->render->Blit(uiTex, 16, 16, &lives_score_p1, 0.0f);
 	App->render->Blit(uiTex, 256, 16, &live_score_p2, 0.0f);
@@ -53,9 +62,5 @@ update_status ModuleUI::Update() {
 	App->render->Blit(uiTex, 112, 16, &top, 0.0f);
 	App->render->Blit(uiTex, 24, 208, &pow, 0.0f);
 	App->render->Blit(uiTex, 184, 208, &pow, 0.0f);
-	
-	
-	
-
 	return UPDATE_CONTINUE;
 }

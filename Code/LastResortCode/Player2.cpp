@@ -139,8 +139,8 @@ void Player2::ShipAnimation() {
 			colType = COLLIDER_PLAYER;
 			playerCol->type = COLLIDER_PLAYER;
 
-			if (Lives > 0) {
-				--Lives;
+			if (lives > 0) {
+				--lives;
 				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f); //change to restart player
 			}
 			else {
