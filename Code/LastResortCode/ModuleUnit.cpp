@@ -265,9 +265,10 @@ update_status ModuleUnit::Update()
 	//Shoot------------------------------------------------------------------------------------------------
 	if(App->player1->Shoot() == true)
 	{
-		App->particles->AddParticle(App->particles->basicShot, position.x, position.y, App->player1->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, App->player1->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
-
+	//unistShot.speed.x = cosf(currentSpin);
+	//unistShot.speed.x = sinf(currentSpin);
 	return UPDATE_CONTINUE;
 }
 

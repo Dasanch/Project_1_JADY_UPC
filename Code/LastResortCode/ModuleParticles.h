@@ -53,7 +53,9 @@ public:
 	//PLAYER------------------------------------------------
 	Particle death_explosion; //Death explosion 
 	Particle basic_explosion; //Basic Shot Explosion
+	Particle unit_explosion;//Unit shot explosion
 	Particle basicShot;
+	Particle unitShot;
 	//GENERAL-----------------------------------------------
 	Particle g_explosion01;
 	Particle g_explosion02;

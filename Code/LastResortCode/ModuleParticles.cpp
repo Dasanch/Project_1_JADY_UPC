@@ -30,6 +30,30 @@ ModuleParticles::ModuleParticles()
 	basicShot.speed.x = 12;
 	basicShot.anim.loop = false;
 	basicShot.collision_fx = &basic_explosion;
+	//Basic shot particle---------------------------------------
+	unitShot.anim.PushBack({ 155, 288, 13, 13});
+	unitShot.anim.PushBack({ 170, 288, 13, 13 });
+	unitShot.anim.PushBack({ 155, 303, 13, 13 });
+	unitShot.anim.PushBack({ 170, 303, 13, 13 });
+	unitShot.anim.PushBack({ 155, 318, 13, 13 });
+	unitShot.anim.PushBack({ 170, 318, 13, 13 });
+	unitShot.anim.PushBack({ 155, 333, 13, 13 });
+	unitShot.anim.PushBack({ 170, 333, 13, 13 });
+	unitShot.anim.loop = true;
+	unitShot.anim.speed = 0.3f;
+	unitShot.collision_fx = &unit_explosion;
+	unitShot.speed.x = 5;
+	unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
+	//Basic shot explosion--------------------------------------
+	unit_explosion.anim.PushBack({ 244, 263, 16, 16});
+	unit_explosion.anim.PushBack({ 226, 263, 16, 16});
+	unit_explosion.anim.PushBack({ 224, 247, 14, 14});
+	unit_explosion.anim.PushBack({ 210, 263, 14, 14});
+	unit_explosion.anim.PushBack({ 239, 247, 14, 14});
+	unit_explosion.anim.PushBack({ 255, 247, 14, 14});
+	unit_explosion.anim.PushBack({ 208, 247, 14, 14});
+	unit_explosion.anim.loop = false;
+	unit_explosion.anim.speed = 0.3f;
 	//Death Explosion Particle----------------------------------
 	for (int i = 0; i < 5; ++i) {
 		death_explosion.anim.PushBack({ 244 + 32 * i ,288, 32,32 });
