@@ -263,12 +263,12 @@ update_status ModuleUnit::Update()
 
 
 	//Shoot------------------------------------------------------------------------------------------------
+	App->particles->unitShot.speed.x = 5 * cosf(currentSpin);
+	App->particles->unitShot.speed.y = 5 * sinf(currentSpin);
 	if(App->player1->Shoot() == true)
 	{
 		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, App->player1->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 	}
-	//unistShot.speed.x = cosf(currentSpin);
-	//unistShot.speed.x = sinf(currentSpin);
 	return UPDATE_CONTINUE;
 }
 
