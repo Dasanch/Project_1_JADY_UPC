@@ -102,6 +102,9 @@ public:
 	int numLvlwin;
 	void Winlvl();
 	virtual void Winposition()=0; 
+	bool start_timer;
+	int FadeToBlackAlfa;
+	SDL_Rect backgroundBlack;
 
 };
 
