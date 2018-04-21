@@ -6,7 +6,7 @@
 class Player1 : public ModulePlayer
 {
 public:
-	Player1(){}
+	Player1();
 	//void LoadSprites();
 	bool MoveUp();
 	bool MoveDown();

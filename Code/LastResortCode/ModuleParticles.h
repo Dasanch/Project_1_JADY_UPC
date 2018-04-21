@@ -49,6 +49,11 @@ private:
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
+	//PLAYER------------------------------------------------
+	Particle death_explosion; //Death explosion 
+	Particle basic_explosion; //Basic Shot Explosion
+	Particle basicShot;
+	//GENERAL-----------------------------------------------
 	Particle general_explosion02;
 };
 

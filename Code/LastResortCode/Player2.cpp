@@ -1,9 +1,50 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModulePlayer.h"
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFadetoBlack.h"
+
+Player2::Player2() : ModulePlayer() {
+	//Movement animation----------------------------------------
+	shipAnim.PushBack({ 198, 3, 32, 12 });	//0 = UpShip
+	shipAnim.PushBack({ 230, 3, 32, 12 });	//1 = MiddleUpShip
+	shipAnim.PushBack({ 262, 3, 32, 12 });	//2 = idle
+	shipAnim.PushBack({ 294, 3, 32, 12 });	//3 = MiddleDownShip
+	shipAnim.PushBack({ 326, 3, 32, 12 });	//4 = DownShip
+	//Initial animation-----------------------------------------
+	initAnim.PushBack({ 0, 122, 111, 2 });
+	initAnim.PushBack({ 0, 124, 117, 3 });
+	initAnim.PushBack({ 0, 127, 88, 4 });
+	initAnim.PushBack({ 0, 131, 86, 8 });
+	//---------------------------------------------------------
+	initAnim.PushBack({ 0, 139, 64, 25 });
+	initAnim.PushBack({ 0, 164, 64, 25 });
+	initAnim.PushBack({ 0, 189, 64, 25 });
+	initAnim.PushBack({ 0, 214, 64, 25 });
+	initAnim.PushBack({ 64, 139, 64, 25 });
+	initAnim.PushBack({ 64, 164, 64, 25 });
+	initAnim.PushBack({ 64, 189, 64, 25 });
+	initAnim.PushBack({ 64, 214, 64, 25 });
+	initAnim.PushBack({ 128, 139, 64, 25 });
+	initAnim.PushBack({ 128, 164, 64, 25 });
+	initAnim.speed = 0.2f;
+	//Death animation-------------------------------------------
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 6; ++j) {
+			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
+		}
+	}
+	//Shot Fire Animation----------------------------------------
+	shotFire.PushBack({ 125, 247, 10,9 });
+	shotFire.PushBack({ 137, 247, 10,9 });
+	shotFire.PushBack({ 125, 258, 13,12 });
+	shotFire.speed = 0.2f;
+	shotFire.loop = true;
+	deathAnim.speed = 0.3f;
+}
+
 
 bool Player2::MoveLeft()
 {
@@ -76,7 +117,7 @@ void Player2::ShipAnimation() {
 			currentFrame = MaxUp;
 		}
 		//Draw ship--------------------------------------------------
-		current_animation = &shipPlayer1.frames[currentFrame]; //It set the animation frame 
+		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
 		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
 		//-----------------------------------------------------------
 		break;

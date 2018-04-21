@@ -10,85 +10,10 @@
 #include "ModuleAudio.h"
 
 ModulePlayer::ModulePlayer() //Constructor 
-{
-	//PLAYER 1---------------------------------------------------------------------------------//
-	//Movement animation----------------------------------------
-	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
-	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
-	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
-	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
-	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
-	//Initial animation-----------------------------------------
-	initAnim.PushBack({ 0, 122, 111, 2 });
-	initAnim.PushBack({ 0, 124, 117, 3 });
-	initAnim.PushBack({ 0, 127, 88, 4 });
-	initAnim.PushBack({ 0, 131, 86, 8 });
-	//---------------------------------------------------------
-	initAnim.PushBack({ 0, 139, 64, 25 });
-	initAnim.PushBack({ 0, 164, 64, 25 });
-	initAnim.PushBack({ 0, 189, 64, 25 });
-	initAnim.PushBack({ 0, 214, 64, 25 });
-	initAnim.PushBack({ 64, 139, 64, 25 });
-	initAnim.PushBack({ 64, 164, 64, 25 });
-	initAnim.PushBack({ 64, 189, 64, 25 });
-	initAnim.PushBack({ 64, 214, 64, 25 });
-	initAnim.PushBack({ 128, 139, 64, 25 });
-	initAnim.PushBack({ 128, 164, 64, 25 });
-	initAnim.speed = 0.2f;
-	//Death animation-------------------------------------------
-	for (int i = 0; i < 3; ++i) {
-		for (int j = 0; j < 6; ++j) {
-			deathAnim.PushBack({ 55 * i,19 + 17 * j ,55,17 });
-		}
-	}
-	//Shot Fire Animation----------------------------------------
-	shotFire.PushBack({ 125, 247, 10,9 });
-	shotFire.PushBack({ 137, 247, 10,9 });
-	shotFire.PushBack({ 125, 258, 13,12 });
-	shotFire.speed = 0.2f;
-	shotFire.loop = true;
-	deathAnim.speed = 0.3f;
-
-	//PLAYER 2---------------------------------------------------------------------------------//
-	//Movement animation----------------------------------------
-	shipPlayer1.PushBack({ 0, 3, 32, 12 });	    //0 = UpShip
-	shipPlayer1.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
-	shipPlayer1.PushBack({ 64, 3, 32, 12 });	//2 = idle
-	shipPlayer1.PushBack({ 96, 3, 32, 12 });	//3 = MiddleDownShip
-	shipPlayer1.PushBack({ 128, 3, 32, 12 });	//4 = DownShip
-	//Initial animation-----------------------------------------
-
-	//Death animation-------------------------------------------
-
-	//PARTICLES--------------------------------------------------------------------------------//
-	//Death Explosion Particle----------------------------------
-	for (int i = 0; i < 5; ++i) {
-			death_explosion.anim.PushBack({ 244+ 32*i ,288, 32,32 });
-	}
-	death_explosion.anim.speed = 0.2f;
-	death_explosion.anim.loop = false;
-	//Basic Shot Explosion Particle-----------------------------
-    basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
-	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
-	basic_explosion.anim.PushBack({ 285,247, 13,13 }); //3
-	basic_explosion.anim.PushBack({ 271,263, 14,14 }); //4
-	basic_explosion.anim.PushBack({ 300,247, 14,14 }); //5
-	basic_explosion.anim.PushBack({ 316,247, 14,14 }); //6
-	basic_explosion.anim.PushBack({ 217,247, 12,12 }); //7
-	basic_explosion.anim.loop = false;
-	basic_explosion.anim.speed = 0.3f;
-	//Basic Shot Particle---------------------------------------
-	basicShot.anim.PushBack({ 0,247, 15,7 });
-	basicShot.anim.speed = 0.0f;
-	basicShot.speed.x = 12;
-	basicShot.anim.loop = false;
-	basicShot.collision_fx = &basic_explosion;
-}
+{}
 
 ModulePlayer::~ModulePlayer()
-{
-
-}
+{}
 
 bool ModulePlayer::Start()
 {
@@ -110,8 +35,6 @@ bool ModulePlayer::Start()
 	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
-	//particulas---------------------------------------------------------------------
-	basic_explosion.texture = PlayerTexture;
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
 	return ret;
@@ -162,6 +85,7 @@ update_status ModulePlayer::Update()
 	}
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
+
 	//Ship Animation-------------------------------------------------------------------
 	ShipAnimation();
 
@@ -171,7 +95,7 @@ update_status ModulePlayer::Update()
 //Detect collision with a wall. If so, go back to intro screen.
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
-	App->particles->AddParticle(death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
+	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
 	App->audio->ControlSFX(death_sfx, PLAY_AUDIO);
 	isDying = true;
 	canMove = false;
@@ -184,7 +108,7 @@ void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
 	if (Shoot() == true) {
 		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
-		App->particles->AddParticle(basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 		if (isShooting == false)
 			shoot = true;
 	}

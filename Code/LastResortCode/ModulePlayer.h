@@ -16,7 +16,7 @@ class ModulePlayer : public Module
 {
 public:
 	ModulePlayer();
-	~ModulePlayer();
+	virtual ~ModulePlayer();
 
 	bool Start();
 	update_status Update();
@@ -24,12 +24,21 @@ public:
 	void MovementInput(); //Added 
 	void ShotInput(); //Added 
 	void OnCollision(Collider*, Collider*);
+	//Functions that will be rewritten in each player
+	//virtual void LoadSprites();
+	virtual bool MoveUp() = 0;
+	virtual bool MoveDown() = 0;
+	virtual bool MoveLeft() = 0;
+	virtual bool MoveRight() = 0;
+	virtual bool Shoot() = 0;
+	virtual bool Lock() = 0;
+	virtual void ShipAnimation() = 0;
 
 
 public:
 	//Animations--------------------------------------------
 	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
-	Animation shipPlayer1;
+	Animation shipAnim;
 	Animation shotFire; //Animation infront of ship when we are shooting basic shots
 	Animation initAnim;
 	iPoint initAnim_p; //Initial animation pivot
@@ -39,10 +48,6 @@ public:
 	//Collision--------------------------------------------
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE colType = COLLIDER_PLAYER;
-	//Particles--------------------------------------------
-	Particle death_explosion; //Death explosion 
-	Particle basic_explosion; //Basic Shot Explosion
-	Particle basicShot;
 	//Audios-----------------------------------------------
 	Mix_Chunk* basic_shot_sfx = nullptr;
 	Mix_Chunk* death_sfx = nullptr;
@@ -88,17 +93,6 @@ public:
 		Movment,
 		Death
 	} shipAnimations;
-
-public:
-	//Functions that will be rewritten in each player
-	//virtual void LoadSprites();
-	virtual bool MoveUp() = 0;
-	virtual bool MoveDown() = 0;
-	virtual bool MoveLeft() = 0;
-	virtual bool MoveRight() = 0;
-	virtual bool Shoot() = 0;
-	virtual bool Lock() = 0;
-	virtual void ShipAnimation() = 0;
 };
 
 #endif

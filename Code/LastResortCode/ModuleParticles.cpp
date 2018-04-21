@@ -12,8 +12,34 @@ ModuleParticles::ModuleParticles()
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
+	//PLAYER-----------------------------------------------------------------//
+	//Basic Shot Explosion Particle-----------------------------
+	basic_explosion.anim.PushBack({ 305,263, 16,16 }); //1
+	basic_explosion.anim.PushBack({ 287,263, 16,16 }); //2
+	basic_explosion.anim.PushBack({ 285,247, 13,13 }); //3
+	basic_explosion.anim.PushBack({ 271,263, 14,14 }); //4
+	basic_explosion.anim.PushBack({ 300,247, 14,14 }); //5
+	basic_explosion.anim.PushBack({ 316,247, 14,14 }); //6
+	basic_explosion.anim.PushBack({ 217,247, 12,12 }); //7
+	basic_explosion.anim.loop = false;
+	basic_explosion.anim.speed = 0.3f;
+	//Basic Shot Particle---------------------------------------
+	basicShot.anim.PushBack({ 0,247, 15,7 });
+	basicShot.anim.speed = 0.0f;
+	basicShot.speed.x = 12;
+	basicShot.anim.loop = false;
+	basicShot.collision_fx = &basic_explosion;
+	//Death Explosion Particle----------------------------------
+	for (int i = 0; i < 5; ++i) {
+		death_explosion.anim.PushBack({ 244 + 32 * i ,288, 32,32 });
+	}
 
-	//General explosion 02 particle----------------------------------
+	death_explosion.anim.speed = 0.2f;
+	death_explosion.anim.loop = false;
+
+	//GENERAL---------------------------------------------------------------//
+
+	//General explosion 02 particle-----------------------------
 	general_explosion02.anim.PushBack({ 0,0,32,32 });
 	general_explosion02.anim.PushBack({ 32,0,32,32 });
 	general_explosion02.anim.PushBack({ 64,0,16,16 });
