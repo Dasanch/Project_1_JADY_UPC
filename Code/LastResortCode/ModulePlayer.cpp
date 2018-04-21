@@ -52,6 +52,16 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
+update_status ModulePlayer::PreUpdate()
+{
+	//Movement-------------------------------------------------------------------------
+	if (canMove == true)
+		MovementInput();
+	//If the movement is not on preupdate, the player will move after the unit, causing weird visual effects
+
+	return UPDATE_CONTINUE;
+}
+
 update_status ModulePlayer::Update()
 {
 	//Debug Modes----------------------------------------------------------------------
@@ -70,9 +80,6 @@ update_status ModulePlayer::Update()
 	}
 	//Timer----------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
-	//Movement-------------------------------------------------------------------------
-	if (canMove == true)
-		MovementInput();
 	//Shots----------------------------------------------------------------------------
 	if (canShoot == true) {
 		ShotInput();
