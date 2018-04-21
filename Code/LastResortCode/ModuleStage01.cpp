@@ -375,6 +375,7 @@ update_status ModuleStage01::Update()
 		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, FadeToBlackAlfa);
 		SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
+
 	}
 	//-------------------------------------------------------------------------------------------------------------------------	
 	return UPDATE_CONTINUE;

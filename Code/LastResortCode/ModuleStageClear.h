@@ -25,9 +25,8 @@ public:
 	SDL_Rect BGroundStageClear1;
 	SDL_Rect backgroundBlack;
 
-	SDL_Rect Player1 = {
-
-	};
+	SDL_Rect Player1 = { 64,3,32,12 };
+	SDL_Rect Player2 = { 262,3,32,11 };
 
 };
 

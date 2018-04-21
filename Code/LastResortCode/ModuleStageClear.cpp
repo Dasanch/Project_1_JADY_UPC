@@ -49,8 +49,7 @@ bool ModuleStageClear::Start()
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	App->player1->Enable();
-	App->player2->Enable();
+	
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -62,8 +61,6 @@ bool ModuleStageClear::CleanUp()
 	//Remove all memory leaks
 
 	LOG("Unloading ready scene");
-	App->player1->Disable();
-	App->player2->Disable();
 	App->textures->Unload(backgroundStageClear1);
 	App->textures->Unload(Players_Texture);
 	return true;
@@ -77,6 +74,8 @@ update_status ModuleStageClear::Update()
 	// Draw everything
 	//SDL_Rect PLAYER1 = { 64, 3, 32, 12 };
 	//App->render->Blit(App->player1->PlayerTexture, 70 , 120 , &PLAYER1 ,0.0f); //MAGIC NUMBERS
+	App->render->Blit(Players_Texture, 70, 120, &Player1, 0.0f); 
+	App->render->Blit(Players_Texture, 200, 120, &Player2, 0.0f);
 	if(App->player1->numLvlwin == App->player2->numLvlwin == 1)
 	{
 
