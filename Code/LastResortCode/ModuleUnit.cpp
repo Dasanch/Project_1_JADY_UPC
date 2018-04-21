@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleUnit.h"
 #include "ModuleTextures.h"
+#include "ModuleCollision.h"
 #include "ModuleRender.h"
 #include "Player1.h"
 #include <stdio.h>
@@ -195,6 +196,7 @@ bool ModuleUnit::Start()
 		unitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
 	}
 	currentOrbit = currentSpin = angleValue[W];
+	unitCol = App->collision->AddCollider({ position.x, position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
 	return ret;
 }
 
@@ -263,6 +265,9 @@ update_status ModuleUnit::Update()
 	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 9;
 	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 2;
 
+	//Update the collider position (after having set its position)--------------------------------------------
+	unitCol->SetPos(position.x - colXDifferences[(int)currentSpin], position.y + colYDifferences[(int)currentSpin]);
+
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
 
@@ -270,12 +275,11 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x - spriteXDifferences[(int)currentSpin], position.y + spriteYDifferences[(int)currentSpin], &internalRotationAnim[SpintToRender()].frame[(int)currentInternalRotation]);
-
+	App->render->Blit(unitTx, position.x - spriteXDifferences[(int)currentSpin], position.y + spriteYDifferences[(int)currentSpin], &internalRotationAnim[SpinToRender()].frame[(int)currentInternalRotation]);
 
 	//Shoot------------------------------------------------------------------------------------------------
-	App->particles->unitShot.speed.x = 5 * cosf(currentSpin);
-	App->particles->unitShot.speed.y = 5 * sinf(currentSpin);
+	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(currentSpin);
+	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(currentSpin);
 	if(playerToFollow->Shoot() == true)
 	{
 		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, playerToFollow->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
@@ -400,7 +404,7 @@ void ModuleUnit::LimitRotation(float &rotation)
 	}
 }
 
-int ModuleUnit::SpintToRender()
+int ModuleUnit::SpinToRender()
 {
 	//LOG("ESE: %f", angleValue[ESE]);
 	//LOG("SE: %f", angleValue[SE]);

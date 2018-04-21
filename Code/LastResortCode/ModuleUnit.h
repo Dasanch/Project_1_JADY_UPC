@@ -42,7 +42,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 	void RotateTo(float, float&, float);//This function calculates the rotation of the orbit and the internal rotation of the unit
 	void LimitRotation(float &);
-	int SpintToRender();
+	int SpinToRender();
 
 public:
 	iPoint position;
@@ -51,6 +51,7 @@ private:
 	
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 	UnitType type;
+	Collider* unitCol = nullptr;
 	//Rotation
 	const float PI = 3.141592;
 	//- Orbit refers to the rotation of the unit around the player's ship
@@ -69,6 +70,10 @@ private:
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
 	int spriteXDifferences[axis] = { 1, 1, 1, 1, 1, 2, 6, 7, 7, 7, 6, 2, 1, 1, 1, 1 };//Sprite differences in x
 	int spriteYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 8, 7, 8, 6, 2 };//Sprite differences in y
+								//SE, S, SW, 
+	int colXDifferences[axis] = { 1, 1, 100, 1, 1, 1, 6, 7, 7, 7, 6, 2, 1, 1, 1, 1 };
+	int colYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 6, 8, 7, 8, 6, 2 };
+	const float unitProjectileSpeed = 5;
 	//Animations
 	//There is an animation for each direciton of the ball
 	SDL_Texture* unitTx = nullptr;
