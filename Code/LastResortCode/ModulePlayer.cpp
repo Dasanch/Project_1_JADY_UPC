@@ -31,8 +31,7 @@ bool ModulePlayer::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//audios-------------------------------------------------------------------------
-	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav"); 
-	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
+
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//animations-----------------------------------------------------------------------
@@ -46,8 +45,7 @@ bool ModulePlayer::CleanUp()
 	//textures------------------------------------------------------------------
 	App->textures->Unload(PlayerTexture);
 	//audios------------------------------------------------------------------
-	App->audio->UnloadSFX(basic_shot_sfx);
-	App->audio->UnloadSFX(death_sfx);
+
 
 	return true;
 }
@@ -103,7 +101,6 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 {
 	App->particles->AddParticle(App->particles->death_explosion, position.x, position.y , PlayerTexture, COLLIDER_NONE);
-	App->audio->ControlSFX(death_sfx, PLAY_AUDIO);
 	isDying = true;
 	canMove = false;
 	canShoot = false;
@@ -113,7 +110,6 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
 	if (Shoot() == true) {
-		App->audio->ControlSFX(basic_shot_sfx, PLAY_AUDIO);
 		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 		if (isShooting == false)
 			shoot = true;

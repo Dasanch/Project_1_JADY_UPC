@@ -97,9 +97,12 @@ bool ModuleParticles::Start()
 	//particles-----------------------------------------------
 	g_explosion02.texture = graphics;
 	//audios--------------------------------------------------
+	basic_shot_sfx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	basicShot.fx_played = basic_shot_sfx;
+	death_sfx = App->audio->LoadSFX("Assets/005. Death.wav");
+	death_explosion.fx_played = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-
 	//--------------------------------------------------------
 	return true;
 }
@@ -111,7 +114,8 @@ bool ModuleParticles::CleanUp()
 	//textures--------------------------------------------------
 	App->textures->Unload(graphics);
 	//audios---------------------------------------------------
-
+	App->audio->UnloadSFX(basic_shot_sfx);
+	App->audio->UnloadSFX(death_sfx);
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -143,11 +147,6 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(p->texture, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-			if (p->fx_played == false)
-			{
-				p->fx_played = true;
-				//App->audio->PlayFx(p->fx);
-			}
 		}
 
 	}
@@ -165,6 +164,15 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, SDL_Te
 			p->position.x = x;
 			p->position.y = y;
 			p->texture = tex; // texture
+			if (particle.collision_fx != nullptr)
+			{
+				p->collision_fx = particle.collision_fx;
+			}
+			if (particle.fx_played != nullptr)
+			{
+				App->audio->ControlSFX(particle.fx_played, PLAY_AUDIO);
+			}
+
 			if (collider_type != COLLIDER_NONE)
 				//Updated for not spawn it since 1 frame on x,y animation rect values
 				p->collider = App->collision->AddCollider({p->position.x, p->position.y ,p->anim.GetCurrentFrame().w, p->anim.GetCurrentFrame().h }, collider_type, this);

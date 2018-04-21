@@ -212,9 +212,9 @@ update_status ModuleStage01::Update()
 		if (frame < 2 ) {
 			frame++;
 			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame/ 2)
-				App->render->FlippedBlit(LasersTx, 359- orangeLaserAnim.GetFrame().w, 0, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
+				App->render->FlippedBlit(LasersTx, 359- orangeLaserAnim.GetFrame().w, -10, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
 			else
-				App->render->Blit(LasersTx, 358, 0, &orangeLaserAnim.GetFrame(), orangeLaserSpeed,true);
+				App->render->Blit(LasersTx, 358, -10, &orangeLaserAnim.GetFrame(), orangeLaserSpeed,true);
 		}
 		else
 			frame = 0;

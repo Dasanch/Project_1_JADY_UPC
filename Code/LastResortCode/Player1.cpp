@@ -6,7 +6,7 @@
 #include "ModuleFadetoBlack.h"
 
 
-Player1::Player1() : ModulePlayer() {
+Player1::Player1() {
 	//Movement animation----------------------------------------
 	shipAnim.PushBack({ 0, 3, 32, 12 });	//0 = UpShip
 	shipAnim.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip

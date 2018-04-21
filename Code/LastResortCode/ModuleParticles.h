@@ -24,7 +24,7 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
-	bool fx_played = false;
+	Mix_Chunk *fx_played = nullptr;
 
 	Particle();
 	Particle(const Particle& p);
@@ -51,20 +51,24 @@ private:
 
 public:
 	//PLAYER------------------------------------------------
-	Particle death_explosion; //Death explosion 
-	Particle basic_explosion; //Basic Shot Explosion
-	Particle unit_explosion;//Unit shot explosion
+
 	Particle basicShot;
+	Particle basic_explosion; //Basic Shot Explosion
+	Mix_Chunk* basic_shot_sfx = nullptr;
+	Particle unit_explosion;//Unit shot explosion
 	Particle unitShot;
+	Particle death_explosion;//Death explosion 
+	Mix_Chunk* death_sfx = nullptr;
+
 	//GENERAL-----------------------------------------------
 	Particle g_explosion01;
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
-	//Mix_Chunk* g_explosion01_2sfx = nullptr;
-	//Mix_Chunk* g_explosion01_3sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
-	//Mix_Chunk* g_explosion02_3sfx = nullptr;
+	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
+	//Mix_Chunk* g_explosion01_2sfx = nullptr;
+	//Mix_Chunk* g_explosion01_3sfx = nullptr;
 };
 
 #endif // __MODULEPARTICLES_H__

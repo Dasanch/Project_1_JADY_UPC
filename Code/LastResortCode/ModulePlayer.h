@@ -16,7 +16,7 @@ class ModulePlayer : public Module
 {
 public:
 	ModulePlayer();
-	virtual ~ModulePlayer();
+	~ModulePlayer();
 
 	bool Start();
 	update_status PreUpdate();
@@ -50,8 +50,7 @@ public:
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE colType = COLLIDER_PLAYER;
 	//Audios-----------------------------------------------
-	Mix_Chunk* basic_shot_sfx = nullptr;
-	Mix_Chunk* death_sfx = nullptr;
+
 	//Variables--------------------------------------------
 	//--------Time---------------------------------
 	//Time variables
