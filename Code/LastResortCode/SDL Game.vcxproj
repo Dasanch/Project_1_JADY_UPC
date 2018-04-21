@@ -82,6 +82,7 @@
     <ClInclude Include="MemLeaks.h" />
     <ClInclude Include="MiddleBosslvl1.h" />
     <ClInclude Include="Module.h" />
+    <ClInclude Include="ModuleFonts.h" />
     <ClInclude Include="ModulePowerups.h" />
     <ClInclude Include="ModuleStage02.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MiddleBosslvl1.cpp" />
+    <ClCompile Include="ModuleFonts.cpp" />
     <ClCompile Include="ModulePowerups.cpp" />
     <ClCompile Include="ModuleStage02.cpp" />
     <ClCompile Include="ModuleAudio.cpp" />

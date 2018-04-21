@@ -19,7 +19,7 @@
 #include "ModuleUnit.h"
 #include "Player1.h"
 #include "Player2.h"
-
+#include "ModuleFonts.h"
 Application::Application()
 {
 	int i = 0;
@@ -28,6 +28,7 @@ Application::Application()
 	modules[i++] = render = new ModuleRender();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = fonts = new ModuleFonts();
 	modules[i++] = audio = new ModuleAudio();
 	//Stages----------------------------------------------------
 	modules[i++] = stage01 = new ModuleStage01();
