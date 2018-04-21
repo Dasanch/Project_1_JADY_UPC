@@ -134,6 +134,12 @@ bool ModuleStage01::Start()
 
 	//Time variables
 	Start_time = SDL_GetTicks();
+
+	//Change to stage clear variables
+	change = false;
+	FadeToBlackAlfa = 0;
+	backgroundBlack.w = SCREEN_WIDTH * SCREEN_SIZE;
+	backgroundBlack.w = SCREEN_HEIGHT * SCREEN_SIZE;
 	return ret;
 }
 
@@ -184,12 +190,10 @@ update_status ModuleStage01::Update()
 		App->render->camera.x += SCREEN_SIZE;
 		App->player1->position.x += 1;
 		App->player2->position.x += 1;
+		App->render->relative_camera.x += 1;
 	}
-	else
-	{
-
-	}
-	App->render->relative_camera.x += 1;
+	
+	
 
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
@@ -324,18 +328,7 @@ update_status ModuleStage01::Update()
 	{
 		App->fade->FadeToBlack(this, App->continueScene, 0.0);
 	}
-	if (App->input->keyboard[SDL_SCANCODE_0])  //win
-	{
-		if (App->player1->winlvl == false && App->player2->winlvl == false)
-		{
-			App->player1->winlvl = App->player2->winlvl = true;
-			App->player1->numLvlwin = App->player2->numLvlwin = 1;
-		}
-		
-		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
-		
-
-	}
+	
 	//Enemies------------------------------------------------------
 
 	//Create the player 2
@@ -354,7 +347,44 @@ update_status ModuleStage01::Update()
 		/*if (App->render->camera.x < 1500/foregndSpeed*SCREEN_SIZE)*/
 		
 		MoveCam();
-	return UPDATE_CONTINUE;
+
+
+
+
+
+
+
+//Fade to black -----------------------------------------------------------------ALEJANDROOOO MIRA ESTOOOOO
+		if (App->input->keyboard[SDL_SCANCODE_0])  //win
+		{
+			if (App->player1->winlvl == false && App->player2->winlvl == false)
+			{
+				App->player1->winlvl = App->player2->winlvl = true;
+				App->player1->numLvlwin = App->player2->numLvlwin = 1;
+				start_timer = true;
+			}
+
+		}
+		if (FadeToBlackAlfa == 255)
+		{
+			App->fade->FadeToBlack(this, App->stageclearScene, 0.0f);
+		}
+
+		if (start_timer == true) 
+		{
+			backgroundBlack.x = App->player1->position.x;
+			backgroundBlack.y = App->player1->position.y;
+
+			FadeToBlackAlfa += 1;
+			SDL_SetRenderDrawColor(App->render->renderer, 255, 0, 0, FadeToBlackAlfa);
+			SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
+		}
+	//-------------------------------------------------------------------------------------------------------------------------	
+		
+		
+		
+		
+		return UPDATE_CONTINUE;
 }
 
 //move up down camera

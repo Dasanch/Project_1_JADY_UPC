@@ -20,11 +20,14 @@ public:
 public:
 	//Textures
 	SDL_Texture* backgroundStageClear1 = nullptr;
-
+	SDL_Texture* Players_Texture;
 	//Rectangles
 	SDL_Rect BGroundStageClear1;
 	SDL_Rect backgroundBlack;
 
+	SDL_Rect Player1 = {
+
+	};
 
 };
 

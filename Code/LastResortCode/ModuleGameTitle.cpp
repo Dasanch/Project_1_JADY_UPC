@@ -12,6 +12,114 @@
 #include "ModuleStageClear.h"
 
 
+
+ModuleGameTitle::~ModuleGameTitle()
+{}
+bool ModuleGameTitle:: Start()
+{
+	LOG("Loading title assets");
+	bool ret = true;
+	start_time = SDL_GetTicks(); //fixed the real time that we start this module
+	//textures--------------------------------------------------------------------------------
+	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
+	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
+	S3Texture = App->textures->Load("Assets/LastResortTitle/S3.png");
+	T4Texture = App->textures->Load("Assets/LastResortTitle/T4.png");
+	R5Texture = App->textures->Load("Assets/LastResortTitle/R5.png");
+	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
+	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
+	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
+	R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
+	T10Texture = App->textures->Load("Assets/LastResortTitle/T10.png");
+	//audios--------------------------------------------------------------------------------
+	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
+	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
+	App->player1->Lives = 2;
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+	
+	return ret;
+}
+bool ModuleGameTitle::CleanUp() {
+	LOG("Unloading Title scene");
+	App->player1->Disable();
+	L1.Reset();
+	A2.Reset();
+	S3.Reset();
+	T4.Reset();
+	R5.Reset();
+	E6.Reset();
+	S7.Reset();
+	O8.Reset();
+	R9.Reset(); //2LASTCHAR
+	T10.Reset();
+	//textures----------------------------------------------------------------------
+	
+	App->textures->Unload(L1Texture);
+	App->textures->Unload(A2Texture);
+	App->textures->Unload(S3Texture);
+	App->textures->Unload(T4Texture);
+	App->textures->Unload(R5Texture);
+	App->textures->Unload(E6Texture);
+	App->textures->Unload(S7Texture);
+	App->textures->Unload(O8Texture);
+	App->textures->Unload(R9Texture);
+	App->textures->Unload(T10Texture);
+	//audios------------------------------------------------------------------------
+	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
+	App->audio->UnloadMUS(Titlemusic);
+	return true;
+}
+update_status ModuleGameTitle::Update() {
+	//timer------------------------------------------------------------------------
+	current_time = SDL_GetTicks() - start_time; //current time init 0 and increment from star_time 
+
+	//title letters---------------------------------------------------------------------
+	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
+	App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame(), 0.0f);
+	if(current_time>300)
+	App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame(), 0.0f);
+	if (current_time>600)
+	App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame(), 0.0f);
+	if (current_time>900)
+	App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame(), 0.0f);
+	if (current_time>1200)
+	App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame(), 0.0f);
+	if (current_time>1500)
+	App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame(), 0.0f);
+	if (current_time>1800)
+	App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame(), 0.0f);
+	if (current_time>2100)
+	App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame(), 0.0f);
+	if (current_time>2400)
+	App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame(), 0.0f);
+	if (current_time>2600)
+	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame(), 0.0f);
+	
+
+	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
+
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 || current_time>18000) //refix it please 
+	{
+		App->fade->FadeToBlack(this, App->stage01, 0.5f);
+	}
+	
+	// Win/Lose button
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
+	{
+		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	{
+		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	}
+	
+
+	return UPDATE_CONTINUE;
+}
+
 ModuleGameTitle::ModuleGameTitle()
 {
 	L1.PushBack({ 144,398,13,25 }); //64
@@ -81,7 +189,7 @@ ModuleGameTitle::ModuleGameTitle()
 	A2.PushBack({ 0,241,50,60 });
 	A2.PushBack({ 50,241,50,57 });
 	A2.speed = speed;
-	A2.loop=false;
+	A2.loop = false;
 
 	//S3--------------------------------------------------------
 	S3.PushBack({ 0,0,14,20 });
@@ -374,102 +482,4 @@ ModuleGameTitle::ModuleGameTitle()
 	T10.speed = speed;
 	T10.loop = false;
 
-}
-ModuleGameTitle::~ModuleGameTitle()
-{}
-bool ModuleGameTitle:: Start()
-{
-	LOG("Loading title assets");
-	bool ret = true;
-	start_time = SDL_GetTicks(); //fixed the real time that we start this module
-	//textures--------------------------------------------------------------------------------
-	L1Texture= App->textures->Load("Assets/LastResortTitle/L1Atlas.1.png");
-	A2Texture = App->textures->Load("Assets/LastResortTitle/A2.png");
-	S3Texture = App->textures->Load("Assets/LastResortTitle/S3.png");
-	T4Texture = App->textures->Load("Assets/LastResortTitle/T4.png");
-	R5Texture = App->textures->Load("Assets/LastResortTitle/R5.png");
-	E6Texture = App->textures->Load("Assets/LastResortTitle/E6.png");
-	S7Texture = App->textures->Load("Assets/LastResortTitle/S7.png");
-	O8Texture = App->textures->Load("Assets/LastResortTitle/O8.png");
-	R9Texture = App->textures->Load("Assets/LastResortTitle/R9.png"); //2LASTCHAR
-	T10Texture = App->textures->Load("Assets/LastResortTitle/T10.png");
-	//audios--------------------------------------------------------------------------------
-	Titlemusic=App->audio->LoadMUS("Assets/LastResortTitle/02-LAST-RESORT-TITLE.ogg");
-	App->audio->ControlMUS(Titlemusic, PLAY_AUDIO);
-	App->player1->Lives = 2;
-
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
-	
-	return ret;
-}
-bool ModuleGameTitle::CleanUp() {
-	LOG("Unloading Title scene");
-	App->player1->Disable();
-	L1.Reset();
-	A2.Reset();
-	S3.Reset();
-	T4.Reset();
-	R5.Reset();
-	E6.Reset();
-	S7.Reset();
-	O8.Reset();
-	R9.Reset(); //2LASTCHAR
-	T10.Reset();
-	//textures----------------------------------------------------------------------
-	
-	App->textures->Unload(L1Texture);
-	App->textures->Unload(A2Texture);
-	App->textures->Unload(S3Texture);
-	App->textures->Unload(T4Texture);
-	App->textures->Unload(R5Texture);
-	App->textures->Unload(E6Texture);
-	App->textures->Unload(S7Texture);
-	App->textures->Unload(O8Texture);
-	App->textures->Unload(R9Texture);
-	App->textures->Unload(T10Texture);
-	//audios------------------------------------------------------------------------
-	App->audio->ControlMUS(Titlemusic, STOP_AUDIO);
-	App->audio->UnloadMUS(Titlemusic);
-	return true;
-}
-update_status ModuleGameTitle::Update() {
-	//timer------------------------------------------------------------------------
-	current_time = SDL_GetTicks() - start_time; //current time init 0 and increment from star_time 
-
-	//title letters---------------------------------------------------------------------
-	/*App->render->Blit(A2Texture, 60, 30, &A2.frames[(int)currenA2], 0.0f);*/
-	App->render->Blit(L1Texture, 56, 16, &L1.GetCurrentFrame(), 0.0f);
-	App->render->Blit(A2Texture, 103, 15, &A2.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S3Texture, 164, 16, &S3.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T4Texture, 208, 13, &T4.GetCurrentFrame(), 0.0f);
-
-	App->render->Blit(R5Texture, 20, 88, &R5.GetCurrentFrame(), 0.0f);
-	App->render->Blit(E6Texture, 70, 88, &E6.GetCurrentFrame(), 0.0f);
-	App->render->Blit(S7Texture, 114, 88, &S7.GetCurrentFrame(), 0.0f);
-	App->render->Blit(O8Texture, 147, 85, &O8.GetCurrentFrame(), 0.0f);
-	App->render->Blit(R9Texture, 194, 88, &R9.GetCurrentFrame(), 0.0f);
-	App->render->Blit(T10Texture,  238,  85, &T10.GetCurrentFrame(), 0.0f);
-	
-
-	/*App->render->Blit(TitleTexture, ((SCREEN_WIDTH-LastResortRect.w)/2), ((SCREEN_HEIGHT - LastResortRect.h) / 2), &LastResortRect, 0.0f);*/
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1 || current_time>18000) //refix it please 
-	{
-		App->fade->FadeToBlack(this, App->stage01, 0.5f);
-	}
-	
-	// Win/Lose button
-	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
-	{
-		App->fade->FadeToBlack(this, App->stageclearScene, 0.5f);
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
-	{
-		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
-	}
-	
-
-	return UPDATE_CONTINUE;
 }
