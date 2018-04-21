@@ -136,9 +136,9 @@ bool ModuleStage01::Start()
 	Start_time = SDL_GetTicks();
 
 	//Change to stage clear variables
-	change = false;
-	start_timer = false;
-	FadeToBlackAlfa = 0;
+	App->player1->start_timer = App->player2->start_timer = false;
+
+	App->player1->FadeToBlackAlfa = 0;
 	backgroundBlack.w = SCREEN_WIDTH * SCREEN_SIZE;
 	backgroundBlack.h = SCREEN_HEIGHT * SCREEN_SIZE;
 	return ret;
@@ -352,31 +352,20 @@ update_status ModuleStage01::Update()
 	//Fade to black -----------------------------------------------------------------ALEJANDROOOO MIRA ESTOOOOO
 	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN)  //win
 	{
-		//if (App->player1->winlvl == false && App->player2->winlvl == false)
-		//{
+		
+	/*	App->player1->backgroundBlack.x = App->player2->backgroundBlack.x = App->render->relative_camera.x / SCREEN_SIZE;
+		App->player1->backgroundBlack.y = App->player2->backgroundBlack.y= App->render->relative_camera.y / SCREEN_SIZE;*/
+		if (App->player1->winlvl == false && App->player2->winlvl == false)
+		{
 		App->player1->winlvl = App->player2->winlvl = true;
 		App->player1->numLvlwin = App->player2->numLvlwin = 1;
-		start_timer = true;
-		//}
-
+	/*	App->player1->start_timer = App->player2->start_timer = true; */
+		
+		}
+		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
 	}
-	if (FadeToBlackAlfa > 255)
-	{
-		App->fade->FadeToBlack(this, App->stageclearScene, 0.0f);
-	}
+	
 
-	if (start_timer)
-	{
-		backgroundBlack.x = App->render->camera.x;
-		backgroundBlack.y = App->render->camera.y;
-
-		FadeToBlackAlfa += 3;
-		SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
-		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, FadeToBlackAlfa);
-		SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
-
-
-	}
 	//-------------------------------------------------------------------------------------------------------------------------	
 	return UPDATE_CONTINUE;
 }
