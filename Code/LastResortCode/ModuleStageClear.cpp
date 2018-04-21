@@ -44,12 +44,13 @@ bool ModuleStageClear::Start()
 	bool ret = true;
 
 	backgroundStageClear1 = App->textures->Load("Assets/UI.png");
+	Players_Texture = App->textures->Load("Assets/SpaceShip_player1.png");
 
 	SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 	SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
 
-	
-	
+	App->player1->Enable();
+	App->player2->Enable();
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -64,6 +65,7 @@ bool ModuleStageClear::CleanUp()
 	App->player1->Disable();
 	App->player2->Disable();
 	App->textures->Unload(backgroundStageClear1);
+	App->textures->Unload(Players_Texture);
 	return true;
 }
 
@@ -79,6 +81,7 @@ update_status ModuleStageClear::Update()
 	{
 
 		App->render->Blit(backgroundStageClear1, 40 , 60 , &BGroundStageClear1, 0.0f); //MAGIC NUMBERS
+		
 
 	}
 
@@ -86,12 +89,16 @@ update_status ModuleStageClear::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
 		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
+		App->player1->winlvl = App->player2->winlvl = false;
+		App->player1->numLvlwin = App->player2->numLvlwin = 0;
 	}
 
 	// Win/Lose button
 	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
 	{
 		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+		App->player1->winlvl = App->player2->winlvl = false;
+		App->player1->numLvlwin = App->player2->numLvlwin = 0;
 	}
 
 

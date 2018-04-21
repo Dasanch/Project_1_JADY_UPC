@@ -124,6 +124,10 @@ public:
 
 	//Win variables
 	bool win;
+	bool change = false;
+	int FadeToBlackAlfa;
+	bool start_timer;
+	SDL_Rect backgroundBlack;
 };
 
 #endif
