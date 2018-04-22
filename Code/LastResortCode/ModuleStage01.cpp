@@ -20,6 +20,7 @@
 #include "ModuleUnit.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
+#include "ModulePowerups.h"
 
 #define INIT_X_PLAYER_1 40
 #define INIT_Y_PLAYER_1 74
@@ -85,6 +86,7 @@ bool ModuleStage01::Start()
 	App->enemies->Enable();
 	App->unit->Enable();
 	App->ui->Enable();
+	App->powerups->Enable();
 
 	//Player variable reset--------------------------------------------------------
 	App->player1->winlvl = false;
@@ -143,6 +145,9 @@ bool ModuleStage01::Start()
 	App->player1->FadeToBlackAlfa = 0;
 	backgroundBlack.w = SCREEN_WIDTH * SCREEN_SIZE;
 	backgroundBlack.h = SCREEN_HEIGHT * SCREEN_SIZE;
+
+	App->powerups->AddPowerup(200, 50, SPEED);
+
 	return ret;
 }
 
@@ -170,6 +175,7 @@ bool ModuleStage01::CleanUp()
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();
+	App->powerups->Disable();
 	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

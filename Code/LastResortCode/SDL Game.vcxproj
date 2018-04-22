@@ -110,6 +110,9 @@
     <ClInclude Include="Path.h" />
     <ClInclude Include="Player1.h" />
     <ClInclude Include="Player2.h" />
+    <ClInclude Include="Powerup.h" />
+    <ClInclude Include="Powerup_Laser.h" />
+    <ClInclude Include="Powerup_Speed.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
@@ -144,6 +147,9 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Player1.cpp" />
     <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="Powerup.cpp" />
+    <ClCompile Include="Powerup_Laser.cpp" />
+    <ClCompile Include="Powerup_Speed.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
