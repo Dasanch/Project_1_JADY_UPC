@@ -264,6 +264,7 @@ void ModulePlayer::MovementInput() {
 	}
 	if (MoveDown() == true)	{
 		//---------Movment-----------------------------------------------------------
+		if (position.y <(App->render->camera.y / App->render->cameraspeed) + SCREEN_HEIGHT - 12)
 		position.y += movementSpeed;
 		
 		
