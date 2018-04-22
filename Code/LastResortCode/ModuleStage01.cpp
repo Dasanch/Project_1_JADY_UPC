@@ -106,6 +106,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150);
+<<<<<<< HEAD
 
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 980, 120);
@@ -114,6 +115,11 @@ bool ModuleStage01::Start()
 
 
 
+=======
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 120);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1000, 130);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1010, 40);
+>>>>>>> origin/master
 
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
@@ -332,22 +338,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		//2048 = distance from the start of the tilemap to the first light
 	}
-	//Change scenes on button press-------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_N])
-	{
-		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
-	}
-	if (App->input->keyboard[SDL_SCANCODE_G]) //lose
-	{
-		App->fade->FadeToBlack(this, App->gameoverScene, 0.0);
-	}
-	if (App->input->keyboard[SDL_SCANCODE_C])
-	{
-		App->fade->FadeToBlack(this, App->continueScene, 0.0);
-	}
-
-	//Enemies------------------------------------------------------
-
 	//Create the player 2
 
 	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_KP_2])
@@ -365,30 +355,22 @@ update_status ModuleStage01::Update()
 	MoveCam();
 
 	//Fade to black -----------------------------------------------------------------ALEJANDROOOO MIRA ESTOOOOO
-	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN)  //win
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_DOWN)  //win
 	{
-		
-	/*	App->player1->backgroundBlack.x = App->player2->backgroundBlack.x = App->render->relative_camera.x / SCREEN_SIZE;
-		App->player1->backgroundBlack.y = App->player2->backgroundBlack.y= App->render->relative_camera.y / SCREEN_SIZE;*/
 		if (App->player1->winlvl == false && App->player2->winlvl == false)
 		{
 		App->player1->winlvl = App->player2->winlvl = true;
 		App->player1->numLvlwin = App->player2->numLvlwin = 1;
-	/*	App->player1->start_timer = App->player2->start_timer = true; */
-		
 		}
 		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
 	}
-	
-
-	//-------------------------------------------------------------------------------------------------------------------------	
+	//------------------------------------------------------------------------------------------
 	return UPDATE_CONTINUE;
 }
 
 //move up down camera
 
 void ModuleStage01::MoveCam(){
-	
 	
 	if ( stop_time == false)
 	{
