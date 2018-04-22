@@ -151,8 +151,12 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8600, SCREEN_HEIGHT+50);
-
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8500, SCREEN_HEIGHT+50);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8000, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8050, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8100, 50);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 8150, 80);
 	//End of the tunnel
 
 	//define moveCamera struct values
