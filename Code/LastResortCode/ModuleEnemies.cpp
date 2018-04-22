@@ -141,12 +141,10 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x, info.y);
 			break;
-		case ENEMY_TYPES::METALCROWTORSO:
-			enemies[i] = new Enemy_MetalCraw_Torso(info.x, info.y);
+		case ENEMY_TYPES::METALCROW:
+			enemies[i] = new Enemy_MetalCraw(info.x, info.y);
 			break;
-		case ENEMY_TYPES::METALCROWARM:
-			enemies[i] = new Enemy_MetalCraw_Arm(info.x, info.y);
-			break;
+		
 		}
 		
 	}

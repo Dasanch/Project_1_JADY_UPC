@@ -77,7 +77,7 @@ bool Application::Init()
 	enemies->Disable();
 	particles->Disable();
 	collision->Disable();
-	ui->Disable();
+	ui->HideUi();
 	powerups->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
