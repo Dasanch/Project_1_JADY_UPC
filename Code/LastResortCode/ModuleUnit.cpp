@@ -275,7 +275,7 @@ update_status ModuleUnit::Update()
 	currentInternalRotation += internalRotationSpeed;
 
 	//- Limit the internal rotation
-	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
+	if (currentInternalRotation >= internalRotationFrames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
 	App->render->Blit(unitTx,
