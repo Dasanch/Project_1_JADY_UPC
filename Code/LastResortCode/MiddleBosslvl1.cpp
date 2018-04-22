@@ -51,16 +51,61 @@ Enemy_MetalCraw_Arm::Enemy_MetalCraw_Arm(int x, int y) : Enemy(x, y)
 void Enemy_MetalCraw_Arm::Move()
 {
 	current_time = SDL_GetTicks() - start_time;
-	if (current_time > 3700)
+	if (current_time > 4420)
 	{
 		position.x += 1.0f;
+		
+	}
+	if (current_time > 3700)
+	{
+		if (position.y>50)
+			position.y -= 1.0f;
+	}
+	
+
+}
+
+//----------------------------------------------------------------------Left_Arm---------------------------------------------------------------------
+Enemy_MetalCraw_LeftArm::Enemy_MetalCraw_LeftArm(int x, int y) : Enemy(x, y)
+{
+	Arm.PushBack({ 0,248,46,62 });
+	Arm.PushBack({ 46,248,46,62 });
+	Arm.PushBack({ 92,248,46,62 });
+	Arm.PushBack({ 138,248,46,62 });
+	Arm.PushBack({ 184,248,46,62 });
+	Arm.speed = 0.2f;
+	animation = &Arm;
+
+	collider = App->collision->AddCollider({ 0, 0, 42, 57 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	lives = 20;
+	start_time = SDL_GetTicks();
+}
+void Enemy_MetalCraw_LeftArm::Move()
+{
+	current_time = SDL_GetTicks() - start_time;
+	if (current_time > 3050)
+	{
+		position.x += 1.0f;
+
+	}
+	if (current_time > 3700)
+	{
 		if (position.y>50)
 			position.y -= 1.0f;
 	}
 
+
 }
+void  Enemy_MetalCraw_LeftArm::Draw(SDL_Texture* sprites)
+{
 
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y + App->render->relative_camera.y);
 
+	if (animation != nullptr)
+		App->render->FlippedBlit(sprites, position.x, position.y + App->render->relative_camera.y, &(animation->GetCurrentFrame()));
+	
+}
 
 
 
