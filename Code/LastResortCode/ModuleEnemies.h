@@ -52,6 +52,7 @@ private:
 
 	EnemyInfo queue[MAX_ENEMIES];
 	Enemy* enemies[MAX_ENEMIES];
+public:
 	SDL_Texture* sprites;
 };
 
