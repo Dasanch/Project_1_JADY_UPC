@@ -90,8 +90,6 @@ bool ModuleStage01::Start()
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
-<<<<<<< HEAD
-=======
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
@@ -108,24 +106,6 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150);
-	/*App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT,LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 4000, SCREEN_HEIGHT);
-
->>>>>>> dcde1e0092084923ed5416d62a0d11586f9dbcf3
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136, LASER);
-<<<<<<< HEAD
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT, LASER);
-
-=======
-	
-*/
->>>>>>> dcde1e0092084923ed5416d62a0d11586f9dbcf3
 
 	//define moveCamera struct values
 	
@@ -218,13 +198,6 @@ update_status ModuleStage01::Update()
 	}
 	else
 	{
-		//if (App->player1->winlvl == false && App->player2->winlvl == false)
-		//{
-		//	App->player1->winlvl = App->player2->winlvl = true;
-		//	App->player1->numLvlwin = App->player2->numLvlwin = 1;
-		//	/*	App->player1->start_timer = App->player2->start_timer = true; */
-
-		//}
 		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
 	}
 	//Initial Position-------------------------------------------------------------------------
