@@ -13,7 +13,7 @@ Enemy_Basic::Enemy_Basic(int x, int y) : Enemy(x, y)
 	animation = &basicenemy;
 
 	collider = App->collision->AddCollider({ 0, 0, 32, 16 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-
+	
 	
 }
 

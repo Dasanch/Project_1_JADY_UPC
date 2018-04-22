@@ -9,6 +9,7 @@ Enemy_Oscilator::Enemy_Oscilator(int x, int y) : Enemy(x, y)
 	animation = &Oscilator;
 	collider = App->collision->AddCollider({ 0, 0, 50, 48 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	original_y = y;
+
 }
 
 void Enemy_Oscilator::Move()

@@ -98,6 +98,7 @@ bool ModuleStage01::Start()
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT);
 	//define moveCamera struct values
 	
 	MoveCamera.ymgPos = 0;
@@ -187,6 +188,17 @@ update_status ModuleStage01::Update()
 		App->player1->position.x += 1;
 		App->player2->position.x += 1;
 		App->render->relative_camera.x += 1;
+	}
+	else
+	{
+		//if (App->player1->winlvl == false && App->player2->winlvl == false)
+		//{
+		//	App->player1->winlvl = App->player2->winlvl = true;
+		//	App->player1->numLvlwin = App->player2->numLvlwin = 1;
+		//	/*	App->player1->start_timer = App->player2->start_timer = true; */
+
+		//}
+		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
 	}
 	//Initial Position-------------------------------------------------------------------------
 	App->player1->initPosition.x += 1;

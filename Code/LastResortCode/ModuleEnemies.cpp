@@ -144,6 +144,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::METALCROWTORSO:
 			enemies[i] = new Enemy_MetalCraw_Torso(info.x, info.y);
 			break;
+		case ENEMY_TYPES::METALCROWARM:
+			enemies[i] = new Enemy_MetalCraw_Arm(info.x, info.y);
+			break;
 		}
 		
 	}
@@ -155,9 +158,16 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-			enemies[i]->OnCollision(c2);
-			delete enemies[i];
-			enemies[i] = nullptr;
+
+			enemies[i]->lives -= 1;
+			if (enemies[i]->lives == 0)
+			{
+				enemies[i]->OnCollision(c2);
+				delete enemies[i];
+				enemies[i] = nullptr;
+			}
+			
+			
 			break;
 		}
 	}
