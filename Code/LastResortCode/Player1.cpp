@@ -48,7 +48,10 @@ Player1::Player1() {
 	
 }
 
-
+void Player1::Reset_Positions() {
+	initPosition = { 40,74 };
+	position = initPosition;
+}
 //MOVEMENT INPTUT
 bool Player1::MoveLeft()
 {

@@ -56,7 +56,11 @@ Player2::Player2() {
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
-	
+}
+
+void Player2::Reset_Positions() {
+	initPosition = { 40,138 };
+	position = initPosition;
 }
 
 bool Player2::MoveLeft()

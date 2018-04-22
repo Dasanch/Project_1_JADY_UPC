@@ -16,7 +16,6 @@ public:
 	bool Lock();
 	void ShipAnimation();
 	void Winposition() override;
-
-
+	void Reset_Positions();
 };
 #endif

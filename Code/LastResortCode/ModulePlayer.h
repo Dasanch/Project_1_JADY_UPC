@@ -26,6 +26,7 @@ public:
 	void ShotInput(); //Added 
 	void OnCollision(Collider*, Collider*);
 	void Reappear();
+	void InitPosition();
 
 	//Functions that will be rewritten in each player
 	//virtual void LoadSprites();
@@ -36,7 +37,7 @@ public:
 	virtual bool Shoot() = 0;
 	virtual bool Lock() = 0;
 	virtual void ShipAnimation() = 0;
-	void InitPosition();
+	virtual void Reset_Positions() = 0;
 
 public:
 	//Variables--------------------------------------------

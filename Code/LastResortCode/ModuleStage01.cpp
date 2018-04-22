@@ -86,8 +86,8 @@ bool ModuleStage01::Start()
 	App->player1->winlvl = false;
 	App->player2->winlvl = false;
 	//"Reset ship position when fadetoblackends"
-	App->player1->InitPosition();
-	App->player2->InitPosition();
+	App->player1->Reset_Positions();
+	App->player2->Reset_Positions();
 	//Enemies----------------------------------------------------------------
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
@@ -141,6 +141,7 @@ bool ModuleStage01::Start()
 bool ModuleStage01::CleanUp()
 {
 	LOG("Unloading stage01 assets");
+
 	//textures-----------------------------------------------------------------------
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);
@@ -151,7 +152,6 @@ bool ModuleStage01::CleanUp()
 	App->textures->Unload(midgndLightsTx);
 	App->textures->Unload(bckgndLightsTx);
 	App->textures->Unload(tunnelLightsTx);
-
 	//audios------------------------------------------------------------------------
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
