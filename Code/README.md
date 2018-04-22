@@ -44,7 +44,10 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 	- 0 Keynumeric: Shoot
 
 
-- F9: Change to level 2.
+	- F9: Change to level 2.
+
+## Others funtions
+	- Space: Skip intros
 
 ## Debug funtions
 
