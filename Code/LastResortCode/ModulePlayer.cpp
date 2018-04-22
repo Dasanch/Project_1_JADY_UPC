@@ -33,11 +33,13 @@ bool ModulePlayer::Start()
 	isDying = false;
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
+	//audios-------------------------------------------------------------------------
+	init_sfx = App->audio->LoadSFX("Assets/initial_sfx.wav");
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
-	//animations-----------------------------------------------------------------------
+	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
 
 	ShotLaserBasic.PushBack({ 32,305,30,3 });
@@ -57,6 +59,8 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player assets");
 	//textures------------------------------------------------------------------
 	App->textures->Unload(PlayerTexture);
+	//audios-------------------------------------------------------------------------
+	App->audio->UnloadSFX(init_sfx);
 	return true;
 }
 
@@ -144,6 +148,10 @@ void ModulePlayer::ShipAnimation() {
 	switch (shipAnimations) {
 	case Initial:
 		current_animation = &initAnim.GetFrameEx();
+		if (initAnim.current_frame == 0) {
+			App->audio->ControlSFX(init_sfx, PLAY_AUDIO);
+		}
+
 		if (initAnim.finished == true) {
 			shipAnimations = ShipAnimations::Movment;
 			if (godMode == false) {

@@ -43,6 +43,7 @@ public:
 
 public:
 	//Variables--------------------------------------------
+	Mix_Chunk* init_sfx = nullptr;
 	//--------Gameplay-----------------------------
 	int powerup_upgrades = 0;
 	powerupType powerup_type = powerupType::NOPOWERUP;
@@ -106,11 +107,9 @@ public:
 	void Winlvl();
 	virtual void Winposition()=0; 
 	bool start_timer;
+	bool LaserPowerUp = false;
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
-
-	bool LaserPowerUp = false;
-
 	
 
 };
