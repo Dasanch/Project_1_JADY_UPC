@@ -89,24 +89,24 @@ bool ModuleStage01::Start()
 	App->player1->Reset_Positions(); 
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
-<<<<<<< HEAD
+
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 120);
-	/*App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);*/
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 660, 35);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35, SPEED);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT,LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 4000, SCREEN_HEIGHT);
-=======
+
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT, LASER);
->>>>>>> origin/master
+	
+*/
 
 	//define moveCamera struct values
 	
