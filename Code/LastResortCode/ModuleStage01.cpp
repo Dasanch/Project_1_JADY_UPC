@@ -90,6 +90,10 @@ bool ModuleStage01::Start()
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3f321bba2c2714bd06a7711eb51ef1b26f4e20c4
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
@@ -107,6 +111,16 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150);
 
+<<<<<<< HEAD
+=======
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 980, 120);
+
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT, LASER);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
+	
+
+
+>>>>>>> 3f321bba2c2714bd06a7711eb51ef1b26f4e20c4
 	//define moveCamera struct values
 	
 	MoveCamera.ymgPos = 0;
