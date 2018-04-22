@@ -254,36 +254,36 @@ update_status ModuleUnit::Update()
 		//- Rotation of the unit itself
 		if (moving == true) { RotateTo(targetOrbit, currentSpin, spinSpeed); }
 
-		//- Limit the rotation
-		//-- On the orbit
+		//Limit the rotation----------------------------------------------------------------------------------
+		//- On the orbit
 		LimitRotation(currentOrbit);
-		//-- On the spin
+		//- On the spin
 		LimitRotation(currentSpin);
-
-		//- We grab the spin we need to render (here because it won't change if the unit doesn't move)
-		spinToRender = SpinToRender();
 	}
 
-	//Set the position-------------------------------------------------------------------------------------
+	//- We grab the spin we need to render--------------------------------------------------------------------
+	spinToRender = SpinToRender();
+
+	//Set the position----------------------------------------------------------------------------------------
 	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 16;//+ 16 and + 6 are to make the unit orbit around the center of the player's ship
 	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + 6;
 
 	//Update the collider position (after having set its position)--------------------------------------------
 	unitCol->SetPos(position.x - 8, position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
-	//Increase the internal rotation-----------------------------------------------------------------------
+	//Increase the internal rotation--------------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
 
 	//- Limit the internal rotation
 	if (currentInternalRotation >= internalRotationFrames) { currentInternalRotation = 0; }
 
-	//Set the rotation and render (all in the same place)--------------------------------------------------
+	//Set the rotation and render (all in the same place)-----------------------------------------------------
 	App->render->Blit(unitTx,
 		position.x - spriteXDifferences[spinToRender],
 		position.y - spriteYDifferences[spinToRender],
 		&internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
 
-	//Shoot------------------------------------------------------------------------------------------------
+	//Shoot---------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(angleValue[spinToRender]);
 	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(angleValue[spinToRender]);
 	if(playerToFollow->Shoot() == true)
