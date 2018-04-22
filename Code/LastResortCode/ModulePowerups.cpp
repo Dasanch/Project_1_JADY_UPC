@@ -19,7 +19,7 @@ ModulePowerups::~ModulePowerups()
 
 bool ModulePowerups::Start()
 {
-	powerupTx = App->textures->Load("Assets/General/Enemies/PowerUps.png");
+	powerupTx = App->textures->Load("Assets/PowerUps.png");
 	return true;
 }
 
@@ -30,7 +30,7 @@ update_status ModulePowerups::Update()
 	{
 		if (powerups[i] != nullptr)
 		{
-			powerups[i]->position.x -= 10;//Change to the speed in which the camera moves
+			//powerups[i]->position.x -= 10;//Change to the speed in which the camera moves
 		}
 	}
 
