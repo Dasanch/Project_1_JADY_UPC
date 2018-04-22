@@ -21,6 +21,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	LOG("Loading player assets");
 	//variables-----------------------------------------------------------------------
+	lives = 2;
 	godMode = false;
 	isShooting = false;
 	shoot = false;
@@ -35,7 +36,7 @@ bool ModulePlayer::Start()
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
-	
+
 	return ret;
 }
 
@@ -55,7 +56,8 @@ void ModulePlayer::Reappear() {
 	canShoot = false;
 	start_time = SDL_GetTicks();
 	deathAnim.Reset();
-	position = initPosition;
+	position.x = initPosition.x;
+	position.y = initPosition.y + App->render->relative_camera.y;
 }
 
 void ModulePlayer::InitPosition() {
@@ -139,6 +141,10 @@ void ModulePlayer::ShipAnimation() {
 		current_animation = &initAnim.GetFrameEx();
 		if (initAnim.finished == true) {
 			shipAnimations = ShipAnimations::Movment;
+			if (godMode == false) {
+				colType = COLLIDER_PLAYER;
+				playerCol->type = COLLIDER_PLAYER;
+			}
 			initAnim.Reset();
 			canMove = true;
 			canShoot = true;
@@ -180,15 +186,7 @@ void ModulePlayer::ShipAnimation() {
 	case Death:
 
 		if (deathAnim.finished == true) {
-			colType = COLLIDER_PLAYER;
-			playerCol->type = COLLIDER_PLAYER;
-			if (lives > 0) {
-				--lives;
-				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f); //change to restart player
-			}
-			else {
-				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
-			}
+			PlayerDies();
 		}
 
 		else if (isDying) {

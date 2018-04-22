@@ -9,6 +9,8 @@
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleFonts.h"
+#include "ModuleFadetoBlack.h"
+#include "ModuleContinue.h"
 #include <stdio.h>
 
 
@@ -46,18 +48,25 @@ bool ModuleUI::CleanUp() {
 }
 
 update_status  ModuleUI::PreUpdate() { 
-	
 
 	return update_status::UPDATE_CONTINUE;
 }
 
 
 update_status ModuleUI::Update() {
+
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
 	str_lives_p1 = new char[4];
 	str_lives_p2 = new char[4];
 
+	if (p1_isDead && p2_isDead) {
+		p1_isDead = false;
+		p2_isDead = false;
+		App->fade->FadeToBlack(current_stage, App->continueScene, 0.1f);
+	}
+
+	
 	lives_p1 = App->player1->lives;
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", lives_p1);
 

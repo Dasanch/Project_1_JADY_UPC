@@ -16,5 +16,6 @@ public:
 	bool Lock();
 	void Winposition() override;
 	void Reset_Positions();
+	void PlayerDies();
 };
 #endif

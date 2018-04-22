@@ -37,8 +37,8 @@ public:
 	virtual bool MoveRight() = 0;
 	virtual bool Shoot() = 0;
 	virtual bool Lock() = 0;
-	
 	virtual void Reset_Positions() = 0;
+	virtual void PlayerDies() = 0;
 
 public:
 	//Variables--------------------------------------------

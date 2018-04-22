@@ -35,6 +35,8 @@ public:
 	int lives_p2;
 	int credits;
 
+	bool p1_isDead = false;
+	bool p2_isDead = false;
 	bool showUI = true;
 
 	SDL_Texture *uiTex = nullptr;

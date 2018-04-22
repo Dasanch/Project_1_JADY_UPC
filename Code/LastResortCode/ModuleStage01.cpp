@@ -96,13 +96,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
-
-
-
-
-
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT);
-	
 
 	//define moveCamera struct values
 	
@@ -160,7 +154,7 @@ bool ModuleStage01::CleanUp()
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
-	App->player1->Disable(); //Disable the player module
+	App->player1->Disable();
 	App->player2->Disable();
 	App->unit->Disable();
 	App->particles->Disable();
