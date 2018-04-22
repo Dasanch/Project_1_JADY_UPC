@@ -50,6 +50,8 @@ bool ModulePlayer::Start()
 	ShotLaserBasic.PushBack({ 64,288,27,9 });
 	ShotLaserBasic.PushBack({ 32,288,13,13 });
 	ShotLaserBasic.PushBack({ 47,288,15,15 });
+	ShotLaserBasic.speed = 0.8f;
+	ShotLaserBasic.loop = true;
 
 	return ret;
 }
@@ -308,7 +310,7 @@ void  ModulePlayer::ShotInput() {
 		}
 		if (powerup_type == powerupType::LASER)
 		{
-			if (shotFire.finished == false) {
+			if (ShotLaserBasic.finished == false) {
 				isShooting = true;
 				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &ShotLaserBasic.GetFrameEx());
 			}

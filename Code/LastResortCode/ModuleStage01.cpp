@@ -143,7 +143,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1900, 105);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1930, 105);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180,LASER);
 
 	//Start of the tunnel
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3540, 45);
