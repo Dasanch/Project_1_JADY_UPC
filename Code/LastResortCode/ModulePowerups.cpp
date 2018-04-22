@@ -27,13 +27,7 @@ bool ModulePowerups::Start()
 update_status ModulePowerups::Update()
 {
 	//Move the powerups
-	for (uint i = 0; i < MAX_POWERUPS; ++i)
-	{
-		if (powerups[i] != nullptr)
-		{
-			powerups[i]->position.x -= 1;
-		}
-	}
+	//The camera moves automatically, so we don't need to adjust the position of the powerup
 
 	//Render the powerups
 	for (uint i = 0; i < MAX_POWERUPS; ++i)
