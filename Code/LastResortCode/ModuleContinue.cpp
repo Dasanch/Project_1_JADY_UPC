@@ -66,8 +66,6 @@ bool ModuleContinue::Start() {
 	//audios------------------------------------------------------------------------
 	continue_and_go = App->audio->LoadMUS("Assets/Continue/continue_and_go.ogg");
 	App->audio->ControlMUS(continue_and_go, PLAY_AUDIO);
-	//modules-----------------------------------------------------------------------
-	App->player1->Disable();
 	//animations--------------------------------------------------------------------
 	numbersAnim.current_frame = 9;
 	for (int x = 0; x < 8; ++x) {

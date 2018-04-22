@@ -4,6 +4,7 @@
 #include "Player2.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModuleUI.h"
 #include "ModuleFadetoBlack.h"
 
 Player2::Player2() {
@@ -56,6 +57,18 @@ Player2::Player2() {
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
+}
+
+void Player2::PlayerDies() {
+	if (lives > 0) {
+		lives -= 1 ;
+		Reappear();
+		LOG("lives p2 %d", lives);
+	}
+	else {
+		App->ui->p2_isDead = true;
+		playerCol->to_delete = true;
+	}
 }
 
 void Player2::Reset_Positions() {

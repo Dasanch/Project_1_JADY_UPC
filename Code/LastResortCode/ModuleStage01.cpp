@@ -96,16 +96,10 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
-<<<<<<< HEAD
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWARM, 400, SCREEN_HEIGHT);
-
-=======
-
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWARM, 600, SCREEN_HEIGHT+100);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWLEFTARM, 600, SCREEN_HEIGHT + 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT+100);
->>>>>>> 16e612b74ca6f2b185cfe1caec5345e4b93b3d9f
+
 	//define moveCamera struct values
 	
 	MoveCamera.ymgPos = 0;
@@ -164,7 +158,7 @@ bool ModuleStage01::CleanUp()
 	App->audio->ControlMUS(music_01, STOP_AUDIO);
 	App->audio->UnloadMUS(music_01);
 	//Modules-----------------------------------------------------------------------
-	App->player1->Disable(); //Disable the player module
+	App->player1->Disable();
 	App->player2->Disable();
 	App->unit->Disable();
 	App->particles->Disable();
