@@ -45,7 +45,6 @@ Player1::Player1() {
 	shotFire.PushBack({ 125, 258, 13,12 });
 	shotFire.speed = 0.2f;
 	shotFire.loop = true;
-	
 }
 
 void Player1::Reset_Positions() {
@@ -87,75 +86,6 @@ bool Player1::Lock()
 }
 
 
-void Player1::ShipAnimation() {
-
-	switch (shipAnimations) {
-	case Initial:
-		current_animation = &initAnim.GetFrameEx();
-		if (initAnim.finished == true) {
-			shipAnimations = ShipAnimations::Movment;
-			initAnim.Reset();
-			canMove = true;
-			canShoot = true;
-			break;
-		}
-		//Draw ship---------------------------------------------------
-		if (initAnim.current_frame > 4) {
-			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
-		}
-		else {
-			App->render->Blit(PlayerTexture, position.x - 40, position.y +6- (current_animation->h / 2), current_animation);
-		}
-		//------------------------------------------------------------
-		break;
-	case Movment: 
-		//Idle--------------------------------------------------------
-		if (yAxis > -transitionLimit && yAxis < transitionLimit) {
-			currentFrame = Idle;
-		}
-		//Transitions-------------------------------------------------
-		if (yAxis >= transitionLimit && yAxis < MaxLimit) {
-			currentFrame = TransitionDown;
-		}
-		if (yAxis <= -transitionLimit && yAxis > -MaxLimit) {
-			currentFrame = TransitionUp;
-		}
-		//Maximums---------------------------------------------------
-		if (yAxis >= MaxLimit) {
-			currentFrame = MaxDown;
-		}
-		if (yAxis <= -MaxLimit) {
-			currentFrame = MaxUp;
-		}
-		//Draw ship--------------------------------------------------
-		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
-		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
-		//-----------------------------------------------------------
-		break;
-	case Death:
-
-		if (deathAnim.finished == true) {
-			colType = COLLIDER_PLAYER;
-			playerCol->type = COLLIDER_PLAYER;
-
-			if (lives > 0) {
-				--lives;
-				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->readyScene, 0.0f); //change to restart player
-			}
-			else {
-				App->fade->FadeToBlack((Module*)App->stage01, (Module*)App->titleScene, 0.0f);
-			}
-		}
-
-		else if (isDying) {
-			colType = COLLIDER_NONE;
-			playerCol->type = COLLIDER_NONE;
-			current_animation = &deathAnim.GetFrameEx();
-			App->render->Blit(PlayerTexture, position.x - 23, position.y - 4, current_animation);
-		}
-		break;
-	}
-}
 void Player1::Winposition()
 {
 	if (position.x < App->render->relative_camera.x + 70)

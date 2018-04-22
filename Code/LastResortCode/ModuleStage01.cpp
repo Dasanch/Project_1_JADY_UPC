@@ -80,26 +80,37 @@ bool ModuleStage01::Start()
 	App->collision->Enable();
 	App->enemies->Enable();
 	App->unit->Enable();
-	App->ui->Enable();
+	App->ui->ShowUi();
+	App->ui->current_stage = this;
 	App->powerups->Enable();
 	//Player variable reset--------------------------------------------------------
 	App->player1->winlvl = false;
 	App->player2->winlvl = false;
-	//"Reset ship position when fadetoblackends"
-	App->player1->Reset_Positions();
+	//"Reset ship position when fadetoblackends"----------------------------------
+	App->player1->Reset_Positions(); 
 	App->player2->Reset_Positions();
-	//Enemies----------------------------------------------------------------
-
+	//Enemies---------------------------------------------------------------------
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25);
-
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
+<<<<<<< HEAD
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWARM, 400, SCREEN_HEIGHT);
 
+=======
+
+<<<<<<< HEAD
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT);
 	
+=======
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWARM, 600, SCREEN_HEIGHT+100);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWLEFTARM, 600, SCREEN_HEIGHT + 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT+100);
+>>>>>>> 16e612b74ca6f2b185cfe1caec5345e4b93b3d9f
+>>>>>>> origin/master
 	//define moveCamera struct values
 	
 	MoveCamera.ymgPos = 0;
