@@ -42,16 +42,7 @@ bool ModulePlayer::Start()
 	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
 
-	ShotLaserBasic.PushBack({ 32,305,30,3 });
-	ShotLaserBasic.PushBack({ 32,321,32,3 });
-	ShotLaserBasic.PushBack({ 32,326,32,3 });
-	ShotLaserBasic.PushBack({ 32,314,31,5 });
-	ShotLaserBasic.PushBack({ 64,305,30,7 });
-	ShotLaserBasic.PushBack({ 64,288,27,9 });
-	ShotLaserBasic.PushBack({ 32,288,13,13 });
-	ShotLaserBasic.PushBack({ 47,288,15,15 });
-	ShotLaserBasic.speed = 0.8f;
-	ShotLaserBasic.loop = true;
+	
 
 	return ret;
 }
