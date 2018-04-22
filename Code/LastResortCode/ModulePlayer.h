@@ -27,7 +27,6 @@ public:
 	void OnCollision(Collider*, Collider*);
 	void Reappear();
 
-
 	//Functions that will be rewritten in each player
 	//virtual void LoadSprites();
 	virtual bool MoveUp() = 0;
@@ -37,25 +36,9 @@ public:
 	virtual bool Shoot() = 0;
 	virtual bool Lock() = 0;
 	virtual void ShipAnimation() = 0;
-
-
-
+	void InitPosition();
 
 public:
-	//Animations--------------------------------------------
-	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
-	Animation shipAnim;
-	Animation shotFire; //Animation infront of ship when we are shooting basic shots
-	Animation initAnim;
-	iPoint initAnim_p; //Initial animation pivot
-	Animation deathAnim;
-	//Textures---------------------------------------------
-	SDL_Texture* PlayerTexture = nullptr;
-	//Collision--------------------------------------------
-	Collider* playerCol = nullptr;
-	COLLIDER_TYPE colType = COLLIDER_PLAYER;
-	//Audios-----------------------------------------------
-
 	//Variables--------------------------------------------
 	//--------Gameplay-----------------------------
 	int score;
@@ -73,10 +56,11 @@ public:
 	Uint32 current_time;
 	//--------Movment------------------------------
 	iPoint position;
+	iPoint initPosition;
 	float const movementSpeed = 2;
 	bool canMove;
 	bool canShoot;
-	//-------Animation-----------------------------
+	//-------Ship Animation-----------------------------
 	int const playerwidth = 32;
 	float yAxis = 0;//This value will control the animation of the ship. It will increase up to 1 when S is pressed and it will decrease up to -1 when W is pressed. When none of those keys are pressed, it will progressively go back to 0.
 	const float keyPressSpeed = 0.05f;//The speed at which the ship will change its frame when the key is pressed
@@ -84,9 +68,6 @@ public:
 	int currentFrame;//The frame we'll render. It will take a value from the ShipFrames enumerator
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
-
-	
-
 	enum ShipFrames
 	{
 		MaxUp,
@@ -102,6 +83,17 @@ public:
 		Death
 	} shipAnimations;
 
+	//Animations--------------------------------------------
+	SDL_Rect *current_animation = nullptr; //pointer to the only one animation 
+	Animation shipAnim;
+	Animation shotFire; //Animation infront of ship when we are shooting basic shots
+	Animation initAnim;
+	Animation deathAnim;
+	//Textures---------------------------------------------
+	SDL_Texture* PlayerTexture = nullptr;
+	//Collision--------------------------------------------
+	Collider* playerCol = nullptr;
+	COLLIDER_TYPE colType = COLLIDER_PLAYER;
 
 	//Win variables
 	bool winlvl;

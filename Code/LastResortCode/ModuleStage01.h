@@ -58,8 +58,6 @@ public:
 public:
 	uint randoms[27];
 	uint frame;
-	//Points
-	iPoint initPosition;
 	//Audios
 	Mix_Music* music_01 = nullptr;
 

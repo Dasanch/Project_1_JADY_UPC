@@ -22,11 +22,6 @@
 #include "ModuleEnemies.h"
 #include "ModulePowerups.h"
 
-#define INIT_X_PLAYER_1 40
-#define INIT_Y_PLAYER_1 74
-#define INIT_X_PLAYER_2 40
-#define INIT_Y_PLAYER_2 138
-
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
 #define midgndSpeed 0.25f
@@ -87,20 +82,12 @@ bool ModuleStage01::Start()
 	App->unit->Enable();
 	App->ui->Enable();
 	App->powerups->Enable();
-
 	//Player variable reset--------------------------------------------------------
 	App->player1->winlvl = false;
 	App->player2->winlvl = false;
 	//"Reset ship position when fadetoblackends"
-	App->player1->position.x = INIT_X_PLAYER_1;
-	App->player1->position.y = INIT_Y_PLAYER_1;
-	App->player2->position.x= INIT_X_PLAYER_2;
-	App->player2->position.y = INIT_Y_PLAYER_2;
-	App->player1->initAnim_p.x = 0; //Fix the initial animation pivot 
-	App->player2->initAnim_p.x = 0;
-	App->player1->initAnim_p.y = 79;
-	App->player2->initAnim_p.y = 144;
-	initPosition = { 40, 78 };
+	App->player1->InitPosition();
+	App->player2->InitPosition();
 	//Enemies----------------------------------------------------------------
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
@@ -201,12 +188,9 @@ update_status ModuleStage01::Update()
 		App->player2->position.x += 1;
 		App->render->relative_camera.x += 1;
 	}
-
-
-
 	//Initial Position-------------------------------------------------------------------------
-	App->player1->initAnim_p.x = initPosition.x++; //Fix the initial animation pivot 
-	App->player2->initAnim_p.x = initPosition.x;
+	App->player1->initPosition.x += 1;
+	App->player2->initPosition.x += 1;
 
 	//Boss buildings----------------------------------------------------------------------------
 	if (App->render->camera.x > (3800 * SCREEN_SIZE))
@@ -349,8 +333,7 @@ update_status ModuleStage01::Update()
 			//We enable the other player
 			App->player2->Enable();
 			//We put it on the position we need it
-			App->player2->position.x = initPosition.x;
-			App->player2->position.y = INIT_Y_PLAYER_2;
+			App->player2->InitPosition();
 		}
 	}
 	/*if (App->render->camera.x < 1500/foregndSpeed*SCREEN_SIZE)*/

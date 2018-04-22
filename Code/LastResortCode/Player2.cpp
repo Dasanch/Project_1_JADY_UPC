@@ -7,6 +7,8 @@
 #include "ModuleFadetoBlack.h"
 
 Player2::Player2() {
+	//Initial position------------------------------------------
+	initPosition = { 40,138 };
 	//Movement animation----------------------------------------
 	shipAnim.PushBack({ 198, 3, 32, 12 });	//0 = UpShip
 	shipAnim.PushBack({ 230, 3, 32, 12 });	//1 = MiddleUpShip
@@ -57,7 +59,6 @@ Player2::Player2() {
 	
 }
 
-
 bool Player2::MoveLeft()
 {
 	return (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT);
@@ -102,10 +103,10 @@ void Player2::ShipAnimation() {
 		}
 		//Draw ship---------------------------------------------------
 		if (initAnim.current_frame > 4) {
-			App->render->Blit(PlayerTexture, initAnim_p.x - (current_animation->w / 2), initAnim_p.y - (current_animation->h / 2), current_animation);
+			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
 		}
 		else {
-			App->render->Blit(PlayerTexture, position.x - 40, initAnim_p.y - (current_animation->h / 2), current_animation);
+			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
 		}
 		//------------------------------------------------------------
 		break;

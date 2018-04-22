@@ -48,14 +48,21 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
+	shipAnimations = ShipAnimations::Initial;
 	isShooting = false;
 	shoot = false;
 	canMove = false;
 	canShoot = false;
-	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	deathAnim.Reset();
+	position = initPosition;
 }
+
+void ModulePlayer::InitPosition() {
+	position.x = initPosition.x;
+	position.y = initPosition.y;
+}
+
 
 update_status ModulePlayer::PreUpdate()
 {
