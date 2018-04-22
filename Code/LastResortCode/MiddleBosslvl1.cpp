@@ -39,8 +39,15 @@ void Enemy_MetalCraw::Move()
 	if (current_time > 5000)
 	{
 		numparticles += 1;
-		if(numparticles<=1)
-		App->particles->AddParticle(App->particles->MiddleBossShot, position.x, position.y, App->enemies->sprites, COLLIDER_ENEMY);
+		if (numparticles <= 1)
+		{
+			App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y-10, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y+50, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
+		}
+		
+		
 	}
 	if ( current_time > 20000)
 	{
