@@ -10,7 +10,7 @@
 #include<math.h>
 
 //-------------------------------------------------------Torso--------------------------------------------------------------------------------------
-Enemy_MetalCraw::Enemy_MetalCraw(int x, int y) : Enemy(x, y)
+Enemy_MetalCraw::Enemy_MetalCraw(int x, int y, powerupType pu_t ) : Enemy(x, y, pu_t)
 {
 	torso.PushBack({ 254,373,42,54 });
 	torso.PushBack({ 138,372,42,59 });

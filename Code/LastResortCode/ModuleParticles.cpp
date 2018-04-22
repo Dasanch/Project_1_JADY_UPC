@@ -59,9 +59,9 @@ ModuleParticles::ModuleParticles()
 	Basic_Laser.anim.PushBack({ 17,252,64,3 });
 	Basic_Laser.anim.PushBack({ 75,247,48,3 });
 	Basic_Laser.anim.PushBack({ 17,247,56,3 });
-	Basic_Laser.anim.speed = 0.5f;
-	Basic_Laser.life = 1000;
-	Basic_Laser.speed.x = 12;
+	Basic_Laser.anim.speed = 0.3f;
+	Basic_Laser.life = 2000;
+	Basic_Laser.speed.x = 10;
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({232,248,18,17});
 	MiddleBossShot.anim.PushBack({ 232,267,17,17 });

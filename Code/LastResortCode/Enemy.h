@@ -3,6 +3,7 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "ModulePowerUps.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -17,8 +18,10 @@ public:
 	iPoint position;
 	float lives=1;
 	int points;
+	powerupType powerUp_drop;
+
 public:
-	Enemy(int x, int y);
+	Enemy(int x, int y, powerupType pu_t);
 	virtual ~Enemy();
 
 	const Collider* GetCollider() const;

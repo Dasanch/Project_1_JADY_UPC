@@ -2,7 +2,7 @@
 #include "Enemy_Basic.h"
 #include "ModuleCollision.h"
 
-Enemy_Basic::Enemy_Basic(int x, int y) : Enemy(x, y)
+Enemy_Basic::Enemy_Basic(int x, int y, powerupType pu_t) : Enemy(x, y, pu_t)
 {
 	for (int i=0;i<=96;i+=32)
 	{

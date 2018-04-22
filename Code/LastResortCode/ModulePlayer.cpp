@@ -84,7 +84,7 @@ update_status ModulePlayer::Update()
 	//Timer----------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !isDying)
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
 	{
 		if (godMode == true) {
 			colType = COLLIDER_PLAYER;
@@ -130,7 +130,7 @@ void ModulePlayer::ShipAnimation() {
 			shipAnimations = ShipAnimations::Movment;
 			if (godMode == false) {
 				colType = COLLIDER_PLAYER;
-				playerCol->type = COLLIDER_PLAYER;
+				playerCol->type = colType;
 			}
 			initAnim.Reset();
 			canMove = true;
@@ -215,7 +215,11 @@ void  ModulePlayer::ShotInput() {
 				break;
 			case 2:
 				//Laser shot
+<<<<<<< HEAD
 				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_TYPE::COLLIDER_PLAYER_1_SHOT, 0);
+=======
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+>>>>>>> e66986d6c621ed2d5f0ea763e21b20395f24f898
 				break;
 			case 3:
 				//Laser shot

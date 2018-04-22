@@ -4,6 +4,7 @@
 #include "ModuleEnemies.h"
 #include "ModuleParticles.h"
 #include "ModuleTextures.h"
+#include "ModulePowerups.h"
 #include "Enemy.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_Basic.h"
@@ -101,7 +102,7 @@ bool ModuleEnemies::CleanUp()
 	return true;
 }
 
-bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
+bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y, powerupType powerup_type)
 {
 	bool ret = false;
 
@@ -112,6 +113,7 @@ bool ModuleEnemies::AddEnemy(ENEMY_TYPES type, int x, int y)
 			queue[i].type = type;
 			queue[i].x = x;
 			queue[i].y = y;
+			queue[i].pu_Type = powerup_type;
 			ret = true;
 			break;
 		}
@@ -131,18 +133,18 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		switch (info.type)
 		{
 		case ENEMY_TYPES::BASIC:
-			enemies[i] = new Enemy_Basic(info.x, info.y);
+			enemies[i] = new Enemy_Basic(info.x, info.y, info.pu_Type);
 			break;
 
 		case ENEMY_TYPES::OSCILATOR:
-			enemies[i] = new Enemy_Oscilator(info.x, info.y);
+			enemies[i] = new Enemy_Oscilator(info.x, info.y, info.pu_Type);
 			break;
 
 		case ENEMY_TYPES::POWERDROPPER:
-			enemies[i] = new Enemy_PowerDropper(info.x, info.y);
+			enemies[i] = new Enemy_PowerDropper(info.x, info.y, info.pu_Type);
 			break;
 		case ENEMY_TYPES::METALCROW:
-			enemies[i] = new Enemy_MetalCraw(info.x, info.y);
+			enemies[i] = new Enemy_MetalCraw(info.x, info.y, info.pu_Type);
 			break;
 		
 		}
