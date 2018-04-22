@@ -3,12 +3,14 @@
 
 #include "Powerup.h"
 
+struct Collider;
+
 class Powerup_Laser : public Powerup
 {
 public:
 	Powerup_Laser(int x, int y);
 	Animation laserAnim;
-	void CollisionEffect(Collider*) override;
+	void OnCollision(Collider*);
 };
 
 #endif // __POWERUP_LASER_H__

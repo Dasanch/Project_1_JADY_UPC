@@ -3,6 +3,7 @@
 #include "ModuleCollision.h"
 #include "Player1.h"
 #include "Player2.h"
+#include "Globals.h"
 
 Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 {
@@ -14,7 +15,7 @@ Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 	collider = App->collision->AddCollider({ 0, 0, 18, 21 }, COLLIDER_TYPE::COLLIDER_POWERUP, (Module*)App->powerups);
 }
 
-void Powerup_Speed::CollisionEffect(Collider* col)
+void Powerup_Speed::OnCollision(Collider* col)
 {
 	LOG("You touched a powerup!!!");
 	//We find which player got this powerup
