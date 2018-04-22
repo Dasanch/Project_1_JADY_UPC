@@ -2,7 +2,7 @@
 #define __ModuleEnemies_H__
 
 #include "Module.h"
-
+#include "ModulePowerups.h"
 #include "Enemy_Basic.h"
 #include "Enemy_Oscilator.h"
 #include "Enemy_PowerDropper.h"
@@ -26,6 +26,7 @@ struct EnemyInfo
 {
 	ENEMY_TYPES type = ENEMY_TYPES::NO_TYPE;
 	int x, y;
+	powerupType pu_Type = powerupType:: NOPOWERUP;
 };
 
 class ModuleEnemies : public Module
@@ -42,7 +43,7 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddEnemy(ENEMY_TYPES type, int x, int y);
+	bool AddEnemy(ENEMY_TYPES type, int x, int y, powerupType powerup_type = NOPOWERUP);
 
 private:
 

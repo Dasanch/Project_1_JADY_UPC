@@ -8,7 +8,7 @@
 #include "ModulePowerups.h"
 
 
-Enemy::Enemy(int x, int y) : position(x, y)
+Enemy::Enemy(int x, int y, powerupType pu_t) : position(x, y), powerUp_drop(pu_t)
 {}
 
 Enemy::~Enemy()
@@ -35,7 +35,9 @@ void Enemy::Draw(SDL_Texture* sprites)
 void Enemy::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->g_explosion02, position.x, position.y + App->render->relative_camera.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);
-	App->powerups->AddPowerup(position.x, position.y, LASER);
+	if (powerUp_drop != NOPOWERUP) {
+          App->powerups->AddPowerup(position.x, position.y, powerUp_drop);
+	}
 	if (SDL_GetTicks() % 2)
 		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else

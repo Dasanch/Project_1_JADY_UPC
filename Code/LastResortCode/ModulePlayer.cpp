@@ -82,7 +82,7 @@ update_status ModulePlayer::Update()
 	//Timer----------------------------------------------------------------------------
 	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Debug Modes----------------------------------------------------------------------
-	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !isDying)
+	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN)
 	{
 		if (godMode == true) {
 			colType = COLLIDER_PLAYER;
@@ -128,7 +128,7 @@ void ModulePlayer::ShipAnimation() {
 			shipAnimations = ShipAnimations::Movment;
 			if (godMode == false) {
 				colType = COLLIDER_PLAYER;
-				playerCol->type = COLLIDER_PLAYER;
+				playerCol->type = colType;
 			}
 			initAnim.Reset();
 			canMove = true;

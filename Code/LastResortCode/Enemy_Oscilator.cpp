@@ -2,7 +2,7 @@
 #include "Enemy_Oscilator.h"
 #include "ModuleCollision.h"
 
-Enemy_Oscilator::Enemy_Oscilator(int x, int y) : Enemy(x, y)
+Enemy_Oscilator::Enemy_Oscilator(int x, int y, powerupType pu_t) : Enemy(x, y, pu_t)
 {
 	Oscilator.PushBack({ 0,0,50,48 });
 	Oscilator.speed = 0.2F;

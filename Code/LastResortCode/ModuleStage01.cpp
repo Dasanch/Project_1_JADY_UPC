@@ -94,7 +94,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT);
 
