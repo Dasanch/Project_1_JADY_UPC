@@ -166,6 +166,7 @@ bool ModuleStage01::CleanUp()
 	App->player1->Disable();
 	App->player2->Disable();
 	App->unit->Disable();
+	App->unit2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
 	App->enemies->Disable();

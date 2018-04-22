@@ -219,6 +219,7 @@ void  ModulePlayer::ShotInput() {
 				break;
 			case 3:
 				//Laser shot
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
 				//Laser rings
 				break;
 			}
