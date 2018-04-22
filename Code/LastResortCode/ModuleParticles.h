@@ -69,7 +69,7 @@ public:
 	Mix_Chunk* Basic_LaserFx = nullptr;
 	//Enemies------------------------------------------------
 	Particle MiddleBossShot;
-	Particle* MiddleBosExplotion;
+	Particle MiddleBosExplotion;
 
 	iPoint VectorMiddleBossShots;
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
