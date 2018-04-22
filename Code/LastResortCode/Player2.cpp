@@ -146,6 +146,6 @@ void Player2::Winposition()
 
 void Player2::KillUnit()
 {
-	App->unit2->Disable();
+	//App->unit2->Disable();
 	//App->unit.currentOrbit = App->unit.currentSpin = angle angleValue[E];
 }
