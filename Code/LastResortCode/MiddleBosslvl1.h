@@ -9,6 +9,7 @@ private:
 	float wave = -1.0f;
 	bool going_up = true;
 	int original_y = 0;
+	int original_x;
 	Animation torso;
 	Animation Arm;
 	Animation Lights;

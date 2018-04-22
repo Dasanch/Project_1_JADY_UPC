@@ -89,13 +89,14 @@ bool ModuleStage01::Start()
 	App->player1->Reset_Positions(); 
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 550, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 570, 102);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 586, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 143);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 590, 120);
+	/*App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1200, 25, SPEED);*/
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 300, SCREEN_HEIGHT);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 4000, SCREEN_HEIGHT);
 
 	//define moveCamera struct values
 	

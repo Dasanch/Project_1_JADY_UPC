@@ -42,7 +42,7 @@ Enemy_MetalCraw::Enemy_MetalCraw(int x, int y, powerupType pu_t ) : Enemy(x, y, 
 void Enemy_MetalCraw::Move()
 {
 	current_time = SDL_GetTicks() - start_time;
-	if (current_time > 3000 && current_time < 10000)
+	if (current_time > 3100 && current_time < 10000)
 	{
 		position.x += 1.0f;
 		if(position.y>50)
