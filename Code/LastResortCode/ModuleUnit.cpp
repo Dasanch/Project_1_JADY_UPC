@@ -211,55 +211,61 @@ update_status ModuleUnit::Update()
 {
 	//Initial set up--------------------------------------------------------------------------------------
 	//- We update our moving bool to false, if any key is pressed, it will go to true
-	moving = false;
+	orbiting = false;
+	spinning = false;
 
 	//- Check if the ball is locked
-	if(playerToFollow->unit_locked == false)
+
+	//Conditions for movement-----------------------------------------------------------------------------
+	if (playerToFollow->MoveLeft() == true)
 	{
-		//Conditions for movement-----------------------------------------------------------------------------
-		if (playerToFollow->MoveLeft() == true)
-		{
-			moving = true;
-			//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleValue[E];
-		}
-		if (playerToFollow->MoveRight() == true)
-		{
-			moving = true;
-			//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleValue[W];
-		}
-		if (playerToFollow->MoveUp() == true)
-		{
-			moving = true;
-			//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleValue[S];
-			//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
-			if (playerToFollow->MoveLeft() == true) { targetOrbit -= PI / 4; }
-			if (playerToFollow->MoveRight() == true) { targetOrbit += PI / 4; }
-		}
-		if (playerToFollow->MoveDown() == true)
-		{
-			moving = true;
-			//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
-			targetOrbit = angleValue[N];
-			//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
-			if (playerToFollow->MoveLeft() == true) { targetOrbit += PI / 4; }
-			if (playerToFollow->MoveRight() == true) { targetOrbit -= PI / 4; }
-		}
-
-		//Move the orbit to the target rotation---------------------------------------------------------------
-		//- Orbit around the player
-		if (moving == true) { RotateTo(targetOrbit, currentOrbit, orbitSpeed); }
-		//- Rotation of the unit itself
-		if (moving == true) { RotateTo(targetOrbit, currentSpin, spinSpeed); }
-
-		//Limit the rotation----------------------------------------------------------------------------------
-		//- On the orbit
-		LimitRotation(currentOrbit);
-		//- On the spin
-		LimitRotation(currentSpin);
+		orbiting = true;
+		spinning = true;
+		//- The unit goes to the right (the unit always goes to the opposite direction that we're moving to)
+		targetOrbit = angleValue[E];
 	}
+	if (playerToFollow->MoveRight() == true)
+	{
+		orbiting = true;
+		spinning = true;
+		//- The unit goes to the left (the unit always goes to the opposite direction that we're moving to)
+		targetOrbit = angleValue[W];
+	}
+	if (playerToFollow->MoveUp() == true)
+	{
+		orbiting = true;
+		spinning = true;
+		//- The unit moves down (the unit always goes to the opposite direction that we're moving to)
+		targetOrbit = angleValue[S];
+		//- We check if a part from going down, it's also going to one of the sides (for the diagonals)
+		if (playerToFollow->MoveLeft() == true) { targetOrbit -= PI / 4; }
+		if (playerToFollow->MoveRight() == true) { targetOrbit += PI / 4; }
+	}
+	if (playerToFollow->MoveDown() == true)
+	{
+		orbiting = true;
+		spinning = true;
+		//- The unit goes up (the unit always goes to the opposite direction that we're moving to)
+		targetOrbit = angleValue[N];
+		//- We check if a part from going up, it's also going to one of the sides (for the diagonals)
+		if (playerToFollow->MoveLeft() == true) { targetOrbit += PI / 4; }
+		if (playerToFollow->MoveRight() == true) { targetOrbit -= PI / 4; }
+	}
+
+	//If the ball is locked it won't rotate around the player ship
+	if (playerToFollow->unit_locked == true) { orbiting = false; }
+
+	//Move the orbit to the target rotation---------------------------------------------------------------
+	//- Orbit around the player
+	if (orbiting == true) { RotateTo(targetOrbit, currentOrbit, orbitSpeed); }
+	//- Rotation of the unit itself
+	if (spinning == true) { RotateTo(targetOrbit, currentSpin, spinSpeed); }
+
+	//Limit the rotation----------------------------------------------------------------------------------
+	//- On the orbit
+	if (orbiting == true) { LimitRotation(currentOrbit); }
+	//- On the spin
+	if (spinning == true) { LimitRotation(currentSpin); }
 
 	//- We grab the spin we need to render--------------------------------------------------------------------
 	spinToRender = SpinToRender();

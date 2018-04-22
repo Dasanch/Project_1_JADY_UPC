@@ -79,7 +79,6 @@ bool ModuleStage01::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
-	App->unit->Enable();
 	App->ui->ShowUi();
 	App->ui->current_stage = this;
 	App->powerups->Enable();

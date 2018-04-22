@@ -108,6 +108,10 @@ public:
 	int FadeToBlackAlfa;
 	SDL_Rect backgroundBlack;
 
+	bool LaserPowerUp = false;
+
+	
+
 };
 
 #endif
