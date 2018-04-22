@@ -58,7 +58,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
   *Left:4;
   *Right:6;
 
--GodMode: With "M" input;
+-GodMode: With "F2" input;
 
 ##CHANGES
 	## CHANGES IN V0.5.0.0
