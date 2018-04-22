@@ -146,7 +146,7 @@ bool ModuleStage01::Start()
 	backgroundBlack.w = SCREEN_WIDTH * SCREEN_SIZE;
 	backgroundBlack.h = SCREEN_HEIGHT * SCREEN_SIZE;
 
-	App->powerups->AddPowerup(50, 50, SPEED);
+	App->powerups->AddPowerup(200, 50, SPEED);
 
 	return ret;
 }

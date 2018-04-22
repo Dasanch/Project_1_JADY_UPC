@@ -5,6 +5,7 @@
 #include "Powerup.h"
 #include "Powerup_Speed.h"
 #include "Powerup_Laser.h"
+#include "ModuleCollision.h"
 
 ModulePowerups::ModulePowerups()
 {
@@ -30,7 +31,7 @@ update_status ModulePowerups::Update()
 	{
 		if (powerups[i] != nullptr)
 		{
-			//powerups[i]->position.x -= 10;//Change to the speed in which the camera moves
+			powerups[i]->position.x -= 1;
 		}
 	}
 
@@ -42,8 +43,7 @@ update_status ModulePowerups::Update()
 			//- Collider
 			if (powerups[i]->collider != nullptr)
 			{
-				//powerups[i]->collider->SetPos(powerups[i]->position.x, powerups[i]->position.y + App->render->relative_camera.y);
-				//Causes an error. Needs to be fixed
+				powerups[i]->collider->SetPos(powerups[i]->position.x, powerups[i]->position.y + App->render->relative_camera.y);
 			}
 			//- Sprite
 			if (powerups[i]->animation != nullptr)
