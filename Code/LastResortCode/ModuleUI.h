@@ -30,15 +30,14 @@ public:
 	char *str_lives_p1 = nullptr;
 	char *str_lives_p2 = nullptr;
 	//Player data---------------------------------
-	int score_p1;
-	int score_p2; 
-	int lives_p1;
-	int lives_p2;
+	int score_p1 =0;
+	int score_p2= 0; 
+	int lives_p1 =2;
+	int lives_p2= 2;
 	bool p1_isDead = false;
 	bool p2_isDead = false;
 	bool p1_Unit= false;
 	bool p2_Unit = false;
-
 	//General data--------------------------------
 	int credits;
 	bool showUI = true;

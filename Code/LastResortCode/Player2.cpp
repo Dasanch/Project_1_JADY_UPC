@@ -60,10 +60,11 @@ Player2::Player2() {
 }
 
 void Player2::PlayerDies() {
-	if (lives > 0) {
-		lives -= 1 ;
+
+	if (App->ui->lives_p2 > 0) {
+		App->ui->lives_p2 -= 1;
 		Reappear();
-		LOG("lives p2 %d", lives);
+		LOG("lives p2 %d", App->ui->lives_p2);
 	}
 	else {
 		App->ui->p2_isDead = true;

@@ -64,20 +64,16 @@ update_status ModuleUI::Update() {
 		p1_isDead = false;
 		p2_isDead = false;
 		App->fade->FadeToBlack(current_stage, App->continueScene, 0.1f);
+		lives_p1 = 2;
+		lives_p2 = 2;
 	}
 
-	
-	lives_p1 = App->player1->lives;
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", lives_p1);
-
-	lives_p2 = App->player2->lives;
 	snprintf(str_lives_p2, 4 * sizeof(str_lives_p2), "%d", lives_p2);
-
-	score_p1 = App->player1->score;
 	snprintf(str_score_p1, 4 * sizeof(str_score_p1), "%d", score_p1);
-
-	score_p2 = App->player1->score;
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", score_p2);
+
+
 
 	if (showUI == true) {
 		//Static UI-----------------------------------------------------

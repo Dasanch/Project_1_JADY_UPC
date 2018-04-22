@@ -161,6 +161,7 @@ bool ModuleStage01::CleanUp()
 	App->collision->Disable();
 	App->enemies->Disable();
 	App->powerups->Disable();
+	App->ui->HideUi();
 	//camera------------------------------------------------------------------------
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

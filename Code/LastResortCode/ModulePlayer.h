@@ -42,9 +42,6 @@ public:
 
 public:
 	//Variables--------------------------------------------
-	//--------Gameplay-----------------------------
-	int score = 0;
-	int lives = 2;
 	//--------States--------------------------------
 	bool isAppearing;
 	bool isDying;

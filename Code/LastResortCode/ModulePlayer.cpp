@@ -21,7 +21,6 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	LOG("Loading player assets");
 	//variables-----------------------------------------------------------------------
-	lives = 2;
 	godMode = false;
 	isShooting = false;
 	shoot = false;
