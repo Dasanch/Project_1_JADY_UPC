@@ -48,6 +48,9 @@ public:
 	iPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 	UnitType type;
+	float currentOrbit;//We'll be incrementing it when we move counterclock and decrementing it when we move clockwise
+	float currentSpin;
+	float angleValue[axis];//The value of each angle
 
 private:
 	Collider* unitCol = nullptr;
@@ -57,17 +60,15 @@ private:
 	//- Spin refers to the rotation of the unit to aim at different directions
 	//- InternalRotation refers to the rotation of the unit on its own axis
 	float targetOrbit;//The rotation we want the unit to be in
-	float currentOrbit;//We'll be incrementing it when we move counterclock and decrementing it when we move clockwise
 	const float orbitSpeed = 3.141592 / 27;//The speed at which the orbit rotates around the player ship
-	float currentSpin;
 	const float spinSpeed = orbitSpeed * 2;
 	int spinToRender;
 	float currentInternalRotation;
 	const float internalRotationSpeed = 0.2f;
 	bool orbiting;//A bool that indicates if we can make the unit orbit
 	bool spinning;//A bool that indicates if we can make the unit spin
+	bool hideUnit = false;
 	const float radius = 31;
-	float angleValue[axis];//The value of each angle
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
                                     //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
 	int spriteXDifferences[axis] =  {    8,   8,   8,   8,   8,   9,  13,  14,  14,  14,  13,   9,   8,   8,   8,   8 };//Sprite differences in x and y, helps us keep the unit centered on its trajectory
