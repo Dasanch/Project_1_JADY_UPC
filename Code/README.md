@@ -44,11 +44,11 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 	- 0 Keynumeric: Shoot
 
 
-	- F9: Change to level 2.
+	
 
 ## Others funtions
 	- Space: Skip intros
-
+	- F9: Change to level 2.
 ## Debug funtions
 
 - Move camera: 
@@ -58,7 +58,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
   *Left:4;
   *Right:6;
 
--GodMode: With "M" input;
+-GodMode: With "F3" input;
 
 ##CHANGES
 	## CHANGES IN V0.5.0.0
