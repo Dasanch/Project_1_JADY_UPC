@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleUI.h"
 #include "ModuleFadetoBlack.h"
+#include "ModuleUnit.h"
 
 
 Player1::Player1() {
@@ -120,4 +121,10 @@ void Player1::Winposition()
 		position.y -= SCREEN_SIZE;
 	}
 
+}
+
+void Player1::KillUnit()
+{
+	App->unit->Disable();
+	//App->unit.currentOrbit = App->unit.currentSpin = angle angleValue[E];
 }

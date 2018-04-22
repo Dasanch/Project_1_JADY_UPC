@@ -70,13 +70,7 @@ void ModulePlayer::Reappear() {
 	powerup_upgrades = 0;
 	powerup_type = powerupType::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
-	if (this == App->player1) {
-
-	}
-	if (this == App->player2) {
-	/*	App->unit.currentOrbit = App->unit.currentSpin = Angel angleValue[E];*/
-	}
-
+	KillUnit();
 	isShooting = false;
 	shoot = false;
 	canMove = false;

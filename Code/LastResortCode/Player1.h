@@ -17,5 +17,6 @@ public:
 	void Winposition() override;
 	void Reset_Positions();
 	void PlayerDies();
+	void KillUnit();
 };
 #endif

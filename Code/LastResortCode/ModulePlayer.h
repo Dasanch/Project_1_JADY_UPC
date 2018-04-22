@@ -40,6 +40,7 @@ public:
 	virtual bool Lock() = 0;
 	virtual void Reset_Positions() = 0;
 	virtual void PlayerDies() = 0;
+	virtual void KillUnit() = 0;
 
 public:
 	//Variables--------------------------------------------
