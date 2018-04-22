@@ -318,6 +318,18 @@ void  ModulePlayer::ShotInput() {
 				shoot = false;
 			}
 		}
+		else
+		{
+			if (shotFire.finished == false) {
+				isShooting = true;
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+			}
+			else {
+				shotFire.finished = false;
+				isShooting = false;
+				shoot = false;
+			}
+		}
 		
 	}
 }
