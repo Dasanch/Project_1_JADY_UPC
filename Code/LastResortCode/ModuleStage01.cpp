@@ -151,6 +151,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8700, SCREEN_HEIGHT+50);
 
 	//End of the tunnel
 
@@ -195,7 +196,7 @@ bool ModuleStage01::Start()
 bool ModuleStage01::CleanUp()
 {
 	LOG("Unloading stage01 assets");
-
+	
 	//textures-----------------------------------------------------------------------
 	App->textures->Unload(groundAndTunel);
 	App->textures->Unload(PurpleBuildings);
@@ -233,11 +234,12 @@ bool ModuleStage01::CleanUp()
 // Update: draw background
 update_status ModuleStage01::Update()
 {
+	LOG("Relative_camera: %i ", App->render->relative_camera.x);
 	//Time 
 	Current_time = SDL_GetTicks();
-
+	App->render->relative_camera.x;
 	// Move camera forward -------------------------------------------------------------------
-	if (App->render->camera.x <= ((4408 / foregndSpeed)*SCREEN_SIZE))
+	if (App->render->camera.x <= ((5000 / foregndSpeed)*SCREEN_SIZE))
 	{
 		App->render->camera.x += SCREEN_SIZE;
 		App->player1->position.x += 1;
