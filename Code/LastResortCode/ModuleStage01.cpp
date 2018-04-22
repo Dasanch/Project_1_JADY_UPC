@@ -20,6 +20,7 @@
 #include "ModuleUnit.h"
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
+#include "ModulePowerups.h"
 
 #define INIT_X_PLAYER_1 40
 #define INIT_Y_PLAYER_1 74
@@ -143,6 +144,7 @@ bool ModuleStage01::Start()
 	App->player1->FadeToBlackAlfa = 0;
 	backgroundBlack.w = SCREEN_WIDTH * SCREEN_SIZE;
 	backgroundBlack.h = SCREEN_HEIGHT * SCREEN_SIZE;
+
 	return ret;
 }
 

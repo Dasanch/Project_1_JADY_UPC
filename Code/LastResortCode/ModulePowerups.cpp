@@ -3,6 +3,8 @@
 #include "ModuleTextures.h"
 #include "ModulePowerups.h"
 #include "Powerup.h"
+#include "Powerup_Speed.h"
+#include "Powerup_Laser.h"
 
 ModulePowerups::ModulePowerups()
 {
@@ -90,20 +92,37 @@ bool ModulePowerups::CleanUp()
 	return true;
 }
 
-bool ModulePowerups::AddPowerup(powerupType type)
+bool ModulePowerups::AddPowerup(int x, int y, powerupType type)//x and y should be the position in which the enemy that drops the powerup has died
 {
 	bool ret = false;
 
-	for (uint i = 0; i < MAX_POWERUPS; ++i)
+	//Here we will have the code based on SpawnEnemy, because we'll be rendering the collider directly
+	//Find room for the new powerup
+	uint i = 0;
+	for (; powerups[i] != nullptr && i < MAX_POWERUPS; ++i);
+
+	if (i != MAX_POWERUPS)
 	{
-		if (queue[i].type == powerupType::NOPOWERUP)
+		switch (type)
 		{
-			queue[i].type = type;
-			ret = true;
+		case powerupType::SPEED:
+			powerups[i] = new Powerup_Speed(x, y);
+			break;
+		case powerupType::DESPEED:
+			powerups[i] = new Powerup_Speed(x, y);
+			break;
+		case powerupType::LASER:
+			powerups[i] = new Powerup_Laser(x, y);
+			break;
+		case powerupType::HOMING:
+			powerups[i] = new Powerup_Laser(x, y);
+			break;
+		case powerupType::GROUND:
+			powerups[i] = new Powerup_Laser(x, y);
 			break;
 		}
+		//For now, we'll have speed for despeed and laser for homing and ground
 	}
-
 	return ret;
 }
 

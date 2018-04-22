@@ -3,7 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_POWERUPS 10
+#define MAX_POWERUPS 20
 #define DESPAWN_MARGIN 50
 
 //This module follows the structure of the module enemies
@@ -21,10 +21,7 @@ enum powerupType
 };
 
 class Powerup;
-struct PowerupInfo
-{
-	powerupType type = powerupType::NOPOWERUP;
-};
+
 //We don't need x and y positions on powerupinfo (as opposed to enemy info) because we won't be checking their positions to spawn them
 struct SDL_Texture;
 
@@ -40,10 +37,10 @@ public:
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2);
 
-	bool AddPowerup(powerupType);
+	bool AddPowerup(int, int, powerupType);
 
 private:
-	PowerupInfo queue[MAX_POWERUPS];
+	//We don't need a queue, because we'll render the powerups as soon as AddCollider gets called
 	Powerup* powerups[MAX_POWERUPS];
 	SDL_Texture* powerupTx = nullptr;
 };

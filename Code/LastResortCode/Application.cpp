@@ -21,6 +21,7 @@
 #include "Player2.h"
 #include "ModuleFonts.h"
 #include "ModuleUI.h"
+#include "ModulePowerups.h"
 
 Application::Application()
 {
@@ -35,6 +36,7 @@ Application::Application()
 	//Stages----------------------------------------------------
 	modules[i++] = stage01 = new ModuleStage01();
 	modules[i++] = stage02 = new Module2lvlScene();
+	modules[i++] = powerups = new ModulePowerups();
 	modules[i++] = unit = new ModuleUnit();
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
