@@ -138,6 +138,10 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3580, 45);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
+
+	//End of the tunnel
+
 	//define moveCamera struct values
 	
 	MoveCamera.ymgPos = 0;
