@@ -122,5 +122,5 @@ bool ModulePowerups::AddPowerup(int x, int y, powerupType type)//x and y should 
 
 void ModulePowerups::OnCollision(Collider* c1, Collider* c2)
 {
-
+	
 }

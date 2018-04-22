@@ -10,6 +10,8 @@
 #include "ModuleAudio.h"
 #include "ModuleStageClear.h"
 #include "ModuleStage01.h"
+#include "ModuleUnit.h"
+
 ModulePlayer::ModulePlayer() //Constructor 
 {}
 
@@ -211,10 +213,71 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
-	if (Shoot() == true) {
-		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
-		if (isShooting == false)
-			shoot = true;
+	if (Shoot() == true)
+	{
+		if(powerup_type == powerupType::NOPOWERUP)
+		{
+			//Basic shoot
+			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		}
+		if (powerup_type == powerupType::LASER)
+		{
+			switch(powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				break;
+			case 2:
+				//Laser shot
+				break;
+			case 3:
+				//Laser shot
+				//Laser rings
+				break;
+			}
+		}
+		if (powerup_type == powerupType::HOMING)
+		{
+			switch (powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				break;
+			case 2:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				//2 missiles on the sides
+				break;
+			case 3:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				//6 missiles on the sides
+				break;
+			}
+		}
+		if (powerup_type == powerupType::GROUND)
+		{
+			switch (powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				break;
+			case 2:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				//Missiles up and down
+				break;
+			case 3:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+				//Missiles up and down that destoy the ground
+				break;
+			}
+		}
+		if (isShooting == false) { shoot = true; }
 	}
 	//----------Ship Fire-------------------------------------------
 	if (shoot == true) {
@@ -237,20 +300,20 @@ void ModulePlayer::MovementInput() {
 
 	if (MoveLeft() == true)	{
 		//---------Movment-----------------------------------------------------------
-		position.x -= movementSpeed;
+		position.x -= (int)movementSpeed;
 	
 		if (position.x < (App->render->camera.x / App->render->cameraspeed))
 			position.x = App->render->camera.x / App->render->cameraspeed;
 	}
 	if (MoveRight() == true) {
 		//---------Movment-----------------------------------------------------------
-		position.x += movementSpeed;
+		position.x += (int)movementSpeed;
 		if (position.x + playerwidth > (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
 			position.x = (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;
 	}
 	if (MoveUp() == true) {
 		//---------Movment-----------------------------------------------------------
-		position.y -= movementSpeed;
+		position.y -= (int)movementSpeed;
 		if (position.y <(App->render->camera.y / App->render->cameraspeed))
 			position.y = (App->render->camera.y / App->render->cameraspeed) ;
 		/*if (position.y < 0)
@@ -264,8 +327,11 @@ void ModulePlayer::MovementInput() {
 	}
 	if (MoveDown() == true)	{
 		//---------Movment-----------------------------------------------------------
+
 		if (position.y <(App->render->camera.y / App->render->cameraspeed) + SCREEN_HEIGHT - 12)
-		position.y += movementSpeed;
+
+		position.y += (int)movementSpeed;
+
 		
 		
 		//---------Animation---------------------------------------------------------

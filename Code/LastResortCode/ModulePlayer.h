@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "ModuleParticles.h" 
 #include "p2Point.h"
+#include "ModulePowerups.h"
 
 struct SDL_Texture;
 struct Collider; //SHOT
@@ -45,6 +46,8 @@ public:
 	//--------Gameplay-----------------------------
 	int score = 0;
 	int lives = 2;
+	int powerup_upgrades = 0;
+	powerupType powerup_type = powerupType::NOPOWERUP;
 	//--------States--------------------------------
 	bool isAppearing;
 	bool isDying;
@@ -59,7 +62,7 @@ public:
 	//--------Movment------------------------------
 	iPoint position;
 	iPoint initPosition;
-	float const movementSpeed = 2;
+	float movementSpeed = 2;//It can't be const because the speed powerup modifies this value
 	bool canMove;
 	bool canShoot;
 	//-------Ship Animation-----------------------------
