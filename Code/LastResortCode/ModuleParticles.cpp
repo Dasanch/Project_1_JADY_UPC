@@ -44,14 +44,8 @@ ModuleParticles::ModuleParticles()
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
 	//LaserShot particle 
-	Basic_Laser.anim.PushBack({ 32,305,30,3 });
-	Basic_Laser.anim.PushBack({ 32,321,32,3 });
-	Basic_Laser.anim.PushBack({ 32,326,32,3 });
-	Basic_Laser.anim.PushBack({ 32,314,31,5 });
-	Basic_Laser.anim.PushBack({ 64,305,30,7 });
-	Basic_Laser.anim.PushBack({ 64,288,27,9 });
-	Basic_Laser.anim.PushBack({ 32,288,13,13 });
-	Basic_Laser.anim.PushBack({ 47,288,15,15 });
+	
+
 	Basic_Laser.anim.PushBack({ 43,257,16,3 });
 	Basic_Laser.anim.PushBack({ 17,257,24,3 });
 	Basic_Laser.anim.PushBack({ 61,257,32,3 });

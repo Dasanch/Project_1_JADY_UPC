@@ -40,6 +40,15 @@ bool ModulePlayer::Start()
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
 
+	ShotLaserBasic.PushBack({ 32,305,30,3 });
+	ShotLaserBasic.PushBack({ 32,321,32,3 });
+	ShotLaserBasic.PushBack({ 32,326,32,3 });
+	ShotLaserBasic.PushBack({ 32,314,31,5 });
+	ShotLaserBasic.PushBack({ 64,305,30,7 });
+	ShotLaserBasic.PushBack({ 64,288,27,9 });
+	ShotLaserBasic.PushBack({ 32,288,13,13 });
+	ShotLaserBasic.PushBack({ 47,288,15,15 });
+
 	return ret;
 }
 
@@ -52,7 +61,16 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
+	powerup_upgrades = 0;
+	powerup_type = powerupType::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
+	if (this == App->player1) {
+
+	}
+	if (this == App->player2) {
+	/*	App->unit.currentOrbit = App->unit.currentSpin = Angel angleValue[E];*/
+	}
+
 	isShooting = false;
 	shoot = false;
 	canMove = false;
@@ -268,15 +286,43 @@ void  ModulePlayer::ShotInput() {
 	}
 	//----------Ship Fire-------------------------------------------
 	if (shoot == true) {
-		if (shotFire.finished == false) {
-			isShooting = true;
-			App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+		if (powerup_type == powerupType::NOPOWERUP)
+		{
+			if (shotFire.finished == false) {
+				isShooting = true;
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+			}
+			else {
+				shotFire.finished = false;
+				isShooting = false;
+				shoot = false;
+			}
 		}
-		else {
-			shotFire.finished = false;
-			isShooting = false;
-			shoot = false;
+		if (powerup_type == powerupType::LASER)
+		{
+			if (shotFire.finished == false) {
+				isShooting = true;
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &ShotLaserBasic.GetFrameEx());
+			}
+			else {
+				shotFire.finished = false;
+				isShooting = false;
+				shoot = false;
+			}
 		}
+		else
+		{
+			if (shotFire.finished == false) {
+				isShooting = true;
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+			}
+			else {
+				shotFire.finished = false;
+				isShooting = false;
+				shoot = false;
+			}
+		}
+		
 	}
 }
 

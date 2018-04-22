@@ -48,12 +48,13 @@ public:
 	iPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 	UnitType type;
+	Collider* unitCol = nullptr;
 	float currentOrbit;//We'll be incrementing it when we move counterclock and decrementing it when we move clockwise
 	float currentSpin;
 	float angleValue[axis];//The value of each angle
 
 private:
-	Collider* unitCol = nullptr;
+	
 	//Rotation
 	const float PI = 3.141592;
 	//- Orbit refers to the rotation of the unit around the player's ship

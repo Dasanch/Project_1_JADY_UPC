@@ -61,7 +61,7 @@ public:
 	//Audios
 	Mix_Music* music_01 = nullptr;
 
-	SDL_Texture * groundAndTunel = nullptr;
+	SDL_Texture* groundAndTunel = nullptr;
 	SDL_Texture* PurpleBuildings = nullptr;
 	SDL_Texture* BackgroundBuildings = nullptr;
 	SDL_Texture* Boss1Background = nullptr;
