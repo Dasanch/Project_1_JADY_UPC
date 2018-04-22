@@ -8,6 +8,7 @@
 #include "Enemy_Oscilator.h"
 #include "Enemy_Basic.h"
 #include "Enemy_PowerDropper.h"
+#include "MiddleBosslvl1.h"
 
 
 #define SPAWN_MARGIN 50
@@ -140,7 +141,11 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::POWERDROPPER:
 			enemies[i] = new Enemy_PowerDropper(info.x, info.y);
 			break;
+		case ENEMY_TYPES::METALCROWTORSO:
+			enemies[i] = new Enemy_MetalCraw_Torso(info.x, info.y);
+			break;
 		}
+		
 	}
 }
 
