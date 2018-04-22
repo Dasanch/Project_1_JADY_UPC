@@ -11,6 +11,7 @@ private:
 	int original_y = 0;
 	Animation torso;
 	Animation Arm;
+	SDL_Rect Leg;
 
 	Uint32 start_time = SDL_GetTicks();
 	Uint32 current_time;
