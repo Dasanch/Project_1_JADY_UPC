@@ -145,7 +145,7 @@ bool ModuleParticles::Start()
 	death_explosion.sfx = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
-	Basic_LaserFx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	Basic_LaserFx = App->audio->LoadSFX("Assets/014. Lasser_2-Center.WAV");
 	Basic_Laser.sfx = Basic_LaserFx;
 	//--------------------------------------------------------
 	return true;
