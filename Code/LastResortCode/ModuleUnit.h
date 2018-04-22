@@ -46,10 +46,9 @@ public:
 
 public:
 	iPoint position;
+	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 
 private:
-	
-	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 	UnitType type;
 	Collider* unitCol = nullptr;
 	//Rotation
