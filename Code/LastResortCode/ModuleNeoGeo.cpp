@@ -11,6 +11,7 @@
 #include "ModuleGameTitle.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
+#include "SDL/include/SDL.h"
 
 
 ModuleNeoGeo::ModuleNeoGeo()
@@ -32,18 +33,14 @@ bool ModuleNeoGeo::Start()
 	proGearSpecTx = App->textures->Load("Assets/NeoGeo/Max330ProGearSpec.png");
 	snkTx = App->textures->Load("Assets/NeoGeo/SNK.png");
 
-	int spriteWidth = 228;
-	int spriteHeight = 40;
-	for(int i = 0; i < spriteWidth * 2; i += spriteWidth)
+	for(int i = 0; i < neogeoWidth * 2; i += neogeoWidth)
 	{
-		for(int j = 0; j < spriteHeight * 25; j += spriteHeight)
+		for(int j = 0; j < neogeoHeight * 25; j += neogeoHeight)
 		{
-			if (i == spriteWidth * 1 && j == spriteHeight * 22) { break; }
-			neogeoAnim.PushBack({i,j,spriteWidth,spriteHeight });
+			if (i == neogeoWidth * 1 && j == neogeoHeight * 22) { break; }
+			neogeoAnim.PushBack({i,j,neogeoWidth,neogeoHeight });
 		}
 	}
-	//227 = width of each sprite
-	// 40 = height of each sprite
 	neogeoAnim.loop = false;
 	neogeoAnim.speed = neogeoAnimSpeed;
 
@@ -71,7 +68,7 @@ bool ModuleNeoGeo::Start()
 		}
 	}
 	snkAnim.loop = false;
-	snkAnim.speed = 0.2f;
+	snkAnim.speed = 0.5f;
 
 
 	neogeoMusic = App->audio->LoadMUS("Assets/NeoGeo/NeoGeoSong.ogg");
@@ -125,6 +122,7 @@ update_status ModuleNeoGeo::Update()
 	//- If the SNL logo has finished its animation (15 = last frame)
 	else if (currentAnimation == SNK && snkAnim.current_frame >= 15)
 	{
+		startTime = SDL_GetTicks();
 		currentAnimation = Finish;
 	}
 
@@ -144,7 +142,9 @@ update_status ModuleNeoGeo::Update()
 		SDL_SetRenderDrawColor(App->render->renderer, currentFade, currentFade, currentFade, 255);
 		SDL_RenderFillRect(App->render->renderer, NULL);
 		//Animate the logo
-		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);
+		//40, 52 positions calculated from the original game
+		//Keep in mind that neogeoAnim.current_frame is called before GetCurrent frame, so we'll get the frame before
 		break;
 	case Max330ProGearSpecLine1:
 		//Move the fist rectangle
@@ -190,7 +190,14 @@ update_status ModuleNeoGeo::Update()
 		break;
 	case Finish:
 		//Fade to black
-		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
+		currentTime = SDL_GetTicks();
+		if(currentTime > startTime + 1750)//1750 = time to go to the Title screen after all the animations have finished
+		{
+			App->fade->FadeToBlack(this, App->titleScene, 0.5f);
+		}
+		App->render->Blit(neogeoTx, 40, 52, &neogeoAnim.GetCurrentFrame(), 0.0f);//40, 52 positions calculated from the original game
+		App->render->Blit(proGearSpecTx, proGearSpecPosX, 113, &proGearSpecRect, 0.0f);//89, 133 positions calculated from the original game
+		App->render->Blit(snkTx, 116, 162, &snkAnim.GetCurrentFrame(), 0.0f);
 		break;
 	}
 	return UPDATE_CONTINUE;

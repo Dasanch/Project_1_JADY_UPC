@@ -35,7 +35,9 @@ public:
 	//NEO GEO
 	SDL_Texture * neogeoTx = nullptr;
 	Animation neogeoAnim;
-	const float neogeoAnimSpeed = 0.05f;
+	const float neogeoAnimSpeed = 0.5f;
+	const int neogeoWidth = 230;
+	const int neogeoHeight = 40;
 
 	//Transition from white to black
 	int currentFade = 255;
@@ -47,10 +49,12 @@ public:
 	int cover01PosX = 89;
 	int cover02PosX = 89;
 	int currentFrame = 0;
-	const int frameLimit = 5;
+	const int frameLimit = 2;
 	const int coverSpeed = 8;
 	const int proGearSpecPosX = 89;
 	const int proGearSpecWidth = 133;
+	Uint32 startTime;
+	Uint32 currentTime;
 
 	//SNK
 	SDL_Texture * snkTx = nullptr;
