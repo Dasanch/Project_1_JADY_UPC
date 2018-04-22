@@ -129,6 +129,20 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1375, 150, LASER);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
+
+	//- Basic diagonal enemies
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1650, 45);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1690, 60);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1730, 75);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1770, 90);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1810, 105);
+
+	//Enemies that follow a straight line
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1840, 105);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1870, 105);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1900, 105);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1930, 105);
+
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180);
 
 	//Start of the tunnel
