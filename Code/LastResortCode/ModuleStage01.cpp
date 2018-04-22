@@ -151,7 +151,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 7700, 45, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8700, SCREEN_HEIGHT+50);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 8600, SCREEN_HEIGHT+50);
 
 	//End of the tunnel
 
@@ -239,7 +239,7 @@ update_status ModuleStage01::Update()
 	Current_time = SDL_GetTicks();
 	App->render->relative_camera.x;
 	// Move camera forward -------------------------------------------------------------------
-	if (App->render->camera.x <= ((5000 / foregndSpeed)*SCREEN_SIZE))
+	if (App->render->camera.x <= ((4550 / foregndSpeed)*SCREEN_SIZE))
 	{
 		App->render->camera.x += SCREEN_SIZE;
 		App->player1->position.x += 1;
