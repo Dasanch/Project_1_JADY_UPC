@@ -21,6 +21,7 @@
 #include "ModuleUI.h"
 #include "ModuleEnemies.h"
 #include "ModulePowerups.h"
+#include "ModuleStage02.h"
 
 #define midgndLoopDist 512 //midgndLoopDist = Distance when the first building on the tilemap repeats
 #define midgndOffset 32
@@ -123,6 +124,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1315, 45);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1257, 150);
+
 
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT, LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
@@ -366,6 +368,10 @@ update_status ModuleStage01::Update()
 		App->player1->numLvlwin = App->player2->numLvlwin = 1;
 		}
 		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
+	}
+	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN)  //win
+	{
+		App->fade->FadeToBlack(this, App->stage02, 0.5f);
 	}
 	//------------------------------------------------------------------------------------------
 	return UPDATE_CONTINUE;

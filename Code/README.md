@@ -27,7 +27,24 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 * _Find her on Instragram as @randomgerbit_
 * _Github profile: https://github.com/YessicaSD_
 
+## Movement keys
+>>Player 1:
+	- A:Left
+	- S:Down
+	- D: Right
+	- W: Up
+	-Space: Shoot
 
+>>Player 2:
+
+	- Left_arrow:Left
+	- Down_arrow:Down
+	- Right_arrow:Right
+	- Up_arrow:Up
+	- 0 Keynumeric: Shoot
+
+
+- F9: Change to level 2.
 
 ## Debug funtions
 
