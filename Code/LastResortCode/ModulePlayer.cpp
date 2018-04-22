@@ -52,7 +52,17 @@ bool ModulePlayer::CleanUp()
 }
 
 void ModulePlayer::Reappear() {
+	powerup_upgrades = 0;
+	powerup_type = powerupType::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
+	if (this == App->player1) {
+		App->unit->unitCol->to_delete = true;
+		App->unit->Disable();
+	}
+	if (this == App->player2) {
+		App->unit2->Enable();
+	}
+
 	isShooting = false;
 	shoot = false;
 	canMove = false;

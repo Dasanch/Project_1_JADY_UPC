@@ -48,9 +48,10 @@ public:
 	iPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
 	UnitType type;
+	Collider* unitCol = nullptr;
 
 private:
-	Collider* unitCol = nullptr;
+	
 	//Rotation
 	const float PI = 3.141592;
 	//- Orbit refers to the rotation of the unit around the player's ship

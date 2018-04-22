@@ -341,20 +341,6 @@ update_status ModuleStage01::Update()
 		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
 		//2048 = distance from the start of the tilemap to the first light
 	}
-	//Create the player 2
-
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_DOWN || App->input->keyboard[SDL_SCANCODE_KP_2])
-	{
-		if (App->player2->IsEnabled() == false)
-		{
-			//We enable the other player
-			App->player2->Enable();
-			//We put it on the position we need it
-			App->player2->InitPosition();
-		}
-	}
-	/*if (App->render->camera.x < 1500/foregndSpeed*SCREEN_SIZE)*/
-
 	MoveCam();
 
 	//Fade to black -----------------------------------------------------------------ALEJANDROOOO MIRA ESTOOOOO
