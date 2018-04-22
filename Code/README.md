@@ -33,7 +33,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 	- S:Down
 	- D: Right
 	- W: Up
-	-Space: Shoot
+	- Space: Shoot
+	- Left shift: Lock the unit
 
 >>Player 2:
 
@@ -42,6 +43,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 	- Right_arrow:Right
 	- Up_arrow:Up
 	- 0 Keynumeric: Shoot
+	- Right shift: Lock the unit
 
 
 	
@@ -49,6 +51,7 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 ## Others funtions
 	- Space: Skip intros
 	- F9: Change to level 2.
+	- F2: Go to cleared screen
 ## Debug funtions
 
 - Move camera: 
@@ -58,8 +61,8 @@ https://github.com/Dasanch/Project_1_JADY_UPC
   *Left:4;
   *Right:6;
 
--GodMode: With "F3" input;
-
+-GodMode: With "F3" input.
+-Show/Hide collider boxes: F1
 
 ##CHANGES
 	## CHANGES IN V0.5.0.0
