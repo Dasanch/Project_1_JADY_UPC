@@ -4,6 +4,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "Globals.h"
+#include "ModuleUnit.h"
 
 Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
 {
@@ -27,6 +28,11 @@ void Powerup_Laser::OnCollision(Collider* col)
 		LOG("You obtained its power!!!");
 		//We give it this powerup
 		if ( App->player1->powerup_upgrades < 3) { App->player1->powerup_upgrades++; }
+		if ( App->player1->powerup_upgrades == 1)
+		{
+			App->unit->Enable();
+			App->unit->playerToFollow = App->player1;
+		}
 		App->player1->powerup_type = powerupType::LASER;
 	}
 	else if(col == App->player2->playerCol)
