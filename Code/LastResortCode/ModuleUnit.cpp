@@ -262,7 +262,6 @@ update_status ModuleUnit::Update()
 
 		//- We grab the spin we need to render (here because it won't change if the unit doesn't move)
 		spinToRender = SpinToRender();
-		LOG("Spin to render: %i", spinToRender);
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
@@ -279,14 +278,22 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x - spriteXDifferences[spinToRender], position.y - spriteYDifferences[spinToRender], &internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
+	App->render->Blit(unitTx,
+		position.x - spriteXDifferences[spinToRender],
+		position.y - spriteYDifferences[spinToRender],
+		&internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
 
 	//Shoot------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(currentSpin);
 	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(currentSpin);
 	if(playerToFollow->Shoot() == true)
 	{
-		App->particles->AddParticle(App->particles->unitShot, position.x, position.y, playerToFollow->PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
+		App->particles->AddParticle(App->particles->unitShot,
+			position.x + shotPosXDifferences[spinToRender] - 7,
+			position.y + shotPosYDifferences[spinToRender] - 7,
+			playerToFollow->PlayerTexture,
+			COLLIDER_PLAYER_SHOT,
+			0);
 	}
 	return UPDATE_CONTINUE;
 }
@@ -410,10 +417,6 @@ void ModuleUnit::LimitRotation(float &rotation)
 
 int ModuleUnit::SpinToRender()
 {
-	//LOG("ESE: %f", angleValue[ESE]);
-	//LOG("SE: %f", angleValue[SE]);
-	//LOG("SSE: %f", angleValue[SSE]);
-	//LOG("S: %f", angleValue[S]);
 	//Start with the exception (E)
 	if(currentSpin > angleValue[E] - angleSeparation || currentSpin <= 0 + angleSeparation) { return E; }
 	//Then go through all the other cases

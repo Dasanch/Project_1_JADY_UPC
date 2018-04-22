@@ -69,9 +69,11 @@ private:
 	const float radius = 31;
 	float angleValue[axis];//The value of each angle
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
-                                   //E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW,  N, NNE, NE, ENE
-	int spriteXDifferences[axis] = { 8,   8,  8,   8, 8,   9, 13,  14, 14, 14, 13,   9,  8,   8,  8,   8 };//Sprite differences in x and y, helps us keep the unit centered on its trajectory
-	int spriteYDifferences[axis] = { 8,   8,  8,   8, 8,   8,  8,   8,  8,  9, 13,  15, 14,  15, 13,   9 };
+                                    //   E, ESE,  SE, SSE,   S, SSW,  SW, WSW,   W, WNW,  NW, NNW,   N, NNE,  NE, ENE
+	int spriteXDifferences[axis] =  {    8,   8,   8,   8,   8,   9,  13,  14,  14,  14,  13,   9,   8,   8,   8,   8 };//Sprite differences in x and y, helps us keep the unit centered on its trajectory
+	int spriteYDifferences[axis] =  {    8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };
+	int shotPosXDifferences[axis] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the orbit projectile at the top of its antenas
+	int shotPosYDifferences[axis] = {    7,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };
 	const float unitProjectileSpeed = 5;
 	//Animations
 	//There is an animation for each direciton of the ball
