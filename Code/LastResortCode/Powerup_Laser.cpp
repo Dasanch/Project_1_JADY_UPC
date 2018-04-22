@@ -32,14 +32,7 @@ void Powerup_Laser::OnCollision(Collider* col)
 			App->unit->playerToFollow = App->player1;
 		}
 		App->player1->powerup_type = powerupType::LASER;
-		if(animation->current_frame == 0)
-		{
-			App->unit->type = UnitType::orange;
-		}
-		else
-		{
-			App->unit->type = UnitType::blue;
-		}
+		//Change unit type
 	}
 	else if(col == App->player2->playerCol)
 	{
@@ -51,13 +44,6 @@ void Powerup_Laser::OnCollision(Collider* col)
 			App->unit2->playerToFollow = App->player2;
 		}
 		App->player2->powerup_type = powerupType::LASER;
-		if (animation->current_frame == 0)
-		{
-			App->unit2->type = UnitType::orange;
-		}
-		else
-		{
-			App->unit2->type = UnitType::blue;
-		}
+		//Change unit type
 	}
 }

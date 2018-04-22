@@ -39,7 +39,8 @@ bool Module2lvlScene::Start()
 	App->particles->Enable();
 	App->collision->Enable();
 
-
+	App->render->relative_camera.x = 0;
+	App->render->relative_camera.y = 0;
 	App->player1->position.x = 0;
 	App->player1->position.y = 130;
 	App->player2->position.x = 0;
@@ -66,7 +67,8 @@ update_status Module2lvlScene::Update() {
 
 	App->player1->position.x += 1;
 	App->player2->position.x += 1;
-	App->render->camera.x -= SCREEN_SIZE;
+	App->render->camera.x += SCREEN_SIZE;
+	App->render->relative_camera.x += 1;
 
 
 	App->render->Blit(lvl2Text, 0, 0, NULL, backgroundspeed);

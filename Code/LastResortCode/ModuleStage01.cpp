@@ -90,8 +90,8 @@ bool ModuleStage01::Start()
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78,LASER);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100,LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 150);
 
@@ -106,7 +106,10 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 120);
+
+
+
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 980, 120);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1000, 130);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1010, 40);
 

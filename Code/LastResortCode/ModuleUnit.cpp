@@ -184,14 +184,7 @@ bool ModuleUnit::Start()
 	bool ret = true;
 	LOG("Loading unit assets");
 	//Load assets
-	if(type == orange)
-	{
-		unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
-	}
-	else
-	{
-		unitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
-	}
+	unitTx = App->textures->Load("Assets/OrangeUnitSpritesheet.png");
 	currentOrbit = currentSpin = angleValue[E];
 	unitCol = App->collision->AddCollider({ position.x, position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
 	return ret;

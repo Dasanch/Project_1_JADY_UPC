@@ -10,6 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
+#include "ModuleStage02.h"
 
 
 
@@ -103,7 +104,10 @@ update_status ModuleGameTitle::Update() {
 	{
 		App->fade->FadeToBlack(this, App->stage01, 0.0f);
 	}
-	
+	if (App->input->keyboard[SDL_SCANCODE_F9] == KEY_DOWN) //refix it please 
+	{
+		App->fade->FadeToBlack(this, App->stage02, 0.0f);
+	}
 	// Win/Lose button
 	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_DOWN) //win
 	{

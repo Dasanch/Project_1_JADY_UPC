@@ -59,9 +59,10 @@ ModuleParticles::ModuleParticles()
 	Basic_Laser.anim.PushBack({ 17,252,64,3 });
 	Basic_Laser.anim.PushBack({ 75,247,48,3 });
 	Basic_Laser.anim.PushBack({ 17,247,56,3 });
-	Basic_Laser.anim.speed = 0.3f;
+	Basic_Laser.anim.speed = 2.0f;
 	Basic_Laser.life = 2000;
 	Basic_Laser.speed.x = 10;
+	
 	//Middle Boss shot particle------------------------------------
 	MiddleBossShot.anim.PushBack({232,248,18,17});
 	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
@@ -76,6 +77,21 @@ ModuleParticles::ModuleParticles()
 	MiddleBossShot.life = 5000;
 	MiddleBossShot.speed.x = 1*VectorMiddleBossShots.x;
 	MiddleBossShot.speed.y = 1*VectorMiddleBossShots.y;
+
+	//Middle Boss Explosition shot----------------------------------
+	MiddleBosExplotion.anim.PushBack({ 0,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 24,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 48,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 72,434,23,24 });
+	MiddleBosExplotion.anim.PushBack({ 96,435,24,23 });
+	MiddleBosExplotion.anim.PushBack({ 121,434,24,24 });
+	MiddleBosExplotion.anim.PushBack({ 145,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 168,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 192,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 214,434,22,25 });
+	MiddleBosExplotion.anim.PushBack({ 237,434,22,25 });
+	MiddleBosExplotion.anim.speed = 0.2;
+	MiddleBossShot.collision_fx = &MiddleBosExplotion;
 	//unitShot.speed.x = 5;
 	//unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
 	//Basic shot explosion--------------------------------------
@@ -136,6 +152,8 @@ bool ModuleParticles::Start()
 	death_explosion.sfx = death_sfx;
 	g_explosion01_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_1.wav");
 	g_explosion02_1sfx = App->audio->LoadSFX("Assets/General/Fx/Explosion_2.wav");
+	Basic_LaserFx = App->audio->LoadSFX("Assets/004. Shot - center.wav");
+	Basic_Laser.sfx = Basic_LaserFx;
 	//--------------------------------------------------------
 	return true;
 }
