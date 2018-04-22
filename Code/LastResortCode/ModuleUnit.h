@@ -74,7 +74,8 @@ private:
 	int spriteYDifferences[axis] =  {    8,   8,   8,   8,   8,   8,   8,   8,   8,   9,  13,  15,  14,  15,  13,   9 };
 	int shotPosXDifferences[axis] = {   15,  14,  12,   6,   0,  -5, -11, -13, -14, -13, -11,  -6,   0,   6,  11,  14 };//Helps us position the orbit projectile at the top of its antenas
 	int shotPosYDifferences[axis] = {    7,   7,  12,  14,  15,  14,  12,   6,   0,  -6, -11, -14, -14, -13, -10,  -6 };
-	const float unitProjectileSpeed = 5;
+	const float unitProjectileSpeed = 6 + 1;//6= pixels it moves each frame, 1 = speed at which the camera moves backwards
+	//The speed is not correctly true because when the particle goes back, it will have + 1 speed, because the camera moves to the back
 	//Animations
 	//There is an animation for each direciton of the ball
 	SDL_Texture* unitTx = nullptr;
