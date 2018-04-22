@@ -160,6 +160,7 @@ bool ModuleParticles::CleanUp()
 	//audios---------------------------------------------------
 	App->audio->UnloadSFX(basic_shot_sfx);
 	App->audio->UnloadSFX(death_sfx);
+	App->audio->UnloadSFX(Basic_LaserFx);
 	//----------------------------------------------------------
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
