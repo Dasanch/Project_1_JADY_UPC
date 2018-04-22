@@ -284,12 +284,12 @@ update_status ModuleUnit::Update()
 		&internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
 
 	//Shoot------------------------------------------------------------------------------------------------
-	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(currentSpin);
-	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(currentSpin);
+	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(angleValue[spinToRender]);
+	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(angleValue[spinToRender]);
 	if(playerToFollow->Shoot() == true)
 	{
 		App->particles->AddParticle(App->particles->unitShot,
-			position.x + shotPosXDifferences[spinToRender] - 7,
+			position.x + shotPosXDifferences[spinToRender] - 7,//7 = half of the witdh of the unit's projectile
 			position.y + shotPosYDifferences[spinToRender] - 7,
 			playerToFollow->PlayerTexture,
 			COLLIDER_PLAYER_SHOT,
