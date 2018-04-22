@@ -16,9 +16,11 @@ Powerup_Speed::Powerup_Speed(int x, int y) : Powerup(x, y)
 
 void Powerup_Speed::CollisionEffect(Collider* col)
 {
+	LOG("You touched a powerup!!!");
 	//We find which player got this powerup
 	if (col == App->player1->playerCol)
 	{
+		LOG("You obtained its power!!!");
 		//We give it this powerup
 		App->player1->movementSpeed += 0.5f;//Test value. We should check what is the speed increase in the game.
 	}
