@@ -2,7 +2,8 @@
 #include "MiddleBosslvl1.h"
 #include "ModuleCollision.h"
 #include "ModuleRender.h"
-
+#include "ModuleParticles.h"
+#include "ModuleEnemies.h"
 
 //-------------------------------------------------------Torso--------------------------------------------------------------------------------------
 Enemy_MetalCraw::Enemy_MetalCraw(int x, int y) : Enemy(x, y)
@@ -23,6 +24,7 @@ Enemy_MetalCraw::Enemy_MetalCraw(int x, int y) : Enemy(x, y)
 	collider = App->collision->AddCollider({ -97, 6, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
 	lives = 20;
 	start_time = SDL_GetTicks();
+	numparticles = 0;
 }
 
 void Enemy_MetalCraw::Move()
@@ -34,7 +36,20 @@ void Enemy_MetalCraw::Move()
 		if(position.y>50)
 		position.y -= 1.0f;
 	}
-	if ( current_time > 10000)
+	if (current_time > 5000)
+	{
+		numparticles += 1;
+		if (numparticles <= 1)
+		{
+			App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y-10, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x-10, position.y+50, App->enemies->sprites, COLLIDER_ENEMY);
+		App->particles->AddParticle(App->particles->MiddleBossShot, position.x+50, position.y+10, App->enemies->sprites, COLLIDER_ENEMY);
+		}
+		
+		
+	}
+	if ( current_time > 20000)
 	{
 		position.x -= 1.0f;
 	}

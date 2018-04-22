@@ -29,15 +29,20 @@ public:
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;
 	char *str_lives_p2 = nullptr;
+	//Player data---------------------------------
 	int score_p1;
 	int score_p2; 
 	int lives_p1;
 	int lives_p2;
-	int credits;
-
 	bool p1_isDead = false;
 	bool p2_isDead = false;
+	bool p1_Unit= false;
+	bool p2_Unit = false;
+
+	//General data--------------------------------
+	int credits;
 	bool showUI = true;
+	//-------------------------------------------
 
 	SDL_Texture *uiTex = nullptr;
 	SDL_Rect lives_score_p1;

@@ -65,6 +65,9 @@ public:
 	Particle g_explosion02;
 	Mix_Chunk* g_explosion01_1sfx = nullptr;
 	Mix_Chunk* g_explosion02_1sfx = nullptr;
+	//Enemies------------------------------------------------
+	Particle MiddleBossShot;
+
 	//Mix_Chunk* g_explosion02_2sfx = nullptr;
 	//Mix_Chunk* g_explosion02_3sfx = nullptr;	
 	//Mix_Chunk* g_explosion01_2sfx = nullptr;
