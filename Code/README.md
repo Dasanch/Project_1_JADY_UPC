@@ -6,6 +6,12 @@ This game was created by 4 students of UPC, CITM on the Game Design and Developm
 In this project we will recreate the arcade game Last Resort, 
 we will use the sprites of the original game and we will program it from scratch.
 You can find all the information and necessary material we used to recreate this game in our repository on Github.
+About Last Resort
+Last Resort game imerses us in a world where the apocalypse is approaching and we will try to stop it.
+In order to acomplish our mission, we pilot a spaceship with the help of a small drone , the "unit",
+and we will defeat all kinds of enemies.
+It is a sci-fi side-scrolling shooter developed by SNK 1992.
+
 ## Find project
 https://github.com/Dasanch/Project_1_JADY_UPC
 
@@ -43,26 +49,27 @@ https://github.com/Dasanch/Project_1_JADY_UPC
 	- Right_arrow:Right
 	- Up_arrow:Up
 	- 0 Keynumeric: Shoot
-	- Right shift: Lock the unit
+	- 1 Keynumeric: Lock the unit
 
 
 	
 
-## Others funtions
+## Others functions
 	- Space: Skip intros
-	- F9: Change to level 2.
+	- F9: Go to level 2
 	- F2: Go to cleared screen
-## Debug funtions
+	- +: Volume up
+	- -: Volume down
 
-- Move camera: 
-  (Move with the numeric keypad)
-  *Up: 8 ;
-  *Down:5;
-  *Left:4;
-  *Right:6;
-
--GodMode: With "F3" input.
--Show/Hide collider boxes: F1
+## Debug functions
+	- Move camera: 
+ 	 (Move with the numeric keypad)
+  	*Up: 8 ;
+  	*Down:5;
+ 	 *Left:4;
+  	*Right:6;
+	-GodMode: With "F3" input.
+	-Show/Hide collider boxes: F1
 
 ##CHANGES
 	## CHANGES IN V0.5.0.0
