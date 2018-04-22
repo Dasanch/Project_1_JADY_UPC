@@ -59,3 +59,41 @@ https://github.com/Dasanch/Project_1_JADY_UPC
   *Right:6;
 
 -GodMode: With "M" input;
+
+##CHANGES
+	## CHANGES IN V0.5.0.0
+		* Added UI
+		* 2 Power Ups
+		* 3 Enemies (One that shot)
+		* Debug Modes (GodMode)
+		* Second player
+		* Unit
+
+	## CHANGES IN V0.4.0.0
+		* Partially added last resort title animations
+		* Added colliders for the player and a static enemy
+		* Added particles and sfx when the player shoots
+		* Completed neo geo screen animation
+ 
+	## CHANGES IN 0.3.1.0
+		* Added Continue Screen
+		*Fixed GameOver Screen
+
+	## CHANGES IN V0.3.0.0
+		* The player movement is fixed. 
+		* Added level 2.
+		* Added the game title screen, the neogeo screen, game over screen. 
+		* Added music to neogeo, the title screen, level 1 and 2.
+
+	## CHANGES IN V0.2.0.0:
+		* Added player 1 movement and animation
+		* Added paralax for all backgrounds with 3 different levels of depth.
+		* Added unfunctional audio module
+
+	## CHANGES IN V0.2.0.1:
+		* Added lights
+		* Changed 3r level of the background.
+		* Player transition move.
+
+
+
