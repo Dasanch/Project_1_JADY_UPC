@@ -1,38 +1,67 @@
 #include "Application.h"
 #include "MiddleBosslvl1.h"
 #include "ModuleCollision.h"
+#include "ModuleRender.h"
 
+
+//-------------------------------------------------------Torso--------------------------------------------------------------------------------------
 Enemy_MetalCraw_Torso::Enemy_MetalCraw_Torso(int x, int y) : Enemy(x, y)
 {
-	dropper.PushBack({ 138,372,42,59 });
-	dropper.PushBack({ 180,373,42,57 });
-	dropper.speed = 0.0f;
-	animation = &dropper;
+	torso.PushBack({ 138,372,42,59 });
+	torso.PushBack({ 180,373,42,57 });
+	torso.speed = 0.0f;
+	animation = &torso;
 
 	collider = App->collision->AddCollider({ 0, 6, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
-	original_y = y;
+	lives = 20;
+	start_time = SDL_GetTicks();
 }
 
 void Enemy_MetalCraw_Torso::Move()
 {
-
-	if (going_up)
+	current_time = SDL_GetTicks() - start_time;
+	if (current_time > 3700)
 	{
-		if (wave > 1.0f)
-			going_up = false;
-		else
-			wave += 0.07f;
+		position.x += 1.0f;
+		if(position.y>50)
+		position.y -= 1.0f;
 	}
-	else
-	{
-		if (wave < -1.0f)
-			going_up = true;
-		else
-			wave -= 0.07f;
-	}
-
-	position.y = int(float(original_y) + (20.0f * sinf(wave)));
-	position.x -= 1;
+	
+	
 
 
 }
+
+
+//--------------------------------------------------------------------Arm---------------------------------------------------------------------------------------
+Enemy_MetalCraw_Arm::Enemy_MetalCraw_Arm(int x, int y) : Enemy(x, y)
+{
+	Arm.PushBack({ 0,248,46,62 });
+	Arm.PushBack({ 46,248,46,62 });
+	Arm.PushBack({ 92,248,46,62 });
+	Arm.PushBack({ 138,248,46,62 });
+	Arm.PushBack({ 184,248,46,62 });
+	Arm.speed = 0.2f;
+	animation = &Arm;
+
+	collider = App->collision->AddCollider({ 0, 6, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
+	lives = 20;
+	start_time = SDL_GetTicks();
+}
+void Enemy_MetalCraw_Arm::Move()
+{
+	current_time = SDL_GetTicks() - start_time;
+	if (current_time > 3700)
+	{
+		position.x += 1.0f;
+		if (position.y>50)
+			position.y -= 1.0f;
+	}
+
+}
+
+
+
+
+
+

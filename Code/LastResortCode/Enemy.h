@@ -15,7 +15,7 @@ protected:
 
 public:
 	iPoint position;
-
+	float lives=1;
 public:
 	Enemy(int x, int y);
 	virtual ~Enemy();
