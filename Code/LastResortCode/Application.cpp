@@ -78,6 +78,7 @@ bool Application::Init()
 	particles->Disable();
 	collision->Disable();
 	ui->Disable();
+	powerups->Disable();
 
 	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
