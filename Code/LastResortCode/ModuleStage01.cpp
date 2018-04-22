@@ -99,6 +99,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWARM, 600, SCREEN_HEIGHT+100);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWLEFTARM, 600, SCREEN_HEIGHT + 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROWTORSO, 600, SCREEN_HEIGHT+100);
 	//define moveCamera struct values
 	

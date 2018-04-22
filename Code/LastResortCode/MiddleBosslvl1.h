@@ -34,4 +34,17 @@ public:
 
 };
 
+class Enemy_MetalCraw_LeftArm : public Enemy
+{
+private:
+	Animation Arm;
+	Uint32 start_time = SDL_GetTicks();
+	Uint32 current_time;
+public:
+
+	Enemy_MetalCraw_LeftArm(int x, int y);
+
+	void Move();
+	void Draw(SDL_Texture* sprites);
+};
 #endif // __ENEMY_METALCRAW_H__

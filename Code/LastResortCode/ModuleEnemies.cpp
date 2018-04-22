@@ -147,6 +147,9 @@ void ModuleEnemies::SpawnEnemy(const EnemyInfo& info)
 		case ENEMY_TYPES::METALCROWARM:
 			enemies[i] = new Enemy_MetalCraw_Arm(info.x, info.y);
 			break;
+		case ENEMY_TYPES::METALCROWLEFTARM:
+			enemies[i] = new Enemy_MetalCraw_LeftArm(info.x, info.y);
+			break;
 		}
 		
 	}
