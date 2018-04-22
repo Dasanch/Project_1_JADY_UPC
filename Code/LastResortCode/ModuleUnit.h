@@ -47,9 +47,9 @@ public:
 public:
 	iPoint position;
 	ModulePlayer* playerToFollow = nullptr;//Ship it has to follow
+	UnitType type;
 
 private:
-	UnitType type;
 	Collider* unitCol = nullptr;
 	//Rotation
 	const float PI = 3.141592;
