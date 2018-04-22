@@ -97,6 +97,7 @@ public:
 	//Collision--------------------------------------------
 	Collider* playerCol = nullptr;
 	COLLIDER_TYPE colType = COLLIDER_PLAYER;
+	COLLIDER_TYPE shot_colType;
 
 	//Win variables
 	bool winlvl;
