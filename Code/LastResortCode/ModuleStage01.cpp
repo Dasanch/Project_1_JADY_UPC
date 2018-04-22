@@ -101,7 +101,7 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 740, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 780, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35, LASER);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 850, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
