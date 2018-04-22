@@ -51,11 +51,12 @@ update_status  ModuleUI::PreUpdate() {
 	return update_status::UPDATE_CONTINUE;
 }
 
+
 update_status ModuleUI::Update() {
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];
-	str_lives_p1 = new char[1];
-	str_lives_p2 = new char[1];
+	str_lives_p1 = new char[4];
+	str_lives_p2 = new char[4];
 
 	lives_p1 = App->player1->lives;
 	snprintf(str_lives_p1, 4 * sizeof(str_lives_p1), "%d", lives_p1);
@@ -69,18 +70,22 @@ update_status ModuleUI::Update() {
 	score_p2 = App->player1->score;
 	snprintf(str_score_p2, 4 * sizeof(str_score_p2), "%d", score_p2);
 
-	//Static UI-----------------------------------------------------
-	App->render->Blit(uiTex, 16, 16, &lives_score_p1, 0.0f);
-	App->render->Blit(uiTex, 256, 16, &live_score_p2, 0.0f);
-	App->render->Blit(uiTex, 112, 16, &top, 0.0f);
-	App->render->Blit(uiTex, 24, 208, &pow, 0.0f);
-	App->render->Blit(uiTex, 184, 208, &pow, 0.0f);
-	/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //push button p2
-    //Variable UI----------------------------------------------------
-	App->fonts->BlitText(48, 24, 0, str_lives_p1);
-	App->fonts->BlitText(264, 24, 0, str_lives_p2);
-	App->fonts->BlitText(264, 24, 0, str_score_p1);
-	App->fonts->BlitText(264, 24, 0, str_score_p2);
+	if (showUI == true) {
+		//Static UI-----------------------------------------------------
+		App->fonts->BlitText(208, 216, 0, "CREDITS_00");
+		App->render->Blit(uiTex, 16, 16, &lives_score_p1, 0.0f);
+		App->render->Blit(uiTex, 256, 16, &live_score_p2, 0.0f);
+		App->render->Blit(uiTex, 112, 16, &top, 0.0f);
+		App->render->Blit(uiTex, 24, 208, &pow, 0.0f);
+		App->render->Blit(uiTex, 184, 208, &pow, 0.0f);
+		/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //Remember 1.0
+		//Variable UI----------------------------------------------------
+		App->fonts->BlitText(48, 24, 0, str_lives_p1);  //lives player 1
+		App->fonts->BlitText(264, 24, 0, str_lives_p2); //lives player 2
+		//App->fonts->BlitText(264, 24, 0, str_score_p1); //score player 1
+		//App->fonts->BlitText(264, 24, 0, str_score_p2); //score player 2
+	}
+	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
 
 	delete[](str_score_p1);
 	delete[](str_score_p2);
@@ -92,4 +97,16 @@ update_status ModuleUI::Update() {
 	str_lives_p2 = nullptr;
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleUI::ShowUi() {
+	if (showUI == false) {
+		showUI = true;
+	}
+	
+}
+void ModuleUI::HideUi() {
+	if (showUI == true) {
+		showUI = false;
+	}
 }

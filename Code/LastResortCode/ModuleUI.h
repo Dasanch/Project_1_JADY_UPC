@@ -18,11 +18,13 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void hideUi();
-	void showUi();
+	void HideUi();
+	void ShowUi();
 
 
 public:
+	Module* current_stage = nullptr;
+
 	char *str_score_p1= nullptr;
 	char *str_score_p2 = nullptr;
 	char *str_lives_p1 = nullptr;

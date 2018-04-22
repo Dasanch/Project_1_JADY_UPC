@@ -27,6 +27,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 	void Reappear();
 	void InitPosition();
+	void ShipAnimation();
 
 	//Functions that will be rewritten in each player
 	//virtual void LoadSprites();
@@ -36,14 +37,14 @@ public:
 	virtual bool MoveRight() = 0;
 	virtual bool Shoot() = 0;
 	virtual bool Lock() = 0;
-	virtual void ShipAnimation() = 0;
+	
 	virtual void Reset_Positions() = 0;
 
 public:
 	//Variables--------------------------------------------
 	//--------Gameplay-----------------------------
-	int score;
-	int lives;
+	int score = 0;
+	int lives = 2;
 	//--------States--------------------------------
 	bool isAppearing;
 	bool isDying;
