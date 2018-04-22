@@ -55,6 +55,8 @@ ModuleParticles::ModuleParticles()
 	MiddleBossShot.anim.PushBack({ 232,377,18,16 });
 	MiddleBossShot.anim.speed = 0.2f;
 	MiddleBossShot.life = 5000;
+	MiddleBossShot.speed.x = 1*VectorMiddleBossShots.x;
+	MiddleBossShot.speed.y = 1*VectorMiddleBossShots.y;
 	//unitShot.speed.x = 5;
 	//unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
 	//Basic shot explosion--------------------------------------

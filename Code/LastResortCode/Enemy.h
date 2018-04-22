@@ -25,7 +25,7 @@ public:
 
 	virtual void Move() {};
 	virtual void Draw(SDL_Texture* sprites);
-	virtual void OnCollision(Collider* collider);
+	virtual void OnCollision(Collider*);
 };
 
 #endif // __ENEMY_H__
