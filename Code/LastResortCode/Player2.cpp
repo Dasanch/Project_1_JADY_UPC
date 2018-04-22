@@ -10,6 +10,7 @@
 Player2::Player2() {
 	//Initial position------------------------------------------
 	initPosition = { 40,138 };
+	shot_colType = COLLIDER_PLAYER_2_SHOT;
 	//Movement animation----------------------------------------
 	shipAnim.PushBack({ 198, 3, 32, 12 });	//0 = UpShip
 	shipAnim.PushBack({ 230, 3, 32, 12 });	//1 = MiddleUpShip

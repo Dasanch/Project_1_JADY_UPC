@@ -8,8 +8,10 @@
 
 
 Player1::Player1() {
-	//Initial position------------------------------------------
+	//Initial values------------------------------------------
 	initPosition = { 40,74 };
+	shot_colType = COLLIDER_PLAYER_1_SHOT;
+
 	//Movement animation----------------------------------------
 	shipAnim.PushBack({ 0, 3, 32, 12 });	//0 = UpShip
 	shipAnim.PushBack({ 32, 3, 32, 12 });	//1 = MiddleUpShip
