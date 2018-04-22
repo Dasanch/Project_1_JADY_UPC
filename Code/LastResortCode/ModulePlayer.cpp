@@ -213,6 +213,7 @@ void  ModulePlayer::ShotInput() {
 				break;
 			case 2:
 				//Laser shot
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
 				break;
 			case 3:
 				//Laser shot
