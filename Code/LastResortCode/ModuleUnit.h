@@ -7,7 +7,7 @@
 #include "p2Point.h"
 #include "ModulePlayer.h"
 
-#define frames 8
+#define internalRotationFrames 8
 #define axis 16
 
 struct SDL_Texture;
@@ -27,7 +27,7 @@ enum UnitType
 
 struct InternalRotationAnimations
 {
-	SDL_Rect frame [frames];
+	SDL_Rect frame [internalRotationFrames];
 };
 
 class ModuleUnit : public Module
