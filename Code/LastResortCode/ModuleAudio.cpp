@@ -88,16 +88,45 @@ Mix_Music* const ModuleAudio::LoadMUS(const char* path) {
 
 	music = Mix_LoadMUS(path);
 
-	if (music == nullptr)
+	if (music != nullptr)
 	{
-		LOG("Unable to load music Mix Error: %s\n", Mix_GetError());
+		for (int i = 0; i < MAX_MUSICS; ++i)
+		{
+			if (musics[i] == nullptr)
+			{
+				musics[i] = music;
+				return music;
+			}
+		}
 	}
 	else
-	{
-		musics[last_music++] = music;
-	}
+		LOG("Unable to load music Mix Error: %s\n", Mix_GetError());
+
 	return music;
 }
+
+Mix_Chunk* const ModuleAudio::LoadSFX(const char* path) {
+
+	Mix_Chunk *chunk;
+	chunk = Mix_LoadWAV(path);
+
+	if (chunk != nullptr)
+	{
+		for (int i = 0; i < MAX_SOUNDEFECTS; ++i)
+		{
+			if (sfx[i] == nullptr)
+			{
+				sfx[i] = chunk;
+				return chunk;
+			}
+		}
+	}
+	else
+		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
+
+	return chunk;
+}
+
 
 bool ModuleAudio::UnloadMUS(Mix_Music * music) {
 
@@ -118,7 +147,6 @@ bool ModuleAudio::UnloadMUS(Mix_Music * music) {
 		}
 		
 	}
-	last_music = 0;
 	return ret;
 }
 
@@ -141,28 +169,14 @@ bool ModuleAudio::UnloadSFX(Mix_Chunk * sound_fx) {
 		}
 
 	}
-	last_chunk = 0;
 	return ret;
 }
 
-Mix_Chunk* const ModuleAudio::LoadSFX(const char* path) {
-
-	Mix_Chunk *chunk;
-	chunk = Mix_LoadWAV(path);
-
-	if (chunk == nullptr)
-	{
-		LOG("Unable to load sfx Mix Error: %s\n", Mix_GetError());
-	}
-	else
-		sfx[last_chunk++] = chunk;
-
-	return chunk;
-}
 
 bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 
 	bool music_found = false;
+
 	for (uint i = 0; i <MAX_MUSICS ; ++i) {
 		if (musics[i] == music) {
 			music_found = true;
@@ -198,12 +212,12 @@ bool ModuleAudio::ControlMUS(Mix_Music* music, Audio_State state) {
 bool ModuleAudio::ControlSFX(Mix_Chunk* chunk, Audio_State state) {
 	
 	bool sfx_found = false;
+
 	for (uint i = 0; i < MAX_SOUNDEFECTS; ++i) {
 		if (sfx[i] == chunk) {
 			sfx_found = true;
 		}
 	}
-
 
 	if (!sfx_found) {
 		LOG("Music not found ControlSFX");
