@@ -23,3 +23,4 @@ void Enemy_Basic::Move()
 	position.x -= 1;
 	
 }
+
