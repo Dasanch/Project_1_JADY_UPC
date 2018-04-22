@@ -13,6 +13,7 @@
 #include "Player2.h"
 #include "ModuleGameOver.h"
 #include "ModuleStageClear.h"
+#include "ModuleGameTitle.h"
 
 ModuleStageClear::ModuleStageClear()
 {
@@ -94,18 +95,18 @@ update_status ModuleStageClear::Update()
 	// Make that pressing SPACE loads another stage
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, App->readyScene, 0.5f);
+		App->fade->FadeToBlack(this, App->titleScene, 0.5f);
 		App->player1->winlvl = App->player2->winlvl = false;
 		App->player1->numLvlwin = App->player2->numLvlwin = 0;
 	}
 
 	// Win/Lose button
-	if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
-	{
-		App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
-		App->player1->winlvl = App->player2->winlvl = false;
-		App->player1->numLvlwin = App->player2->numLvlwin = 0;
-	}
+	//if (App->input->keyboard[SDL_SCANCODE_G] == KEY_DOWN) //lose
+	//{
+	//	App->fade->FadeToBlack(this, App->gameoverScene, 0.5f);
+	//	App->player1->winlvl = App->player2->winlvl = false;
+	//	App->player1->numLvlwin = App->player2->numLvlwin = 0;
+	//}
 
 
 	return UPDATE_CONTINUE;
