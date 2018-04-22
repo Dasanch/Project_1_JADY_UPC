@@ -25,6 +25,9 @@ public:
 	void MovementInput(); //Added 
 	void ShotInput(); //Added 
 	void OnCollision(Collider*, Collider*);
+	void Reappear();
+
+
 	//Functions that will be rewritten in each player
 	//virtual void LoadSprites();
 	virtual bool MoveUp() = 0;
@@ -57,17 +60,17 @@ public:
 	//--------Gameplay-----------------------------
 	int score;
 	int lives;
-	//--------Time---------------------------------
-	//Time variables
-	Uint32 start_time;
-	Uint32 current_time;
-	//--------Debug Modes--------------------------
-	bool godMode;
 	//--------States--------------------------------
 	bool isAppearing;
 	bool isDying;
 	bool isShooting = false;
 	bool shoot = false;
+	bool unit_locked = false;
+	//--------Debug Modes--------------------------
+	bool godMode;
+	//--------Time---------------------------------
+	Uint32 start_time;
+	Uint32 current_time;
 	//--------Movment------------------------------
 	iPoint position;
 	float const movementSpeed = 2;
@@ -82,7 +85,7 @@ public:
 	float const transitionLimit = 0.5f;//This indicates when the ship will transition from its idle animation to its transition animation
 	float const MaxLimit = 0.90f;//This indicates when the ship will transition from its transition animation to its max animation
 
-	bool locked = false;
+	
 
 	enum ShipFrames
 	{

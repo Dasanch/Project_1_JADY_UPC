@@ -23,13 +23,17 @@ public:
 
 
 public:
-	char str_score_p1[MAX_NUMBERS_SCORE];
-	char str_score_p2[MAX_NUMBERS_SCORE];
+	char *str_score_p1= nullptr;
+	char *str_score_p2 = nullptr;
+	char *str_lives_p1 = nullptr;
+	char *str_lives_p2 = nullptr;
 	int score_p1;
 	int score_p2; 
 	int lives_p1;
 	int lives_p2;
+	int credits;
 
+	bool showUI = true;
 
 	SDL_Texture *uiTex = nullptr;
 	SDL_Rect lives_score_p1;

@@ -214,7 +214,7 @@ update_status ModuleUnit::Update()
 	moving = false;
 
 	//- Check if the ball is locked
-	if(playerToFollow->locked == false)
+	if(playerToFollow->unit_locked == false)
 	{
 		//Conditions for movement-----------------------------------------------------------------------------
 		if (playerToFollow->MoveLeft() == true)

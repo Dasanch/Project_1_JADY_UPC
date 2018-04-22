@@ -27,19 +27,15 @@ bool ModulePlayer::Start()
 	canMove = false;
 	canShoot = false;
 	isDying = false;
-
-	
 	shipAnimations = ShipAnimations::Initial;
 	start_time = SDL_GetTicks();
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
-	//audios-------------------------------------------------------------------------
-
 	//colliders----------------------------------------------------------------------
 	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
 	//animations-----------------------------------------------------------------------
 	deathAnim.Reset();
-	FadeToBlackAlfa = 0;
+	
 	return ret;
 }
 
@@ -48,10 +44,17 @@ bool ModulePlayer::CleanUp()
 	LOG("Unloading player assets");
 	//textures------------------------------------------------------------------
 	App->textures->Unload(PlayerTexture);
-	//audios------------------------------------------------------------------
-
-
 	return true;
+}
+
+void ModulePlayer::Reappear() {
+	isShooting = false;
+	shoot = false;
+	canMove = false;
+	canShoot = false;
+	shipAnimations = ShipAnimations::Initial;
+	start_time = SDL_GetTicks();
+	deathAnim.Reset();
 }
 
 update_status ModulePlayer::PreUpdate()
@@ -66,6 +69,8 @@ update_status ModulePlayer::PreUpdate()
 
 update_status ModulePlayer::Update()
 {
+	//Timer----------------------------------------------------------------------------
+	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Debug Modes----------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !isDying)
 	{
@@ -80,8 +85,6 @@ update_status ModulePlayer::Update()
 			godMode = true;
 		}
 	}
-	//Timer----------------------------------------------------------------------------
-	current_time = SDL_GetTicks() - start_time; //Delete if it has not use
 	//Shots----------------------------------------------------------------------------
 	if (canShoot == true) {
 		ShotInput();
@@ -89,8 +92,8 @@ update_status ModulePlayer::Update()
 	//Lock the unit--------------------------------------------------------------------
 	if (Lock())
 	{
-		if (locked == true) { locked = false; }
-		else { locked = true; }
+		if (unit_locked == true) { unit_locked = false; }
+		else { unit_locked = true; }
 	}
 	//Collision------------------------------------------------------------------------
 	playerCol->SetPos(position.x, position.y); //We update the collider position
