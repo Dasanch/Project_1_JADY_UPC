@@ -15,6 +15,7 @@ private:
 
 	Uint32 start_time = SDL_GetTicks();
 	Uint32 current_time;
+	int numparticles;
 public:
 
 	Enemy_MetalCraw(int x, int y);

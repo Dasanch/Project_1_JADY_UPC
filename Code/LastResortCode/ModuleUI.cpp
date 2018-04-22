@@ -88,7 +88,7 @@ update_status ModuleUI::Update() {
 		App->fonts->BlitText(48, 24, 0, str_lives_p1);  //lives player 1
 		App->fonts->BlitText(264, 24, 0, str_lives_p2); //lives player 2
 		//App->fonts->BlitText(264, 24, 0, str_score_p1); //score player 1
-		//App->fonts->BlitText(264, 24, 0, str_score_p2); //score player 2
+
 	}
 	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
 

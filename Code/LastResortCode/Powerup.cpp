@@ -20,5 +20,5 @@ const Collider* Powerup::GetCollider() const
 
 void Powerup::OnCollision(Collider* collider)
 {
-
+	CollisionEffect(collider);
 }

@@ -35,7 +35,7 @@ void Enemy::Draw(SDL_Texture* sprites)
 void Enemy::OnCollision(Collider* collider)
 {
 	App->particles->AddParticle(App->particles->g_explosion02, position.x, position.y + App->render->relative_camera.y, App->particles->g_explosion02.texture, COLLIDER_NONE, 0);
-	App->powerups->AddPowerup(position.x, position.y, SPEED);
+	App->powerups->AddPowerup(position.x, position.y, LASER);
 	if (SDL_GetTicks() % 2)
 		App->audio->ControlSFX(App->particles->g_explosion01_1sfx, PLAY_AUDIO);
 	else

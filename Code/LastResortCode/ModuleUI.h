@@ -38,6 +38,7 @@ public:
 	bool p2_isDead = false;
 	bool p1_Unit= false;
 	bool p2_Unit = false;
+	bool godMode = false;
 	//General data--------------------------------
 	int credits;
 	bool showUI = true;

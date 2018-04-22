@@ -156,10 +156,10 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
 		{
-
 			enemies[i]->lives -= 1;
 			if (enemies[i]->lives == 0)
 			{
+				enemies[i]->points;
 				enemies[i]->OnCollision(c2);
 				delete enemies[i];
 				enemies[i] = nullptr;

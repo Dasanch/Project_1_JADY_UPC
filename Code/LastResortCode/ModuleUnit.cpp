@@ -292,7 +292,7 @@ update_status ModuleUnit::Update()
 			position.x + shotPosXDifferences[spinToRender] - 7,//7 = half of the witdh of the unit's projectile
 			position.y + shotPosYDifferences[spinToRender] - 7,
 			playerToFollow->PlayerTexture,
-			COLLIDER_PLAYER_SHOT,
+			COLLIDER_PLAYER_1_SHOT,
 			0);
 	}
 	return UPDATE_CONTINUE;

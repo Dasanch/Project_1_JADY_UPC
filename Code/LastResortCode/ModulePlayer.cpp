@@ -10,6 +10,8 @@
 #include "ModuleAudio.h"
 #include "ModuleStageClear.h"
 #include "ModuleStage01.h"
+#include "ModuleUnit.h"
+
 ModulePlayer::ModulePlayer() //Constructor 
 {}
 
@@ -84,12 +86,12 @@ update_status ModulePlayer::Update()
 	{
 		if (godMode == true) {
 			colType = COLLIDER_PLAYER;
-			playerCol->type = COLLIDER_PLAYER;
+			playerCol->type = colType;
 			godMode = false;
 		}
 		else {
 			colType = COLLIDER_NONE;
-			playerCol->type = COLLIDER_NONE;
+			playerCol->type = colType;
 			godMode = true;
 		}
 	}
@@ -113,25 +115,9 @@ update_status ModulePlayer::Update()
 	if (winlvl)
 	{
 		Winlvl();
-		/*if (start_timer)
-		{
-
-
-			FadeToBlackAlfa += 1;
-			SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
-			SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, FadeToBlackAlfa);
-			SDL_RenderFillRect(App->render->renderer, &backgroundBlack);
-
-
-		}*/
-		/*if (FadeToBlackAlfa > 255)
-		{*/
-			
-		/*}*/
 	}
 	return UPDATE_CONTINUE;
 }
-
 
 void ModulePlayer::ShipAnimation() {
 
@@ -190,7 +176,7 @@ void ModulePlayer::ShipAnimation() {
 
 		else if (isDying) {
 			colType = COLLIDER_NONE;
-			playerCol->type = COLLIDER_NONE;
+			playerCol->type = colType;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}
@@ -210,10 +196,71 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 
 void  ModulePlayer::ShotInput() {
 	//Basic shoot-------------------------------------------------------------------
-	if (Shoot() == true) {
-		App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_SHOT, 0);
-		if (isShooting == false)
-			shoot = true;
+	if (Shoot() == true)
+	{
+		if(powerup_type == powerupType::NOPOWERUP)
+		{
+			//Basic shoot
+			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+		}
+		if (powerup_type == powerupType::LASER)
+		{
+			switch(powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				break;
+			case 2:
+				//Laser shot
+				break;
+			case 3:
+				//Laser shot
+				//Laser rings
+				break;
+			}
+		}
+		if (powerup_type == powerupType::HOMING)
+		{
+			switch (powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				break;
+			case 2:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				//2 missiles on the sides
+				break;
+			case 3:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				//6 missiles on the sides
+				break;
+			}
+		}
+		if (powerup_type == powerupType::GROUND)
+		{
+			switch (powerup_upgrades)
+			{
+			case 1:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				break;
+			case 2:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				//Missiles up and down
+				break;
+			case 3:
+				//Basic shoot
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_PLAYER_1_SHOT, 0);
+				//Missiles up and down that destoy the ground
+				break;
+			}
+		}
+		if (isShooting == false) { shoot = true; }
 	}
 	//----------Ship Fire-------------------------------------------
 	if (shoot == true) {
@@ -236,20 +283,20 @@ void ModulePlayer::MovementInput() {
 
 	if (MoveLeft() == true)	{
 		//---------Movment-----------------------------------------------------------
-		position.x -= movementSpeed;
+		position.x -= (int)movementSpeed;
 	
 		if (position.x < (App->render->camera.x / App->render->cameraspeed))
 			position.x = App->render->camera.x / App->render->cameraspeed;
 	}
 	if (MoveRight() == true) {
 		//---------Movment-----------------------------------------------------------
-		position.x += movementSpeed;
+		position.x += (int)movementSpeed;
 		if (position.x + playerwidth > (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
 			position.x = (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;
 	}
 	if (MoveUp() == true) {
 		//---------Movment-----------------------------------------------------------
-		position.y -= movementSpeed;
+		position.y -= (int)movementSpeed;
 		if (position.y <(App->render->camera.y / App->render->cameraspeed))
 			position.y = (App->render->camera.y / App->render->cameraspeed) ;
 		/*if (position.y < 0)
@@ -263,7 +310,11 @@ void ModulePlayer::MovementInput() {
 	}
 	if (MoveDown() == true)	{
 		//---------Movment-----------------------------------------------------------
-		position.y += movementSpeed;
+
+		if (position.y <(App->render->camera.y / App->render->cameraspeed) + SCREEN_HEIGHT - 12)
+
+		position.y += (int)movementSpeed;
+
 		
 		
 		//---------Animation---------------------------------------------------------
@@ -292,7 +343,7 @@ void ModulePlayer::Winlvl()
 	if (godMode == false)
 	{
 		colType = COLLIDER_NONE;
-		playerCol->type = COLLIDER_NONE;
+		playerCol->type = colType;
 		godMode = true;
 	}
 	

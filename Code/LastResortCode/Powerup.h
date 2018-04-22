@@ -19,6 +19,7 @@ public:
 	virtual ~Powerup();
 
 	const Collider* GetCollider() const;
+	virtual void CollisionEffect(Collider*) = 0;
 	virtual void OnCollision(Collider* collider);
 };
 

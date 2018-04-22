@@ -43,6 +43,18 @@ ModuleParticles::ModuleParticles()
 	unitShot.anim.speed = 0.3f;
 	unitShot.life = 2000;
 	unitShot.collision_fx = &unit_explosion;
+	//Middle Boss shot particle------------------------------------
+	MiddleBossShot.anim.PushBack({232,248,18,17});
+	MiddleBossShot.anim.PushBack({ 232,267,17,17 });
+	MiddleBossShot.anim.PushBack({ 233,285,17,17 });
+	MiddleBossShot.anim.PushBack({ 232,303,18,17 });
+	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
+	MiddleBossShot.anim.PushBack({ 233,320,17,18 });
+	MiddleBossShot.anim.PushBack({ 233,339,17,18 });
+	MiddleBossShot.anim.PushBack({ 232,358,18,17 });
+	MiddleBossShot.anim.PushBack({ 232,377,18,16 });
+	MiddleBossShot.anim.speed = 0.2f;
+	MiddleBossShot.life = 5000;
 	//unitShot.speed.x = 5;
 	//unitShot.speed.y = -5;//These speeds need to be changed depending in which way the orbit was when they were thrown
 	//Basic shot explosion--------------------------------------
@@ -235,7 +247,7 @@ bool Particle::Update()
 
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
-		if (collider->type == COLLIDER_PLAYER_SHOT && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
+		if (collider->type == COLLIDER_PLAYER_1_SHOT && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
 			ret = false;
 		}
 	}
