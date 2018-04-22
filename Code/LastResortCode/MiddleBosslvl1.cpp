@@ -14,10 +14,10 @@ Enemy_MetalCraw::Enemy_MetalCraw(int x, int y) : Enemy(x, y)
 	animation = &torso;
 
 	Arm.PushBack({ 0,248,46,62 });
-	/*Arm.PushBack({ 46,248,46,62 });
+	Arm.PushBack({ 46,248,46,62 });
 	Arm.PushBack({ 92,248,46,62 });
 	Arm.PushBack({ 138,248,46,62 });
-	Arm.PushBack({ 184,248,46,62 });*/
+	Arm.PushBack({ 184,248,46,62 });
 	Arm.speed = 0.2f;
 	Leg = {222,406,18,24};
 	collider = App->collision->AddCollider({ -97, 6, 42, 42 }, COLLIDER_TYPE::COLLIDER_ENEMY, (Module*)App->enemies);
@@ -28,13 +28,16 @@ Enemy_MetalCraw::Enemy_MetalCraw(int x, int y) : Enemy(x, y)
 void Enemy_MetalCraw::Move()
 {
 	current_time = SDL_GetTicks() - start_time;
-	if (current_time > 3000)
+	if (current_time > 3000 && current_time < 10000)
 	{
 		position.x += 1.0f;
 		if(position.y>50)
 		position.y -= 1.0f;
 	}
-	
+	if ( current_time > 10000)
+	{
+		position.x -= 1.0f;
+	}
 	
 
 
@@ -53,8 +56,8 @@ void  Enemy_MetalCraw::Draw(SDL_Texture* sprites)
 		App->render->FlippedBlit(sprites, position.x+ 39, position.y-6 + App->render->relative_camera.y, &(Arm.GetCurrentFrame()));
 	
 
-	/*	App->render->Blit(sprites, position.x - 3, position.y + 35 + App->render->relative_camera.y, &Leg);
-		App->render->FlippedBlit(sprites, position.x +27, position.y + 35 + App->render->relative_camera.y, &Leg);*/
+		App->render->Blit(sprites, position.x - 3, position.y + 35 + App->render->relative_camera.y, &Leg);
+		App->render->FlippedBlit(sprites, position.x +27, position.y + 35 + App->render->relative_camera.y, &Leg);
 
 		App->render->Blit(sprites, position.x, position.y + App->render->relative_camera.y, &(animation->GetCurrentFrame()));
 	}
