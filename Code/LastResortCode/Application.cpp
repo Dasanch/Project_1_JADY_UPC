@@ -38,6 +38,7 @@ Application::Application()
 	modules[i++] = stage02 = new Module2lvlScene();
 	modules[i++] = powerups = new ModulePowerups();
 	modules[i++] = unit = new ModuleUnit();
+	modules[i++] = unit2 = new ModuleUnit();
 	modules[i++] = particles = new ModuleParticles();//!IMPORTANT: Module particles must be after the level modules and before the player module (note that particles are always rendered behind the player ship)
 	modules[i++] = neogeoScene = new ModuleNeoGeo();
 	modules[i++] = titleScene = new ModuleGameTitle();
@@ -74,6 +75,7 @@ bool Application::Init()
 	continueScene->Disable();
 	stageclearScene->Disable();
 	unit->Disable();
+	unit2->Disable();
 	enemies->Disable();
 	particles->Disable();
 	collision->Disable();

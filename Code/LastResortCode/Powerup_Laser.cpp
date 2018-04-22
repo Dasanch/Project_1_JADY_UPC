@@ -44,7 +44,20 @@ void Powerup_Laser::OnCollision(Collider* col)
 	else if(col == App->player2->playerCol)
 	{
 		//We give it this powerup
-		if ( App->player2->powerup_upgrades < 3) { App->player1->powerup_upgrades++; }
+		if ( App->player2->powerup_upgrades < 3) { App->player2->powerup_upgrades++; }
+		if (App->player2->powerup_upgrades == 1)
+		{
+			App->unit2->Enable();
+			App->unit2->playerToFollow = App->player2;
+		}
 		App->player2->powerup_type = powerupType::LASER;
+		if (animation->current_frame == 0)
+		{
+			App->unit2->type = UnitType::orange;
+		}
+		else
+		{
+			App->unit2->type = UnitType::blue;
+		}
 	}
 }
