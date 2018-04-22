@@ -20,9 +20,11 @@ Powerup_Laser::Powerup_Laser(int x, int y) : Powerup(x, y)
 
 void Powerup_Laser::OnCollision(Collider* col)
 {
+	LOG("You touched a powerup!!!");
 	//We find which player got this powerup
 	if(col == App->player1->playerCol)
 	{
+		LOG("You obtained its power!!!");
 		//We give it this powerup
 		if ( App->player1->powerup_upgrades < 3) { App->player1->powerup_upgrades++; }
 		App->player2->powerup_type = powerupType::LASER;
