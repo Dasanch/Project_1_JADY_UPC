@@ -8,7 +8,7 @@ class Powerup_Speed : public Powerup
 public:
 	Powerup_Speed(int x, int y);
 	Animation speedAnim;
-	//Effect on catch
+	void CollisionEffect(Collider*) override;
 };
 
-#endif // __POWERUP_LASER_H__
+#endif // __POWERUP_SPEED_H__

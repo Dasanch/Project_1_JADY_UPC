@@ -83,8 +83,9 @@ bool Player2::MoveLeft()
 
 bool Player2::MoveRight()
 {
-	return (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && MoveLeft()== false);
 }
+//We limit MoveRight because if MoveRight and Moveleft are pressed, it goes left
 
 bool Player2::MoveDown()
 {
@@ -93,8 +94,9 @@ bool Player2::MoveDown()
 
 bool Player2::MoveUp()
 {
-	return (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT);
+	return (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && MoveDown() == false);
 }
+//We limit MoveUp because if MoveUp and MoveDown are pressed, it goes down
 
 bool Player2::Shoot()
 {
