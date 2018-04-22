@@ -51,12 +51,17 @@ Enemy_MetalCraw_Arm::Enemy_MetalCraw_Arm(int x, int y) : Enemy(x, y)
 void Enemy_MetalCraw_Arm::Move()
 {
 	current_time = SDL_GetTicks() - start_time;
-	if (current_time > 3700)
+	if (current_time > 4200)
 	{
 		position.x += 1.0f;
+		
+	}
+	if (current_time > 3700)
+	{
 		if (position.y>50)
 			position.y -= 1.0f;
 	}
+	
 
 }
 
