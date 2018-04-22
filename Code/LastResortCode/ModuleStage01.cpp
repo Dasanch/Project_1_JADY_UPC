@@ -102,6 +102,10 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 780, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35);
 
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 850, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 890, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 930, 150);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 970, 150);
 	/*App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT,LASER);
 	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 4000, SCREEN_HEIGHT);
