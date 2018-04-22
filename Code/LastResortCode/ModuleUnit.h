@@ -65,7 +65,8 @@ private:
 	int spinToRender;
 	float currentInternalRotation;
 	const float internalRotationSpeed = 0.2f;
-	bool moving;//A bool that indicates if the player is moving (pressing any keys)
+	bool orbiting;//A bool that indicates if we can make the unit orbit
+	bool spinning;//A bool that indicates if we can make the unit spin
 	const float radius = 31;
 	float angleValue[axis];//The value of each angle
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
