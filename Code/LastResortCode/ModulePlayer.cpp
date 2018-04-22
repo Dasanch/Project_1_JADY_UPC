@@ -212,9 +212,6 @@ void  ModulePlayer::ShotInput() {
 			case 1:
 				//Basic shoot
 				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
-				//Unit
-				App->unit->Enable();
-				App->unit->playerToFollow = App->player1;
 				break;
 			case 2:
 				//Laser shot
@@ -233,9 +230,6 @@ void  ModulePlayer::ShotInput() {
 			case 1:
 				//Basic shoot
 				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
-				//Unit
-				App->unit->Enable();
-				App->unit->playerToFollow = App->player1;
 				break;
 			case 2:
 				//Basic shoot
@@ -256,9 +250,6 @@ void  ModulePlayer::ShotInput() {
 			case 1:
 				//Basic shoot
 				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position. y + 3, PlayerTexture, shot_colType, 0);
-				//Unit
-				App->unit->Enable();
-				App->unit->playerToFollow = App->player1;
 				break;
 			case 2:
 				//Basic shoot

@@ -183,9 +183,6 @@ bool ModuleUnit::Start()
 {
 	bool ret = true;
 	LOG("Loading unit assets");
-	//Change the player to follow depending on which player has gotten the powerup
-	playerToFollow = App->player1;
-	type = blue;
 	//Load assets
 	if(type == orange)
 	{
@@ -195,7 +192,7 @@ bool ModuleUnit::Start()
 	{
 		unitTx = App->textures->Load("Assets/BlueUnitSpritesheet.png");
 	}
-	currentOrbit = currentSpin = angleValue[W];
+	currentOrbit = currentSpin = angleValue[E];
 	unitCol = App->collision->AddCollider({ position.x, position.y, 16, 16 }, COLLIDER_INDESTRUCTIBLE, this);
 	return ret;
 }

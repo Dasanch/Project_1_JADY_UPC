@@ -55,7 +55,7 @@ update_status ModuleRender::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_KP_8] == KEY_STATE::KEY_REPEAT)
 		camera.y -= speed;
-
+	
 	if (App->input->keyboard[SDL_SCANCODE_KP_5] == KEY_STATE::KEY_REPEAT)
 		camera.y += speed;
 
@@ -63,7 +63,11 @@ update_status ModuleRender::Update()
 		camera.x -= speed;
 
 	if (App->input->keyboard[SDL_SCANCODE_KP_6] == KEY_STATE::KEY_REPEAT)
+	{
 		camera.x += speed;
+		relative_camera.x += 1;
+	}
+		
 
 	return update_status::UPDATE_CONTINUE;
 }
