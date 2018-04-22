@@ -92,6 +92,7 @@ public:
 	Animation shotFire; //Animation infront of ship when we are shooting basic shots
 	Animation initAnim;
 	Animation deathAnim;
+	Animation ShotLaserBasic;
 	//Textures---------------------------------------------
 	SDL_Texture* PlayerTexture = nullptr;
 	//Collision--------------------------------------------
