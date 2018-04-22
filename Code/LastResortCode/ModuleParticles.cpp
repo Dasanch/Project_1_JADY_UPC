@@ -179,9 +179,8 @@ update_status ModuleParticles::Update()
 
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(p->texture, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			App->render->Blit(p->texture, p->position.x, p->position.y - p->anim.GetCurrentFrame().h/2, &(p->anim.GetFrame()));
 		}
-
 	}
 	return UPDATE_CONTINUE;
 }
@@ -267,7 +266,7 @@ bool Particle::Update()
 	position.y += speed.y;
 
 	if (collider != nullptr) {
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x  , position.y- anim.GetFrame().h/2);
 		if ((collider->type == COLLIDER_PLAYER_1_SHOT || collider->type == COLLIDER_PLAYER_2_SHOT) && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
 			ret = false;
 		}

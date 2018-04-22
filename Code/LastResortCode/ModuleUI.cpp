@@ -55,6 +55,7 @@ update_status  ModuleUI::PreUpdate() {
 
 
 update_status ModuleUI::Update() {
+	
 
 	str_score_p1 = new char[MAX_NUMBERS_SCORE];
 	str_score_p2 = new char[MAX_NUMBERS_SCORE];

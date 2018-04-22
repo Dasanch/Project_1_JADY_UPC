@@ -203,7 +203,7 @@ void  ModulePlayer::ShotInput() {
 		if(powerup_type == powerupType::NOPOWERUP)
 		{
 			//Basic shoot
-			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+			App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 		}
 		if (powerup_type == powerupType::LASER)
 		{
@@ -211,15 +211,15 @@ void  ModulePlayer::ShotInput() {
 			{
 			case 1:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 2:
 				//Laser shot
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 3:
 				//Laser shot
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Laser rings
 				break;
 			}
@@ -230,16 +230,16 @@ void  ModulePlayer::ShotInput() {
 			{
 			case 1:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 2:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//2 missiles on the sides
 				break;
 			case 3:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//6 missiles on the sides
 				break;
 			}
@@ -250,16 +250,16 @@ void  ModulePlayer::ShotInput() {
 			{
 			case 1:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position. y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position. y + 6, PlayerTexture, shot_colType, 0);
 				break;
 			case 2:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down
 				break;
 			case 3:
 				//Basic shoot
-				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
+				App->particles->AddParticle(App->particles->basicShot, position.x + 32, position.y + 6, PlayerTexture, shot_colType, 0);
 				//Missiles up and down that destoy the ground
 				break;
 			}
