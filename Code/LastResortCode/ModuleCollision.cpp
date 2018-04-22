@@ -191,6 +191,9 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_PLAYER_1_SHOT: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
+		case COLLIDER_PLAYER_2_SHOT: // yellow
+			App->render->DrawQuad(colliders[i]->rect, 255, 51, 255, alpha);
+			break;
 		case COLLIDER_ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;

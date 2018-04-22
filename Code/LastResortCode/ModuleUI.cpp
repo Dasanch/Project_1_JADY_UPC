@@ -12,6 +12,7 @@
 #include "ModuleFadetoBlack.h"
 #include "ModuleContinue.h"
 #include <stdio.h>
+#include <string.h>
 
 
 ModuleUI::ModuleUI() {
@@ -77,18 +78,29 @@ update_status ModuleUI::Update() {
 
 	if (showUI == true) {
 		//Static UI-----------------------------------------------------
-		App->fonts->BlitText(208, 216, 0, "CREDITS_00");
 		App->render->Blit(uiTex, 16, 16, &lives_score_p1, 0.0f);
 		App->render->Blit(uiTex, 256, 16, &live_score_p2, 0.0f);
 		App->render->Blit(uiTex, 112, 16, &top, 0.0f);
 		App->render->Blit(uiTex, 24, 208, &pow, 0.0f);
-		App->render->Blit(uiTex, 184, 208, &pow, 0.0f);
-		/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //Remember 1.0
+		App->render->Blit(uiTex, 184, 208, &pow, 0.0f);	/*App->render->Blit(uiTex, 192, 16, &push_p2, 0.0f);*/ //Remember 1.0
+
 		//Variable UI----------------------------------------------------
 		App->fonts->BlitText(48, 24, 0, str_lives_p1);  //lives player 1
 		App->fonts->BlitText(264, 24, 0, str_lives_p2); //lives player 2
-		//App->fonts->BlitText(264, 24, 0, str_score_p1); //score player 1
-
+		//-------------score player 1------------------------------------
+		if (score_p1 == 0) {
+			App->fonts->BlitText( 72, 16, 0, "00"); 
+		}
+		else {
+			App->fonts->BlitText(88- 8*strlen(str_score_p1) , 16, 0, str_score_p1);
+		}
+		//-------------score player 2------------------------------------
+		if (score_p2 == 0) {
+			App->fonts->BlitText(256, 16, 0, "00");
+		}
+		else {
+			App->fonts->BlitText(272 - 8 * strlen(str_score_p2), 16, 0, str_score_p2);
+		}
 	}
 	App->fonts->BlitText(208, 216, 0, "CREDITS_00");//credits
 

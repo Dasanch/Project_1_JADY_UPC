@@ -268,7 +268,7 @@ bool Particle::Update()
 
 	if (collider != nullptr) {
 		collider->SetPos(position.x, position.y);
-		if (collider->type == COLLIDER_PLAYER_1_SHOT && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
+		if ((collider->type == COLLIDER_PLAYER_1_SHOT || collider->type == COLLIDER_PLAYER_2_SHOT) && position.x > App->render->relative_camera.x + SCREEN_WIDTH) {
 			ret = false;
 		}
 	}
