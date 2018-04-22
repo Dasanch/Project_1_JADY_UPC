@@ -70,10 +70,8 @@ private:
 	float angleValue[axis];//The value of each angle
 	const float angleSeparation = PI / 16;//The separation between the angles (helps us calculate which animation we have to play)
                                    //E, ESE, SE, SSE, S, SSW, SW, WSW, W, WNW, NW, NNW,  N, NNE, NE, ENE
-	int spriteXDifferences[axis] = { 8,   8,  8,   8, 8,  11, 13,  14, 14, 14, 13,   9,  8,   8,  8,   8 };//Sprite differences in x and y, helps us keep the unit centered on its trajectory
+	int spriteXDifferences[axis] = { 8,   8,  8,   8, 8,   9, 13,  14, 14, 14, 13,   9,  8,   8,  8,   8 };//Sprite differences in x and y, helps us keep the unit centered on its trajectory
 	int spriteYDifferences[axis] = { 8,   8,  8,   8, 8,   8,  8,   8,  8,  9, 13,  15, 14,  15, 13,   9 };
-	int colXDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };//Collider differences in x and y. Helps us keep the collider on the ball side of the unit and not on the antenas
-	int colYDifferences[axis] = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 11, 10, 10, 1, 10, 3 };
 	const float unitProjectileSpeed = 5;
 	//Animations
 	//There is an animation for each direciton of the ball

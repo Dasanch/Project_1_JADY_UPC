@@ -270,7 +270,7 @@ update_status ModuleUnit::Update()
 	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + 6;
 
 	//Update the collider position (after having set its position)--------------------------------------------
-	unitCol->SetPos(position.x + colXDifferences[spinToRender], position.y + colYDifferences[spinToRender]);
+	unitCol->SetPos(position.x - 8, position.y - 8);//- 8 is because the sphere part of the unit has 8 witdh and 8 height, so since the position.x and position.y are in the center in the trajectory, we just need to substract them from that to get the position of the collider
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
