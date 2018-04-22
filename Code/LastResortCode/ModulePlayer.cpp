@@ -215,11 +215,7 @@ void  ModulePlayer::ShotInput() {
 				break;
 			case 2:
 				//Laser shot
-<<<<<<< HEAD
-				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, COLLIDER_TYPE::COLLIDER_PLAYER_1_SHOT, 0);
-=======
 				App->particles->AddParticle(App->particles->Basic_Laser, position.x + 32, position.y + 3, PlayerTexture, shot_colType, 0);
->>>>>>> e66986d6c621ed2d5f0ea763e21b20395f24f898
 				break;
 			case 3:
 				//Laser shot
