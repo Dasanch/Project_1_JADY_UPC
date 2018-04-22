@@ -266,11 +266,11 @@ update_status ModuleUnit::Update()
 	}
 
 	//Set the position-------------------------------------------------------------------------------------
-	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 9;
-	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y - 2;
+	position.x = radius * cosf(currentOrbit) + playerToFollow->position.x + 16;//+ 16 and + 6 are to make the unit orbit around the center of the player's ship
+	position.y = radius * sinf(currentOrbit) + playerToFollow->position.y + 6;
 
 	//Update the collider position (after having set its position)--------------------------------------------
-	unitCol->SetPos(position.x - colXDifferences[spinToRender], position.y + colYDifferences[spinToRender]);
+	unitCol->SetPos(position.x + colXDifferences[spinToRender], position.y + colYDifferences[spinToRender]);
 
 	//Increase the internal rotation-----------------------------------------------------------------------
 	currentInternalRotation += internalRotationSpeed;
@@ -279,7 +279,7 @@ update_status ModuleUnit::Update()
 	if (currentInternalRotation >= frames) { currentInternalRotation = 0; }
 
 	//Set the rotation and render (all in the same place)--------------------------------------------------
-	App->render->Blit(unitTx, position.x /*- spriteXDifferences[spinToRender]*/, position.y /*+ spriteYDifferences[spinToRender]*/, &internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
+	App->render->Blit(unitTx, position.x - spriteXDifferences[spinToRender], position.y - spriteYDifferences[spinToRender], &internalRotationAnim[spinToRender].frame[(int)currentInternalRotation]);
 
 	//Shoot------------------------------------------------------------------------------------------------
 	App->particles->unitShot.speed.x = unitProjectileSpeed * cosf(currentSpin);
