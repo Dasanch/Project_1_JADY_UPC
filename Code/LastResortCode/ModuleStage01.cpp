@@ -91,14 +91,14 @@ bool ModuleStage01::Start()
 	App->player2->Reset_Positions();
 	//Enemies---------------------------------------------------------------------
 
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78,LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100,LASER);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 540, 78);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 580, 100);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 78);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 610, 150);
 
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 675, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 660, 35);
-	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35, SPEED);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 700, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 740, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 780, 35);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 820, 35);
@@ -130,8 +130,13 @@ bool ModuleStage01::Start()
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1335, 150);
 	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 1375, 150);
 
-	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT, LASER);
-	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 1976, 136);
+	App->enemies->AddEnemy(ENEMY_TYPES::METALCROW, 1500, SCREEN_HEIGHT);
+	App->enemies->AddEnemy(ENEMY_TYPES::POWERDROPPER, 3500, 180);
+
+	//Start of the tunnel
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3540, 45);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3580, 45);
+	App->enemies->AddEnemy(ENEMY_TYPES::BASIC, 3620, 45);
 
 	//define moveCamera struct values
 	
