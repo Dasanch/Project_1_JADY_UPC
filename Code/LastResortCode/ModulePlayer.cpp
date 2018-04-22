@@ -56,11 +56,10 @@ void ModulePlayer::Reappear() {
 	powerup_type = powerupType::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
 	if (this == App->player1) {
-		App->unit->unitCol->to_delete = true;
-		App->unit->Disable();
+
 	}
 	if (this == App->player2) {
-		App->unit2->Enable();
+	/*	App->unit.currentOrbit = App->unit.currentSpin = Angel angleValue[E];*/
 	}
 
 	isShooting = false;

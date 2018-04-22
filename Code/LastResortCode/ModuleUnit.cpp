@@ -285,8 +285,8 @@ update_status ModuleUnit::Update()
 	if(playerToFollow->Shoot() == true)
 	{
 		App->particles->AddParticle(App->particles->unitShot,
-			position.x + shotPosXDifferences[spinToRender] - 7,//7 = half of the witdh of the unit's projectile
-			position.y + shotPosYDifferences[spinToRender] - 7,
+			position.x + shotPosXDifferences[spinToRender],//7 = half of the witdh of the unit's projectile
+			position.y + shotPosYDifferences[spinToRender],
 			playerToFollow->PlayerTexture,
 			COLLIDER_PLAYER_1_SHOT,
 			0);
