@@ -171,7 +171,7 @@ bool ModuleStage01::Start()
 	MoveCamera.ymax_road = -15;
 	MoveCamera.ymin_road = 10;
 	MoveCamera.loop = 0;
-	MoveCamera.maxloop = 5; //¿?
+	MoveCamera.maxloop = 5; //Â¿?
 
 
 	//Moving camera funtions variables;
@@ -376,7 +376,7 @@ update_status ModuleStage01::Update()
 	}
 	MoveCam();
 
-	//Fade to black -----------------------------------------------------------------ALEJANDROOOO MIRA ESTOOOOO
+	//Fade to black -----------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_DOWN)  //win
 	{
 		if (App->player1->winlvl == false && App->player2->winlvl == false)
