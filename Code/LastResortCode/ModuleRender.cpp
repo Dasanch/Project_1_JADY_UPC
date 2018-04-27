@@ -36,6 +36,14 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	if (WIN_FULLSCREEN_DESKTOP == 1)
+	{
+		SDL_RenderSetLogicalSize(renderer,
+			SCREEN_WIDTH,
+			SCREEN_HEIGHT);
+	}
+
+
 	return ret;
 }
 
