@@ -18,7 +18,7 @@ bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");
 	bool ret = true;
-	SDL_Init(0);
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
 
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
@@ -35,6 +35,20 @@ update_status ModuleInput::PreUpdate()
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	
+	//Open the first available controller
+	
+	for (int i = 0; i < SDL_NumJoysticks(); ++i) {
+		if (SDL_IsGameController(i)) {
+			controller = SDL_GameControllerOpen(i);
+			if (controller) {
+				break;
+			}
+			else {
+				LOG( "Could not open gamecontroller %i: %s\n", i, SDL_GetError());
+			}
+		}
+	}
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
