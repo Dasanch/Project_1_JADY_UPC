@@ -151,11 +151,10 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship---------------------------------------------------
 		if (initAnim.current_frame > 4) {
-			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation
-);
+			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation ,0.0f, false);
 		}
 		else {
-			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
+			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation ,0.0f, false);
 		}
 		//------------------------------------------------------------
 		break;
@@ -180,7 +179,7 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship--------------------------------------------------
 		current_animation = &shipAnim.frames[currentFrame]; //It set the animation frame 
-		App->render->Blit(PlayerTexture, position.x, position.y, current_animation);
+		App->render->Blit(PlayerTexture, position.x, position.y, current_animation, 0.0f, false);
 		//-----------------------------------------------------------
 		break;
 	case Death:
@@ -190,7 +189,7 @@ void ModulePlayer::ShipAnimation() {
 		else if (isDying) {
 			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
-			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
+			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation, 0.0f, false);
 		}
 		break;
 	}
@@ -282,7 +281,7 @@ void  ModulePlayer::ShotInput() {
 		{
 			if (shotFire.finished == false) {
 				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx(), 0.0f, false);
 			}
 			else {
 				shotFire.finished = false;
@@ -306,7 +305,7 @@ void  ModulePlayer::ShotInput() {
 		{
 			if (shotFire.finished == false) {
 				isShooting = true;
-				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx());
+				App->render->Blit(PlayerTexture, position.x + 32, position.y + 1, &shotFire.GetFrameEx(), 0.0f, false);
 			}
 			else {
 				shotFire.finished = false;
@@ -323,26 +322,25 @@ void  ModulePlayer::ShotInput() {
 
 void ModulePlayer::MovementInput() {
 
-	if (MoveLeft() == true)	{
+	if (MoveLeft() == true) {
 		//---------Movment-----------------------------------------------------------
 		position.x -= (int)movementSpeed;
-	
-		if (position.x < (App->render->camera.x / App->render->cameraspeed))
-			position.x = App->render->camera.x / App->render->cameraspeed;
+
+		if (position.x < 0)
+			position.x = 0;
 	}
 	if (MoveRight() == true) {
 		//---------Movment-----------------------------------------------------------
 		position.x += (int)movementSpeed;
-		if (position.x + playerwidth > (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w)
-			position.x = (App->render->camera.x / App->render->cameraspeed) + App->render->camera.w - playerwidth;
+		if (position.x + playerwidth > App->render->camera.w)
+			position.x = App->render->camera.w - playerwidth;
 	}
 	if (MoveUp() == true) {
 		//---------Movment-----------------------------------------------------------
 		position.y -= (int)movementSpeed;
-		if (position.y <(App->render->camera.y / App->render->cameraspeed))
-			position.y = (App->render->camera.y / App->render->cameraspeed) ;
-		/*if (position.y < 0)
-			position.y = 0;*/
+		if (position.y < 0)
+			position.y = 0;
+
 		//---------Animation---------------------------------------------------------
 		yAxis -= keyPressSpeed;
 		//We check that the yAxis doesn't get bellow -1
@@ -350,15 +348,14 @@ void ModulePlayer::MovementInput() {
 			yAxis = -1;
 		}
 	}
-	if (MoveDown() == true)	{
-		//---------Movment-----------------------------------------------------------
 
-		if (position.y <(App->render->camera.y / App->render->cameraspeed) + SCREEN_HEIGHT - 12)
+	if (MoveDown() == true) {
 
 		position.y += (int)movementSpeed;
+		//---------Movment-----------------------------------------------------------
+		if (position.y + playerheight > App->render->camera.h)
+			position.y = App->render->camera.h - playerheight;
 
-		
-		
 		//---------Animation---------------------------------------------------------
 		yAxis += keyPressSpeed;
 		//We check that the yAxis doesn't get above 1
@@ -380,14 +377,15 @@ void ModulePlayer::MovementInput() {
 		}
 	}
 }
+
 void ModulePlayer::Winlvl()
 {
-	if (godMode == false) 
+	if (godMode == false)
 	{
 		playerCol->type = COLLIDER_NONE;
 		godMode = true;
 	}
-	
+
 	canShoot = false;
 	canMove = false;
 	Winposition();
