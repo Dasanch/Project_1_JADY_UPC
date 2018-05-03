@@ -84,7 +84,7 @@ public:
 	enum ShipAnimations
 	{
 		Initial,
-		Movment,
+		Movement,
 		Death
 	} shipAnimations;
 
@@ -99,7 +99,6 @@ public:
 	SDL_Texture* PlayerTexture = nullptr;
 	//Collision--------------------------------------------
 	Collider* playerCol = nullptr;
-	COLLIDER_TYPE colType = COLLIDER_PLAYER;
 	COLLIDER_TYPE shot_colType;
 
 	//Win variables

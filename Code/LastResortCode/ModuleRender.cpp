@@ -167,6 +167,7 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
+//Blit that flips the texture horizontally
 bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool use_camera)
 {
 	bool ret = true;
@@ -206,6 +207,7 @@ bool ModuleRender::FlippedBlit(SDL_Texture* texture, int x, int y, SDL_Rect* sec
 
 	return ret;
 }
+
 bool ModuleRender::Blit_x_o_y(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool use_camera_x,bool use_camera_y)
 {
 	bool ret = true;
@@ -248,9 +250,10 @@ bool ModuleRender::Blit_x_o_y(SDL_Texture* texture, int x, int y, SDL_Rect* sect
 
 	return ret;
 }
-float  ModuleRender::getCameraPosition(int position,float speed) {
-	return(-position*SCREEN_SIZE/speed);
 
+float  ModuleRender::getCameraPosition(int position,float speed)
+{
+	return(-position*SCREEN_SIZE/speed);
 }
 
 

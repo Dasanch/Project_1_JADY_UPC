@@ -38,7 +38,7 @@ bool ModulePlayer::Start()
 	//textures-----------------------------------------------------------------------
 	PlayerTexture = App->textures->Load("Assets/SpaceShip_player1.png"); // arcade version																 
 	//colliders----------------------------------------------------------------------
-	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, colType, this);
+	playerCol = App->collision->AddCollider({ position.x, position.y, 32, 12 }, COLLIDER_TYPE::COLLIDER_PLAYER, this);
 	//animations----------------------------------------------------------------------
 	deathAnim.Reset();
 
@@ -95,14 +95,14 @@ update_status ModulePlayer::Update()
 	//Debug Modes----------------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{
-		if (godMode == true) {
-			colType = COLLIDER_PLAYER;
-			playerCol->type = colType;
+		if (godMode == true)
+		{
+			playerCol->type = COLLIDER_PLAYER;
 			godMode = false;
 		}
-		else {
-			colType = COLLIDER_NONE;
-			playerCol->type = colType;
+		else
+		{
+			playerCol->type = COLLIDER_NONE;
 			godMode = true;
 		}
 	}
@@ -140,10 +140,9 @@ void ModulePlayer::ShipAnimation() {
 		}
 
 		if (initAnim.finished == true) {
-			shipAnimations = ShipAnimations::Movment;
+			shipAnimations = ShipAnimations::Movement;
 			if (godMode == false) {
-				colType = COLLIDER_PLAYER;
-				playerCol->type = colType;
+				playerCol->type = COLLIDER_PLAYER;
 			}
 			initAnim.Reset();
 			canMove = true;
@@ -152,14 +151,15 @@ void ModulePlayer::ShipAnimation() {
 		}
 		//Draw ship---------------------------------------------------
 		if (initAnim.current_frame > 4) {
-			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation);
+			App->render->Blit(PlayerTexture, position.x + 32 - (current_animation->w), position.y + 6 - (current_animation->h / 2), current_animation
+);
 		}
 		else {
 			App->render->Blit(PlayerTexture, position.x - 40, position.y + 6 - (current_animation->h / 2), current_animation);
 		}
 		//------------------------------------------------------------
 		break;
-	case Movment:
+	case Movement:
 		//Idle--------------------------------------------------------
 		if (yAxis > -transitionLimit && yAxis < transitionLimit) {
 			currentFrame = Idle;
@@ -184,14 +184,11 @@ void ModulePlayer::ShipAnimation() {
 		//-----------------------------------------------------------
 		break;
 	case Death:
-
 		if (deathAnim.finished == true) {
 			PlayerDies();
 		}
-
 		else if (isDying) {
-			colType = COLLIDER_NONE;
-			playerCol->type = colType;
+			playerCol->type = COLLIDER_NONE;
 			current_animation = &deathAnim.GetFrameEx();
 			App->render->Blit(PlayerTexture, position.x + 32 - current_animation->w, position.y + 6 - current_animation->h / 2, current_animation);
 		}
@@ -385,10 +382,9 @@ void ModulePlayer::MovementInput() {
 }
 void ModulePlayer::Winlvl()
 {
-	if (godMode == false)
+	if (godMode == false) 
 	{
-		colType = COLLIDER_NONE;
-		playerCol->type = colType;
+		playerCol->type = COLLIDER_NONE;
 		godMode = true;
 	}
 	
