@@ -247,19 +247,19 @@ update_status ModuleStage01::Update()
 	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
 
 	//Background buildings-----------------------------------------------------------------------
-	App->render->Blit_x_o_y(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed, true, false);
+	App->render->Blit(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed, true);
 
 	//Background lights-----------------------------------------------------------------------------
-	App->render->Blit_x_o_y(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 634, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 122, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 88, 50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 600, 50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 321, 0, &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 167, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true, false);
-	App->render->Blit_x_o_y(bckgndLightsTx, 240, 32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed, true, false);
+	App->render->Blit(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 634, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 122, 10, &bckgndLightsAnim02.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 88, 50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 600, 50, &bckgndLightsAnim03.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 321, 0, &bckgndLightsAnim04.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 167, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 679, 0, &bckgndLightsAnim05.GetCurrentFrame(), bckgndSpeed, true);
+	App->render->Blit(bckgndLightsTx, 240, 32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed, true);
 
 	//Orange Laser-----------------------------------------------------------------------------
 
