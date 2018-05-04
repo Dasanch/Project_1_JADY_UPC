@@ -175,7 +175,7 @@ bool ModuleStage01::Start()
 
 
 	//Moving camera funtions variables;
-	App->render->camera.y = -20;
+	//App->render->camera.y = -20;
 	Start_time_y = SDL_GetTicks();
 	stop_time = false;
 	StatetCamY = CameraDown;
@@ -238,36 +238,17 @@ bool ModuleStage01::CleanUp()
 // Update: draw background
 update_status ModuleStage01::Update()
 {
-	LOG("Relative_camera: %i ", App->render->relative_camera.x);
 	//Time 
 	Current_time = SDL_GetTicks();
-	App->render->relative_camera.x;
 	// Move camera forward -------------------------------------------------------------------
-	if (App->render->camera.x <= ((4550 / foregndSpeed)*SCREEN_SIZE))
-	{
-		App->render->camera.x += SCREEN_SIZE;
-		App->player1->position.x += 1;
-		App->player2->position.x += 1;
-		App->render->relative_camera.x += 1;
-	}
-	else
-	{
-		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
-	}
-	//Initial Position-------------------------------------------------------------------------
-	App->player1->initPosition.x += 1;
-	App->player2->initPosition.x += 1;
-
+	App->render->camera.x -= 1;
 	//Boss buildings----------------------------------------------------------------------------
-	if (App->render->camera.x > (3800 * SCREEN_SIZE))
-	{
-		App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
-	}
+
+	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);
+
 	//Background buildings-----------------------------------------------------------------------
-	if (App->render->camera.x < ((3800 / foregndSpeed) * SCREEN_SIZE))
-	{
-		App->render->Blit_x_o_y(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed, true, false);
-	}
+	App->render->Blit_x_o_y(BackgroundBuildings, 0, 0, &BGBuildings, bckgndSpeed, true, false);
+
 	//Background lights-----------------------------------------------------------------------------
 	App->render->Blit_x_o_y(bckgndLightsTx, -9, 0, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true, false);
 	App->render->Blit_x_o_y(bckgndLightsTx, 504, 1, &bckgndLightsAnim01.GetCurrentFrame(), bckgndSpeed, true, false);
@@ -281,51 +262,49 @@ update_status ModuleStage01::Update()
 	App->render->Blit_x_o_y(bckgndLightsTx, 240, 32, &bckgndLightsAnim06.GetCurrentFrame(), bckgndSpeed, true, false);
 
 	//Orange Laser-----------------------------------------------------------------------------
-	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x >= (33)* SCREEN_SIZE* foregndSpeed)
-	{
-		orangeLaserAnim.LoopAnimation();
-		if (frame < 2) {
-			frame++;
-			if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame / 2)
-				App->render->FlippedBlit(LasersTx, 359 - orangeLaserAnim.GetFrame().w, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
-			else
-				App->render->Blit(LasersTx, 358, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed, true);
-		}
+
+	orangeLaserAnim.LoopAnimation();
+	if (frame < 2) {
+		frame++;
+		if (orangeLaserAnim.current_frame < orangeLaserAnim.last_frame / 2)
+			App->render->FlippedBlit(LasersTx, 359 - orangeLaserAnim.GetFrame().w, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed);
 		else
-			frame = 0;
+			App->render->Blit(LasersTx, 358, -5, &orangeLaserAnim.GetFrame(), orangeLaserSpeed, true);
 	}
+	else
+		frame = 0;
 
 
 
 
 	//Midground lights-------------------------------------------------------------------------------------------
-	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE)) {
-		App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
 
-		//- Loop 1
-		App->render->Blit(midgndLightsTx, 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-		//- Loop 2
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-		//- Loop 3
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
-		App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
-		//Positions calculated from the png
-	}
-	//Blue Lasers-------------------------------------------------------------------------------------------
+	App->render->Blit(PurpleBuildings, 0, MoveCamera.ymgPos + midgndOffset, &PBuildings, midgndSpeed); //Mod Y=32
+
+	//- Loop 1
+	App->render->Blit(midgndLightsTx, 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	//- Loop 2
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	//- Loop 3
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 40, MoveCamera.ymgPos + midgndOffset + 28, &midgndLightsAnim01.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 184, MoveCamera.ymgPos + midgndOffset + 18, &midgndLightsAnim02.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 234, MoveCamera.ymgPos + midgndOffset + 97, &midgndLightsAnim03.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 329, MoveCamera.ymgPos + midgndOffset + 2, &midgndLightsAnim04.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 392, MoveCamera.ymgPos + midgndOffset + 50, &midgndLightsAnim05.GetCurrentFrame(), midgndSpeed);
+	App->render->Blit(midgndLightsTx, midgndLoopDist * 2 + 471, MoveCamera.ymgPos + midgndOffset + 36, &midgndLightsAnim06.GetCurrentFrame(), midgndSpeed);
+	//Positions calculated from the png
+
+//Blue Lasers-------------------------------------------------------------------------------------------
 	blueLaserAnim.LoopAnimation();
 
 	if (blueLaserAnim.current_frame < blueLaserAnim.last_frame / 2) {
@@ -342,47 +321,44 @@ update_status ModuleStage01::Update()
 	}
 	//Ground and tunnel-----------------------------------------------------------------------------------	
 
-	if (App->render->camera.x < ((5000 / foregndSpeed) * SCREEN_SIZE)) {
 
-		App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
+	App->render->Blit(groundAndTunel, 0, MoveCamera.yroadPos, &ground, foregndSpeed); //Mod Y
+
+
+//Street Lights-----------------------------------------------------------------------------------------
+
+	//1
+	App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos + 136, &streetLightsAnim01.GetCurrentFrame(), foregndSpeed);
+	for (int i = 1; i < 27; ++i) {
+		App->render->Blit(streetLightsTx, 40 + streetLightDist * i, MoveCamera.yroadPos + 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
+	}
+	//2
+	App->render->Blit(streetLightsTx, -7, MoveCamera.yroadPos + 217, &streetLightsAnim02.GetCurrentFrame(), foregndSpeed);
+	for (int i = 1; i < 14; ++i) {
+		App->render->Blit(streetLightsTx, -7 + roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
 	}
 
-	//Street Lights-----------------------------------------------------------------------------------------
-	if (App->render->camera.x < ((2000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		//1
-		App->render->Blit(streetLightsTx, 40, MoveCamera.yroadPos + 136, &streetLightsAnim01.GetCurrentFrame(), foregndSpeed);
-		for (int i = 1; i < 27; ++i) {
-			App->render->Blit(streetLightsTx, 40 + streetLightDist * i, MoveCamera.yroadPos + 136, &streetLightsAnim01.AddFrame(randoms[i]), foregndSpeed);
-		}
-		//2
-		App->render->Blit(streetLightsTx, -7, MoveCamera.yroadPos + 217, &streetLightsAnim02.GetCurrentFrame(), foregndSpeed);
-		for (int i = 1; i < 14; ++i) {
-			App->render->Blit(streetLightsTx, -7 + roadLightDist * i, MoveCamera.yroadPos + 217, &streetLightsAnim02.AddFrame(randoms[i]), foregndSpeed);
-		}
-	}
 	//Tunnel lights----------------------------------------------------------------------------------------
-	if (App->render->camera.x > ((1000 / foregndSpeed) * SCREEN_SIZE) && App->render->camera.x > -((4000 / foregndSpeed) * SCREEN_SIZE))
-	{
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
-		//2048 = distance from the start of the tilemap to the first light
-	}
-	MoveCam();
 
-	//Fade to black -----------------------------------------------------------------
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 0, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 1, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 2, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 3, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 4, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 5, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 6, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	App->render->Blit(tunnelLightsTx, 2048 + tunnelLightDist * 7, MoveCamera.yroadPos, &tunnelLightsAnim.GetCurrentFrame(), foregndSpeed);
+	//2048 = distance from the start of the tilemap to the first light
+
+//MoveCam();
+
+//Fade to black -----------------------------------------------------------------
 	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_DOWN)  //win
 	{
 		if (App->player1->winlvl == false && App->player2->winlvl == false)
 		{
-		App->player1->winlvl = App->player2->winlvl = true;
-		App->player1->numLvlwin = App->player2->numLvlwin = 1;
+			App->player1->winlvl = App->player2->winlvl = true;
+			App->player1->numLvlwin = App->player2->numLvlwin = 1;
 		}
 		App->fade->FadeToBlack(App->stage01, App->stageclearScene, 3.5f);
 	}
@@ -396,12 +372,12 @@ update_status ModuleStage01::Update()
 
 //move up down camera
 
-void ModuleStage01::MoveCam(){
-	
-	if ( stop_time == false)
+void ModuleStage01::MoveCam() {
+
+	if (stop_time == false)
 	{
 		Current_time_y = SDL_GetTicks();
-		if(Current_time_y - Start_time_y > 5000)
+		if (Current_time_y - Start_time_y > 5000)
 			switch (StatetCamY)
 			{
 			case CameraDown:
@@ -414,20 +390,20 @@ void ModuleStage01::MoveCam(){
 				up = true;
 				stop_time = true;
 				break;
-			
+
 			}
 
 	}
-	if(down)
+	if (down)
 	{
-		if (App->render->camera.y < 26*SCREEN_SIZE)
+		if (App->render->camera.y < 26 * SCREEN_SIZE)
 		{
 			App->player1->position.y += 1;
 			App->player2->position.y += 1;
 			App->render->camera.y += SCREEN_SIZE;
 			App->render->relative_camera.y += 1;
 		}
-		
+
 		else {
 			stop_time = false;
 			down = false;
@@ -436,22 +412,22 @@ void ModuleStage01::MoveCam(){
 			{
 				stop_time = true;
 				cameraDown = true;
-				
+
 			}
-			
-			
+
+
 		}
 	}
 	if (up)
 	{
-		if (App->render->camera.y > -33*SCREEN_SIZE)
+		if (App->render->camera.y > -33 * SCREEN_SIZE)
 		{
 			App->player1->position.y -= 1;
 			App->player2->position.y -= 1;
 			App->render->camera.y -= SCREEN_SIZE;
 			App->render->relative_camera.y -= 1;
 		}
-			
+
 		else {
 			stop_time = false;
 			up = false;
@@ -461,11 +437,11 @@ void ModuleStage01::MoveCam(){
 				stop_time = true;
 				cameraUp = true;
 			}
-			
-			
+
+
 		}
 	}
-	if(cameraUp)
+	if (cameraUp)
 	{
 		if (App->render->camera.y < 0)
 		{

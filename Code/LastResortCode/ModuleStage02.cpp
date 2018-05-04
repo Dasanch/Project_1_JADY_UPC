@@ -65,10 +65,10 @@ update_status Module2lvlScene::Update() {
 	
 	// Move camera forward -----------------------------
 
-	App->player1->position.x += 1;
-	App->player2->position.x += 1;
-	App->render->camera.x += SCREEN_SIZE;
-	App->render->relative_camera.x += 1;
+	//App->player1->position.x += 1;
+	//App->player2->position.x += 1;
+	//App->render->camera.x += SCREEN_SIZE;
+	//App->render->relative_camera.x += 1;
 
 
 	App->render->Blit(lvl2Text, 0, 0, NULL, backgroundspeed);
