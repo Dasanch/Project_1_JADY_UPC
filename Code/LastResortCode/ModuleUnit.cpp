@@ -204,8 +204,6 @@ update_status ModuleUnit::Update()
 	orbiting = false;
 	spinning = false;
 
-	//- Check if the ball is locked
-
 	//Conditions for movement-----------------------------------------------------------------------------
 	if (playerToFollow->MoveLeft() == true)
 	{
@@ -284,11 +282,12 @@ update_status ModuleUnit::Update()
 	App->particles->unitShot.speed.y = unitProjectileSpeed * sinf(angleValue[spinToRender]);
 	if(playerToFollow->Shoot() == true)
 	{
-		App->particles->AddParticle(App->particles->unitShot,
-			position.x + shotPosXDifferences[spinToRender],//7 = half of the witdh of the unit's projectile
+		App->particles->AddParticle(
+			App->particles->unitShot,
+			position.x + shotPosXDifferences[spinToRender],
 			position.y + shotPosYDifferences[spinToRender],
 			playerToFollow->PlayerTexture,
-			COLLIDER_PLAYER_1_SHOT,
+			playerToFollow->shot_colType,
 			0);
 	}
 	return UPDATE_CONTINUE;
