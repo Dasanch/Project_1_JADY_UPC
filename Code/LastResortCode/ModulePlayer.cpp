@@ -61,7 +61,6 @@ void ModulePlayer::Reappear() {
 	powerup_upgrades = 0;
 	powerup_type = powerupType::NOPOWERUP;
 	shipAnimations = ShipAnimations::Initial;
-	KillUnit();
 	isShooting = false;
 	shoot = false;
 	canMove = false;
@@ -204,6 +203,7 @@ void ModulePlayer::OnCollision(Collider* collider1, Collider* collider2)
 	canMove = false;
 	canShoot = false;
 	shipAnimations = ShipAnimations::Death;
+	KillUnit();
 }
 
 void  ModulePlayer::ShotInput() {

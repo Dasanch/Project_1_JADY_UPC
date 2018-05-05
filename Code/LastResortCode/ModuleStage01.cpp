@@ -12,7 +12,7 @@
 #include "ModuleInput.h"
 #include "ModuleReady.h"
 #include "ModuleAudio.h"
-#include "ModuleGameOver.h"//delete (provitional)
+#include "ModuleGameOver.h"//delete (provisional)
 #include "ModuleContinue.h" 
 #include "ModuleParticles.h"
 #include "ModuleStageClear.h"
@@ -77,6 +77,8 @@ bool ModuleStage01::Start()
 	//Enable------------------------------------------------------------------------
 	App->player1->Enable();
 	App->player2->Enable();
+	App->unit1->Enable();
+	App->unit1->playerToFollow = App->player1;
 	App->particles->Enable();
 	App->collision->Enable();
 	App->enemies->Enable();
@@ -217,7 +219,7 @@ bool ModuleStage01::CleanUp()
 	//Modules-----------------------------------------------------------------------
 	App->player1->Disable();
 	App->player2->Disable();
-	App->unit->Disable();
+	App->unit1->Disable();
 	App->unit2->Disable();
 	App->particles->Disable();
 	App->collision->Disable();
@@ -241,7 +243,7 @@ update_status ModuleStage01::Update()
 	//Time 
 	Current_time = SDL_GetTicks();
 	// Move camera forward -------------------------------------------------------------------
-	App->render->camera.x -= 1;
+	//App->render->camera.x -= 1;
 	//Boss buildings----------------------------------------------------------------------------
 
 	App->render->Blit(Boss1Background, 0, 0, NULL, 0.0f);

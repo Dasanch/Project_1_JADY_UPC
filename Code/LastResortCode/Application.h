@@ -56,7 +56,7 @@ public:
 	ModuleParticles* particles = nullptr;
 	ModuleCollision* collision = nullptr;
 	ModuleStageClear * stageclearScene = nullptr;
-	ModuleUnit * unit = nullptr;
+	ModuleUnit * unit1 = nullptr;
 	ModuleUnit * unit2 = nullptr;
 	ModuleFonts* fonts = nullptr;
 	ModuleUI* ui = nullptr;
